@@ -1,4 +1,4 @@
 package com.jspo.member.service;
 
-public interface memberService {
+public interface MemberService {
 }

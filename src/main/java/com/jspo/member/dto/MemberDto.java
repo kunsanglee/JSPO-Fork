@@ -4,7 +4,7 @@ package com.jspo.member.dto;
 import java.sql.Date;
 import java.util.Objects;
 
-public class memberDto {
+public class MemberDto {
 
     private int id;
     private String email;
@@ -63,7 +63,7 @@ public class memberDto {
 
     @Override
     public String toString() {
-        return "memberDto{" +
+        return "MemberDto{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", pwd='" + pwd + '\'' +
@@ -77,7 +77,7 @@ public class memberDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        memberDto memberDto = (memberDto) o;
+        MemberDto memberDto = (MemberDto) o;
         return id == memberDto.id && Objects.equals(email, memberDto.email) && Objects.equals(pwd, memberDto.pwd) && Objects.equals(name, memberDto.name) && Objects.equals(birth, memberDto.birth) && Objects.equals(phone, memberDto.phone);
     }
 
@@ -86,7 +86,7 @@ public class memberDto {
         return Objects.hash(id, email, pwd, name, birth, phone);
     }
 
-    public memberDto(int id, String email, String pwd, String name, Date birth, String phone) {
+    public MemberDto(int id, String email, String pwd, String name, Date birth, String phone) {
         this.id = id;
         this.email = email;
         this.pwd = pwd;
@@ -95,12 +95,12 @@ public class memberDto {
         this.phone = phone;
     }
 
-    public memberDto() { }
+    public MemberDto() { }
 
     // DB조회용 user객체 싱글톤패턴으로 재사용
-    private static final memberDto instance = new memberDto();
+    private static final MemberDto instance = new MemberDto();
 
-    public static memberDto getInstance() {
+    public static MemberDto getInstance() {
         return instance;
     }
 
