@@ -60,12 +60,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
-
-}
-
-.tp1{
-    width: 46.6%;
 }
 
 .reg__btn{
