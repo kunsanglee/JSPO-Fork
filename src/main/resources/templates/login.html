@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <form action="/join" method="post" name="loginForm" >
     <div class="wrap">
 
         <div class="login__area">
@@ -25,8 +26,9 @@
             </div>
             <div class="input__box">
                 <h3 class="input__title">비밀번호</h3>
-                <input type="password" class="input__txt" id="name">
+                <input type="password" class="input__txt" id="password">
             </div>
+            <input type="checkbox" name="remember" id="remember"> 아이디 기억하기
             <div class="login__btn">
                 <button class="login">로그인</button>
             </div>
@@ -37,8 +39,11 @@
                 <li class="find__list listBorder"> <a href="#">이메일 찾기</a></li>
                 <li class="find__list listBorder"> <a href="#">비밀번호 찾기</a></li>
             </ul>
-        </div>
 
+
+        </div>
+    </div>
+    </form>
 </body>
 
 </html>
