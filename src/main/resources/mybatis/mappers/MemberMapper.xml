@@ -9,7 +9,7 @@
         values (#{m_email}, #{m_pwd}, #{m_name}, #{m_birth}, #{m_phone});
     </insert>
 
-<!--    회원조회-->
+<!--    이메일 중복 확인-->
     <select id="selectMember" parameterType="MemberDto" resultType="MemberDto">
         select * from member where m_email = #{m_email};
     </select>
