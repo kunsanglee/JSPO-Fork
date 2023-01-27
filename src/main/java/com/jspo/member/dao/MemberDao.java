@@ -17,7 +17,7 @@ public interface MemberDao {
 
     // 이메일 중복확인
 
-    int emailCheck(String inputEmail) throws Exception;
+    Integer emailCheck(String inputEmail) throws Exception;
 
     MemberDto selectMemberByEmail (String email) throws Exception;
 

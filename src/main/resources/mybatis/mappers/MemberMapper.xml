@@ -19,7 +19,7 @@
     </select>
 
 <!--    이메일 중복확인-->
-    <select id="emailCheck" parameterType="String" resultType="int">
+    <select id="emailCheck" parameterType="String" resultType="Integer">
         select * from member where email = #{email};
     </select>
 

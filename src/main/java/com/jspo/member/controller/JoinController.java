@@ -10,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -32,12 +33,6 @@ public class JoinController {
 
     @PostMapping("/join")
     public String join(@Valid MemberDto joinMember, Errors errors, String pwd2, Model m) throws Exception {
-        System.out.println("joinMember.getId() = " + joinMember.getId());
-        System.out.println("joinMember.getEmail() = " + joinMember.getEmail());
-        System.out.println("joinMember.getPwd() = " + joinMember.getPwd());
-        System.out.println("joinMember.getName() = " + joinMember.getName());
-        System.out.println("joinMember.getBirth() = " + joinMember.getBirth());
-        System.out.println("joinMember.getPhone() = " + joinMember.getPhone());
 
 //        post 요청시 넘어온 joinMember 입력값에서 validation에 걸리는 경우
         if (errors.hasErrors()) {
@@ -66,32 +61,27 @@ public class JoinController {
             return "regForm";
         }
 
-        System.out.println("memberDto = " + memberDto);
-        memberDto.setEmail(joinMember.getEmail());
-
-
-//        중복회원 버튼 만들고 ajax로 처리해야함.
-        if (memberDao.selectMember(memberDto) != null) {
-            System.out.println("memberDao.selectMember(memberDto) = " + memberDao.selectMember(memberDto));
-            System.out.println("이메일이 중복되었습니다.");
-            return "regForm";
-        }
-
-
-
-
-        memberDto.setPwd(joinMember.getPwd());
-        memberDto.setName(joinMember.getName());
-        memberDto.setBirth(joinMember.getBirth());
-        memberDto.setPhone(joinMember.getPhone());
+//        memberDto.setEmail(joinMember.getEmail());
+//        memberDto.setPwd(joinMember.getPwd());
+//        memberDto.setName(joinMember.getName());
+//        memberDto.setBirth(joinMember.getBirth());
+//        memberDto.setPhone(joinMember.getPhone());
 
 //        DB에 등록한 회원 저장.
-        memberDao.insertMember(memberDto);
-
-        m.addAttribute("memberDto", memberDto);
-
+        memberDao.insertMember(joinMember);
+        m.addAttribute("memberDto", joinMember);
         System.out.println("join 성공");
 
         return "test";
+    }
+
+    @PostMapping("/emailCheck")
+    @ResponseBody
+    public int emailCheck(String email) throws Exception {
+        System.out.println("email = " + email);
+        if (memberDao.emailCheck(email) == null) {
+            return 0;
+        }
+        return memberDao.emailCheck(email);
     }
 }
