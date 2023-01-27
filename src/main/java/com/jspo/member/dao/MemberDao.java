@@ -12,9 +12,13 @@ public interface MemberDao {
     // 회원조회
     MemberDto selectMember(MemberDto memberDto) throws Exception;
 
+
+    MemberDto login(MemberDto memberDto) throws Exception;
+
     // 이메일 중복확인
 
     int emailCheck(String inputEmail) throws Exception;
 
     MemberDto selectMemberByEmail (String email) throws Exception;
+
 }
