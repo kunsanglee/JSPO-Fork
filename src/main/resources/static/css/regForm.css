@@ -77,3 +77,57 @@
     margin-top: 25px;
 
 }
+
+#valid_name{
+    font-size: 10px;
+    color: indianred;
+    display: inline-block;
+}
+
+#valid_email{
+    font-size: 10px;
+    color: indianred;
+    display: inline-block;
+}
+
+#valid_pwd{
+    font-size: 10px;
+    color: indianred;
+    display: inline-block;
+}
+
+#valid_birth{
+    font-size: 10px;
+    color: indianred;
+    display: inline-block;
+}
+
+#valid_phone{
+    font-size: 10px;
+    color: indianred;
+    display: inline-block;
+}
+
+.email_ok{
+    font-size: 10px;
+    color: #4CAF50;
+    display: none;
+}
+
+.email_already{
+    font-size: 10px;
+    color: indianred;
+    display: none;
+}
+
+.pwd_ok{
+    font-size: 10px;
+    color: #4CAF50;
+    display: none;
+}
+
+.pwd_duplicate{
+    font-size: 10px;
+    color: indianred;
+    display: none;
+}

@@ -1,16 +1,25 @@
 package com.jspo.member.dto;
 
 
+import javax.validation.constraints.*;
 import java.sql.Date;
 import java.util.Objects;
 
 public class MemberDto {
 
     private int id;
+    @NotBlank(message = "이메일을 입력해주세요.")
+    @Email(message = "올바른 이메일 형식으로 작성해주세요. ex) jspo@jspo.com")
     private String email;
+    @NotBlank(message = "비밀번호를 입력해주세요.")
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,16}$", message = "비밀번호는 8~16자리수여야 합니다. 영문 대소문자, 숫자, 특수문자를 1개 이상 포함해야 합니다.")
     private String pwd;
+    @NotBlank(message = "이름을 입력해주세요.")
     private String name;
+    @NotNull(message = "생년월일을 입력해주세요.")
+    @Past(message = "올바른 생년월일을 입력해주세요.")
     private Date birth;
+    @NotBlank(message = "핸드폰번호를 입력해주세요.")
     private String phone;
 
     public int getId() {

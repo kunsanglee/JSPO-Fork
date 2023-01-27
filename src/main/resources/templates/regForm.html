@@ -1,3 +1,4 @@
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -10,7 +11,7 @@
 </head>
 
 <body>
-<form action="/join" method="post" name="regForm" >
+<form th:action="@{/join}" method="post" name="regForm" modelAttribute="memberDto">
     <div class="wrap">
 
         <div class="join__area">
@@ -19,46 +20,134 @@
                 <img class="logo" src="imgs/JSPO-logo.png" alt="logo">
                 <span class="title">회원가입</span>
             </div>
+
             <div class="input__box">
                 <h3 class="input__title">이름*</h3>
-                <input type="text" class="input__txt" id="name" autofocus>
+                <input type="text" class="input__txt" id="name" name="name" th:value="${memberDto.name}" autofocus oninput="checkName()">
+                <span id="valid_name" th:text="${valid_name}"></span>
             </div>
+
             <div class="input__box">
                 <h3 class="input__title">이메일*</h3>
                 <div class="email__box">
-                    <input type="text" class="input__txt" id="email">
+                    <input type="text" class="input__txt" id="email" name="email" th:value="${memberDto.email}" oninput="checkEmail()">
+                    <span class="email_ok">사용 가능한 이메일입니다.</span>
+                    <span class="email_already">이미 사용중인 이메일입니다.</span>
+                    <span id="valid_email" th:text="${valid_email}"></span>
                 </div>
-
-
             </div>
+
             <div class="input__box">
                 <h3 class="input__title">비밀번호*</h3>
-                <input type="password" class="input__txt" id="password" placeholder="영문,숫자,특수문자 조합 8-16자">
+                <input type="password" class="input__txt" id="password" name="pwd" placeholder="영문,숫자,특수문자 조합 8-16자" oninput="checkPwd()">
+                <span id="valid_pwd" th:text="${valid_pwd}"></span>
             </div>
+
             <div class="input__box">
                 <h3 class="input__title">비밀번호 확인*</h3>
-                <input type="password" class="input__txt" id="check__password" placeholder="비밀번호 재입력">
+                <input type="password" class="input__txt" id="check__password" name="pwd2" placeholder="비밀번호 재입력" oninput="checkPwd()">
+                <span class="pwd_ok">비밀번호가 일치합니다.</span>
+                <span class="pwd_duplicate">비밀번호가 일치하지 않습니다.</span>
             </div>
 
             <div class="input__box">
                 <h3 class="input__title">
                     생년월일*</h3>
-                <input type="text" class="input__txt" id="birth" placeholder="생년월일 예)19900101">
+                <input type="text" class="input__txt" id="birth" name="birth" th:value="${memberDto.birth}" placeholder="생년월일 예)1990-01-01" oninput="checkBirth()">
+                <span id="valid_birth" th:text="${valid_birth}"></span>
             </div>
 
             <div class="input__box">
                 <h3 class="input__title">연락처*</h3>
-                <input type="text" class="input__txt" id="phone" placeholder=" - 없이 숫자만 입력">
+                <input type="text" class="input__txt" id="phone" name="phone" th:value="${memberDto.phone}" placeholder=" - 없이 숫자만 입력" oninput="checkPhone()">
+                <span id="valid_phone" th:text="${valid_phone}"></span>
             </div>
+
             <div class="reg__btn">
-                <button class="reg">가입하기</button>
+                <button type="submit" class="reg" disabled="disabled">가입하기</button>
             </div>
 
         </div>
     </div>
 </form>
+<script>
+    function checkEmail() {
+        let email = $("#email").val();
+        console.log(email);
+
+        if (email !== "") $("#valid_email").css("display", "none");
+        else $("#valid_email").css("display", "inline-block");
 
 
+        $.ajax({
+            url: "emailCheck",
+            type: "post",
+            data: {email: email},
+            success: function (cnt) {
+                if (email === "") {
+                    $(".email_ok").css("display", "none");
+                    $(".email_already").css("display", "none");
+                }
+                else if (cnt === 0) {
+                    $(".email_ok").css("display", "inline-block");
+                    $(".email_already").css("display", "none");
+                    $(".reg").prop("disabled", false);
+                    $(".reg").css("background-color", "#4CAF50");
+                } else {
+                    $(".email_ok").css("display", "none");
+                    $(".email_already").css("display", "inline-block");
+                    $(".reg").prop("disabled", true);
+                    $(".reg").css("background-color", "#aaaaaa");
+                }
+            },
+            error:function(){
+                alert("에러입니다.");
+            }
+        });
+    }
+
+    function checkPwd() {
+        let pwd = $("#password").val();
+        let chkPwd = $("#check__password").val();
+
+        if (pwd !== "" && pwd === chkPwd) {
+            $(".pwd_ok").css("display", "inline-block");
+            $(".pwd_duplicate").css("display", "none");
+            $(".reg").prop("disabled", false);
+            $(".reg").css("background-color", "#4CAF50");
+            $("#valid_pwd").css("display", "none");
+        } else {
+            $(".pwd_ok").css("display", "none");
+            $(".pwd_duplicate").css("display", "inline-block");
+            $(".reg").prop("disabled", true);
+            $("#valid_pwd").css("display", "inline-block");
+        }
+    }
+
+    function checkName() {
+        if($("#name").val() !== "") {
+            $("#valid_name").css("display", "none");
+        } else {
+            $("#valid_name").css("display", "inline-block");
+        }
+    }
+
+    function checkBirth() {
+        if($("#birth").val() !== "") {
+            $("#valid_birth").css("display", "none");
+        } else {
+            $("#valid_birth").css("display", "inline-block");
+        }
+    }
+
+    function checkPhone() {
+        if($("#phone").val() !== "") {
+            $("#valid_phone").css("display", "none");
+        } else {
+            $("#valid_phone").css("display", "inline-block");
+        }
+    }
+</script>
 </body>
 
 </html>
