@@ -1,16 +1,26 @@
 package com.jspo.member.dto;
 
 
+import javax.validation.constraints.*;
 import java.sql.Date;
 import java.util.Objects;
 
 public class MemberDto {
 
     private int id;
+    @NotBlank(message = "이메일을 입력해주세요.")
+    @Email(message = "올바른 이메일 형식으로 작성해주세요. ex) jspo@jspo.com")
     private String email;
+    @Size(min = 4 , max = 16, message = "비밀번호를 입력해주세요. 8자리 이상 16자리 이하, 대소문자 숫자 특수문자 포함.")
+    @NotBlank(message = "비밀번호를 입력해주세요.")
+//    @Pattern(regexp = "") // 대소문자 숫자 특수문자 포함으로 바꿔줘야함
     private String pwd;
+    @NotBlank(message = "이름을 입력해주세요.")
     private String name;
+    @NotNull(message = "생년월일을 입력해주세요.")
+    @Past(message = "올바른 생년월일을 입력해주세요.")
     private Date birth;
+    @NotBlank(message = "핸드폰번호를 입력해주세요.")
     private String phone;
 
     public int getId() {

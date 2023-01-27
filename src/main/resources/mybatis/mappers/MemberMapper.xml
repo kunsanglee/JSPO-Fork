@@ -5,13 +5,22 @@
 
 <!--    회원가입-->
     <insert id="insertMember" parameterType="MemberDto">
-        insert into member (m_email, m_pwd, m_name, m_birth, m_phone)
-        values (#{m_email}, #{m_pwd}, #{m_name}, #{m_birth}, #{m_phone});
+        insert into member (email, pwd, name, birth, phone)
+        values (#{email}, #{pwd}, #{name}, #{birth}, #{phone});
     </insert>
 
-<!--    이메일 중복 확인-->
+<!--    회원조회-->
     <select id="selectMember" parameterType="MemberDto" resultType="MemberDto">
-        select * from member where m_email = #{m_email};
+        select * from member where email = #{email};
+    </select>
+
+    <select id="selectMemberByEmail" parameterType="String" resultType="MemberDto">
+        select * from member where email = #{String};
+    </select>
+
+<!--    이메일 중복확인-->
+    <select id="emailCheck" parameterType="String" resultType="int">
+        select * from member where email = #{email};
     </select>
 
 <!--로그인-->
