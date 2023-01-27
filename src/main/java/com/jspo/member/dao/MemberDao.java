@@ -8,4 +8,6 @@ public interface MemberDao {
     MemberDto insertMember(MemberDto memberDto) throws Exception;
 
     MemberDto selectMember(MemberDto memberDto) throws Exception;
+
+    MemberDto login(MemberDto memberDto) throws Exception;
 }
