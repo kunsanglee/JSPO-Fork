@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<script src="http://code.jquery.com/jquery-latest.min.js"
+      ></script>
 <html lang="en">
 
 <head>
@@ -11,10 +13,10 @@
 </head>
 
 <body>
-    <form action="/login" method="post" name="loginForm" >
+    <form action="/login"  method="post" name="loginForm" >
     <div class="wrap">
 
-        <div class="login__area">
+        <div class="login__area" >
 
             <div class="login__title">
                 <img class="logo" src="imgs/JSPO-logo.png" alt="logo">
@@ -23,14 +25,20 @@
             <div class="input__box">
                 <h3 class="input__title">이메일 주소</h3>
                 <input type="text" class="input__txt" id="email" name="email" placeholder="예) jspo@jspo.com" autofocus>
+<!--                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">이메일이 맞지 않다.</p>-->
             </div>
             <div class="input__box">
                 <h3 class="input__title">비밀번호</h3>
                 <input type="password" class="input__txt" id="pwd" name="pwd">
+<!--                <p th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}">비밀번호가 맞지 않다.</p>-->
             </div>
-            <input type="checkbox" name="remember" id="remember"> 아이디 기억하기
+<!--            <div th:if="${#fields.hasGlobalErrors()}">-->
+<!--                <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류메시지</p>-->
+<!--            </div>-->
+            <input type="checkbox" name="remember" id="remember"> 아이디 기억하기 <br>
+
             <div class="login__btn">
-                <button class="login">로그인</button>
+                <button class="login" onclick="check()">로그인</button>
             </div>
             <ul class="find">
                 <li class="find__list">
@@ -44,6 +52,11 @@
         </div>
     </div>
     </form>
+
+<script>
+
+
+</script>
 </body>
 
 </html>
