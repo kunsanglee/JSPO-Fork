@@ -35,7 +35,7 @@
 <!--            <div th:if="${#fields.hasGlobalErrors()}">-->
 <!--                <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류메시지</p>-->
 <!--            </div>-->
-            <input type="checkbox" name="remember" id="remember"> 아이디 기억하기 <br>
+            <input type="checkbox" id="remember" name="remember" value="true" th:value="${#request.cookies[0].getValue()}"> 아이디 기억하기 <br>
 
             <div class="login__btn">
                 <button class="login" onclick="check()">로그인</button>
