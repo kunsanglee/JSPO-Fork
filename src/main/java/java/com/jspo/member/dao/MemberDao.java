@@ -1,4 +1,4 @@
-package com.jspo.member.dao;
+package java.com.jspo.member.dao;
 
 import com.jspo.member.dto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
