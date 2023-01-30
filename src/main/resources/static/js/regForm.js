@@ -130,8 +130,9 @@ function checkPhone() {
 }
 
 // 이메일인증 버튼 누르면 서버에 인증번호 저장.
-function sendAuthNum() {
+function sendAuthNum(e) {
     let email = $("#email").val();
+    e.preventDefault();
     $.ajax({
         url: "join/emailConfirm",
         method: "post",
@@ -162,8 +163,9 @@ function checkAuthNum() {
 }
 
 // 핸드폰 인증번호 서버에 저장.
-function sendPhoneAuthNum() {
+function sendPhoneAuthNum(e) {
     let phone = $("#phone").val();
+    e.preventDefault();
 
     if (phone.length !== 11) {
         return;
