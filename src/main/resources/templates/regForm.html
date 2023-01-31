@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<form th:action="@{/join}" method="post" name="regForm"><!--modelAttribute="memberDto"-->
+<form th:action="@{/join}" method="post" name="regForm" th:object="${memberDto}"><!--modelAttribute="memberDto"-->
     <div class="wrap">
 
         <div class="join__area">
@@ -23,14 +23,14 @@
 
             <div class="input__box">
                 <h3 class="input__title">이름*</h3>
-                <input type="text" class="input__txt" id="name" name="name" th:value="${memberDto.name}" autofocus oninput="checkName()">
+                <input type="text" class="input__txt" id="name" name="name" th:value="*{name}" autofocus oninput="checkName()">
                 <span id="valid_name" th:text="${valid_name}"></span>
             </div>
 
             <div class="input__box">
                 <h3 class="input__title">이메일*</h3>
                 <div class="email__box">
-                    <input type="text" class="input__txt" id="email" name="email" th:value="${memberDto.email}" oninput="checkEmail()">
+                    <input type="text" class="input__txt" id="email" name="email" th:value="*{email}" oninput="checkEmail()">
                     <input type="text" id="authNum" oninput="checkAuthNum()">
                     <span id="authBtn" disabled="disabled" onclick="sendAuthNum()">인증번호 전송</span>
                     <span class="email_ok">사용 가능한 이메일입니다.</span>
@@ -55,13 +55,13 @@
             <div class="input__box">
                 <h3 class="input__title">
                     생년월일*</h3>
-                <input type="text" class="input__txt" id="birth" name="birth" th:value="${memberDto.birth}" placeholder="생년월일 예)1990-01-01" oninput="checkBirth()">
+                <input type="text" class="input__txt" id="birth" name="birth" th:value="*{birth}" placeholder="생년월일 예)1990-01-01" oninput="checkBirth()">
                 <span id="valid_birth" th:text="${valid_birth}"></span>
             </div>
 
             <div class="input__box">
                 <h3 class="input__title">연락처*</h3>
-                <input type="text" class="input__txt" id="phone" name="phone" th:value="${memberDto.phone}" placeholder=" - 없이 숫자만 입력" oninput="checkPhone()">
+                <input type="text" class="input__txt" id="phone" name="phone" th:value="*{phone}" placeholder=" - 없이 숫자만 입력" oninput="checkPhone()">
                 <input type="text" id="phoneAuthNum" oninput="checkPhoneAuthNum()">
                 <span id="phoneAuthBtn" disabled="disabled" onclick="sendPhoneAuthNum()">인증번호 전송</span>
                 <span id="valid_phone" th:text="${valid_phone}"></span>
@@ -215,6 +215,7 @@
             method: "post",
             data: {email:email},
         })
+        alert("이메일로 인증번호가 전송됐습니다.");
     }
 
     // 서버에 저장된 인증번호와 사용자가 입력한 값이 맞는지 확인.
@@ -233,9 +234,9 @@
                     $("#authNum").css("background-color", "#ebebeb");
                     authNumCheck = false;
                 }
-                allCheck();
             }
         })
+        allCheck();
     }
 
     // 핸드폰 인증번호 서버에 저장.
@@ -251,6 +252,7 @@
             method: "post",
             data: {phone : phone}
         })
+        alert("핸드폰으로 인증번호가 전송됐습니다.");
     }
 
     function checkPhoneAuthNum() {
@@ -271,6 +273,7 @@
                 }
             })
         }
+        allCheck();
         return;
     }
 
