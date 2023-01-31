@@ -60,6 +60,11 @@ h3{
 
 }
 
+.unit__content .div_change{
+    display: flex;
+
+}
+
 .include_btn{
     display: flex;
     flex-direction: row;
@@ -94,6 +99,7 @@ h3{
 
 .secession{
     margin-top: 40px;
+
 }
 
 .secession button{
@@ -109,7 +115,51 @@ h3{
     color: black;
 }
 
+
 .div_change{
+    width: 480px;
     display: flex;
     flex-direction: column;
+}
+
+h5{
+    margin: 13px 0 0;
+}
+
+.inputbox{
+    height: 37px;
+    border: none;
+    border-bottom: 1px solid #9a9998;
+    outline: none;
+
+
+}
+
+
+.btn_div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top : 10px;
+}
+
+.btn{
+    width: 103px;
+    height: 42px;
+    border: 1px solid #9a9998;
+    border-radius: 12px;
+
+
+}
+
+.cancleBtn{
+    background-color: white;
+
+}
+
+.applyBtn{
+    background-color: #9a9998;
+    color: white;
+    margin-left: 8px;
 }

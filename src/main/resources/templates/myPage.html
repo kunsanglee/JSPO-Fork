@@ -10,7 +10,7 @@
   <script src="/js/myPage.js" defer></script>
 </head>
 <body>
-<div class="container">
+<div class="container" >
 
   <div class="title__titleLine">
     <h3>회원 정보</h3>
@@ -31,7 +31,8 @@
         <div class="unit__content include_btn">
           <div class="contentBox">
             <h5 class="title">비밀 번호</h5>
-            <p class="desc desc__passworod noneColor">●●●●●●●●</p>
+            <p class="desc desc__passworod noneColor" th:text="*{pwd}"></p>
+
           </div>
           <button class="changeBtn change_pass_btn">변경</button>
 
