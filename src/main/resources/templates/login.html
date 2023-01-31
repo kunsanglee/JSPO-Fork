@@ -25,7 +25,7 @@
             <div class="input__box">
                 <h3 class="input__title">이메일 주소</h3>
                 <!-- getCookies가 널이 아니면 cookie의 value값을 텍스트박스에 value값에 저장 -->
-                <input type="text" class="input__txt" id="email" name="email" placeholder="예) jspo@jspo.com" autofocus th:value="${#request.getCookies() != null} ? ${#request.cookies[0].getValue()}">
+                <input type="text" class="input__txt" id="email" name="email" placeholder="예) jspo@jspo.com" autofocus th:value="${email}">
 
             </div>
             <div class="input__box">
@@ -35,8 +35,9 @@
             </div>
 <!--            클릭 했을시 value=true가 컨트롤러 가야하고 클릭 안했을시 value=false가 컨트롤러에 가야함-->
 <!--            쿠키가 있으면 checked=true 쿠키가 없으면 checked=false-->
-            <input type="checkbox" name="remember"  th:if="${#request.getCookies() == null}" >
-            <input type="checkbox" name="remember"  th:if="${#request.getCookies() != null}" checked="checked" > 아이디 기억하기
+            <input type="checkbox" name="remember"  th:if="${email == null}" >
+<!--            <input type="checkbox" name="remember"  th:if="${#request.getCookies() != null}" checked="checked" > 아이디 기억하기-->
+            <input type="checkbox" name="remember"  th:if="${email != null}" checked="checked" > 아이디 기억하기
 
 
             <div class="login__btn">
