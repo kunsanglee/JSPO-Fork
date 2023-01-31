@@ -67,7 +67,7 @@ public class LoginController {
 //            String referer = request.getHeader("Referer");
 //            System.out.println(referer) +referer;
             m.addAttribute("memberDto", result);
-            return "test";
+            return "myPage";
         }
 
 //        둘다 데이터가 없을시
