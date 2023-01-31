@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,9 @@ public class LoginController {
     private MemberDto memberDto = MemberDto.getInstance();
 
     @GetMapping("/login")
-    public String login() {
+    public String login(@CookieValue (value = "email", required = false) String email, Model m) {
+
+        m.addAttribute("email", email);
 
         return "login";
     }
@@ -40,25 +43,24 @@ public class LoginController {
         // 로그인 페이지에 적은 이메일과 패스워드를 memberDto에 set한다.
          memberDto.setEmail(loginMember.getEmail());
          memberDto.setPwd(loginMember.getPwd());
-
-
-
          // memberDto 엔 email값과 pwd 값이 있으며
         // 그 값을 sql문의 login의 조건으로 select 한다.
-
-
         MemberDto result = memberDao.login(memberDto);
+
         if(result != null ) {
 
             if(remember) {
-                Cookie cookie = new Cookie("email", String.valueOf(result.getEmail()));
+                Cookie cookie = new Cookie("email", result.getEmail());
                 cookie.setMaxAge(60*60*24);
                 response.addCookie(cookie);
+
+
             } else {
                 Cookie cookie = new Cookie("email", null);
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
             }
+//            HttpSession session = request.getSession();
             // 결과값이 널이 아니면 즉 select가 정상적으로 되었음
             // 메인 홈으로 가기
 

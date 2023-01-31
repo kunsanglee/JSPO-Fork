@@ -25,8 +25,8 @@
             <div class="input__box">
                 <h3 class="input__title">이메일 주소</h3>
                 <!-- getCookies가 널이 아니면 cookie의 value값을 텍스트박스에 value값에 저장 -->
-                <input type="text" class="input__txt" id="email" name="email" placeholder="예) jspo@jspo.com" autofocus th:value="${#request.getCookies() != null} ? ${#request.cookies[0].getValue()}">
-
+                <input type="text" class="input__txt" id="email" name="email" placeholder="예) jspo@jspo.com" autofocus th:value="${email}">
+<!--
             </div>
             <div class="input__box">
                 <h3 class="input__title">비밀번호</h3>
