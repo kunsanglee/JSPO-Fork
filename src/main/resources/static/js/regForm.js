@@ -117,22 +117,41 @@ function checkBirth() {
 // 사용자가 전화번호를 입력했는지 확인.
 function checkPhone() {
     if ($("#phone").val() !== "" && $("#phone").val().length === 11) {
-        $("#valid_phone").css("display", "none");
-        $("#phoneAuthBtn").prop("disabled", false);
-        $("#phoneAuthBtn").css("background-color", "#4CAF50");
+        let phone = $("#phone").val();
+        $.ajax({
+            url: "/phoneCheck",
+            method: "post",
+            data: {phone : phone},
+            success: function (res) {
+                if (res === 0) {
+                    $("#valid_phone").css("display", "none");
+                    $("#phoneAuthBtn").prop("disabled", false);
+                    $("#phoneAuthBtn").css("background-color", "#4CAF50");
+                    $("#phone_ok").css("display", "inline-block");
+                    $("#phoneDuplicate").css("display", "none");
+                }
+                else {
+                    $("#valid_phone").css("display", "inline-block");
+                    $("#phoneAuthBtn").prop("disabled", true);
+                    $("#phoneAuthBtn").css("background-color", "#ebebeb");
+                    $("#phone_ok").css("display", "none");
+                    $("#phoneDuplicate").css("display", "inline-block");
+                    phoneCheck = false;
+                }
+            }
+        })
     } else {
-        $("#valid_phone").css("display", "inline-block");
+        $("#phoneDuplicate").css("display", "none");
+        $("#phone_ok").css("display", "none");
         $("#phoneAuthBtn").prop("disabled", true);
         $("#phoneAuthBtn").css("background-color", "#ebebeb");
-        phoneCheck = false;
     }
     allCheck();
 }
 
 // 이메일인증 버튼 누르면 서버에 인증번호 저장.
-function sendAuthNum(e) {
+function sendAuthNum() {
     let email = $("#email").val();
-    e.preventDefault();
     $.ajax({
         url: "join/emailConfirm",
         method: "post",

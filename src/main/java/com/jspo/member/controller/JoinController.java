@@ -77,4 +77,14 @@ public class JoinController {
         }
         return memberDao.emailCheck(email);
     }
+
+    @PostMapping("/phoneCheck")
+    @ResponseBody
+    public int memberPhoneCount(String phone) throws Exception {
+        System.out.println("phone = " + phone);
+        if (memberDao.memberPhoneCount(phone) == null) {
+            return 0;
+        }
+        return memberDao.memberPhoneCount(phone);
+    }
 }

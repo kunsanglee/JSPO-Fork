@@ -65,6 +65,8 @@
                 <input type="text" class="input__txt" id="phone" name="phone" th:value="*{phone}" placeholder=" - 없이 숫자만 입력" oninput="checkPhone()">
                 <input type="text" id="phoneAuthNum" oninput="checkPhoneAuthNum()">
                 <span id="phoneAuthBtn" disabled="disabled" onclick="sendPhoneAuthNum()">인증번호 전송</span>
+                <span id="phone_ok">등록 가능한 번호입니다</span>
+                <span id="phoneDuplicate">이미 등록된 번호입니다</span>
                 <span id="valid_phone" th:text="${valid_phone}"></span>
             </div>
 
