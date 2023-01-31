@@ -61,10 +61,9 @@ public class LoginController {
                 response.addCookie(cookie);
             }
             HttpSession session = request.getSession();
-            // 결과값이 널이 아니면 즉 select가 정상적으로 되었음
-            // 메인 홈으로 가기
 
-//            session.setAttribute("email",memberDto.getEmail());
+
+            session.setAttribute("email",memberDto.getEmail());
 //            String referer = request.getHeader("Referer");
 //            System.out.println(referer) +referer;
             m.addAttribute("memberDto", result);
@@ -87,11 +86,11 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletResponse response) {
+    public String logout(HttpServletRequest request) {
 
-        Cookie cookie = new Cookie("email", null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
+        HttpSession session = request.getSession();
+        session.invalidate();
+
         return "redirect:/";
     }
 }
