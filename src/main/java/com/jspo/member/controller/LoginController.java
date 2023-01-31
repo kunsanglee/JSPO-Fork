@@ -60,7 +60,7 @@ public class LoginController {
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
             }
-//            HttpSession session = request.getSession();
+            HttpSession session = request.getSession();
             // 결과값이 널이 아니면 즉 select가 정상적으로 되었음
             // 메인 홈으로 가기
 
