@@ -34,7 +34,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(MemberDto loginMember , Model m, HttpServletRequest request,
-                        HttpServletResponse response, boolean remember, HttpSession session) throws Exception {
+                        HttpServletResponse response, boolean remember) throws Exception {
 
 
         // 로그인 페이지에 적은 이메일과 패스워드를 memberDto에 set한다.
@@ -54,16 +54,19 @@ public class LoginController {
                 Cookie cookie = new Cookie("email", String.valueOf(result.getEmail()));
                 cookie.setMaxAge(60*60*24);
                 response.addCookie(cookie);
+            } else {
+                Cookie cookie = new Cookie("email", null);
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
             }
             // 결과값이 널이 아니면 즉 select가 정상적으로 되었음
             // 메인 홈으로 가기
-            session.setAttribute("email",memberDto.getEmail());
-            String referer = request.getHeader("Referer");
-            System.out.println(referer);
+
+//            session.setAttribute("email",memberDto.getEmail());
+//            String referer = request.getHeader("Referer");
+//            System.out.println(referer) +referer;
             m.addAttribute("memberDto", result);
-            return "redirect:"+referer;
-        } else {
-            return "/login";
+            return "test";
         }
 
 //        둘다 데이터가 없을시
@@ -78,7 +81,7 @@ public class LoginController {
 //
 //        비밀번호는 초기화 되고
 //        아이디쪽만 데이터가 남아있음
-
+        return "login";
     }
 
     @GetMapping("/logout")
