@@ -1,93 +1,72 @@
-//-[x] 변경버튼을 누르면 변경버튼이 사라지고 -> display 속성을 none으로 하였음
-//-[x] 비밀번호를 변경할 수 있는 모달창이 열린다.
-//-[x] 취소 버튼을 누르면 모달창이 닫힌다.
-//-[x] 변경 버튼이 다시 보이게 된다.
+//[]사용자가 현재 비밀번호를 입력하고 바뀔 비밀번호를 입력했을때
+//[] 현재 비밀번호와 새로운 비밀번호가 정규식에 맞는지 체크
+//[] 체크 통과하면 버튼 활성화 [색상변경, 클릭가능]
 
-const pa = document.querySelector('.desc__passworod');
+const modal = document.querySelector('.modal');
+const hidden = document.querySelector('.hidden');
+const cancleBtn = document.querySelector('.cancleBtn');
+const currentPwd = document.querySelector(' .currentPwd');
+const newPwd = document.querySelector(' .newPwd');
 const change_pass_btn = document.querySelector('.change_pass_btn');
-const inputbox_active = document.querySelector('.inputbox');
-let modal = false;
+const hint1 = document.querySelector('.hint1');
+const hint2 = document.querySelector('.hint2');
+
+let isModalTrue = false;
+
+
+//비밀번호가 정규식에 맞는지 체크하는 함수
+function pwd_check(pwd){
+    let regex=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/;
+    return regex.test(pwd);
+}
+
+
+currentPwd.addEventListener('input',(e)=>{
+    const hint = document.querySelector('.hint1');
+    let pass_vaild = pwd_check(currentPwd.value);
+    if (pass_vaild){
+        hint.style.display = "none";
+    }else if (!pass_vaild){
+        hint.style.display = "block";
+
+    }
+
+})
+newPwd.addEventListener('input',(e)=>{
+    const hint = document.querySelector('.hint2');
+    let pass_vaild = pwd_check(newPwd.value);
+    if (pass_vaild){
+        hint.style.display = "none";
+    }else if (!pass_vaild){
+        hint.style.display = "block";
+
+    }
+
+
+})
+//
+
 
 
 change_pass_btn.addEventListener('click',()=>{
-
-    modal= !modal;
-    if(modal) {
-
-        change_pass_btn.style.display = 'none';
-
-
-        const change = document.createElement('div');
-        const change_h5 = document.createElement('h5');
-        const span = document.createElement('h5');
-        const span2 = document.createElement('h5');
-        const pre_input = document.createElement('input');
-        const change_input = document.createElement('input');
-        const btn_div = document.createElement('div');
-        const  cancleBtn = document.createElement('button');
-        const  applyBtn = document.createElement('button');
-        //버튼 두개 추가
-
-        change.setAttribute('class','div_change');
-        change_h5.setAttribute("class","change_h5");
-
-
-        pre_input.setAttribute("class", 'inputbox');
-        pre_input.setAttribute("type", 'password');
-        pre_input.setAttribute("placeholder","영문,숫자특수문자 조합 8~16자");
-
-        change_input.setAttribute("class", 'inputbox');
-        change_input.setAttribute("type", 'password');
-        change_input.setAttribute("placeholder","영문,숫자특수문자 조합 8~16자");
-
-
-        btn_div.setAttribute('class','btn_div');
-
-        cancleBtn.setAttribute("class","cancleBtn btn")
-        applyBtn.setAttribute("class","applyBtn btn")
-
-
-
-        change_h5.innerText = "비밀번호 변경"
-        span.innerText = "현재 비밀번호";
-        span2.innerText = "새 비밀번호";
-
-
-
-        cancleBtn.innerText = "취소";
-        applyBtn.innerText = "확인";
-
-        pa.appendChild(change);
-        change.appendChild(change_h5);
-        change.appendChild(span);
-        change.appendChild(pre_input);
-        change.appendChild(span2);
-        change.appendChild(change_input);
-        change.appendChild(btn_div);
-        btn_div.appendChild(cancleBtn)
-        btn_div.appendChild(applyBtn);
-
-
-    }else{
+    isModalTrue = !isModalTrue;
+    if (isModalTrue){
+        hidden.style.display = 'flex';
 
     }
+})
 
+cancleBtn.addEventListener('click', () => {
+    isModalTrue = false;
+    if (isModalTrue===false){
+        hidden.style.display = 'none';
+        hint1.style.display = "none";
+        hint2.style.display = "none";
+        currentPwd.value = '';
+        newPwd.value = '';
 
-
-
-
-
-});
-
-pa.addEventListener('click',(e)=>{
-    const change = document.querySelector('.div_change');
-
-    if (e.target.className==='cancleBtn btn'){
-        modal = !modal;
-        change_pass_btn.style.display = 'block';
-
-        change.remove();
     }
-    
 
 })
+
+
