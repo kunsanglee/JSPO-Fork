@@ -80,6 +80,11 @@ function checkPwd() {
         $(".pwd_duplicate").css("display", "none");
         $("#valid_pwd").css("display", "none");
         pwdCheck = true;
+    } else if (chkPwd === "") {
+        $(".pwd_ok").css("display", "none");
+        $(".pwd_duplicate").css("display", "none");
+        $(".reg").prop("disabled", true);
+        $("#valid_pwd").css("display", "none");
     } else {
         $(".pwd_ok").css("display", "none");
         $(".pwd_duplicate").css("display", "inline-block");
