@@ -2,6 +2,7 @@ package com.jspo.member.controller;
 
 import com.jspo.member.dao.MemberDao;
 import com.jspo.member.dto.MemberDto;
+import com.jspo.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,9 @@ public class JoinController {
 
     @Autowired
     private MemberDao memberDao;
+
+    @Autowired
+    private MemberService memberService;
 
     private MemberDto memberDto = MemberDto.getInstance();
 
@@ -65,26 +69,9 @@ public class JoinController {
         m.addAttribute("memberDto", joinMember);
         System.out.println("join 성공");
 
-        return "myPage";
-    }
 
-    @PostMapping("/emailCheck")
-    @ResponseBody
-    public int emailCheck(String email) throws Exception {
-        System.out.println("email = " + email);
-        if (memberDao.emailCheck(email) == null) {
-            return 0;
-        }
-        return memberDao.emailCheck(email);
-    }
+        m.addAttribute("encPwd", memberService.getEncPwd(joinMember));
 
-    @PostMapping("/phoneCheck")
-    @ResponseBody
-    public int memberPhoneCount(String phone) throws Exception {
-        System.out.println("phone = " + phone);
-        if (memberDao.memberPhoneCount(phone) == null) {
-            return 0;
-        }
-        return memberDao.memberPhoneCount(phone);
+        return "my";
     }
 }
