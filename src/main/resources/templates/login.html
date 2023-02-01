@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+<script src="http://code.jquery.com/jquery-latest.min.js"
+      ></script>
 <html lang="en">
 
 <head>
@@ -11,10 +14,10 @@
 </head>
 
 <body>
-    <form action="/login" method="post" name="loginForm" >
+    <form action="/login"  method="post" name="loginForm" >
     <div class="wrap">
 
-        <div class="login__area">
+        <div class="login__area" >
 
             <div class="login__title">
                 <img class="logo" src="imgs/JSPO-logo.png" alt="logo">
@@ -22,15 +25,24 @@
             </div>
             <div class="input__box">
                 <h3 class="input__title">이메일 주소</h3>
-                <input type="text" class="input__txt" id="email" name="email" placeholder="예) jspo@jspo.com" autofocus>
+                <!-- getCookies가 널이 아니면 cookie의 value값을 텍스트박스에 value값에 저장 -->
+                <input type="text" class="input__txt" id="email" name="email" placeholder="예) jspo@jspo.com" autofocus th:value="${email}">
+
             </div>
             <div class="input__box">
                 <h3 class="input__title">비밀번호</h3>
                 <input type="password" class="input__txt" id="pwd" name="pwd">
+
             </div>
-            <input type="checkbox" name="remember" id="remember"> 아이디 기억하기
+<!--            클릭 했을시 value=true가 컨트롤러 가야하고 클릭 안했을시 value=false가 컨트롤러에 가야함-->
+<!--            쿠키가 있으면 checked=true 쿠키가 없으면 checked=false-->
+            <input type="checkbox" name="remember"  th:if="${email == null}" >
+<!--            <input type="checkbox" name="remember"  th:if="${#request.getCookies() != null}" checked="checked" > 아이디 기억하기-->
+            <input type="checkbox" name="remember"  th:if="${email != null}" checked="checked" > 아이디 기억하기
+
+
             <div class="login__btn">
-                <button class="login">로그인</button>
+                <button class="login" onclick="check()">로그인</button>
             </div>
             <ul class="find">
                 <li class="find__list">
@@ -44,6 +56,11 @@
         </div>
     </div>
     </form>
-</body>
 
+<script>
+
+
+</script>
+</body>
+</th:block>
 </html>

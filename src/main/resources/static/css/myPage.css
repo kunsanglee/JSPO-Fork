@@ -212,3 +212,106 @@ h3{
     margin-left: 15px;
 }
 
+
+/*email_modal*/
+
+.email__modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.email__modal .email__bg {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: relative;
+}
+
+
+.email__modalBox {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    background-color: #fff;
+    width: 400px;
+    height: 180px;
+    padding: 15px;
+
+}
+
+.email__modal__hidden{
+    display: none;
+}
+
+
+.change__email__title{
+    color: black;
+    font-size: 20px;
+    margin: 0;
+}
+
+.newEmail__h5{
+
+    margin : 10px 0 0;
+
+}
+
+.emailHint{
+    color: red;
+}
+
+.email__cancleBtn{
+    background-color: white;
+
+}
+.email__applyBtn{
+    background-color: #ebebeb;
+    margin-left: 10px;
+
+}
+
+
+
+
+
+/*secession_modal*/
+
+.secession__modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.secession__modal .secession__bg {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: relative;
+}
+
+
+.secession__modalBox {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    background-color: #fff;
+    width: 400px;
+    height: 160px;
+    padding: 15px;
+
+}
+
+.secession__modal__hidden{
+    display: none;
+}
