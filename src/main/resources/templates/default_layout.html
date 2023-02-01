@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8" />
+    <title>thymeleaf layout</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+    <!-- content script -->
+<!--    <th:block layout:fragment="css"></th:block>-->
+<!--    &lt;!&ndash; content script &ndash;&gt;-->
+<!--    <th:block layout:fragment="script"></th:block>-->
+</head>
+<body>
+<!-- header fragment 사용 -->
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!-- content fragment 사용 -->
+<th:block layout:fragment="content"></th:block>
+<!-- footer fragment 사용 -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+</body>
+</html>
+
+
+
+
+
+<!--<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">-->
+<!--<th:block th:replace="fragments/head :: headFragment"></th:block>-->
+<!--<body>-->
+<!--<div>-->
+<!--    <th:block th:replace="fragments/header :: headerFragment('Header')"></th:block>-->
+<!--    <th:block layout:fragment="content"></th:block>-->
+<!--    <th:block th:replace="fragments/footer :: footerFragment"></th:block>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!--&lt;!&ndash;<!doctype html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta name="viewport"&ndash;&gt;-->
+<!--&lt;!&ndash;          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta http-equiv="X-UA-Compatible" content="ie=edge">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Document</title>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;안녕하세요&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
