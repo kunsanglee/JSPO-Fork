@@ -33,4 +33,9 @@
     <select id="memberPhoneCount" parameterType="String" resultType="Integer">
         select count(*) from member where phone = #{phone};
     </select>
+
+<!--    비밀번호 변경-->
+    <update id="updatePwd" parameterType="Map">
+        update member set pwd = #{pwd} where email = #{email};
+    </update>
 </mapper>
