@@ -11,6 +11,9 @@ const change_pass_btn = document.querySelector('.change_pass_btn');
 const hint1 = document.querySelector('.hint1');
 const hint2 = document.querySelector('.hint2');
 
+
+const change__phone__button = document.querySelector('.change__phone__title');
+
 let isModalTrue = false;
 
 
@@ -67,6 +70,12 @@ cancleBtn.addEventListener('click', () => {
 
     }
 
+})
+
+
+
+change__phone__button.addEventListener('click',()=>{
+    console.log('ddd')
 })
 
 
