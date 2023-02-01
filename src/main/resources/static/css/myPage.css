@@ -88,6 +88,7 @@ h3{
     background-color: white;
     border: 1px solid #ebebeb;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .info__person{
