@@ -3,6 +3,8 @@ package com.jspo.member.dao;
 import com.jspo.member.dto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Map;
+
 @Mapper
 public interface MemberDao {
 
@@ -22,5 +24,7 @@ public interface MemberDao {
     MemberDto selectMemberByEmail (String email) throws Exception;
 
     Integer memberPhoneCount(String phone) throws Exception;
+
+    void updatePwd(Map<String, String> map) throws Exception;
 
 }

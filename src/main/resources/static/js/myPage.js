@@ -4,6 +4,7 @@
 
 const modal = document.querySelector('.modal');
 const hidden = document.querySelector('.hidden');
+const applyBtn = document.querySelector('.applyBtn');
 const cancleBtn = document.querySelector('.cancleBtn');
 const currentPwd = document.querySelector(' .currentPwd');
 const newPwd = document.querySelector(' .newPwd');
@@ -42,7 +43,6 @@ newPwd.addEventListener('input',(e)=>{
         hint.style.display = "none";
     }else if (!pass_vaild){
         hint.style.display = "block";
-
     }
 
 
@@ -57,6 +57,32 @@ change_pass_btn.addEventListener('click',()=>{
         hidden.style.display = 'flex';
 
     }
+})
+
+applyBtn.addEventListener('click', () => {
+    // 현재 비밀번호와 새로운 비밀번호를 변수에 저장한다.
+    let pwd = currentPwd.value;
+    let chgPwd = newPwd.value;
+    $.ajax({
+        // modifyPwd 라는 url로
+        url: "modifyPwd",
+        // post형식으로 보낸다
+        type: "post",
+        // pwd라는 이름으로 pwd값을, chgPwd라는 이름으로 chgPwd값을
+        data: {
+            pwd: pwd,
+            chgPwd: chgPwd
+        },
+        // 성공하면 function을 실행하고 서버로부터 받아온 res(결과값)을 받아와서 작업한다.
+        success: function(res) {
+            if (res) {
+                alert("비밀번호 변경을 완료했습니다.");
+                window.location.reload();
+            } else {
+                alert("입력하신 비밀번호가 일치하지 않습니다.");
+            }
+        }
+    })
 })
 
 cancleBtn.addEventListener('click', () => {

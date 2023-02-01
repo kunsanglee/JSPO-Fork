@@ -2,6 +2,7 @@ package com.jspo.member.controller;
 
 import com.jspo.member.dao.MemberDao;
 import com.jspo.member.dto.MemberDto;
+import com.jspo.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,9 @@ public class LoginController {
 
     @Autowired
     private MemberDao memberDao;
+
+    @Autowired
+    private MemberService memberService;
 
     private MemberDto memberDto = MemberDto.getInstance();
 
@@ -66,8 +70,10 @@ public class LoginController {
             session.setAttribute("email",memberDto.getEmail());
 //            String referer = request.getHeader("Referer");
 //            System.out.println(referer) +referer;
+
             m.addAttribute("memberDto", result);
-            return "myPage";
+            m.addAttribute("encPwd", memberService.getEncPwd(result));
+            return "redirect:/my";
         }
 
 //        둘다 데이터가 없을시
