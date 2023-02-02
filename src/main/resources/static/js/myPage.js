@@ -12,6 +12,8 @@ const change_pass_btn = document.querySelector('.change_pass_btn');
 const hint1 = document.querySelector('.hint1');
 const hint2 = document.querySelector('.hint2');
 
+
+const change__phone__button = document.querySelector('.change__phone__btn');
 const phone__modal__hidden = document.querySelector('.phone__modal__hidden');
 const phone__cancleBtn = document.querySelector('.phone__cancleBtn');
 const newPhone = document.querySelector('.newPhone');
@@ -19,11 +21,11 @@ const authBtn = document.querySelector('.phone__authBtn');
 const authPhone = document.querySelector('.authPhone');
 const phone__applyBtn = document.querySelector('.phone__applyBtn');
 
+const secessionBtn = document.querySelector('.secessionBtn');
+const secession__cancle__btn = document.querySelector('.secession__cancle__btn');
 const secession__modal__hidden = document.querySelector('.secession__modal__hidden');
 const secession__password = document.querySelector('.secession__password');
 const secession__apply__btn = document.querySelector('.secession__apply__btn');
-
-const change__phone__button = document.querySelector('.change__phone__btn');
 
 let isModalTrue = false;
 let isPhoneModalTrue = false;
@@ -56,11 +58,22 @@ currentPwd.addEventListener('input', (e) => {
 })
 newPwd.addEventListener('input', (e) => {
     const hint = document.querySelector('.hint2');
+    const hint3 = document.querySelector('.hint3');
     let pass_vaild = pwd_check(newPwd.value);
     if (pass_vaild) {
+        if (currentPwd.value === newPwd.value) {
+            hint.style.display = "none";
+            hint3.style.display = "block"
+            applyBtn.disabled = true;
+            return;
+        }
         hint.style.display = "none";
-    } else if (!pass_vaild) {
+        hint3.style.display = "none";
+        applyBtn.disabled = false;
+    } else {
         hint.style.display = "block";
+        hint3.style.display = "none";
+        applyBtn.disabled = true;
     }
 
 
@@ -213,15 +226,15 @@ newPhone.addEventListener('input', () => {
     let phone_vaild = phone_check(newPhone.value);
     if (phone_vaild) {
         hint.style.display = "none";
+        phone__applyBtn.disabled = false;
     } else if (!phone_vaild) {
         hint.style.display = "block";
+        phone__applyBtn.disabled = true;
 
     }
 
 });
 
-const secessionBtn = document.querySelector('.secessionBtn');
-const secession__cancle__btn = document.querySelector('.secession__cancle__btn');
 secessionBtn.addEventListener('click', () => {
     isSecessionModalTrue = !isSecessionModalTrue;
     if (isSecessionModalTrue) {
