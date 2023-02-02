@@ -88,6 +88,7 @@ h3{
     background-color: white;
     border: 1px solid #ebebeb;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .info__person{
@@ -138,7 +139,7 @@ h3{
     position: absolute;
     background-color: #fff;
     width: 400px;
-    height: 268px;
+    height: 250px;
     padding: 15px;
 }
 
@@ -172,8 +173,12 @@ h3{
     border: 0;
     border-bottom: 1px solid #9a9998;
     height: 35px;
-    width: 100%;
+    width: 85%;
 
+}
+
+.authPhone{
+    width: 20%;
 }
 
 .hint{
@@ -213,9 +218,9 @@ h3{
 }
 
 
-/*email_modal*/
+/*phone_modal*/
 
-.email__modal {
+.phone__modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -226,7 +231,7 @@ h3{
     align-items: center;
 }
 
-.email__modal .email__bg {
+.phone__modal .phone__bg {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
@@ -234,43 +239,48 @@ h3{
 }
 
 
-.email__modalBox {
+.phone__modalBox {
     position: absolute;
     top: 40%;
     left: 40%;
     background-color: #fff;
     width: 400px;
-    height: 180px;
+    height: 200px;
     padding: 15px;
 
 }
 
-.email__modal__hidden{
+.phone__modal__hidden{
     display: none;
 }
 
 
-.change__email__title{
+.change__phone__title{
     color: black;
-    font-size: 20px;
+    /*font-size: 15px;*/
     margin: 0;
 }
 
-.newEmail__h5{
+.newPhone__h5{
 
     margin : 10px 0 0;
 
 }
 
-.emailHint{
+.phoneHint{
     color: red;
 }
 
-.email__cancleBtn{
+.phone__authBtn{
+    background-color: white;
+    font-size: 10px;
+}
+
+.phone__cancleBtn{
     background-color: white;
 
 }
-.email__applyBtn{
+.phone__applyBtn{
     background-color: #ebebeb;
     margin-left: 10px;
 

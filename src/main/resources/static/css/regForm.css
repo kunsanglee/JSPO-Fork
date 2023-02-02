@@ -133,3 +133,15 @@
     color: indianred;
     display: none;
 }
+
+#phoneDuplicate{
+    font-size: 10px;
+    color: indianred;
+    display: none;
+}
+
+#phone_ok{
+    font-size: 10px;
+    color: #4CAF50;
+    display: none;
+}

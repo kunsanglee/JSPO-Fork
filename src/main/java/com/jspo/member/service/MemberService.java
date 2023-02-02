@@ -18,22 +18,14 @@ public class MemberService {
 
     private MemberDto memberDto = MemberDto.getInstance();
 
-    @PostMapping("/modifyPhone")
-    public boolean modifyPhone(String pwd, HttpSession session) throws Exception {
-
-        String email = (String) session.getAttribute("email");
-        memberDto = memberDao.selectMemberByEmail(email);
-
-        // 세션에서 얻어온 아이디로 DB조회해서 나온 회원정보와 입력받은 pwd가 일치하지 않으면
-        if (!memberDto.getPwd().equals(pwd)) {
-            return false;
+    public static String getEncPwd(MemberDto memberDto) {
+        // 회원정보페이지로 보내는 암호화 비밀번호
+        String encPwd = "";
+        // 회원의 비밀번호 길이만큼 ●●●● 처리
+        for (int i = 0; i < memberDto.getPwd().length(); i++) {
+            encPwd += "●";
         }
-
-        Map<String, String> map = new HashMap<>();
-
-        map.put("pwd", pwd);
-        map.put("email", email);
-
-        return true;
+        return encPwd;
     }
+
 }
