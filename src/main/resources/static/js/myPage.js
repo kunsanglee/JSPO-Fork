@@ -238,3 +238,11 @@ secession__cancle__btn.addEventListener('click', () => {
     }
 
 })
+
+secession__password.addEventListener('input', () => {
+    let pwd = secession__password.value;
+
+    $.ajax({
+        url: "/"
+    })
+})
