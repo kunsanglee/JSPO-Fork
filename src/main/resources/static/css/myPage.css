@@ -245,7 +245,7 @@ h3{
     left: 40%;
     background-color: #fff;
     width: 400px;
-    height: 200px;
+    height: 210px;
     padding: 15px;
 
 }
@@ -273,7 +273,9 @@ h3{
 
 .phone__authBtn{
     background-color: white;
-    font-size: 10px;
+    font-size: 13px;
+    width: 100px;
+    margin-left: 10px;
 }
 
 .phone__cancleBtn{
@@ -284,6 +286,18 @@ h3{
     background-color: #ebebeb;
     margin-left: 10px;
 
+}
+
+.phone__auth__box{
+    display: flex;
+    flex-direction: row;
+    width: 314px;
+    align-items: center;
+    justify-content: right;
+}
+
+.authphone{
+    width: 80px;
 }
 
 
@@ -325,3 +339,4 @@ h3{
 .secession__modal__hidden{
     display: none;
 }
+
