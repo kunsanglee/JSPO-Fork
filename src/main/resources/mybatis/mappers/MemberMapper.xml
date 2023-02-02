@@ -43,4 +43,9 @@
     <update id="updatePhone" parameterType="Map">
         update member set phone = #{phone} where email = #{email};
     </update>
+
+<!--    회원 탈퇴-->
+    <delete id="deleteMember" parameterType="String">
+        delete from member where email = #{email};
+    </delete>
 </mapper>

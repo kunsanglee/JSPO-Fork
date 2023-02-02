@@ -29,4 +29,6 @@ public interface MemberDao {
 
     void updatePhone(Map<String, String> map) throws Exception;
 
+    void deleteMember(String email) throws Exception;
+
 }
