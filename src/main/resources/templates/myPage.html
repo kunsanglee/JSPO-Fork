@@ -128,10 +128,13 @@
         </div>
         <div class="content">
             <h5 class="newPhone__h5">새 핸드폰 번호</h5>
-            <input class="change__input newPhone" type="text" required>
-            <button class="phone__authBtn btn">인증번호 전송</button>
+            <input class="change__input newPhone" type="text" placeholder="- 없이 번호만 입력" required maxlength="11">
+
             <span class="hint phoneHint">핸드폰 번호를 정확히 입력해주세요.</span>
-            <input class="change__input authPhone" type="text" required placeholder="예)123456">
+            <div class="phone__auth__box">
+            <input class="change__input authPhone" type="text" required placeholder="예)123456" maxlength="6">
+            <button class="phone__authBtn btn">인증번호 전송</button>
+            </div>
             <div class="div__btn">
                 <button class="phone__cancleBtn btn">취소</button>
                 <button class="phone__applyBtn btn" disabled="disabled">확인</button>
