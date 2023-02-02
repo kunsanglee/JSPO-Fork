@@ -30,6 +30,22 @@ public class JoinController {
         return "regForm";
     }
 
+    @GetMapping("/")
+    public String home(MemberDto memberDto) {
+
+        return "mainPage";
+    }
+
+    @GetMapping("/fregments/header")
+    public String header(){
+        return "/fragments/header";
+    }
+
+    @GetMapping("/fregments/footer")
+    public String footer(){
+        return "/fragments/footer";
+    }
+
     @PostMapping("/join")
     public String join(@Valid MemberDto joinMember, Errors errors, Model m) throws Exception {
 

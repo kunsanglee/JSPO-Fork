@@ -3,6 +3,8 @@
 }
 
 .wrap{
+    width: 1929px;
+    height: 1000px;
     padding: 0px 40px;
     display: flex;
     flex-direction: column;

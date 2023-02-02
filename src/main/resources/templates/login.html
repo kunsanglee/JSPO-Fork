@@ -8,12 +8,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>JSPO : Login page</title>
 <!--    <link rel="stylesheet" href="/src/main/resources/static/css/login.css">-->
     <link rel="stylesheet" href="css/login.css">
+
+    <script type="text/javascript">
+        $(document).ready( function() {
+
+            $("#headers").load("/fregments/header");
+            $("#footers").load("/fregments/footer");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+        });
+    </script>
 </head>
 
 <body>
+    <div id="headers"></div>
     <form action="/login"  method="post" name="loginForm" >
     <div class="wrap">
 
@@ -61,6 +71,7 @@
 
 
 </script>
+<div id="footers"></div>
 </body>
-</th:block>
+
 </html>
