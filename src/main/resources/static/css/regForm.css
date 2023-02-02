@@ -3,7 +3,9 @@
 }
 
 .wrap{
-    padding: 0px 40px;
+    width: 1929px;
+    height: 1000px;
+    padding: 0px ;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,7 +14,7 @@
 
 .join__area{
     width: 400px;
-    height: 731px;
+    height: 900px;
     padding: 58px 0px 160px;
 
 }

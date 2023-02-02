@@ -9,9 +9,18 @@
     <title>JSPO | 좆소파워 </title>
     <link rel="stylesheet" href="css/regForm.css">
     <script src="js/regForm.js" defer></script>
+    <script type="text/javascript">
+        $(document).ready( function() {
+
+            $("#headers").load("/fregments/header");
+            $("#footers").load("/fregments/footer");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+        });
+    </script>
 </head>
 
 <body>
+<div id="headers"></div>
 <form th:action="@{/join}" method="post" name="regForm" th:object="${memberDto}"><!--modelAttribute="memberDto"-->
     <div class="wrap">
 
@@ -82,5 +91,6 @@
 
     </div>
 </form>
+<div id="footers"></div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!doctype html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/default_layout">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,8 +8,24 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/myPage.css">
     <script src="js/myPage.js" defer></script>
+
+    <script type="text/javascript">
+        $(document).ready( function() {
+
+            $("#headers").load("/fregments/header");
+            $("#footers").load("/fregments/footer");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+
+        });
+    </script>
+
+
+
 </head>
 <body>
+<div id="headers"></div>
+
+
+
 <div class="container">
 
     <div class="title__titleLine">
@@ -143,7 +159,7 @@
         </div>
     </div>
 </div>
-
+<div id="footers"></div>
 
 </body>
 </html>
