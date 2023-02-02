@@ -72,6 +72,6 @@ public class JoinController {
 
         m.addAttribute("encPwd", memberService.getEncPwd(joinMember));
 
-        return "my";
+        return "redirect:/login";
     }
 }

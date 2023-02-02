@@ -27,4 +27,6 @@ public interface MemberDao {
 
     void updatePwd(Map<String, String> map) throws Exception;
 
+    void updatePhone(Map<String, String> map) throws Exception;
+
 }

@@ -38,4 +38,9 @@
     <update id="updatePwd" parameterType="Map">
         update member set pwd = #{pwd} where email = #{email};
     </update>
+
+<!--    핸드폰 번호 변경-->
+    <update id="updatePhone" parameterType="Map">
+        update member set phone = #{phone} where email = #{email};
+    </update>
 </mapper>
