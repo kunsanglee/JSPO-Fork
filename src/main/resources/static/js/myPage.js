@@ -21,6 +21,7 @@ const phone__applyBtn = document.querySelector('.phone__applyBtn');
 
 const secession__modal__hidden = document.querySelector('.secession__modal__hidden');
 const secession__password = document.querySelector('.secession__password');
+const secession__apply__btn = document.querySelector('.secession__apply__btn');
 
 const change__phone__button = document.querySelector('.change__phone__title');
 
@@ -237,4 +238,25 @@ secession__cancle__btn.addEventListener('click', () => {
         secession__password.value = '';
     }
 
+})
+
+secession__apply__btn.addEventListener('click', () => {
+    let pwd = secession__password.value;
+
+    $.ajax({
+        url: "/secession",
+        type: "post",
+        data: {pwd},
+        success: function(res) {
+            if (res) {
+                alert("탈퇴가 정상적으로 처리됐습니다.");
+                window.location.reload();
+            } else {
+                alert("비밀번호가 일치하지 않습니다.");
+            }
+        },
+        error: function() {
+            alert("회원 탈퇴 중 오류가 발생했습니다.");
+        }
+    })
 })

@@ -1,123 +1,107 @@
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/default_layout">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">
+<body>
+<div layout:fragment="content">
     <link rel="stylesheet" href="/css/myPage.css">
     <script src="js/myPage.js" defer></script>
 
-    <script type="text/javascript">
-        $(document).ready( function() {
 
-            $("#headers").load("/fregments/header");
-            $("#footers").load("/fregments/footer");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+    <div class="container">
 
-        });
-    </script>
+        <div class="title__titleLine">
+            <h3>회원 정보</h3>
 
+        </div>
 
+        <div class="profile__info" th:object="${memberDto}">
+            <div class="info__login">
+                <h4 class="info__group__title">로그인 정보</h4>
+                <div class="info__unit">
+                    <div class="unit__content">
+                        <h5 class="title">이메일 주소</h5>
+                        <p class="desc desc__email" th:text="*{email}"></p>
+                    </div>
 
-</head>
-<body>
-<div id="headers"></div>
-
-
-
-<div class="container">
-
-    <div class="title__titleLine">
-        <h3>회원 정보</h3>
-
-    </div>
-
-    <div class="profile__info" th:object="${memberDto}">
-        <div class="info__login">
-            <h4 class="info__group__title">로그인 정보</h4>
-            <div class="info__unit">
-                <div class="unit__content">
-                    <h5 class="title">이메일 주소</h5>
-                    <p class="desc desc__email" th:text="*{email}"></p>
                 </div>
+                <div class="info__unit">
+                    <div class="unit__content include_btn">
+                        <div class="contentBox">
+                            <h5 class="title">비밀 번호</h5>
 
-            </div>
-            <div class="info__unit">
-                <div class="unit__content include_btn">
-                    <div class="contentBox">
-                        <h5 class="title">비밀 번호</h5>
+                            <p class="desc desc__passworod noneColor" th:text="${encPwd}">😎😎😎😎😎</p>
 
-                        <p class="desc desc__passworod noneColor" th:text="${encPwd}">😎😎😎😎😎</p>
 
+                        </div>
+                        <button class="changeBtn change_pass_btn">변경</button>
 
                     </div>
-                    <button class="changeBtn change_pass_btn">변경</button>
 
                 </div>
-
             </div>
-        </div>
-        <div class="info__person">
-            <h4 class="info__group__title">개인 정보</h4>
-            <div class="info__unit">
-                <div class="unit__content">
-                    <h5 class="title">이름</h5>
-                    <p class="desc desc__name noneColor" th:text="*{name}"></p>
-                </div>
-
-                <div class="unit__content">
-                    <h5 class="title">생년월일</h5>
-                    <p class="desc desc__birth noneColor" th:text="*{birth}"></p>
-                </div>
-
-                <div class="unit__content include_btn">
-                    <div class="contentBox">
-                        <h5 class="title">휴대폰 번호</h5>
-                        <p class="desc desc__phone noneColor" th:text="*{phone}"></p>
+            <div class="info__person">
+                <h4 class="info__group__title">개인 정보</h4>
+                <div class="info__unit">
+                    <div class="unit__content">
+                        <h5 class="title">이름</h5>
+                        <p class="desc desc__name noneColor" th:text="*{name}"></p>
                     </div>
-                    <button class="changeBtn change__phone__title">변경</button>
+
+                    <div class="unit__content">
+                        <h5 class="title">생년월일</h5>
+                        <p class="desc desc__birth noneColor" th:text="*{birth}"></p>
+                    </div>
+
+                    <div class="unit__content include_btn">
+                        <div class="contentBox">
+                            <h5 class="title">휴대폰 번호</h5>
+                            <p class="desc desc__phone noneColor" th:text="*{phone}"></p>
+                        </div>
+                        <button class="changeBtn change__phone__title">변경</button>
+                    </div>
+
+
                 </div>
 
+                <a href="#" class="secession">
 
+                    <button class="secessionBtn">회원탈퇴</button>
+                </a>
             </div>
-
-            <a href="#" class="secession">
-
-                <button class="secessionBtn">회원탈퇴</button>
-            </a>
         </div>
+
+
     </div>
 
 
-</div>
+    <div class="modal hidden">
+        <div class="bg"></div>
+        <div class="modalBox">
+            <div class="title">
+                <h5 class="change__pass__title">비밀번호 변경</h5>
+            </div>
+            <div class="content">
+                <h5 class="change__pass__title title__margin">현재 비밀번호</h5>
+                <input class="change__input currentPwd" type="password" placeholder="영문,숫자,특수문자 조합 8~16자" maxlength="16"
+                       minlength="8" required id="pwd">
+                <span class="hint hint1" hidden="true">영문, 숫자, 특수문자를 조합해서 입력해주세요. (8-16자)</span>
+                <h5 class="change__pass__title title__margin">새 비밀번호</h5>
+                <input class="change__input newPwd" type="password" placeholder="영문,숫자,특수문자 조합 8~16자" maxlength="16"
+                       minlength="8" required name="chgPwd">
 
-
-<div class="modal hidden">
-    <div class="bg"></div>
-    <div class="modalBox">
-        <div class="title">
-            <h5 class="change__pass__title">비밀번호 변경</h5>
-        </div>
-        <div class="content">
-            <h5 class="change__pass__title title__margin">현재 비밀번호</h5>
-            <input class="change__input currentPwd" type="password" placeholder="영문,숫자,특수문자 조합 8~16자" maxlength="16"
-                    minlength="8" required id="pwd">
-            <span class="hint hint1" hidden="true">영문, 숫자, 특수문자를 조합해서 입력해주세요. (8-16자)</span>
-            <h5 class="change__pass__title title__margin">새 비밀번호</h5>
-            <input class="change__input newPwd" type="password" placeholder="영문,숫자,특수문자 조합 8~16자" maxlength="16"
-                    minlength="8" required name="chgPwd">
-
-            <span class="hint hint2">영문, 숫자, 특수문자를 조합해서 입력해주세요. (8-16자)</span>
-            <div class="div__btn">
-                <button class="cancleBtn btn">취소</button>
-                <button class="applyBtn btn">확인</button>
+                <span class="hint hint2">영문, 숫자, 특수문자를 조합해서 입력해주세요. (8-16자)</span>
+                <div class="div__btn">
+                    <button class="cancleBtn btn">취소</button>
+                    <button class="applyBtn btn">확인</button>
+                </div>
             </div>
         </div>
+
+
     </div>
 
-
-</div>
 
 
 <div class="phone__modal phone__modal__hidden">
@@ -138,31 +122,30 @@
             <div class="div__btn">
                 <button class="phone__cancleBtn btn">취소</button>
                 <button class="phone__applyBtn btn" disabled="disabled">확인</button>
+
             </div>
         </div>
     </div>
-    </div>
-</div>
 
 
-<div class="secession__modal secession__modal__hidden">
-    <div class="secession__bg">
-        <div class="secession__modalBox">
-            <div class="title">
-                <h5 class="change__phone__title secession__title">회원 탈퇴</h5>
-            </div>
-            <div class="content">
-                <h5 class="newPhone__h5">비밀번호 확인</h5>
-                <input class="change__input secession__password" type="password" required minlength="8" maxlength="16">
-                <div class="div__btn">
-                    <button class="phone__cancleBtn btn secession__cancle__btn">취소</button>
-                    <button class="phone__applyBtn btn secession__apply__btn">확인</button>
+    <div class="secession__modal secession__modal__hidden">
+        <div class="secession__bg">
+            <div class="secession__modalBox">
+                <div class="title">
+                    <h5 class="change__phone__title secession__title">회원 탈퇴</h5>
+                </div>
+                <div class="content">
+                    <h5 class="newPhone__h5">비밀번호 확인</h5>
+                    <input class="change__input secession__password" type="password" required minlength="8"
+                           maxlength="16">
+                    <div class="div__btn">
+                        <button class="phone__cancleBtn btn secession__cancle__btn">취소</button>
+                        <button class="phone__applyBtn btn secession__apply__btn">확인</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div id="footers"></div>
-
 </body>
 </html>

@@ -1,41 +1,42 @@
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSPO | 좆소파워 </title>
-    <link rel="stylesheet" href="css/regForm.css">
-    <script src="js/regForm.js" defer></script>
-    <script type="text/javascript">
-        $(document).ready( function() {
-
-            $("#headers").load("/fregments/header");
-            $("#footers").load("/fregments/footer");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
-
-        });
-    </script>
-</head>
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">
 
 <body>
-<div id="headers"></div>
-<form th:action="@{/join}" method="post" name="regForm" th:object="${memberDto}"><!--modelAttribute="memberDto"-->
-    <div class="wrap">
+<div layout:fragment="content">
+    <link rel="stylesheet" href="css/regForm.css">
+    <script src="js/regForm.js" defer></script>
+    <form th:action="@{/join}" method="post" name="regForm" th:object="${memberDto}"><!--modelAttribute="memberDto"-->
+        <div class="wrap">
 
-        <div class="join__area">
+            <div class="join__area">
 
-            <div class="join__title">
-                <img class="logo" src="imgs/JSPO-logo.png" alt="logo">
-                <span class="title">회원가입</span>
-            </div>
+                <div class="join__title">
+                    <img class="logo" src="imgs/JSPO-logo.png" alt="logo">
+                    <span class="title">회원가입</span>
+                </div>
 
-            <div class="input__box">
-                <h3 class="input__title">이름*</h3>
-                <input type="text" class="input__txt" id="name" name="name" th:value="*{name}" autofocus oninput="checkName()">
-                <span id="valid_name" th:text="${valid_name}"></span>
-            </div>
+                <div class="input__box">
+                    <h3 class="input__title">이름*</h3>
+                    <input type="text" class="input__txt" id="name" name="name" th:value="*{name}" autofocus
+                           oninput="checkName()">
+                    <span id="valid_name" th:text="${valid_name}"></span>
+                </div>
+
+                <div class="input__box">
+                    <h3 class="input__title">이메일*</h3>
+                    <div class="email__box">
+                        <input type="text" class="input__txt" id="email" name="email" th:value="*{email}"
+                               oninput="checkEmail()">
+                        <input type="text" id="authNum" oninput="checkAuthNum()">
+                        <span id="authBtn" disabled="disabled" onclick="sendAuthNum()">인증번호 전송</span>
+                        <span class="email_ok">사용 가능한 이메일입니다.</span>
+                        <span class="email_already">이미 사용중인 이메일입니다.</span>
+                        <span id="valid_email" th:text="${valid_email}"></span>
+                    </div>
+                </div>
 
             <div class="input__box">
                 <h3 class="input__title">이메일*</h3>
@@ -52,30 +53,41 @@
                     <span id="authBtn" class="auth__btn" disabled="disabled" onclick="sendAuthNum()">인증번호 전송</span>
                     </div>
 
+
                 </div>
-            </div>
-
-            <div class="input__box">
-                <h3 class="input__title">비밀번호*</h3>
-                <input type="password" class="input__txt" id="password" name="pwd" placeholder="영문,숫자,특수문자 조합 8-16자" oninput="checkPwd()">
-                <span id="valid_pwd" th:text="${valid_pwd}"></span>
-            </div>
 
 
+                <div class="input__box">
+                    <h3 class="input__title">비밀번호 확인*</h3>
+                    <input type="password" class="input__txt" id="check__password" name="pwd2" placeholder="비밀번호 재입력"
+                           oninput="checkPwd()">
+                    <span class="pwd_ok">비밀번호가 일치합니다.</span>
+                    <span class="pwd_duplicate">비밀번호가 일치하지 않습니다.</span>
+                </div>
 
-            <div class="input__box">
-                <h3 class="input__title">비밀번호 확인*</h3>
-                <input type="password" class="input__txt" id="check__password" name="pwd2" placeholder="비밀번호 재입력" oninput="checkPwd()">
-                <span class="pwd_ok">비밀번호가 일치합니다.</span>
-                <span class="pwd_duplicate">비밀번호가 일치하지 않습니다.</span>
-            </div>
+                <div class="input__box">
+                    <h3 class="input__title">
+                        생년월일*</h3>
+                    <input type="text" class="input__txt" id="birth" name="birth" th:value="*{birth}"
+                           placeholder="생년월일 예)1990-01-01" oninput="checkBirth()">
+                    <span id="valid_birth" th:text="${valid_birth}"></span>
+                </div>
 
-            <div class="input__box">
-                <h3 class="input__title">
-                    생년월일*</h3>
-                <input type="text" class="input__txt" id="birth" name="birth" th:value="*{birth}" placeholder="생년월일 예)1990-01-01" oninput="checkBirth()">
-                <span id="valid_birth" th:text="${valid_birth}"></span>
-            </div>
+                <div class="input__box">
+                    <h3 class="input__title">연락처*</h3>
+                    <input type="text" class="input__txt" id="phone" name="phone" th:value="*{phone}"
+                           placeholder=" - 없이 숫자만 입력" oninput="checkPhone()">
+                    <input type="text" id="phoneAuthNum" oninput="checkPhoneAuthNum()">
+                    <span id="phoneAuthBtn" disabled="disabled" onclick="sendPhoneAuthNum()">인증번호 전송</span>
+                    <span id="phone_ok">등록 가능한 번호입니다</span>
+                    <span id="phoneDuplicate">이미 등록된 번호입니다</span>
+                    <span id="valid_phone" th:text="${valid_phone}"></span>
+                </div>
+
+                <div class="reg__btn">
+                    <button type="submit" class="reg" disabled="disabled">가입하기</button>
+                </div>
+
 
             <div class="input__box">
                 <h3 class="input__title">연락처*</h3>
@@ -94,12 +106,9 @@
                 <button type="submit" class="reg" disabled="disabled">가입하기</button>
             </div>
 
+
         </div>
-
-
-
-    </div>
-</form>
-<div id="footers"></div>
+    </form>
+</div>
 </body>
 </html>

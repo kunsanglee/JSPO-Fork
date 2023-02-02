@@ -78,8 +78,6 @@ public class MemberController {
     @PostMapping("/modifyPwd")
     @ResponseBody
     public boolean modifyPwd(String pwd, String chgPwd, HttpSession session) throws Exception {
-        System.out.println("pwd = " + pwd);
-        System.out.println("chgPwd = " + chgPwd);
 
         if (null == pwd || null == chgPwd) return false;
 
@@ -97,5 +95,19 @@ public class MemberController {
         return false;
     }
 
+    @PostMapping("/secession")
+    @ResponseBody
+    public boolean secession(String pwd, HttpSession session) throws Exception {
+        if (null == pwd) return false;
+        String email = (String) session.getAttribute("email");
+        String DBPwd = memberDao.selectMemberByEmail(email).getPwd();
 
+        if (DBPwd.equals(pwd)) {
+            memberDao.deleteMember(email);
+            session.invalidate();
+            return true;
+        }
+
+        return false;
+    }
 }
