@@ -16,11 +16,17 @@ window.onload = function () {
 }
 
 // 이메일이 정규식에 맞는지 확인하여 true false 반환.
-function phone_check(email) {
+function email_check(email) {
 
     var regex = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     return (email !== '' && email !== 'undefined' && regex.test(email));
 
+}
+
+// 핸드폰 번호가 정규식에 맞는지 확인하여 true false 반환.
+function phone_check(phone) {
+    let regex = /^010[0-9]{8}$/;
+    return (phone !== '' && phone !== 'undefined' && regex.test(phone));
 }
 
 // 사용자가 입력한 이메일 값을 ajax로 서버에 보내서 실시간으로 확인하여 중복된 메일인지 아닌지 확인.
@@ -30,7 +36,7 @@ function checkEmail() {
     if (email !== "") $("#valid_email").css("display", "none");
     else $("#valid_email").css("display", "inline-block");
 
-    if (!(phone_check(email))) {
+    if (!(email_check(email))) {
         $(".email_ok").css("display", "none");
         $(".email_already").css("display", "none");
         return;
@@ -122,7 +128,7 @@ function checkBirth() {
 
 // 사용자가 전화번호를 입력했는지 확인.
 function checkPhone() {
-    if ($("#phone").val() !== "" && $("#phone").val().length === 11) {
+    if ($("#phone").val() !== "" && phone_check($("#phone").val())) {
         let phone = $("#phone").val();
         $.ajax({
             url: "/phoneCheck",

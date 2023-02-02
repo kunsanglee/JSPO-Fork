@@ -78,7 +78,7 @@ h3{
 }
 
 .desc{
-    margin: 0px;
+    margin-top: 12px;
     color: #9a9998;
 }
 
@@ -173,7 +173,7 @@ h3{
     border: 0;
     border-bottom: 1px solid #9a9998;
     height: 35px;
-    width: 85%;
+    width: 100%;
 
 }
 
@@ -245,7 +245,7 @@ h3{
     left: 40%;
     background-color: #fff;
     width: 400px;
-    height: 210px;
+    height: 220px;
     padding: 15px;
 
 }
@@ -256,15 +256,14 @@ h3{
 
 
 .change__phone__title{
-    color: black;
-    /*font-size: 15px;*/
     margin: 0;
+    font-size: 20px;
+    color: black;
 }
 
 .newPhone__h5{
-
-    margin : 10px 0 0;
-
+    margin-top: 10px;
+    font-size: 17px;
 }
 
 .phoneHint{
@@ -296,16 +295,11 @@ h3{
     justify-content: right;
 }
 
-.authphone{
-    width: 80px;
+.authPhone{
+    width: 70px;
 }
 
-
-
-
-
 /*secession_modal*/
-
 .secession__modal {
     position: fixed;
     top: 0;
@@ -338,5 +332,9 @@ h3{
 
 .secession__modal__hidden{
     display: none;
+}
+
+.secession__password{
+    width: 100%;
 }
 
