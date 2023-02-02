@@ -23,7 +23,7 @@ const secession__modal__hidden = document.querySelector('.secession__modal__hidd
 const secession__password = document.querySelector('.secession__password');
 const secession__apply__btn = document.querySelector('.secession__apply__btn');
 
-const change__phone__button = document.querySelector('.change__phone__title');
+const change__phone__button = document.querySelector('.change__phone__btn');
 
 let isModalTrue = false;
 let isPhoneModalTrue = false;
@@ -169,7 +169,7 @@ authPhone.addEventListener('input', () => {
             }
         })
     } else {
-        authPhone.style.backgroundColor = "#ebebeb";
+        authPhone.style.backgroundColor = "white";
         phone__applyBtn.disabled = true;
     }
 })
@@ -220,9 +220,9 @@ newPhone.addEventListener('input', () => {
 
 });
 
-const secession = document.querySelector('.secession');
-const secession__cancle__btn = document.querySelector('.secession__cancle__btn')
-secession.addEventListener('click', () => {
+const secessionBtn = document.querySelector('.secessionBtn');
+const secession__cancle__btn = document.querySelector('.secession__cancle__btn');
+secessionBtn.addEventListener('click', () => {
     isSecessionModalTrue = !isSecessionModalTrue;
     if (isSecessionModalTrue) {
         secession__modal__hidden.style.display = 'flex';
