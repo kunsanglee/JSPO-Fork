@@ -104,19 +104,21 @@
 </div>
 
 
-<div class="email__modal email__modal__hidden">
-    <div class="email__bg">
-    <div class="email__modalBox">
+<div class="phone__modal phone__modal__hidden">
+    <div class="phone__bg">
+    <div class="phone__modalBox">
         <div class="title">
-            <h5 class="change__email__title">이메일 변경</h5>
+            <h5 class="change__phone__title">핸드폰 번호 변경</h5>
         </div>
         <div class="content">
-            <h5 class="newEmail__h5">새 이메일 주소</h5>
-            <input class="change__input newEmail" type="email" required>
-            <span class="hint emailHint">이메일 주소를 정확히 입력해주세요.</span>
+            <h5 class="newPhone__h5">새 핸드폰 번호</h5>
+            <input class="change__input newPhone" type="text" required>
+            <button class="phone__authBtn btn">인증번호 전송</button>
+            <span class="hint phoneHint">핸드폰 번호를 정확히 입력해주세요.</span>
+            <input class="change__input authPhone" type="text" required placeholder="예)123456">
             <div class="div__btn">
-                <button class="email__cancleBtn btn">취소</button>
-                <button class="email__applyBtn btn">확인</button>
+                <button class="phone__cancleBtn btn">취소</button>
+                <button class="phone__applyBtn btn" disabled="disabled">확인</button>
             </div>
         </div>
     </div>
@@ -128,14 +130,14 @@
     <div class="secession__bg">
         <div class="secession__modalBox">
             <div class="title">
-                <h5 class="change__email__title secession__title">회원 탈퇴</h5>
+                <h5 class="change__phone__title secession__title">회원 탈퇴</h5>
             </div>
             <div class="content">
-                <h5 class="newEmail__h5">비밀번호 확인</h5>
+                <h5 class="newPhone__h5">비밀번호 확인</h5>
                 <input class="change__input secession__password" type="password" required minlength="8" maxlength="16">
                 <div class="div__btn">
-                    <button class="email__cancleBtn btn secession__cancle__btn">취소</button>
-                    <button class="email__applyBtn btn secession__apply__btn">확인</button>
+                    <button class="phone__cancleBtn btn secession__cancle__btn">취소</button>
+                    <button class="phone__applyBtn btn secession__apply__btn">확인</button>
                 </div>
             </div>
         </div>

@@ -16,7 +16,7 @@ window.onload = function () {
 }
 
 // 이메일이 정규식에 맞는지 확인하여 true false 반환.
-function email_check(email) {
+function phone_check(email) {
 
     var regex = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     return (email !== '' && email !== 'undefined' && regex.test(email));
@@ -30,7 +30,7 @@ function checkEmail() {
     if (email !== "") $("#valid_email").css("display", "none");
     else $("#valid_email").css("display", "inline-block");
 
-    if (!(email_check(email))) {
+    if (!(phone_check(email))) {
         $(".email_ok").css("display", "none");
         $(".email_already").css("display", "none");
         return;
@@ -188,14 +188,12 @@ function checkAuthNum() {
 }
 
 // 핸드폰 인증번호 서버에 저장.
-function sendPhoneAuthNum(e) {
+function sendPhoneAuthNum() {
     let phone = $("#phone").val();
-    e.preventDefault();
 
     if (phone.length !== 11) {
         return;
     }
-    alert("gogo");
     $.ajax({
         url: "/phoneAuth",
         method: "post",
