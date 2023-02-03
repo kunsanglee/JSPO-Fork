@@ -14,4 +14,5 @@ public interface HotelDao {
     List<HotelDto> selectHotel() throws Exception;
 
     HotelDto selectHotelByHtId(int htId);
+
 }
