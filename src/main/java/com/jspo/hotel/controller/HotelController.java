@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class HotelController {
 
@@ -26,7 +28,11 @@ public class HotelController {
     private HotelDto hotelDto = HotelDto.getInstance();
 
     @GetMapping("/hotel/reg")
-    public String insert() {
+    public String insert(HttpSession session) {
+
+        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
+            return "redirect:/";
+        }
 
         return "HotelReg";
     }
