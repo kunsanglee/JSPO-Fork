@@ -1,112 +1,70 @@
 *{
-    box-sizing: border-box;
-}
-
-.wrap{
-    width: 1929px;
-    height: 1000px;
-    padding: 0px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.login__area{
-    width: 400px;
-    height: 731px;
-    padding: 58px 0px 160px;
-
-}
-
-.login__title{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-/*.logo{*/
-/*    width: 350px;*/
-/*}*/
-
-.title{
-    padding: 0 0 42px;
-    font-size: 32px;
-    font-weight: bolder;
-}
-
-
-
-.input__box{
-    width: 100%;
-    height: 84px;
-    padding: 10px 0 14px;
-    margin: 0 0 5px;
-    
-    /* display: flex; */
-/* /    flex-direction: column; */
-
-}
-
-.input__title{
-    font-size: 13px;
-}
-.input__txt{
-    width: 100%;
-    padding: 9px 0px 8px;
-    border: 0px;
-    border-bottom: 1px solid #ebebeb;
-    outline: none;
-
-
-
-}
-.input__txt::placeholder{
-    font-size: 16px;
-    font-weight: 500;
-    color: #ebebeb;    
-}
-
-
-
-.login__btn{
-    width: 100%;
-}
-.login{
-    width: 100%;
-    height: 52px;
-    border-radius: 15px;
-    border: none;
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    background-color: #ebebeb;
-    margin-top: 25px;
-
-}
-.find{
-    width: 100%;
-    list-style: none;
-    display: flex;
-    text-align: center;
+    margin: 0;
     padding: 0;
 }
 
-.find__list{
-    float: left;
-    width: 33.3%;
-    text-align: center;
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.login {
+    width: 360px;
+    height: min-content;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 5px 5px 10px  1px  rgba(0, 0, 0, 0.2);
+}
+
+.login .logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login form{
+    font-size: 20px;
+}
+
+.login form .form-group{
+    margin-bottom: 12px;
+}
+
+.login form input[type="submit"]{
+    font-size: 20px;
+    margin-top: 15px;
     
 }
-
-.listBorder{
-    border: none;
-    border-left: 1px solid #ebebeb;
+.login form .form-group ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-top: 10px;
 }
 
-a{
-    color: black;
+.login form .form-group li{
+    font-size: 11px;
+    list-style: none;
+    float: left;
+    border-right: 1px solid #ebebeb;
+    padding: 0 10px;
+}
+
+.login form .form-group li:nth-child(3){
+    border : none;
+}
+
+
+
+
+.login form .form-group li a{
     text-decoration: none;
+    color: black;
 }
 
 
