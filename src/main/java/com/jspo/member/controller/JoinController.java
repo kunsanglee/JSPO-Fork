@@ -90,4 +90,10 @@ public class JoinController {
 
         return "redirect:/login";
     }
+
+
+    @GetMapping("/hotel")
+    public String hotel(){
+        return "hotelPage";
+    }
 }
