@@ -8,4 +8,13 @@
         values (#{htId}, #{htName}, #{htAddress}, #{htImg}, #{htPhone});
     </insert>
 
+    <!--  호텔리스트 -->
+    <select id="selectHotel" resultType="HotelDto">
+        select ht_name , ht_address , ht_img from hotel;
+    </select>
+
+    <select id="selectHotelByHtId" parameterType="Integer" resultType="HotelDto">
+        select * from hotel where ht_id = #{htId};
+    </select>
+
 </mapper>

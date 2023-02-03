@@ -1,6 +1,6 @@
 package com.jspo.room.dto;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 public class RoomDto {
@@ -14,6 +14,8 @@ public class RoomDto {
     private Date rCheckout;
     private int hotelHtId;
 
+
+
     public RoomDto() {}
 
     public RoomDto(int rId, String rName, int rPrice, int rState, int rCnt, String rImg, Date rCheckin, Date rCheckout, int hotelHtId) {
@@ -26,6 +28,12 @@ public class RoomDto {
         this.rCheckin = rCheckin;
         this.rCheckout = rCheckout;
         this.hotelHtId = hotelHtId;
+    }
+
+    private static final RoomDto instance = new RoomDto();
+
+    public static RoomDto getInstance() {
+        return instance;
     }
 
     public int getrId() {

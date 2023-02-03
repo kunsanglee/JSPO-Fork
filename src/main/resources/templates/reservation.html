@@ -6,7 +6,26 @@
 
 <body>
 <div layout:fragment="content">
-    <h1>예약페이지</h1>
+    <h5>예약</h5><br>
+    <div>
+        <h5>숙소</h5>
+        <span th:text="${hotelDto.htName}+' '+${hotelDto.htAddress}">도미인 서울 강남</span><br>
+        <span th:text="${roomDto.rName}">스탠다드 더블룸</span><br>
+        <span th:text="|${roomDto.rCheckin} ~ ${roomDto.rCheckout} \ ${roomDto.rCheckout} - ${roomDto.rCheckin} 박|">2023-02-03 (금) ~ 2023-02-04 (토) | 1박</span><br>
+        <span>체크인 15:00 | 체크아웃 12:00</span><br>
+        <span th:text="|숙박 ${roomDto.rPrice}원|">숙박 123,700원</span><br>
+    </div><br>
+    <div th:object="${memberDto}">
+        <h5>예약자 정보</h5>
+        <span>성명</span><br>
+        <span th:text="*{name}">김좋소</span><br>
+        <span>휴대폰 번호</span><br>
+        <span th:text="*{phone}">01012341234</span><br>
+    </div><br>
+    <div>
+        <h5>결제 수단 선택</h5>
+    </div><br>
+    <button th:text="|${roomDto.rPrice}원 결제하기|">123,700원 결제하기</button>
 </div>
 </body>
 </html>
