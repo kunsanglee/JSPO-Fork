@@ -12,4 +12,7 @@ public interface HotelDao {
     void insertHotel(HotelDto hotelDto) throws Exception;
 
     List<HotelDto> selectHotel() throws Exception;
+
+    HotelDto selectHotelByHtId(int htId);
+
 }
