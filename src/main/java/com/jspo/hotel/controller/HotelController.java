@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class HotelController {
 
@@ -16,7 +18,11 @@ public class HotelController {
     private HotelDto hotelDto = HotelDto.getInstance();
 
     @GetMapping("/hotel/reg")
-    public String insert() {
+    public String insert(HttpSession session) {
+
+        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
+            return "redirect:/";
+        }
 
         return "HotelReg";
     }
