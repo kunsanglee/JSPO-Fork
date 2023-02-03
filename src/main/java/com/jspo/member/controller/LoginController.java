@@ -43,36 +43,27 @@ public class LoginController {
     public String login(MemberDto loginMember , Model m, HttpServletRequest request,
                         HttpServletResponse response, boolean remember) throws Exception {
 
+        memberDto = memberDao.login(loginMember);
+        HttpSession session = request.getSession();
 
-        // 로그인 페이지에 적은 이메일과 패스워드를 memberDto에 set한다.
-         memberDto.setEmail(loginMember.getEmail());
-         memberDto.setPwd(loginMember.getPwd());
-         // memberDto 엔 email값과 pwd 값이 있으며
-        // 그 값을 sql문의 login의 조건으로 select 한다.
-        MemberDto result = memberDao.login(memberDto);
+        if(memberDto != null ) {
 
-        if(result != null ) {
-
+            Cookie cookie;
             if(remember) {
-                Cookie cookie = new Cookie("email", result.getEmail());
+                cookie = new Cookie("email", memberDto.getEmail());
                 cookie.setMaxAge(60*60*24);
-                response.addCookie(cookie);
-
-
             } else {
-                Cookie cookie = new Cookie("email", null);
+                cookie = new Cookie("email", null);
                 cookie.setMaxAge(0);
-                response.addCookie(cookie);
             }
-            HttpSession session = request.getSession();
-
+            response.addCookie(cookie);
 
             session.setAttribute("email",memberDto.getEmail());
 //            String referer = request.getHeader("Referer");
 //            System.out.println(referer) +referer;
 
-            m.addAttribute("memberDto", result);
-            m.addAttribute("encPwd", memberService.getEncPwd(result));
+            m.addAttribute("memberDto", memberDto);
+            m.addAttribute("encPwd", memberService.getEncPwd(memberDto));
             return "redirect:/my";
         }
 

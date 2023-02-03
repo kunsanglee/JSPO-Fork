@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jspo.reservation.dao.ReservationDao">
+
+    <insert id="insertReservation" parameterType="ReservationDto">
+        insert into reservation (res_price, res_date, member_m_id, room_r_id, room_hotel_ht_id)
+        values (#{resPrice},#{resDate},#{memberMId},#{roomRId},#{roomHotelHtId});
+    </insert>
+
+    <delete id="deleteReservationByResId" parameterType="Integer">
+        delete from reservation where res_id = #{resId};
+    </delete>
+
+    <delete id="deleteReservationByMemberMId" parameterType="Integer">
+        delete from reservation where member_m_id = #{memberMId};
+    </delete>
+
+    <select id="selectReservationByResId" parameterType="Integer" resultType="ReservationDto">
+        select * from reservation where res_id = #{resId};
+    </select>
+
+    <select id="selectReservationByMemberMId" parameterType="Integer" resultType="ReservationDto">
+        select * from reservation where member_m_id = #{memberMId};
+    </select>
+</mapper>
