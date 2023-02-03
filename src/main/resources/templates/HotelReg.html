@@ -13,19 +13,13 @@
     <table>
         <tbody>
 
-
-
         <tr>
             <td>
-
-
                 <label>호텔명</label><input type="text" name="htName"  /><br>
                 <label>호텔주소</label><input type="text" name="htAddress" /><br>
-                <label>호텔이미지</label><input type="file" name="htImg"  /><br>
+                <label>호텔이미지</label><input type="file" id=htImg name="htImg"  /><br>
+                <div class="select_img"><img src="" /></div>
                 <label>호텔 전화번호</label><input type="text" name="htPhone"  /><br>
-
-
-
             </td>
         <tr>
             <td>
@@ -37,6 +31,18 @@
 </form>
 
 
+<script>
+    $("#htImg").change(function(){
+        if(this.files && this.files[0]) {
+            var reader = new FileReader;
+            reader.onload = function(data) {
+                $(".select_img img").attr("src", data.target.result).width(500);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+</script>
 
 </body>
 </html>

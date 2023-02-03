@@ -5,6 +5,21 @@
     <title>Title</title>
 </head>
 <body>
-    호텔 리스트 페이지
+<form role="form" >
+    <table>
+        <tr><th>사진</th><th>호텔이름</th><th>주소</th></tr>
+
+        <tr th:each="list : ${list}">
+
+            <td th:text="${list.htImg}"></td>
+<!--            <td img th:src="${list.htImg}"></td>-->
+            <td th:text="${list.htName}"></td>
+            <td th:text="${list.htAddress}"> </td>
+
+        </tr>
+    </table>
+</form>
+
+
 </body>
 </html>
