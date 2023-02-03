@@ -3,6 +3,7 @@ package com.jspo.hotel.dto;
 import java.util.Objects;
 
 public class HotelDto {
+
     private int htId;
     private String htName;
     private String htAddress;
@@ -10,7 +11,6 @@ public class HotelDto {
     private String htPhone;
 
     public HotelDto() {}
-
     public HotelDto(int htId, String htName, String htAddress, String htImg, String htPhone) {
         this.htId = htId;
         this.htName = htName;
@@ -81,5 +81,12 @@ public class HotelDto {
                 ", htImg='" + htImg + '\'' +
                 ", htPhone='" + htPhone + '\'' +
                 '}';
+    }
+
+    // DB조회용 user객체 싱글톤패턴으로 재사용
+    private static final HotelDto instance = new HotelDto();
+
+    public static HotelDto getInstance() {
+        return instance;
     }
 }
