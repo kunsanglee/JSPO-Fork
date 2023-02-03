@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .oriImg { width: 500px; height: auto;}
+    </style>
 </head>
 <body>
 <form role="form" >
@@ -11,8 +14,9 @@
 
         <tr th:each="list : ${list}">
 
-            <td th:text="${list.htImg}"></td>
-<!--            <td img th:src="${list.htImg}"></td>-->
+            <td>
+            <img th:src="${list.htImg}" class="oriImg">
+            </td>
             <td th:text="${list.htName}"></td>
             <td th:text="${list.htAddress}"> </td>
 
