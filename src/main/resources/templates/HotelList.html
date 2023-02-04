@@ -8,6 +8,9 @@
     </style>
 </head>
 <body>
+<header>
+    <h1> 호텔 게시판</h1>
+</header>
 <form role="form" >
     <table>
         <tr><th>사진</th><th>호텔이름</th><th>주소</th></tr>
@@ -19,7 +22,7 @@
             </td>
             <td th:text="${list.htName}"></td>
             <td th:text="${list.htAddress}"> </td>
-
+            
         </tr>
     </table>
 </form>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>객실 등록</title>
+</head>
+<body>
+<header>
+    <h1> 객실 게시판</h1>
+</header>
+<form role="form" >
+    <table>
+        <tr><th>사진</th><th>객실이름</th><th>객실가격</th><th>이용인원</th><th>체크인 시간</th><th>체크아웃 시간</th></tr>
+
+        <tr th:each="list : ${list}">
+
+            <td>
+                <img th:src="${list.rImg}" class="oriImg">
+            </td>
+            <td th:text="${list.rName}"></td>
+            <td th:text="${list.rPrice}"></td>
+            <td th:text="${list.rCnt}"></td>
+            <td th:text="${list.rCheckin}"></td>
+            <td th:text="${list.rCheckout}"></td>
+
+        </tr>
+    </table>
+</form>
+</body>
+</html>

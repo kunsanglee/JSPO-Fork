@@ -11,4 +11,8 @@
     <select id="selectRoomByRId" parameterType="Integer" resultType="RoomDto">
         select * from room where r_id = #{rId};
     </select>
+
+    <select id="selectRoom" resultType="RoomDto">
+        select * from room;
+    </select>
 </mapper>

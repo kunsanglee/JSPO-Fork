@@ -2,6 +2,7 @@ package com.jspo.hotel.controller;
 
 import com.jspo.hotel.dao.HotelDao;
 import com.jspo.hotel.dto.HotelDto;
+import com.jspo.member.dao.MemberDao;
 import com.jspo.upload.UploadFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,14 +31,12 @@ public class HotelController {
     @GetMapping("/hotel/reg")
     public String insert(HttpSession session) {
 
-        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
-            return "redirect:/";
-        }
+//        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
+//            return "redirect:/";
+//        }
 
         return "HotelReg";
     }
-
-
     @PostMapping("/hotel/reg")
     public String insert(HotelDto hotelDto,  MultipartFile file) throws Exception {
 
@@ -60,7 +59,6 @@ public class HotelController {
 
         return "redirect:/hotel/list";
     }
-
     @GetMapping("/hotel/list")
     public String select(Model model) throws Exception {
 
@@ -68,28 +66,4 @@ public class HotelController {
        model.addAttribute("list",list);
         return "HotelList";
     }
-
-//    @PostMapping("/upload")
-//    public String Register(HotelDto hotelDto, MultipartFile file) throws Exception {
-//
-//
-//        String imgUploadPath = uploadPath + "imgUpload";
-//        System.out.println("1. imgUploadPath"+imgUploadPath);
-//
-//        String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-//
-//        String fileName = null;
-//
-//        if (file.getOriginalFilename() != null && (!file.getOriginalFilename().equals(""))) {
-//            fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
-//            System.out.println("fileName = "+fileName);
-//        } else {
-//            fileName = uploadPath + File.separator+ "images" + File.separator+ "none.png";
-//        }
-//
-//        hotelDto.setHtImg(File.separator+"image"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
-//        hotelDao.insertHotel(hotelDto);
-//
-//        return "redirect:/list";
-//    }
 }
