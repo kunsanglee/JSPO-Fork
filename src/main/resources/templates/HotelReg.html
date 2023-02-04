@@ -17,6 +17,7 @@
         <tbody>
         <tr>
             <td>
+                <label>ID</label><input type="text" name="htId" /><br>
                 <label>호텔명</label><input type="text" name="htName"  /><br>
                 <label>호텔주소</label><input type="text" name="htAddress" /><br>
                 <label>호텔이미지</label><input type="file" id="htImg" name="file"/><br>
@@ -53,8 +54,12 @@
         <tbody>
         <tr>
             <td>
-
-                <label>호텔명</label><input type="text" name="hotelHtId"  /><br>
+                <label>호텔명</label>
+                <select name="hotelHtId">
+                    <th:block th:each ="list : ${list}">
+                    <option th:text="${list.htName}"></option>
+                    </th:block>
+                </select><br>
                 <label>객실명</label><input type="text" name="rName"  /><br>
                 <label>객실가격</label><input type="text" name="rPrice" /><br>
                 <label>객실이용인원</label><input type="text" name="rCnt" /><br>
@@ -75,11 +80,11 @@
                     });
                 </script>
             </td>
-        <tr>
-            <td>
-                <button type="submit">작성</button>
-            </td>
-        </tr>
+                <tr>
+                    <td>
+                        <button type="submit">작성</button>
+                    </td>
+                </tr>
         </tbody>
     </table>
 </form>

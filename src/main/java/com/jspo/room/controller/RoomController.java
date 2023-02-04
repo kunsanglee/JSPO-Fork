@@ -36,6 +36,7 @@ public class RoomController {
 
     @PostMapping("/room/reg")
     public String insert(RoomDto roomDto, MultipartFile file) throws Exception {
+
         String imgUploadPath = uploadPath + "roomimgUpload";
         System.out.println("1. imgUploadPath"+imgUploadPath);
 

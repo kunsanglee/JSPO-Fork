@@ -29,12 +29,14 @@ public class HotelController {
     private HotelDto hotelDto = HotelDto.getInstance();
 
     @GetMapping("/hotel/reg")
-    public String insert(HttpSession session) {
+    public String insert(HttpSession session, Model model)  throws Exception{
 
 //        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
 //            return "redirect:/";
 //        }
-
+        List<HotelDto> list = hotelDao.selectHotel();
+        model.addAttribute("list",list);
+        System.out.println(list);
         return "HotelReg";
     }
     @PostMapping("/hotel/reg")
@@ -55,7 +57,8 @@ public class HotelController {
         }
 
         hotelDto.setHtImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
-        hotelDao.insertHotel(hotelDto);
+       hotelDao.insertHotel(hotelDto);
+        System.out.println(hotelDto);
 
         return "redirect:/hotel/list";
     }
@@ -64,6 +67,7 @@ public class HotelController {
 
        List<HotelDto> list = hotelDao.selectHotel();
        model.addAttribute("list",list);
+        System.out.println("select ="+list);
         return "HotelList";
     }
 }

@@ -3,9 +3,9 @@
 
 <mapper namespace="com.jspo.hotel.dao.HotelDao">
     <!--    호텔추가-->
-    <insert id="insertHotel" parameterType="HotelDto">
+    <insert id="insertHotel" parameterType="HotelDto" >
         insert into hotel (ht_id,ht_name, ht_address, ht_img, ht_phone)
-        values (#{htId}, #{htName}, #{htAddress}, #{htImg}, #{htPhone});
+        values (#{htId},#{htName}, #{htAddress}, #{htImg}, #{htPhone});
     </insert>
 
     <!--  호텔리스트 -->
