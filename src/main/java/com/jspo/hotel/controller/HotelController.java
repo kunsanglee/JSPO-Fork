@@ -79,9 +79,9 @@ public class HotelController {
        model.addAttribute("list",list);
 
         List pricelist = new ArrayList<>();
+        pricelist.add(0);
         for(int i=1; i<=list.size() ; i++) {
             pricelist.add(roomDao.selectPrice(i));
-
         }
         model.addAttribute("pricelist",pricelist);
         return "HotelList";
