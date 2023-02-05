@@ -1,342 +1,75 @@
-*{
-    box-sizing: border-box;
-}
 
-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-}
-
-.container{
-    width: 1280px;
-    display: flex;
-    flex-direction: column;
-    padding: 40px 40px 160px;
-}
-
-.title__titleLine{
-    font-size: 24px;
-    padding: 5px 0 16px;
-    text-align: left;
-    border-bottom: 3px solid black;
-
-}
-
-h3{
-    margin: 0;
-
-}
-
-.profile__info{
-    padding: 58px 0 0 ;
-    width: 480px;
-    height: 865px;
-}
-
-.info__group__title{
-    font-size: 18px;
-    margin: 0;
-    text-align: left;
-}
-
-.info__unit{
-
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-
-
-}
-.unit__content{
-    width: 100%;
-    padding: 25px 0px 18px;
-    border-bottom: 1px solid #ebebeb ;
-
-}
-
-.unit__content .div_change{
-    display: flex;
-
-}
-
-.include_btn{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.title{
-    margin: 0px;
-    color: #9a9998;
-}
-
-.desc{
-    margin: 0px;
-    color: #9a9998;
-}
-
-.changeBtn{
-    width: 50px;
-    height: 30px;
-    background-color: white;
-    border: 1px solid #ebebeb;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.info__person{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 58px 0 0 ;
-}
-
-.secession{
-    margin-top: 40px;
-
-}
-
-.secession button{
-    border: none;
-    background-color: white;
-    font-size: 12px;
-    color: #9a9998;
-    text-decoration: underline;
-    padding: 0px;
-}
-
-.noneColor{
-    color: black;
-}
-
-
-
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal .bg {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-}
-
-.modalBox {
-    position: absolute;
-    background-color: #fff;
-    width: 400px;
-    height: 250px;
-    padding: 15px;
-}
-
-.closeBtn {
-    display: block;
-    width: 40px;
-    margin: 0 auto;
-    position: absolute;
-    top: 5px;
-    right: 0px;
-
-}
-
-.hidden {
-    display: none;
-}
-
-
-.change__pass__title{
-    margin: 0;
-    font-size: 20px;
-    color: black;
-}
-
-.title__margin{
-    margin-top: 10px;
-    font-size: 17px;
-}
-
-.change__input{
-    border: 0;
-    border-bottom: 1px solid #9a9998;
-    height: 35px;
-    width: 85%;
-
-}
-
-.authPhone{
-    width: 20%;
-}
-
-.hint{
-    display: none;
-    font-size: 12px;
-    color: red;
-
-}
-
-
-.div__btn {
-    width: 100%;
+.myPage_wrap{
+    height: 100vh;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
 }
 
-.btn{
-    width: 50px;
-    height: 40px;
-    border: 1px solid #ebebeb;
+
+
+.myPage {
+    width: 24vw;
+    padding: 20px;
     border-radius: 12px;
-    margin-top: 5px;
-
-
-}
-
-.cancleBtn{
-    background-color: white;
-}
-
-.applyBtn{
-    background-color: #ebebeb;
-    margin-left: 15px;
-}
-
-
-/*phone_modal*/
-
-.phone__modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.phone__modal .phone__bg {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    position: relative;
-}
-
-
-.phone__modalBox {
+    background-color: #ffffff;
+    box-shadow: 5px 5px 10px  1px  rgba(0, 0, 0, 0.2);
     position: absolute;
-    top: 40%;
-    left: 40%;
-    background-color: #fff;
-    width: 400px;
-    height: 210px;
-    padding: 15px;
+    top: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+
+}
+.myPage .myPage_title{
+    width: 100%;
+    border-bottom: 1px solid #ebebeb;
+    margin-bottom: 20px;
 
 }
 
-.phone__modal__hidden{
-    display: none;
+.myPage form{
+    font-size: 20px;
 }
 
+.myPage form .form-group{
+    margin-bottom: 12px;
+}
 
-.change__phone__title{
+.myPage form input[type="submit"]{
+    font-size: 20px;
+    margin-top: 15px;
+
+}
+.myPage form .form-group ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.myPage form .form-group li{
+    font-size: 11px;
+    list-style: none;
+    float: left;
+    border-right: 1px solid #ebebeb;
+    padding: 0 10px;
+}
+
+.myPage form .form-group li:nth-child(3){
+    border : none;
+}
+
+.myPage form .form-group li a{
+    text-decoration: none;
     color: black;
-    /*font-size: 15px;*/
-    margin: 0;
-}
-
-.newPhone__h5{
-
-    margin : 10px 0 0;
-
-}
-
-.phoneHint{
-    color: red;
-}
-
-.phone__authBtn{
-    background-color: white;
-    font-size: 13px;
-    width: 100px;
-    margin-left: 10px;
-}
-
-.phone__cancleBtn{
-    background-color: white;
-
-}
-.phone__applyBtn{
-    background-color: #ebebeb;
-    margin-left: 10px;
-
-}
-
-.phone__auth__box{
-    display: flex;
-    flex-direction: row;
-    width: 314px;
-    align-items: center;
-    justify-content: right;
-}
-
-.authphone{
-    width: 80px;
 }
 
 
 
-
-
-/*secession_modal*/
-
-.secession__modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.margin-input{
+    margin-bottom:20px;
 }
-
-.secession__modal .secession__bg {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    position: relative;
-}
-
-
-.secession__modalBox {
-    position: absolute;
-    top: 40%;
-    left: 40%;
-    background-color: #fff;
-    width: 400px;
-    height: 160px;
-    padding: 15px;
-
-}
-
-.secession__modal__hidden{
-    display: none;
-}
-

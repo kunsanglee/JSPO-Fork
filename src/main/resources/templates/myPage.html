@@ -3,149 +3,165 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default_layout}">
+
+
+
+<head>
+
+
+
+</head>
 <body>
-<div layout:fragment="content">
-    <link rel="stylesheet" href="/css/myPage.css">
-    <script src="js/myPage.js" defer></script>
 
-
-    <div class="container">
-
-        <div class="title__titleLine">
-            <h3>회원 정보</h3>
-
+<div class="myPage_wrap justify-content-center" layout:fragment="content" >
+    <div class="myPage" >
+        <div class="myPage_title" >
+        <p class="fs-3 fw-bold">회원정보</p>
         </div>
+        <form action="/my" method="post" name="loginForm" class="needs-validation" th:object="${memberDto}">
 
-        <div class="profile__info" th:object="${memberDto}">
-            <div class="info__login">
-                <h4 class="info__group__title">로그인 정보</h4>
-                <div class="info__unit">
-                    <div class="unit__content">
-                        <h5 class="title">이메일 주소</h5>
-                        <p class="desc desc__email" th:text="*{email}"></p>
-                    </div>
-
+            <div class="mb-3 row">
+                <label for="staticName" class="col-sm-2 col-form-label">이름</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="staticName" th:value="*{name}" >
                 </div>
-                <div class="info__unit">
-                    <div class="unit__content include_btn">
-                        <div class="contentBox">
-                            <h5 class="title">비밀 번호</h5>
+            </div>
 
-                            <p class="desc desc__passworod noneColor" th:text="${encPwd}">😎😎😎😎😎</p>
 
+            <div class="mb-3 row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">이메일</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value="*{email}" >
+                </div>
+            </div>
+
+
+
+            <div class="mb-3 row">
+                <label for="staticPassword" class="col-sm-2 col-form-label" >비밀번호</label>
+                <div class="col-sm-4">
+                    <input type="password" class="form-control-plaintext" id="staticPassword" th:value="*{pwd.length}" readonly>
+                </div>
+                <div class="col-sm-4">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">비밀번호 변경</button>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="staticBirth" class="col-sm-2 col-form-label" readonly>생년월일</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="staticBirth" th:value="*{birth}" >
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="staticPhone" class="col-sm-2 col-form-label" >휴대폰 번호</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control-plaintext" id="staticPhone" th:value="*{phone}" readonly>
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop-phone">휴대폰 번호 변경</button>
+                </div>
+            </div>
+
+
+
+
+
+        </form>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">비밀번호 변경</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="password" class="form-control margin-input" id="current_password" minlength="8" name="pwd" placeholder="현재 비밀번호" required autofocus >
+                    <form th:action="@{/join}" method="post" name="regForm" class="needs-validation-modal" th:object="${memberDto}"><!--modelAttribute="memberDto"-->
+
+
+                        <input type="password" class="form-control" id="password" minlength="8" name="pwd" placeholder="새 비밀번호" required>
+                    <div  class="progress" style="height: 5px;">
+                        <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 10%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
 
                         </div>
-                        <button class="changeBtn change_pass_btn">변경</button>
+                    </div>
+                    <small id="passwordHelpBlock" class="form-text text-muted" style="font-size: 13px">
+                        영문, 숫자, 특수문자를 조합해서 입력해주세요. (8-16자)
+                    </small>
+
+                    <div id="feedbackin" class="valid-feedback">
 
                     </div>
+                    <div id="feedbackirn" class="invalid-feedback" style="font-size: 13px">
 
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="password_cancle()">취소</button>
+                    <button type="button" class="btn btn-primary" id="change_password_apply" onclick="password_change()">변경</button>
                 </div>
             </div>
-            <div class="info__person">
-                <h4 class="info__group__title">개인 정보</h4>
-                <div class="info__unit">
-                    <div class="unit__content">
-                        <h5 class="title">이름</h5>
-                        <p class="desc desc__name noneColor" th:text="*{name}"></p>
-                    </div>
+        </div>
 
-                    <div class="unit__content">
-                        <h5 class="title">생년월일</h5>
-                        <p class="desc desc__birth noneColor" th:text="*{birth}"></p>
-                    </div>
+    </div>
+<!--비밀번호 변경 모달 끝-->
 
-                    <div class="unit__content include_btn">
-                        <div class="contentBox">
-                            <h5 class="title">휴대폰 번호</h5>
-                            <p class="desc desc__phone noneColor" th:text="*{phone}"></p>
+
+
+    <div class="modal fade" id="staticBackdrop-phone" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel-phone">휴대폰 번호 변경</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form th:action="@{/join}" method="post" name="regForm" class="needs-validation-modal" th:object="${memberDto}"><!--modelAttribute="memberDto"-->
+
+                        <div class="form-group mb-3 was-validated">
+                            <label class="form-label" for="new_phone_number">연락처</label>
+                            <input type="tel" id="new_phone_number" name="phone" class="form-control margin-input"  placeholder=" - 없이 숫자만 입력" required min="7" maxlength="12"  pattern="[0-9]{3}[0-9]{4}[0-9]{4}"/>
+                            <div class="invalid-feedback-phone mb-1">
+
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <!--                    placeholder="인증번호 입력"-->
+                                <input type="text" class="form-control" id="phone_auth_Num" aria-label="Auth email" aria-describedby="button-addon3" required minlength="6" maxlength="6" oninput="checkPhoneAuthNum()">
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon3" onclick="sendPhoneAuthNum()">인증번호 전송</button>
+                            </div>
+
                         </div>
-                        <button class="changeBtn change__phone__title">변경</button>
-                    </div>
 
-
+                    </form>
                 </div>
-
-                <a href="#" class="secession">
-
-                    <button class="secessionBtn">회원탈퇴</button>
-                </a>
-            </div>
-        </div>
-
-
-    </div>
-
-
-    <div class="modal hidden">
-        <div class="bg"></div>
-        <div class="modalBox">
-            <div class="title">
-                <h5 class="change__pass__title">비밀번호 변경</h5>
-            </div>
-            <div class="content">
-                <h5 class="change__pass__title title__margin">현재 비밀번호</h5>
-                <input class="change__input currentPwd" type="password" placeholder="영문,숫자,특수문자 조합 8~16자" maxlength="16"
-                       minlength="8" required id="pwd">
-                <span class="hint hint1" hidden="true">영문, 숫자, 특수문자를 조합해서 입력해주세요. (8-16자)</span>
-                <h5 class="change__pass__title title__margin">새 비밀번호</h5>
-                <input class="change__input newPwd" type="password" placeholder="영문,숫자,특수문자 조합 8~16자" maxlength="16"
-                       minlength="8" required name="chgPwd">
-
-                <span class="hint hint2">영문, 숫자, 특수문자를 조합해서 입력해주세요. (8-16자)</span>
-                <div class="div__btn">
-                    <button class="cancleBtn btn">취소</button>
-                    <button class="applyBtn btn">확인</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="phone_cancle()">취소</button>
+                    <button type="button" class="btn btn-primary" id="change_phone_apply" onclick="phone_change()">변경</button>
                 </div>
             </div>
         </div>
 
-
     </div>
 
-
-
-<div class="phone__modal phone__modal__hidden">
-    <div class="phone__bg">
-    <div class="phone__modalBox">
-        <div class="title">
-            <h5 class="change__phone__title">핸드폰 번호 변경</h5>
-        </div>
-        <div class="content">
-            <h5 class="newPhone__h5">새 핸드폰 번호</h5>
-            <input class="change__input newPhone" type="text" placeholder="- 없이 번호만 입력" required maxlength="11">
-
-            <span class="hint phoneHint">핸드폰 번호를 정확히 입력해주세요.</span>
-            <div class="phone__auth__box">
-            <input class="change__input authPhone" type="text" required placeholder="예)123456" maxlength="6">
-            <button class="phone__authBtn btn">인증번호 전송</button>
-            </div>
-            <div class="div__btn">
-                <button class="phone__cancleBtn btn">취소</button>
-                <button class="phone__applyBtn btn" disabled="disabled">확인</button>
-
-            </div>
-        </div>
-    </div>
-
-
-    <div class="secession__modal secession__modal__hidden">
-        <div class="secession__bg">
-            <div class="secession__modalBox">
-                <div class="title">
-                    <h5 class="change__phone__title secession__title">회원 탈퇴</h5>
-                </div>
-                <div class="content">
-                    <h5 class="newPhone__h5">비밀번호 확인</h5>
-                    <input class="change__input secession__password" type="password" required minlength="8"
-                           maxlength="16">
-                    <div class="div__btn">
-                        <button class="phone__cancleBtn btn secession__cancle__btn">취소</button>
-                        <button class="phone__applyBtn btn secession__apply__btn">확인</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
+
+
+<!-- Modal -->
+
+
+
+
+
 </body>
+
 </html>

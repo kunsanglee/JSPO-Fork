@@ -1,9 +1,5 @@
-*{
-    margin: 0;
-    padding: 0;
-}
 
-body{
+.login_wrap{
     height: 100vh;
     display: flex;
     flex-direction: row;
@@ -11,13 +7,17 @@ body{
     justify-content: center;
 }
 
+
+
 .login {
     width: 360px;
-    height: min-content;
+
     padding: 20px;
     border-radius: 12px;
     background-color: #ffffff;
     box-shadow: 5px 5px 10px  1px  rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 350px;
 }
 
 .login .logo{
@@ -59,12 +59,8 @@ body{
     border : none;
 }
 
-
-
-
 .login form .form-group li a{
     text-decoration: none;
     color: black;
 }
-
 
