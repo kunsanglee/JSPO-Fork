@@ -18,11 +18,21 @@ let authNumCheck;
 
 
 // 이메일이 정규식에 맞는지 확인하여 true false 반환.
+<<<<<<< HEAD
 function validate_check(email) {
+=======
+function email_check(email) {
+>>>>>>> 27aa9c7d196e04877e1796684c763100d9d51a88
 
     let regex = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     return (email !== '' && email !== 'undefined' && regex.test(email));
 
+}
+
+// 핸드폰 번호가 정규식에 맞는지 확인하여 true false 반환.
+function phone_check(phone) {
+    let regex = /^010[0-9]{8}$/;
+    return (phone !== '' && phone !== 'undefined' && regex.test(phone));
 }
 
 // 사용자가 입력한 이메일 값을 ajax로 서버에 보내서 실시간으로 확인하여 중복된 메일인지 아닌지 확인.
@@ -36,9 +46,15 @@ function checkEmail() {
 
     if (email === "")  return check_email_feedback.innerText = `이메일 주소를 입력해 주세요.`;
 
+<<<<<<< HEAD
     if (!(validate_check(email))) {
         check_email_feedback.innerText = `이메일 형식에 맞게 입력해 주세요.`;
         // auth_email_num.style.marginTop = '15px';
+=======
+    if (!(email_check(email))) {
+        $(".email_ok").css("display", "none");
+        $(".email_already").css("display", "none");
+>>>>>>> 27aa9c7d196e04877e1796684c763100d9d51a88
         return;
     } else {
 
@@ -93,6 +109,57 @@ function checkPwd() {
 }
 
 
+<<<<<<< HEAD
+=======
+// 사용자가 생년월일을 입력했는지 확인.
+function checkBirth() {
+    if ($("#birth").val() !== "") {
+        $("#valid_birth").css("display", "none");
+        birthCheck = true;
+    } else {
+        $("#valid_birth").css("display", "inline-block");
+        birthCheck = false;
+    }
+    allCheck();
+}
+
+// 사용자가 전화번호를 입력했는지 확인.
+function checkPhone() {
+    if ($("#phone").val() !== "" && phone_check($("#phone").val())) {
+        let phone = $("#phone").val();
+        $.ajax({
+            url: "/phoneCheck",
+            method: "post",
+            data: {phone : phone},
+            success: function (res) {
+                if (res === 0) {
+                    $("#valid_phone").css("display", "none");
+                    $("#phoneAuthBtn").prop("disabled", false);
+                    $("#phoneAuthBtn").css("background-color", "#4CAF50");
+                    $("#phone_ok").css("display", "inline-block");
+                    $("#phoneDuplicate").css("display", "none");
+                }
+                else {
+                    $("#valid_phone").css("display", "inline-block");
+                    $("#phoneAuthBtn").prop("disabled", true);
+                    $("#phoneAuthBtn").css("background-color", "#ebebeb");
+                    $("#phone_ok").css("display", "none");
+                    $("#phoneDuplicate").css("display", "inline-block");
+                    phoneCheck = false;
+                }
+            }
+        })
+    } else {
+        $("#phoneDuplicate").css("display", "none");
+        $("#phone_ok").css("display", "none");
+        $("#phoneAuthBtn").prop("disabled", true);
+        $("#phoneAuthBtn").css("background-color", "#ebebeb");
+    }
+    allCheck();
+}
+
+// 이메일인증 버튼 누르면 서버에 인증번호 저장.
+>>>>>>> 27aa9c7d196e04877e1796684c763100d9d51a88
 function sendAuthNum() {
     let email = $("#email").val();
     $.ajax({

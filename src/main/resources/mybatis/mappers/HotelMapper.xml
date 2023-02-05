@@ -2,5 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jspo.hotel.dao.HotelDao">
+    <!--    호텔추가-->
+    <insert id="insertHotel" parameterType="HotelDto">
+        insert into hotel (ht_id,ht_name, ht_address, ht_img, ht_phone)
+        values (#{htId}, #{htName}, #{htAddress}, #{htImg}, #{htPhone});
+    </insert>
+
+    <!--  호텔리스트 -->
+    <select id="selectHotel" resultType="HotelDto">
+        select ht_name , ht_address , ht_img from hotel;
+    </select>
+
+    <select id="selectHotelByHtId" parameterType="Integer" resultType="HotelDto">
+        select * from hotel where ht_id = #{htId};
+    </select>
 
 </mapper>

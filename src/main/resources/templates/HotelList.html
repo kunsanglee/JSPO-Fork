@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .oriImg { width: 500px; height: auto;}
+    </style>
+</head>
+<body>
+<form role="form" >
+    <table>
+        <tr><th>사진</th><th>호텔이름</th><th>주소</th></tr>
+
+        <tr th:each="list : ${list}">
+
+            <td>
+            <img th:src="${list.htImg}" class="oriImg">
+            </td>
+            <td th:text="${list.htName}"></td>
+            <td th:text="${list.htAddress}"> </td>
+
+        </tr>
+    </table>
+</form>
+
+
+</body>
+</html>

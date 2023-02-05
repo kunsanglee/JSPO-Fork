@@ -1,3 +1,4 @@
+
 // //[]사용자가 현재 비밀번호를 입력하고 바뀔 비밀번호를 입력했을때
 // //[] 현재 비밀번호와 새로운 비밀번호가 정규식에 맞는지 체크
 // //[] 체크 통과하면 버튼 활성화 [색상변경, 클릭가능]
@@ -13,6 +14,7 @@ function trans_password() {
     let star = '';
         for (let i = 1; i <= length; i++) {
             star += '●'
+
         }
         pwd_length.value = star;
 }
@@ -471,12 +473,15 @@ function password_change(){
                 }
             }
         })
+
     })
 }
 
 
 
+
 //핸드폰 번호 변경
+
 
 //핸드폰번호 변경 > 취소버튼 > value 초기화
 function phone_cancle() {
@@ -487,7 +492,10 @@ function phone_cancle() {
 
 }
 
+
 function phone_change() {
+
+//미구현
 
 }
 

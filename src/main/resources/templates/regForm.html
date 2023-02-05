@@ -44,7 +44,7 @@
 
                 </div>
                 <div class="input-group mb-3">
-<!--                    placeholder="인증번호 입력"-->
+                    <!--                    placeholder="인증번호 입력"-->
                     <input type="text" class="form-control" id="auth_email_num" oninput="checkAuthNum()"  aria-label="Auth email" aria-describedby="button-addon2" required minlength="6" maxlength="6">
                     <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="sendAuthNum()">인증번호 전송</button>
                 </div>
@@ -55,23 +55,23 @@
             <div class="form-group was-validated">
 
 
-                    <label for="password">비밀번호</label>
-                    <input type="password" class="form-control" id="password" minlength="8" name="pwd" placeholder="Password" required autofocus >
-                    <div  class="progress" style="height: 5px;">
-                        <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 10%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-
-                        </div>
-                    </div>
-                    <small id="passwordHelpBlock" class="form-text text-muted" style="font-size: 13px">
-                        영문, 숫자, 특수문자를 조합해서 입력해주세요. (8-16자)
-                    </small>
-
-                    <div id="feedbackin" class="valid-feedback">
+                <label for="password">비밀번호</label>
+                <input type="password" class="form-control" id="password" minlength="8" name="pwd" placeholder="Password" required autofocus >
+                <div  class="progress" style="height: 5px;">
+                    <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 10%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
 
                     </div>
-                    <div id="feedbackirn" class="invalid-feedback" style="font-size: 13px">
+                </div>
+                <small id="passwordHelpBlock" class="form-text text-muted" style="font-size: 13px">
+                    영문, 숫자, 특수문자를 조합해서 입력해주세요. (8-16자)
+                </small>
 
-                    </div>
+                <div id="feedbackin" class="valid-feedback">
+
+                </div>
+                <div id="feedbackirn" class="invalid-feedback" style="font-size: 13px">
+
+                </div>
 
                 <label class="form-label"    for="check_password">비밀번호 확인</label>
                 <input class="form-control"  type="password" id="check_password" name="pwd2" oninput="checkPwd()" required maxlength="16" placeholder="영문, 숫자, 특수문자를 조합해서 입력해주세요. (8-16자)">
