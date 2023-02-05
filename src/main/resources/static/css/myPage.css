@@ -1,7 +1,21 @@
 
-
 .myPage_wrap{
     height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.myPage {
+    width: 24vw;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 5px 5px 10px  1px  rgba(0, 0, 0, 0.2);
+    position: absolute;
     top: 350px;
     display: flex;
     flex-direction: column;
@@ -14,7 +28,6 @@
     border-bottom: 1px solid #ebebeb;
     margin-bottom: 20px;
 
-
 }
 
 .myPage form{
@@ -24,7 +37,6 @@
 .myPage form .form-group{
     margin-bottom: 12px;
 }
-
 
 .myPage form input[type="submit"]{
     font-size: 20px;
