@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -35,10 +36,11 @@ public class RoomController {
     }
 
     @PostMapping("/room/reg")
-    public String insert(RoomDto roomDto, MultipartFile file) throws Exception {
+    public String insert(RoomDto roomDto, MultipartFile file, @RequestParam String hotelHtId) throws Exception {
 
+        System.out.println("들어온 호텔코드 : " + hotelHtId);
         String imgUploadPath = uploadPath + "roomimgUpload";
-        System.out.println("1. imgUploadPath"+imgUploadPath);
+        System.out.println("위치 : Room Post insert = imgUploadPath :"+imgUploadPath);
 
         String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 
@@ -48,21 +50,20 @@ public class RoomController {
             fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
             System.out.println("fileName = "+fileName);
         } else {
-            fileName = uploadPath + File.separator+ "images" + File.separator+ "none.png";
+            fileName = "none.png";
         }
 
         roomDto.setrImg(File.separator+"imgs"+File.separator+ "roomimgUpload" + ymdPath + File.separator+ fileName);
         roomDao.insertRoom(roomDto);
 
-        return "redirect:/room/list";
+        return "redirect:list";
     }
     @GetMapping("/room/list")
     public String select(Model model) throws Exception {
 
         List<RoomDto> list = roomDao.selectRoom();
-
         model.addAttribute("list",list);
-        System.out.println(list);
+
         return "roomList";
     }
 }

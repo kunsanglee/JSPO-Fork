@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface RoomDao {
-    RoomDto insertRoom(RoomDto roomDto);
+    void insertRoom(RoomDto roomDto);
 
     RoomDto selectRoomByRId(int rId);
     List<RoomDto> selectRoom() throws Exception;

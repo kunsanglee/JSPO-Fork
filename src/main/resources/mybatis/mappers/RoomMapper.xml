@@ -5,8 +5,8 @@
     <!--    객실 입력-->
     <insert id="insertRoom" parameterType="RoomDto">
         insert into room (r_name, r_price, r_state, r_cnt, r_img, r_checkin, r_checkout, hotel_ht_id)
-        values (#{rName},#{rPrice},#{rState},#{rCnt},#{rImg},#{rCheckin},#{rCheckout},
-                (select htId from hotel where htName=#{hotelHtId});
+        values (#{rName},#{rPrice},#{rState},#{rCnt},#{rImg},#{rCheckin},#{rCheckout}, #{hotelHtId});
+
     </insert>
 
     <select id="selectRoomByRId" parameterType="Integer" resultType="RoomDto">

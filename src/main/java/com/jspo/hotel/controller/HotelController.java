@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.util.List;
@@ -35,12 +36,12 @@ public class HotelController {
 //            return "redirect:/";
 //        }
         List<HotelDto> list = hotelDao.selectHotel();
-        model.addAttribute("list",list);
-        System.out.println(list);
+        model.addAttribute("list",list); // 객실에 연결된 호텔이름때문
+
         return "HotelReg";
     }
     @PostMapping("/hotel/reg")
-    public String insert(HotelDto hotelDto,  MultipartFile file) throws Exception {
+    public String insert(HotelDto hotelDto, MultipartFile file, RedirectAttributes redirectAttributes) throws Exception {
 
         String imgUploadPath = uploadPath + "imgUpload";
         System.out.println("1. imgUploadPath"+imgUploadPath);
@@ -49,25 +50,25 @@ public class HotelController {
 
         String fileName = null;
         System.out.println(file);
+        System.out.println(file.getOriginalFilename());
         if (file.getOriginalFilename() != null && (!file.getOriginalFilename().equals(""))) {
             fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
             System.out.println("fileName = "+fileName);
         } else {
-            fileName = uploadPath + File.separator+ "images" + File.separator+ "none.png";
+            fileName = "none.png";
         }
 
         hotelDto.setHtImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
        hotelDao.insertHotel(hotelDto);
-        System.out.println(hotelDto);
 
-        return "redirect:/hotel/list";
+        return "redirect:list";
     }
     @GetMapping("/hotel/list")
     public String select(Model model) throws Exception {
 
        List<HotelDto> list = hotelDao.selectHotel();
        model.addAttribute("list",list);
-        System.out.println("select ="+list);
+
         return "HotelList";
     }
 }

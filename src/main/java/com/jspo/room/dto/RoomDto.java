@@ -1,5 +1,7 @@
 package com.jspo.room.dto;
 
+import com.jspo.hotel.dto.HotelDto;
+
 import java.sql.Date;
 import java.util.Objects;
 
@@ -13,8 +15,6 @@ public class RoomDto {
     private Date rCheckin;
     private Date rCheckout;
     private int hotelHtId;
-
-
 
     public RoomDto() {}
 

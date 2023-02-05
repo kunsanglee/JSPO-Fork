@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>객실 등록</title>
+    <style>
+        td{ text-align: center;}
+    </style>
 </head>
 <body>
 <header>
@@ -10,10 +13,11 @@
 </header>
 <form role="form" >
     <table>
-        <tr><th>사진</th><th>객실이름</th><th>객실가격</th><th>이용인원</th><th>체크인 시간</th><th>체크아웃 시간</th></tr>
+        <tr><th>호텔코드</th><th>사진</th><th>객실이름</th><th>객실가격</th><th>이용인원</th><th>체크인 시간</th><th>체크아웃 시간</th></tr>
 
         <tr th:each="list : ${list}">
 
+            <td th:text="${list.hotelHtId}"></td>
             <td>
                 <img th:src="${list.rImg}" class="oriImg">
             </td>
@@ -22,6 +26,7 @@
             <td th:text="${list.rCnt}"></td>
             <td th:text="${list.rCheckin}"></td>
             <td th:text="${list.rCheckout}"></td>
+
 
         </tr>
     </table>

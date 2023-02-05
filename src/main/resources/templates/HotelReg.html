@@ -17,7 +17,7 @@
         <tbody>
         <tr>
             <td>
-                <label>ID</label><input type="text" name="htId" /><br>
+<!--                <label>ID</label><input type="text" name="htId" /><br>-->
                 <label>호텔명</label><input type="text" name="htName"  /><br>
                 <label>호텔주소</label><input type="text" name="htAddress" /><br>
                 <label>호텔이미지</label><input type="file" id="htImg" name="file"/><br>
@@ -57,7 +57,7 @@
                 <label>호텔명</label>
                 <select name="hotelHtId">
                     <th:block th:each ="list : ${list}">
-                    <option th:text="${list.htName}"></option>
+                    <option th:text="${list.htId} + '-' + ${list.htName}" th:value="${list.htId}"></option>
                     </th:block>
                 </select><br>
                 <label>객실명</label><input type="text" name="rName"  /><br>

@@ -33,11 +33,6 @@ public class UploadFileUtils {
         String datePath = monthPath + File.separator+ new DecimalFormat("00").format(cal.get(Calendar.DATE));
 
         makeDir(uploadPath, yearPath, monthPath, datePath);
-        System.out.println(uploadPath);
-        System.out.println(yearPath);
-        System.out.println(monthPath);
-        System.out.println(datePath);
-
         return datePath;
     }
 
