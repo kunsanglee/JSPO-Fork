@@ -10,8 +10,7 @@ import com.jspo.room.dto.RoomDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,8 +25,8 @@ public class ReservationController {
     private RoomDao roomDao;
 
     private HotelDto hotelDto = HotelDto.getInstance();
-    private MemberDto memberDto = MemberDto.getInstance();
     private RoomDto roomDto = RoomDto.getInstance();
+    private MemberDto memberDto = MemberDto.getInstance();
 
     @GetMapping("/reservation")
     public String reserve(HttpSession session, Model m) throws Exception {
@@ -38,11 +37,14 @@ public class ReservationController {
         }
 
         hotelDto = hotelDao.selectHotelByHtId(1);
-        memberDto = memberDao.selectMemberByEmail("admin@jspo.com");
         roomDto = roomDao.selectRoomByRId(4);
+        memberDto = memberDao.selectMemberByEmail("admin@jspo.com");
+        Integer diff = roomDao.diff(roomDto);
+
         m.addAttribute(hotelDto);
-        m.addAttribute(memberDto);
         m.addAttribute(roomDto);
+        m.addAttribute(memberDto);
+        m.addAttribute("diff", diff);
 
         return "reservation";
     }
@@ -55,5 +57,16 @@ public class ReservationController {
         }
 
         return "reserved";
+    }
+
+
+    @PostMapping("/reservation/complete")
+    @CrossOrigin(origins = "*")
+    @ResponseBody
+    public void complete(@RequestBody String data) {
+
+        System.out.println(data);
+
+
     }
 }

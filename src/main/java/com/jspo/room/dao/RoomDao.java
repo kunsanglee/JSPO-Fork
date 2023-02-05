@@ -8,4 +8,6 @@ public interface RoomDao {
     RoomDto insertRoom(RoomDto roomDto);
 
     RoomDto selectRoomByRId(int rId);
+
+    Integer diff(RoomDto roomDto);
 }

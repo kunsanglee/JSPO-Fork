@@ -11,4 +11,8 @@
     <select id="selectRoomByRId" parameterType="Integer" resultType="RoomDto">
         select * from room where r_id = #{rId};
     </select>
+
+    <select id="diff" parameterType="RoomDto" resultType="Integer">
+        select datediff(r_checkout,r_checkin) from room;
+    </select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.jspo.reservation.dto;
 
+import com.jspo.room.dto.RoomDto;
+
 import java.sql.Date;
 import java.util.Objects;
 
@@ -21,6 +23,10 @@ public class ReservationDto {
         this.roomRId = roomRId;
         this.roomHotelHtId = roomHotelHtId;
     }
+
+    private static final RoomDto instnace = new RoomDto();
+
+    public static RoomDto getInstnace() { return instnace; }
 
     public int getResId() {
         return resId;
