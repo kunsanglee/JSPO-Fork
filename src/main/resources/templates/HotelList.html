@@ -14,7 +14,7 @@
 </header>
 <form role="form" >
     <table>
-        <tr><th>사진</th><th>호텔이름</th><th>주소</th></tr>
+        <tr><th>사진</th><th>호텔이름</th><th>주소</th> <th>가격</th></tr>
 
         <tr th:each="list : ${list}">
 
@@ -22,9 +22,13 @@
             <img th:src="${list.htImg}" class="oriImg">
             </td>
             <td th:text="${list.htName}"></td>
-            <td th:text="${list.htAddress}"> </td>
-            
+            <td th:text="${list.htAddress}"></td>
+            <block th:each="pricelist : ${pricelist}">
+                <td th:text="${pricelist}"></td>
+            </block>
+
         </tr>
+
     </table>
 </form>
 

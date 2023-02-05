@@ -3,6 +3,8 @@ package com.jspo.hotel.controller;
 import com.jspo.hotel.dao.HotelDao;
 import com.jspo.hotel.dto.HotelDto;
 import com.jspo.member.dao.MemberDao;
+import com.jspo.room.dao.RoomDao;
+import com.jspo.room.dto.RoomDto;
 import com.jspo.upload.UploadFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -29,6 +32,11 @@ public class HotelController {
 
     private HotelDto hotelDto = HotelDto.getInstance();
 
+    @Autowired
+    private RoomDao roomDao;
+
+    private RoomDto roomDto = RoomDto.getInstance();
+
     @GetMapping("/hotel/reg")
     public String insert(HttpSession session, Model model)  throws Exception{
 
@@ -41,7 +49,7 @@ public class HotelController {
         return "HotelReg";
     }
     @PostMapping("/hotel/reg")
-    public String insert(HotelDto hotelDto, MultipartFile file, RedirectAttributes redirectAttributes) throws Exception {
+    public String insert(HotelDto hotelDto, MultipartFile file) throws Exception {
 
         String imgUploadPath = uploadPath + "imgUpload";
         System.out.println("1. imgUploadPath"+imgUploadPath);
@@ -66,9 +74,16 @@ public class HotelController {
     @GetMapping("/hotel/list")
     public String select(Model model) throws Exception {
 
+
        List<HotelDto> list = hotelDao.selectHotel();
        model.addAttribute("list",list);
 
+        List pricelist = new ArrayList<>();
+        for(int i=1; i<=list.size() ; i++) {
+            pricelist.add(roomDao.selectPrice(i));
+
+        }
+        model.addAttribute("pricelist",pricelist);
         return "HotelList";
     }
 }

@@ -1,6 +1,5 @@
 package com.jspo.room.dao;
 
-import com.jspo.hotel.dto.HotelDto;
 import com.jspo.room.dto.RoomDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,5 +11,7 @@ public interface RoomDao {
 
     RoomDto selectRoomByRId(int rId);
     List<RoomDto> selectRoom() throws Exception;
+
+    Integer selectPrice(int hotelHtId);
 
 }

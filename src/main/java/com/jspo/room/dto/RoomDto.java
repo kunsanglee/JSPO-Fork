@@ -16,6 +16,7 @@ public class RoomDto {
     private Date rCheckout;
     private int hotelHtId;
 
+    private HotelDto hotelDto;
     public RoomDto() {}
 
     public RoomDto(int rId, String rName, int rPrice, int rState, int rCnt, String rImg, Date rCheckin, Date rCheckout, int hotelHtId) {
