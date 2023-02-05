@@ -1,23 +1,62 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 
-<header th:fragment="headerFragment">
-    <link rel="stylesheet" href="css/header.css">
-    <div class="header__container">
+  <body>
+  <th:block th:fragment="headerFragment">
+<!--    justify-content-between-->
+    <nav class="navbar navbar-expand-lg bg-light shadow-lg sticky-top " >
+      <div class="header_container"><a href="/login" class="navbar-brand align-middle">
+          <img src="/imgs/JSPO-logo.png" alt="logo" height="110px">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        
+          <li class="nav-item">
+            <a href="/login" class="nav-link">
+              홈
+            </a>
+          </li>
 
-        <div class="main__inner">
-            <a href="/"><img class="logo" src="imgs/JSPO-logo.png" alt=""></a>
+          <li class="nav-item">
+            <a href="/login" class="nav-link">
+              로그인
+            </a>
+          </li>
 
-        </div>
-        <div class="top__inner">
-            <ul class="top__list">
-                <li><a href="/login">로그인</a></li>
-                <li class="listBorder"><a href="/join">회원가입</a></li>
-                <li class="listBorder"><a href="/my">마이페이지</a></li>
-                <li class="listBorder"><a href="#">팀원소개</a></li>
-            </ul>
-        </div>
+          <li class="nav-item">
+            <a href="/join" class="nav-link">
+              회원가입
+            </a>
+          </li>
 
+          <li class="nav-item">
+            <a href="/myPage" class="nav-link">
+              마이페이지
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#intoduceTeam" class="nav-link">
+              팀원소개
+            </a>
+          </li>
+
+
+
+        </ul>
+      </div>
     </div>
-</header>
+    </nav>
+
+
+
+
+
+  </th:block>
+  </body>
+
 </html>
+
