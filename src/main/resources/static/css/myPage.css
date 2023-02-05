@@ -10,7 +10,7 @@
 
 
 .myPage {
-    width: 24vw;
+    width: 530px;
     padding: 20px;
     border-radius: 12px;
     background-color: #ffffff;
@@ -20,7 +20,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-around;
+    justify-content: center;
+
 
 }
 .myPage .myPage_title{
