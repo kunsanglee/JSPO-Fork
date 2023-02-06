@@ -6,26 +6,89 @@
 
 <body>
 <div layout:fragment="content">
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script src="js/reservation.js" defer></script>
+    <script>
+        var IMP = window.IMP;
+        IMP.init("imp52880818");
+
+        function requestPay() {
+            IMP.request_pay({
+                pg : 'kakaopay.TC0ONETIME',
+                // pg: 'kcp.T0000',
+                pay_method: 'card',
+                merchant_uid: /*"5700155333-33524"*/document.querySelector('.itemId').textContent,
+                name: /*'포시즌스 호텔 디럭스룸'*/document.querySelector('.fullName').textContent,
+                amount: /*100*/document.querySelector('.rPrice').textContent,
+                buyer_email: /*'Iamport@chai.finance'*/document.querySelector('.email').textContent,
+                buyer_name: /*'아임포트 기술지원팀'*/document.querySelector('.name').textContent,
+                buyer_tel: /*'010-1234-5678'*/document.querySelector('.phone').textContent,
+                // buyer_addr: '서울특별시 강남구 삼성동',
+                // buyer_postcode: '123-456',
+                // notice_url : 'https://localhost:8080/reservation/complete',   //웹훅수신 URL 설정
+            }, function (rsp) { // callback
+                if (rsp.success) {
+                    // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+                    // jQuery로 HTTP 요청
+                    jQuery.ajax({
+                        url: encodeURI("/reservation/complete"),
+                        method: "POST",
+                        headers: {"Content-Type": "application/json"},
+                        data: {
+                            imp_uid: rsp.imp_uid,            // 결제 고유번호
+                            merchant_uid: rsp.merchant_uid   // 주문번호
+                        }
+                    }).done(function (data) {
+                        // 가맹점 서버 결제 API 성공시 로직
+                        alert("결제에 성공했습니다!");
+                    })
+                } else {
+                    alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+                }
+            });
+        }
+    </script>
     <h5>예약</h5><br>
     <div>
         <h5>숙소</h5>
+        <div th:object="${hotelDto}" hidden="hidden">
+            <span class="htId" th:text="*{htId}"></span>
+            <span class="htName" th:text="*{htName}"></span>
+            <span class="htAddress" th:text="*{htAddress}"></span>
+            <span class="fullName" th:text="|${hotelDto.htName} ${hotelDto.htAddress} ${roomDto.rName}|"></span>
+            <span class="itemId" th:text="|${hotelDto.htId}${roomDto.rId}|"></span>
+        </div>
+        <div th:object="${roomDto}" hidden="hidden">
+            <span class="rId" th:text="*{rId}"></span>
+            <span class="rName" th:text="*{rName}"></span>
+            <span class="rPrice" th:text="*{rPrice}"></span>
+            <span class="rCheckin" th:text="*{rCheckin}"></span>
+            <span class="rCheckout" th:text="*{rCheckout}"></span>
+        </div>
+        <div th:object="${memberDto}" hidden="hidden">
+            <span class="id" th:text="*{id}"></span>
+            <span class="email" th:text="*{email}"></span>
+            <span class="name" th:text="*{name}"></span>
+            <span class="phone" th:text="*{phone}"></span>
+        </div>
         <span th:text="${hotelDto.htName}+' '+${hotelDto.htAddress}">도미인 서울 강남</span><br>
         <span th:text="${roomDto.rName}">스탠다드 더블룸</span><br>
-        <span th:text="|${roomDto.rCheckin} ~ ${roomDto.rCheckout} \ ${roomDto.rCheckout} - ${roomDto.rCheckin} 박|">2023-02-03 (금) ~ 2023-02-04 (토) | 1박</span><br>
+        <span th:text="|${roomDto.rCheckin} ~ ${roomDto.rCheckout} ${diff}박|">2023-02-03 (금) ~ 2023-02-04 (토) | 1박</span><br>
+
         <span>체크인 15:00 | 체크아웃 12:00</span><br>
         <span th:text="|숙박 ${roomDto.rPrice}원|">숙박 123,700원</span><br>
-    </div><br>
+    </div>
+    <br>
     <div th:object="${memberDto}">
         <h5>예약자 정보</h5>
         <span>성명</span><br>
         <span th:text="*{name}">김좋소</span><br>
         <span>휴대폰 번호</span><br>
         <span th:text="*{phone}">01012341234</span><br>
-    </div><br>
-    <div>
-        <h5>결제 수단 선택</h5>
-    </div><br>
-    <button th:text="|${roomDto.rPrice}원 결제하기|">123,700원 결제하기</button>
+    </div>
+    <br>
+    <button class="payBtn" th:text="|${roomDto.rPrice}원 결제하기|" onclick="requestPay()">123,700원 결제하기</button>
 </div>
 </body>
 </html>

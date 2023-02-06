@@ -10,9 +10,13 @@ public interface RoomDao {
     void insertRoom(RoomDto roomDto);
 
     RoomDto selectRoomByRId(int rId);
+
+    Integer diff(RoomDto roomDto);
+
     List<RoomDto> selectRoom() throws Exception;
 
     Integer selectPrice(int hotelHtId);
 
     List<RoomDto> selectRoomByhtId(int htId);
+
 }
