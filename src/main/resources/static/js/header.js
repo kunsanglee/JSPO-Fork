@@ -16,7 +16,7 @@ function trans_Logout(){
     }else if(document.cookie.length === 0){
         login_logout.innerText = '로그인';
     }
-    
+
 }
 
 //로그아웃 클릭시 로그아웃
