@@ -18,7 +18,7 @@
                 pg : 'kakaopay.TC0ONETIME',
                 // pg: 'kcp.T0000',
                 pay_method: 'card',
-                merchant_uid: /*"5700155333-33524"*/document.querySelector('.itemId').textContent,
+                merchant_uid: /*"5700155333-33524"*/document.querySelector('.resId').textContent,
                 name: /*'포시즌스 호텔 디럭스룸'*/document.querySelector('.fullName').textContent,
                 amount: /*100*/document.querySelector('.rPrice').textContent,
                 buyer_email: /*'Iamport@chai.finance'*/document.querySelector('.email').textContent,
@@ -35,16 +35,30 @@
                         url: encodeURI("/reservation/complete"),
                         method: "POST",
                         headers: {"Content-Type": "application/json"},
-                        data: {
+                        data: JSON.stringify({
                             imp_uid: rsp.imp_uid,            // 결제 고유번호
-                            merchant_uid: rsp.merchant_uid   // 주문번호
-                        }
+                            merchant_uid: rsp.merchant_uid,   // 주문번호
+                            amount: rsp.amount              // 결제금
+                        })
                     }).done(function (data) {
                         // 가맹점 서버 결제 API 성공시 로직
                         alert("결제에 성공했습니다!");
+                        window.location.replace("/reserved");
                     })
                 } else {
-                    alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+                    jQuery.ajax({
+                        url: encodeURI("/reservation/cancel"),
+                        method: "POST",
+                        headers: {"Content-Type": "application/json"},
+                        data: JSON.stringify({
+                            imp_uid: rsp.imp_uid,            // 결제 고유번호
+                            merchant_uid: rsp.merchant_uid,   // 주문번호
+                            amount: rsp.amount              // 결제금
+                        })
+                    }).done(function (data) {
+                        alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+                        window.location.replace("/hotel/list");
+                    })
                 }
             });
         }
@@ -57,7 +71,7 @@
             <span class="htName" th:text="*{htName}"></span>
             <span class="htAddress" th:text="*{htAddress}"></span>
             <span class="fullName" th:text="|${hotelDto.htName} ${hotelDto.htAddress} ${roomDto.rName}|"></span>
-            <span class="itemId" th:text="|${hotelDto.htId}${roomDto.rId}|"></span>
+            <span class="resId" th:text="${reservationDto.resId}"></span>
         </div>
         <div th:object="${roomDto}" hidden="hidden">
             <span class="rId" th:text="*{rId}"></span>

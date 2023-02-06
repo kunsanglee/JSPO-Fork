@@ -7,6 +7,13 @@
 <body>
 <div layout:fragment="content">
     <h1>예약내역페이지</h1>
+    <tr th:each="r : ${reservation}">
+        <td th:text="${r.getResId()}"></td>
+        <td th:text="${r.getRoomHotelHtId()}"></td>
+        <td th:text="${r.getRoomRId()()}"></td>
+        <td th:text="${r.getMemberMId()()}"></td>
+        <td th:text="${r.getResDate()()}"></td>
+    </tr>
 </div>
 </body>
 </html>

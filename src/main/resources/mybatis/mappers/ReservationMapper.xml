@@ -4,8 +4,8 @@
 <mapper namespace="com.jspo.reservation.dao.ReservationDao">
 
     <insert id="insertReservation" parameterType="ReservationDto">
-        insert into reservation (res_price, res_date, member_m_id, room_r_id, room_hotel_ht_id)
-        values (#{resPrice},now(),#{memberMId},#{roomRId},#{roomHotelHtId});
+        insert into reservation (res_price, member_m_id, room_r_id, room_hotel_ht_id)
+        values (#{resPrice},#{memberMId},#{roomRId},#{roomHotelHtId});
     </insert>
 
     <delete id="deleteReservationByResId" parameterType="Integer">
@@ -22,5 +22,13 @@
 
     <select id="selectReservationByMemberMId" parameterType="Integer" resultType="ReservationDto">
         select * from reservation where member_m_id = #{memberMId};
+    </select>
+
+    <select id="selectAllReservationById" parameterType="Integer" resultType="ReservationDto">
+        select * from reservation where member_m_id = #{id} order by res_id desc;
+    </select>
+
+    <select id="selectLastReservation" parameterType="Integer" resultType="ReservationDto">
+        select *  from reservation where member_m_id = #{id} ORDER BY res_id DESC LIMIT 1
     </select>
 </mapper>

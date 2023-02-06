@@ -24,6 +24,10 @@ public class ReservationDto {
         this.roomHotelHtId = roomHotelHtId;
     }
 
+    private static final ReservationDto instance = new ReservationDto();
+
+    public static ReservationDto getInstance() { return instance; }
+
     private static final RoomDto instnace = new RoomDto();
 
     public static RoomDto getInstnace() { return instnace; }

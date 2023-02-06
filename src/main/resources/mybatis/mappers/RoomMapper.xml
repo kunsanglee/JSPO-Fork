@@ -23,6 +23,16 @@
            <result column="" property="hotelHtId" />
         <collection property="hotelDto" resultMap="HDto" />
     </resultMap>
+
+    <resultMap id="reservation" type="ReservationDto">
+        <result column="" property="resId" />
+        <result column="" property="resPrice" />
+        <result column="" property="resDate" />
+        <result column="" property="memberMId" />
+        <result column="" property="roomRId" />
+        <result column="" property="roomHotelHtId" />
+    </resultMap>
+
     <!--    객실 입력-->
     <insert id="insertRoom" parameterType="RoomDto">
         insert into room (r_name, r_price, r_state, r_cnt, r_img, r_checkin, r_checkout, hotel_ht_id)
@@ -35,7 +45,7 @@
     </select>
 
     <select id="diff" parameterType="RoomDto" resultType="Integer">
-        select datediff(r_checkout,r_checkin) from room;
+        select datediff(r_checkout,r_checkin) from room left join reservation on room.hotel_ht_id = reservation.room_hotel_ht_id;
     </select>
 
     <select id="selectRoom" resultType="RoomDto">
