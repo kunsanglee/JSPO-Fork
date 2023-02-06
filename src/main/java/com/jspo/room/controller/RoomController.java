@@ -29,12 +29,19 @@ public class RoomController {
 
     private RoomDto roomDto = RoomDto.getInstance();
 
-    @GetMapping("/hotel/{rId}")
-    public String room(@PathVariable String rId) {
+//    @GetMapping("/hotel/{rId}")
+//    public String room(@PathVariable String rId) {
+//
+//        return "room"; // 객실 html
+//    }
+    @GetMapping("/room/list/{htId}")
+    public String room(@PathVariable int htId, Model model) {
 
-        return "room"; // 객실 html
+        List<RoomDto> list = roomDao.selectRoomByhtId(htId);
+        model.addAttribute("list",list);
+
+        return "roomlist"; // 객실 html
     }
-
     @PostMapping("/room/reg")
     public String insert(RoomDto roomDto, MultipartFile file, @RequestParam String hotelHtId) throws Exception {
 
@@ -63,7 +70,9 @@ public class RoomController {
 
         List<RoomDto> list = roomDao.selectRoom();
         model.addAttribute("list",list);
-
+        System.out.println(list);
         return "roomList";
     }
+
+
 }

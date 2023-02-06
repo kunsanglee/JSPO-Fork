@@ -14,4 +14,5 @@ public interface RoomDao {
 
     Integer selectPrice(int hotelHtId);
 
+    List<RoomDto> selectRoomByhtId(int htId);
 }

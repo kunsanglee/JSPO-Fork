@@ -19,7 +19,7 @@
         <tr th:each="list : ${list}">
 
             <td>
-            <img th:src="${list.htImg}" class="oriImg" th:id="${list.htId}">
+            <a th:href="@{/room/list/} + ${list.htId}"><img th:src="${list.htImg}" class="oriImg" th:id="${list.htId}" ></a>
             </td>
             <td th:text="${list.htName}"></td>
             <td th:text="${list.htAddress}"></td>

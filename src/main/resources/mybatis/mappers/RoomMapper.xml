@@ -42,4 +42,7 @@
         select min(b.r_price) from room b LEFT JOIN hotel h on  b.hotel_ht_id = h.ht_id where b.hotel_ht_id = #{hotelHtId};
     </select>
 
+    <select id="selectRoomByhtId" parameterType="Integer" resultType="RoomDto">
+        select * from room where hotel_ht_id = #{htId};
+    </select>
 </mapper>
