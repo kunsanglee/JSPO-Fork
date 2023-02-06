@@ -28,7 +28,7 @@ public class ReservationController {
     private RoomDto roomDto = RoomDto.getInstance();
     private MemberDto memberDto = MemberDto.getInstance();
 
-    @GetMapping("/reservation")
+    @PostMapping("/reservation")
     public String reserve(HttpSession session, Model m) throws Exception {
 
         // 로그인필터 있어야되는데..
@@ -38,7 +38,7 @@ public class ReservationController {
 
         hotelDto = hotelDao.selectHotelByHtId(1);
         roomDto = roomDao.selectRoomByRId(4);
-        memberDto = memberDao.selectMemberByEmail("admin@jspo.com");
+        memberDto = memberDao.selectMemberByEmail((String) session.getAttribute("email"));
         Integer diff = roomDao.diff(roomDto);
 
         m.addAttribute(hotelDto);
@@ -49,15 +49,15 @@ public class ReservationController {
         return "reservation";
     }
 
-    @PostMapping("/reservation")
-    public String reserve(HttpSession session, ReservationDto reservationDto) {
-
-        if (session.getAttribute("email") == null) {
-            return "redirect:/login";
-        }
-
-        return "reserved";
-    }
+//    @PostMapping("/reservation")
+//    public String reserve(HttpSession session, ReservationDto reservationDto) {
+//
+//        if (session.getAttribute("email") == null) {
+//            return "redirect:/login";
+//        }
+//
+//        return "reserved";
+//    }
 
 
     @PostMapping("/reservation/complete")
@@ -66,7 +66,6 @@ public class ReservationController {
     public void complete(@RequestBody String data) {
 
         System.out.println(data);
-
 
     }
 }

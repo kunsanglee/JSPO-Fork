@@ -5,7 +5,7 @@
 
     <insert id="insertReservation" parameterType="ReservationDto">
         insert into reservation (res_price, res_date, member_m_id, room_r_id, room_hotel_ht_id)
-        values (#{resPrice},#{resDate},#{memberMId},#{roomRId},#{roomHotelHtId});
+        values (#{resPrice},now(),#{memberMId},#{roomRId},#{roomHotelHtId});
     </insert>
 
     <delete id="deleteReservationByResId" parameterType="Integer">
