@@ -46,7 +46,6 @@ public class LoginController {
         memberDto = memberDao.login(loginMember);
         HttpSession session = request.getSession();
         if(memberDto != null ) {
-
             Cookie cookie;
             if(remember) {
                 cookie = new Cookie("email", memberDto.getEmail());
@@ -63,6 +62,7 @@ public class LoginController {
 
             m.addAttribute("memberDto", memberDto);
             m.addAttribute("encPwd", memberService.getEncPwd(memberDto));
+
             return "redirect:/my";
         }
 

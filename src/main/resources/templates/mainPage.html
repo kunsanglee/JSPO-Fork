@@ -3,14 +3,17 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default_layout}">
+<head>
+</head>
 <body>
+<div class="ready" layout:fragment="content">
+
+    <h1>메인 페이지</h1>
 
 
-<div id="headers"></div>
-<div class="mainPage__container">        <h1>메인 페이지</h1>
-    <a href="/hotel">호텔페이지 링크</a></div>
 
-<div id="footers"></div>
 
+    <h1><a href="/hotel">호텔페이지 링크</a></h1></div>
+</div>
 </body>
 </html>
