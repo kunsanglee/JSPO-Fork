@@ -4,13 +4,13 @@
 <mapper namespace="com.jspo.hotel.dao.HotelDao">
     <!--    호텔추가-->
     <insert id="insertHotel" parameterType="HotelDto">
-        insert into hotel (ht_id,ht_name, ht_address, ht_img, ht_phone)
-        values (#{htId}, #{htName}, #{htAddress}, #{htImg}, #{htPhone});
+        insert into hotel (ht_name, ht_address, ht_img, ht_phone)
+        values (#{htName}, #{htAddress}, #{htImg}, #{htPhone});
     </insert>
 
     <!--  호텔리스트 -->
     <select id="selectHotel" resultType="HotelDto">
-        select ht_name , ht_address , ht_img from hotel;
+        select * from hotel;
     </select>
 
     <select id="selectHotelByHtId" parameterType="Integer" resultType="HotelDto">

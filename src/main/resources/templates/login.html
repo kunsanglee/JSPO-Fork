@@ -41,8 +41,11 @@
         
 
         <div class="form-group form-check">
-            <input class="form-check-input" type="checkbox" id="check">
-            <label class="form-check-label" for="check">이메일 기억하기</label>
+
+            <input class="form-check-input" type="checkbox" id="remember" name="remember" th:if="${email == null}">
+            <input class="form-check-input" type="checkbox" id="remember-checked" name="remember" th:if="${email != null}" checked="checked">
+            <label class="form-check-label" for="remember">이메일 기억하기</label>
+
         </div>
 
 

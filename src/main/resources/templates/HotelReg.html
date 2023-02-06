@@ -4,6 +4,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <title>등록페이지</title>
+    <style>
+        .line {width: 100px; height: 100px;}
+    </style>
 </head>
 <body>
 <header>
@@ -14,9 +17,10 @@
         <tbody>
         <tr>
             <td>
+<!--                <label>ID</label><input type="text" name="htId" /><br>-->
                 <label>호텔명</label><input type="text" name="htName"  /><br>
                 <label>호텔주소</label><input type="text" name="htAddress" /><br>
-                <label>호텔이미지</label><input type="file" id=htImg name="file"/><br>
+                <label>호텔이미지</label><input type="file" id="htImg" name="file"/><br>
                 <div class="select_img"><img src="" /></div>
                 <label>호텔 전화번호</label><input type="text" name="htPhone"  /><br>
 
@@ -41,6 +45,49 @@
     </table>
 </form>
 
+<div class="line"></div>
+<header>
+    <h1> 객실 등록게시판</h1>
+</header>
+<form role="form" method="post" action="/room/reg" enctype="multipart/form-data">
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <label>호텔명</label>
+                <select name="hotelHtId">
+                    <th:block th:each ="list : ${list}">
+                    <option th:text="${list.htId} + '-' + ${list.htName}" th:value="${list.htId}"></option>
+                    </th:block>
+                </select><br>
+                <label>객실명</label><input type="text" name="rName"  /><br>
+                <label>객실가격</label><input type="text" name="rPrice" /><br>
+                <label>객실이용인원</label><input type="text" name="rCnt" /><br>
+                <label>체크인</label><input type="text" name="rCheckin" /><br>
+                <label>체크아웃</label><input type="text" name="rCheckout" /><br>
+                <label>객실이미지</label><input type="file" id="rImg" name="file" /><br>
+                <div class="select_img2"><img src="" /></div>
+
+                <script>
+                    $("#rImg").change(function(){
+                        if(this.files && this.files[0]) {
+                            var reader = new FileReader;
+                            reader.onload = function(data) {
+                                $(".select_img2 img").attr("src", data.target.result).width(500);
+                            }
+                            reader.readAsDataURL(this.files[0]);
+                        }
+                    });
+                </script>
+            </td>
+                <tr>
+                    <td>
+                        <button type="submit">작성</button>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+</form>
 
 
 

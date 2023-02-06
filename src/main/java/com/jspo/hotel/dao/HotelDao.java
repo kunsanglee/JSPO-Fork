@@ -15,4 +15,5 @@ public interface HotelDao {
 
     HotelDto selectHotelByHtId(int htId);
 
+
 }

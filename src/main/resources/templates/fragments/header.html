@@ -3,27 +3,30 @@
 
   <body>
   <th:block th:fragment="headerFragment">
+
+
 <!--    justify-content-between-->
     <nav class="navbar navbar-expand-lg bg-light shadow-lg sticky-top " >
-      <div class="header_container"><a href="/login" class="navbar-brand align-middle">
+      <div class="header_container"><a href="/" class="navbar-brand align-middle">
           <img src="/imgs/JSPO-logo.png" alt="logo" height="110px">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" >
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         
           <li class="nav-item">
-            <a href="/login" class="nav-link">
+            <a href="/" class="nav-link">
               홈
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="/login" class="nav-link">
-              로그인
-            </a>
+
+            <span class="nav-link" id="login_logout">
+                로그인
+            </span>
           </li>
 
           <li class="nav-item">
