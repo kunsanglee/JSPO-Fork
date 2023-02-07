@@ -15,8 +15,18 @@ public class RoomDto {
     private Date rCheckin;
     private Date rCheckout;
     private int hotelHtId;
-
+    private String htName;
     private HotelDto hotelDto;
+
+    public String getHtName() {
+        return htName;
+    }
+
+    public void setHtName(String htName) {
+        this.htName = htName;
+    }
+
+
     public RoomDto() {}
 
     public RoomDto(int rId, String rName, int rPrice, int rState, int rCnt, String rImg, Date rCheckin, Date rCheckout, int hotelHtId) {

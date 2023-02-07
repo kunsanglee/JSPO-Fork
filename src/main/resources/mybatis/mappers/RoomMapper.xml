@@ -35,7 +35,8 @@
     </select>
 
     <select id="selectRoom" resultType="RoomDto">
-        select * from room;
+        select a.r_id,a.r_name, a.r_price, a.r_state, a.r_cnt, a.r_img, a.r_checkin, a.r_checkout, a.hotel_ht_id,b.ht_name
+        from room a LEFT JOIN hotel b on a.hotel_ht_id = b.ht_id;
     </select>
 
     <select id="selectPrice" parameterType="Integer" resultType="Integer">

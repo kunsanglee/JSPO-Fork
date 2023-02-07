@@ -1,0 +1,58 @@
+<html>
+<head>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <title>게시판</title>
+</head>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $(".cancel_btn").on("click", function(){
+      event.preventDefault();
+      location.href = "/hotel/list";
+    })
+  })
+
+</script>
+<body>
+
+<div id="root">
+  <header>
+    <h1>호텔 수정</h1>
+  </header>
+
+
+  <section id="container">
+    <form name="updateForm" role="form" method="post" action="/hotel/update" enctype="multipart/form-data">
+      <input type="hidden" name="htId" th:value="${update.htId}" readonly="readonly"/>
+      <table>
+        <tbody>
+        <td>
+          <label>호텔명</label><input type="text" name="htName" th:value="${update.htName}" /><br>
+          <label>호텔주소</label><input type="text" name="htAddress" th:value="${update.htAddress}" /><br>
+          <label>호텔이미지</label><input type="file" id="htImg" name="file"/><br>
+          <div class="select_img"><img th:src="${update.htImg}" /></div>
+          <label>호텔 전화번호</label><input type="text" name="htPhone" th:value="${update.htPhone}" /><br>
+          <script>
+            $("#htImg").change(function(){
+              if(this.files && this.files[0]) {
+                var reader = new FileReader;
+                reader.onload = function(data) {
+                  $(".select_img img").attr("src", data.target.result).width(500);
+                }
+                reader.readAsDataURL(this.files[0]);
+              }
+            });
+          </script>
+        </td>
+        </tbody>
+      </table>
+      <div>
+        <button type="submit" class="update_btn">저장</button>
+        <button type="submit" class="cancel_btn">취소</button>
+      </div>
+    </form>
+  </section>
+  <hr />
+</div>
+</body>
+</html>

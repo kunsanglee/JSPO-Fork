@@ -76,5 +76,17 @@ public class RoomController {
         return "roomList";
     }
 
+    @PostMapping("/room/updateView")
+    public String updateView(Model model,int rId) throws Exception {
+
+        model.addAttribute("update", roomDao.selectRoomByRId(rId));
+        return "roomupdateView";
+    }
+
+    @PostMapping("/room/update")
+    public String update(HotelDto hotelDto) throws Exception {
+
+        return "redirect:list";
+    }
 
 }

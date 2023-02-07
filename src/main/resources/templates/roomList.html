@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>객실 등록</title>
@@ -32,7 +33,6 @@
             <th>이용인원</th>
             <th>체크인 시간</th>
             <th>체크아웃 시간</th>
-            <th>선택</th>
         </tr>
 
         <tr th:each="list : ${list}">
@@ -53,7 +53,6 @@
             <td>
                 <button type="submit">객실 선택하기</button>
             </td>
-
             </form>
 
         </tr>
