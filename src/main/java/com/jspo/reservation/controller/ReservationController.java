@@ -43,9 +43,6 @@ public class ReservationController {
         hotelDto = hotelDao.selectHotelByHtId(hotelHtId);
         memberDto = memberDao.selectMemberByEmail((String) session.getAttribute("email"));
         roomDto = roomDao.selectRoomByRId(rId);
-        System.out.println(hotelDto);
-        System.out.println(memberDto);
-        System.out.println(roomDto);
         m.addAttribute(hotelDto);
         m.addAttribute(memberDto);
         m.addAttribute(roomDto);
@@ -62,4 +59,5 @@ public class ReservationController {
 //
 //        return "reserved";
 //    }
+
 }

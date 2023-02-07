@@ -45,4 +45,8 @@
     <select id="selectRoomByhtId" parameterType="Integer" resultType="RoomDto">
         select * from room where hotel_ht_id = #{htId};
     </select>
+
+    <select id="selectRoomByinfo" parameterType="Integer" resultType="hotelDto">
+        select ht_name,ht_phone,ht_address from hotel where ht_id = #{htId};
+    </select>
 </mapper>

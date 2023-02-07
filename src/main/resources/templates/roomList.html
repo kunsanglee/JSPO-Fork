@@ -16,7 +16,10 @@
 </head>
 <body>
 <header>
-    <h1> 객실 게시판</h1>
+    <h1 th:text="${hotelDto.htName} + ' 호텔'" />
+    <h3 th:text="${hotelDto.htPhone}" />
+    <h3 th:text="${hotelDto.htAddress}" />
+
 </header>
 
 <table>

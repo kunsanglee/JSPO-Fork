@@ -20,11 +20,12 @@
 
             <td>
             <a th:href="@{/room/list/} + ${list.htId}"><img th:src="${list.htImg}" class="oriImg" th:id="${list.htId}" ></a>
+<!--            <a th:href="@{/room/list/} + ${list.htId}"><img th:src="${list.htImg}" class="oriImg" th:id="${list.htId}" ></a>-->
             </td>
             <td th:text="${list.htName}"></td>
             <td th:text="${list.htAddress}"></td>
             <td th:text="${pricelist[list.htId]}"></td>
-
+            <td><button th:onclick="|location.href='@{/room/list/}${list.htId}'|" type="button">숙소 살펴보기</button></td>
         </tr>
 
     </table>

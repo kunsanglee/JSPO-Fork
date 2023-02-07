@@ -29,6 +29,7 @@ public class RoomController {
 
     private RoomDto roomDto = RoomDto.getInstance();
 
+    private HotelDto hotelDto = HotelDto.getInstance();
 //    @GetMapping("/hotel/{rId}")
 //    public String room(@PathVariable String rId) {
 //
@@ -39,7 +40,8 @@ public class RoomController {
 
         List<RoomDto> list = roomDao.selectRoomByhtId(htId);
         model.addAttribute("list",list);
-
+        hotelDto = roomDao.selectRoomByinfo(htId);
+        model.addAttribute(hotelDto);
         return "roomlist"; // 객실 html
     }
     @PostMapping("/room/reg")
