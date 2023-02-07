@@ -10,14 +10,15 @@
 
 
 
-.reservation_page_wrap .reservation {
-    width: 360px;
-    background-color: red;
+.reservation_page_wrap .container {
+    width: 1000px;
+    height: fit-content;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 5px 5px 10px  1px  rgba(0, 0, 0, 0.2);
     position: absolute;
-    top: 150px;
+    top: 250px;
+
 }
 
 .reservation form{
