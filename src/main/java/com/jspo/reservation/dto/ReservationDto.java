@@ -6,20 +6,27 @@ import java.util.Date;
 import java.util.Objects;
 
 public class ReservationDto {
-    private int resId;
+    private String resId;
     private int resPrice;
     private Date resDate;
+
+    private int resState;
     private int memberMId;
+    private Date roomRCheckin;
+    private Date roomRCheckout;
     private int roomRId;
     private int roomHotelHtId;
 
     public ReservationDto() {}
 
-    public ReservationDto(int resId, int resPrice, Date resDate, int memberMId, int roomRId, int roomHotelHtId) {
+    public ReservationDto(String resId, int resPrice, Date resDate, int resState, int memberMId, Date roomRCheckin, Date roomRCheckout, int roomRId, int roomHotelHtId) {
         this.resId = resId;
         this.resPrice = resPrice;
         this.resDate = resDate;
+        this.resState = resState;
         this.memberMId = memberMId;
+        this.roomRCheckin = roomRCheckin;
+        this.roomRCheckout = roomRCheckout;
         this.roomRId = roomRId;
         this.roomHotelHtId = roomHotelHtId;
     }
@@ -32,11 +39,11 @@ public class ReservationDto {
 
     public static RoomDto getInstnace() { return instnace; }
 
-    public int getResId() {
+    public String getResId() {
         return resId;
     }
 
-    public void setResId(int resId) {
+    public void setResId(String resId) {
         this.resId = resId;
     }
 
@@ -56,12 +63,36 @@ public class ReservationDto {
         this.resDate = resDate;
     }
 
+    public int getResState() {
+        return resState;
+    }
+
+    public void setResState(int resState) {
+        this.resState = resState;
+    }
+
     public int getMemberMId() {
         return memberMId;
     }
 
     public void setMemberMId(int memberMId) {
         this.memberMId = memberMId;
+    }
+
+    public Date getRoomRCheckin() {
+        return roomRCheckin;
+    }
+
+    public void setRoomRCheckin(Date roomRCheckin) {
+        this.roomRCheckin = roomRCheckin;
+    }
+
+    public Date getRoomRCheckout() {
+        return roomRCheckout;
+    }
+
+    public void setRoomRCheckout(Date roomRCheckout) {
+        this.roomRCheckout = roomRCheckout;
     }
 
     public int getRoomRId() {
@@ -85,21 +116,24 @@ public class ReservationDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReservationDto that = (ReservationDto) o;
-        return resId == that.resId && resPrice == that.resPrice && memberMId == that.memberMId && roomRId == that.roomRId && roomHotelHtId == that.roomHotelHtId && Objects.equals(resDate, that.resDate);
+        return resPrice == that.resPrice && resState == that.resState && memberMId == that.memberMId && roomRId == that.roomRId && roomHotelHtId == that.roomHotelHtId && Objects.equals(resId, that.resId) && Objects.equals(resDate, that.resDate) && Objects.equals(roomRCheckin, that.roomRCheckin) && Objects.equals(roomRCheckout, that.roomRCheckout);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(resId, resPrice, resDate, memberMId, roomRId, roomHotelHtId);
+        return Objects.hash(resId, resPrice, resDate, resState, memberMId, roomRCheckin, roomRCheckout, roomRId, roomHotelHtId);
     }
 
     @Override
     public String toString() {
         return "ReservationDto{" +
-                "resId=" + resId +
+                "resId='" + resId + '\'' +
                 ", resPrice=" + resPrice +
                 ", resDate=" + resDate +
+                ", resState=" + resState +
                 ", memberMId=" + memberMId +
+                ", roomRCheckin=" + roomRCheckin +
+                ", roomRCheckout=" + roomRCheckout +
                 ", roomRId=" + roomRId +
                 ", roomHotelHtId=" + roomHotelHtId +
                 '}';

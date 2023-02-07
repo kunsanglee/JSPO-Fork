@@ -15,7 +15,7 @@
 
         function requestPay() {
             IMP.request_pay({
-                pg : 'kakaopay.TC0ONETIME',
+                pg: 'kakaopay.TC0ONETIME',
                 // pg: 'kcp.T0000',
                 pay_method: 'card',
                 merchant_uid: /*"5700155333-33524"*/document.querySelector('.resId').textContent,
@@ -46,21 +46,10 @@
                         window.location.replace("/reserved");
                     })
                 } else {
-                    jQuery.ajax({
-                        url: encodeURI("/reservation/cancel"),
-                        method: "POST",
-                        headers: {"Content-Type": "application/json"},
-                        data: JSON.stringify({
-                            imp_uid: rsp.imp_uid,            // 결제 고유번호
-                            merchant_uid: rsp.merchant_uid,   // 주문번호
-                            amount: rsp.amount              // 결제금
-                        })
-                    }).done(function (data) {
-                        alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
-                        window.location.replace("/hotel/list");
-                    })
+                    alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+                    window.location.replace("/hotel/list");
                 }
-            });
+            })
         }
     </script>
     <h5>예약</h5><br>
@@ -88,7 +77,7 @@
         </div>
         <span th:text="${hotelDto.htName}+' '+${hotelDto.htAddress}"></span><br>
         <span th:text="${roomDto.rName}"></span><br>
-        <span th:text="|${#dates.format(roomDto.rCheckin, 'yyyy-MM-dd')} ~ ${#dates.format(roomDto.rCheckout, 'yyyy-MM-dd')} ${diff}박|"></span><br>
+        <span th:text="|${#dates.format(roomDto.rCheckin, 'yyyy-MM-dd')} ${#dates.dayOfWeekNameShort(roomDto.rCheckin)} ~ ${#dates.format(roomDto.rCheckout, 'yyyy-MM-dd')} ${#dates.dayOfWeekNameShort(roomDto.rCheckout)} ${#dates.day(roomDto.rCheckout) - #dates.day(roomDto.rCheckin)}박|"></span><br>
 
         <span>체크인 15:00 | 체크아웃 12:00</span><br>
         <span th:text="|숙박 ${roomDto.rPrice}원|"></span><br>
