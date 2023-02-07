@@ -30,9 +30,9 @@ public class HotelController {
     @GetMapping("/hotel/reg")
     public String insert(HttpSession session) {
 
-        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
-            return "redirect:/";
-        }
+//        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
+//            return "redirect:/";
+//        }
 
         return "HotelReg";
     }
