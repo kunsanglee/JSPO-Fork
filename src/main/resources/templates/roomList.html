@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>객실 등록</title>
+    <style>
+        td {
+            text-align: center;
+        }
+
+        .oriImg {
+            width: 400px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1> 객실 게시판</h1>
+</header>
+
+<table>
+
+        <tr>
+            <th>호텔코드</th>
+            <th>사진</th>
+            <th>객실이름</th>
+            <th>객실가격</th>
+            <th>이용인원</th>
+            <th>체크인 시간</th>
+            <th>체크아웃 시간</th>
+            <th>선택</th>
+        </tr>
+
+        <tr th:each="list : ${list}">
+            <form role="form" method="post" action="/reservation">
+            <td th:name="hotelHtId" th:text="${list.hotelHtId}"></td>
+                <input type="text" hidden=hidden th:name="hotelHtId" th:value="${list.hotelHtId}" />
+            <td>
+                <img th:src="${list.rImg}" class="oriImg">
+            </td>
+            <td th:name="rName" th:text="${list.rName}"></td>
+            <td th:name="rPrice" th:text="${list.rPrice}"></td>
+            <td th:name="rCnt" th:text="${list.rCnt}"></td>
+            <td th:name="rCheckin" th:text="${list.rCheckin}"></td>
+            <td th:name="rCheckout" th:text="${list.rCheckout}"></td>
+            <div hidden="hidden">
+                <input type="text" th:name="rId" th:value="${list.rId}"/>
+            </div>
+            <td>
+                <button type="submit">객실 선택하기</button>
+            </td>
+
+            </form>
+
+        </tr>
+
+</table>
+
+</body>
+</html>

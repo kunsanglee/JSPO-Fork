@@ -45,7 +45,6 @@ public class LoginController {
 
         memberDto = memberDao.login(loginMember);
         HttpSession session = request.getSession();
-
         if(memberDto != null ) {
             Cookie cookie;
             if(remember) {
