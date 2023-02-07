@@ -76,7 +76,6 @@ public class HotelController {
     @GetMapping("/hotel/list")
     public String select(Model model) throws Exception {
 
-
        List<HotelDto> list = hotelDao.selectHotel();
        model.addAttribute("list",list);
 

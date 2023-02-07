@@ -11,8 +11,6 @@ public interface RoomDao {
 
     RoomDto selectRoomByRId(int rId);
 
-    Integer diff(RoomDto roomDto);
-
     List<RoomDto> selectRoom() throws Exception;
 
     Integer selectPrice(int hotelHtId);

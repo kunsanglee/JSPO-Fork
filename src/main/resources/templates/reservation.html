@@ -15,14 +15,13 @@
 
 
 
-
-                <div class="reservation_Page_wrap justify-content-center" layout:fragment="content" >
+                <div class="reservation_page_wrap " layout:fragment="content" >
 
                     <div class="container pt-4 pb-3 py-sm-4">
 
                         <div class="rounded-3 shadow-lg mt-4 mb-5">
-                            <ul class="nav nav-tabs nav-justified mb-3">
-                                <li class="nav-item  "><span class="nav-link fs-lg fw-medium py-4 active fw-bold" href="#">예약 내역</span></li>
+                            <ul class="nav nav-tabs nav-justified my-1">
+                                <li class="nav-item  "><span class="display-3 nav-link fs-lg pt-3 fw-medium active fw-bold" href="#">예약 내역</span></li>
 
                             </ul>
                             <div class="px-3 px-sm-4 px-xl-5 pt-1 pb-4 pb-sm-5">
@@ -48,15 +47,24 @@
 
                                     <!-- 결제 -->
                                     <div class="col-lg-4 col-md-5 pt-3 pt-sm-4 w-100">
-                                        <div class="rounded-3 bg-dark px-3 px-sm-4 py-4 w-100">
+                                        <div class="rounded-3 bg-light px-3 px-sm-4 py-4 w-100">
                                             <div class="text-center mb-4 pb-3 border-bottom">
-                                                <h3 class="h5 mb-3 pb-1 text-light">총액</h3>
-                                                <h4 class="fw-normal text-light" th:text="|${roomDto.rPrice}원|"></h4>
+                                                <h3 class="h5 mb-3 pb-1 text-dark">총액</h3>
+                                                <h4 class="fw-normal text-dark" th:text="|${roomDto.rPrice}원|"></h4>
+                                            </div>
+
+
+                                            <div th:object="${memberDto}">
+                                                <h5>예약자 정보</h5>
+                                                <p class="m-1"><span>성명 :</span>
+                                                <span th:text="*{name}"></span></p>
+                                                <p class="m-1"><span>휴대폰 번호 :</span>
+                                                <span th:text="*{phone}"></span></p>
                                             </div>
 
                                             <form class="needs-validation" method="post" novalidate>
 
-                                            </form><a class="btn btn-light btn-shadow d-block w-100 mt-4 mb-3" href="#"><i class="ci-card fs-lg me-2"></i>결제하기</a>
+                                            </form><a class="btn btn-success btn-shadow d-block w-100 mt-4 mb-3" href="#" onclick="requestPay()"><i class="ci-card fs-lg me-2"></i>결제하기</a>
                                         </div>
                                     </div>
                                 </div>
@@ -69,6 +77,9 @@
                 </div>
 
                 </div>
+
+<script>
+
 </body>
 
 

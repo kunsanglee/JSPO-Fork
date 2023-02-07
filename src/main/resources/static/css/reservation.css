@@ -1,26 +1,24 @@
 
-.reservation_Page_wrap{
+.reservation_page_wrap{
     height: 100vh;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
 }
 
 
 
-.reservation {
+.reservation_page_wrap .reservation {
     width: 360px;
     background-color: red;
     padding: 20px;
     border-radius: 12px;
-
     box-shadow: 5px 5px 10px  1px  rgba(0, 0, 0, 0.2);
     position: absolute;
-    top: 350px;
+    top: 150px;
 }
-
-
 
 .reservation form{
     font-size: 20px;
