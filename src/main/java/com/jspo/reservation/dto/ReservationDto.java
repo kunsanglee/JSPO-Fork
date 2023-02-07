@@ -2,7 +2,7 @@ package com.jspo.reservation.dto;
 
 import com.jspo.room.dto.RoomDto;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 public class ReservationDto {

@@ -44,10 +44,6 @@
         select * from room where r_id = #{rId};
     </select>
 
-    <select id="diff" parameterType="RoomDto" resultType="Integer">
-        select datediff(r_checkout,r_checkin) from room left join reservation on room.hotel_ht_id = reservation.room_hotel_ht_id;
-    </select>
-
     <select id="selectRoom" resultType="RoomDto">
         select * from room;
     </select>

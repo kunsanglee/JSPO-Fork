@@ -8,8 +8,6 @@ import com.jspo.reservation.dao.ReservationDao;
 import com.jspo.reservation.dto.ReservationDto;
 import com.jspo.room.dao.RoomDao;
 import com.jspo.room.dto.RoomDto;
-import org.apache.ibatis.binding.MapperMethod;
-import org.apache.ibatis.jdbc.SQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Controller
 public class ReservationController {
@@ -61,7 +57,9 @@ public class ReservationController {
         reservationDto.setRoomRId(rId);
         reservationDao.insertReservation(reservationDto);
 
-        Integer diff = roomDao.diff(roomDto); // selectOne 나와야하는데 여러개나와서 에러
+        long inTime = roomDto.getrCheckin().getTime();
+        long outTime = roomDto.getrCheckout().getTime();
+        long diff = (outTime - inTime)/1000/60/60/24;
 
         reservationDto = reservationDao.selectLastReservation(memberDto.getId());
         System.out.println("reservationDto = " + reservationDto);
@@ -78,16 +76,6 @@ public class ReservationController {
 
         return "reservation";
     }
-
-//    @PostMapping("/reservation")
-//    public String reserve(HttpSession session, ReservationDto reservationDto) {
-//
-//        if (session.getAttribute("email") == null) {
-//            return "redirect:/login";
-//        }
-//
-//        return "reserved";
-//    }
 
     @PostMapping("/reservation/complete")
     @CrossOrigin(origins = "*")
@@ -113,9 +101,14 @@ public class ReservationController {
         System.out.println("cancel~~");
         System.out.println(data);
         System.out.println("reservationDto = " + reservationDto);
+        System.out.println("data = " + data);
+        if (data.isEmpty()) {
+            return;
+        } else {
+            int resId = Integer.parseInt(data.get("merchant_uid"));
+            System.out.println("reservationDao.deleteReservationByResId(resId) = " + reservationDao.deleteReservationByResId(resId));
+        }
 
-        int resId = Integer.parseInt(data.get("merchant_uid"));
-        System.out.println("reservationDao.deleteReservationByResId(resId) = " + reservationDao.deleteReservationByResId(resId));
 
     }
 }

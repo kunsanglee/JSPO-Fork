@@ -2,7 +2,7 @@ package com.jspo.member.dto;
 
 import javax.validation.constraints.*;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 public class MemberDto {
