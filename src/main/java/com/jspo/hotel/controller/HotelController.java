@@ -42,10 +42,6 @@ public class HotelController {
 //        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
 //            return "redirect:/";
 //        }
-        List<HotelDto> list = hotelDao.selectHotel();
-        model.addAttribute("list",list); // 객실에 연결된 호텔이름때문
-
-
         return "hotelReg";
 
     }
