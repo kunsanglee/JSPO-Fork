@@ -1,0 +1,25 @@
+
+
+
+
+.container {
+    width: 1000px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 5px 5px 10px  1px  rgba(0, 0, 0, 0.2);
+
+
+}
+
+.reserved_hotel_img{
+    margin-right: 30px;
+    background-color: lemonchiffon;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+#reserved_content{
+    display: flex;
+    flex-direction: row;
+}

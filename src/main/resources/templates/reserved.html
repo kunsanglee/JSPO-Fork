@@ -5,16 +5,41 @@
       layout:decorate="~{layout/default_layout}">
 
 <body>
-<div layout:fragment="content">
-    <h1>예약내역페이지</h1>
-    <tr th:each="r : ${reservation}">
-        예약번호 : <td th:text="${r.getResId()}"></td><br>
-        호텔id : <td th:text="${r.getRoomHotelHtId()}"></td><br>
-        객실id : <td th:text="${r.getRoomRId()}"></td><br>
-        회원id : <td th:text="${r.getMemberMId()}"></td><br>
-        예약날짜 : <td th:text="${r.getResDate()}"></td><br>
-        <br>
-    </tr>
-</div>
+
+
+
+        <div class="container  pb-3 mt-5 mb-5 " layout:fragment="content">
+            <div class="rounded-3 shadow-lg mt-4 mb-5">
+                <div class="px-3 px-sm-4 px-xl-5 pt-1 pb-4 pb-sm-5">
+
+                    <div class="row">
+                        <h1>예약내역페이지</h1>
+                        <tr th:each="r : ${reservation}">
+
+                            <div class="col-lg-4 col-md-5 pt-3 pt-sm-4 w-100">
+
+                                <div class="rounded-3 bg-light px-3 px-sm-4 py-4 w-100" id="reserved_content">
+                                    <div class="reserved_hotel_img">
+                                            예약된 호텔 이미지
+                                    </div>
+
+                                        예약번호 : <td th:text="${r.getResId()}"></td><br>
+                                        호텔id : <td th:text="${r.getRoomHotelHtId()}"></td><br>
+                                        객실id : <td th:text="${r.getRoomRId()}"></td><br>
+                                        회원id : <td th:text="${r.getMemberMId()}"></td><br>
+                                        예약날짜 : <td th:text="${r.getResDate()}"></td><br>
+                                        <br>
+
+                                </div>
+                            </div>
+                        </tr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
 </body>
 </html>
