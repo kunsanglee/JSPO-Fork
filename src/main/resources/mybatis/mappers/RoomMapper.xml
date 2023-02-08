@@ -36,7 +36,8 @@
     </select>
 
     <select id="selectRoom" resultType="RoomDto">
-        select * from room;
+        select a.r_id,a.r_name, a.r_price, a.r_state, a.r_cnt, a.r_img, a.r_checkin, a.r_checkout, a.hotel_ht_id,b.ht_name
+        from room a LEFT JOIN hotel b on a.hotel_ht_id = b.ht_id;
     </select>
 
     <select id="selectPrice" parameterType="Integer" resultType="Integer">
@@ -46,4 +47,12 @@
     <select id="selectRoomByhtId" parameterType="Integer" resultType="RoomDto">
         select * from room where hotel_ht_id = #{htId};
     </select>
+
+    <select id="selectRoomByinfo" parameterType="Integer" resultType="hotelDto">
+        select ht_name,ht_phone,ht_address from hotel where ht_id = #{htId};
+    </select>
+
+    <update id="updateRoom" parameterType="RoomDto">
+        update room set r_name = #{rName},r_price = #{rPrice} ,r_img = #{rImg} where r_id = #{rId};
+    </update>
 </mapper>

@@ -2,7 +2,6 @@ package com.jspo.hotel.controller;
 
 import com.jspo.hotel.dao.HotelDao;
 import com.jspo.hotel.dto.HotelDto;
-import com.jspo.member.dao.MemberDao;
 import com.jspo.room.dao.RoomDao;
 import com.jspo.room.dto.RoomDto;
 import com.jspo.upload.UploadFileUtils;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -48,7 +46,8 @@ public class HotelController {
         model.addAttribute("list",list); // 객실에 연결된 호텔이름때문
 
 
-        return "HotelReg";
+        return "hotelReg";
+
     }
     @PostMapping("/hotel/reg")
     public String insert(HotelDto hotelDto, MultipartFile file) throws Exception {
@@ -67,7 +66,6 @@ public class HotelController {
         } else {
             fileName = "none.png";
         }
-
         hotelDto.setHtImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
        hotelDao.insertHotel(hotelDto);
 
@@ -85,6 +83,42 @@ public class HotelController {
             pricelist.add(roomDao.selectPrice(i));
         }
         model.addAttribute("pricelist",pricelist);
-        return "HotelList";
+        return "hotelList";
     }
+    @PostMapping("/hotel/updateView")
+    public String updateView(Model model,int htId) throws Exception {
+
+        model.addAttribute("hotelupdate", hotelDao.selectHotelByHtId(htId));
+        return "adminupdateView";
+    }
+    @PostMapping("/hotel/update")
+    public String update(HotelDto hotelDto,MultipartFile file) throws Exception {
+        System.out.println(hotelDto);
+        String imgUploadPath = uploadPath + "imgUpload";
+        System.out.println("1. imgUploadPath"+imgUploadPath);
+
+        String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+
+        String fileName = null;
+        System.out.println(file);
+        System.out.println(file.getOriginalFilename());
+        if (file.getOriginalFilename() != null && (!file.getOriginalFilename().equals(""))) {
+            fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+            System.out.println("fileName = "+fileName);
+        } else {
+            fileName = "none.png";
+        }
+        hotelDto.setHtImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
+        hotelDao.updateHotel(hotelDto);
+        return "redirect:adminlist";
+    }
+
+    @PostMapping("/hotel/delete")
+    public String delete(HotelDto hotelDto) throws Exception {
+        hotelDao.deleteHotel(hotelDto.getHtId());
+        return "redirect:list";
+    }
+
+
+
 }

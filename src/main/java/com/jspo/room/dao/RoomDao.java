@@ -1,5 +1,6 @@
 package com.jspo.room.dao;
 
+import com.jspo.hotel.dto.HotelDto;
 import com.jspo.room.dto.RoomDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,5 +17,9 @@ public interface RoomDao {
     Integer selectPrice(int hotelHtId);
 
     List<RoomDto> selectRoomByhtId(int htId);
+
+    HotelDto selectRoomByinfo(int htId);
+
+    void updateRoom(RoomDto roomDto);
 
 }

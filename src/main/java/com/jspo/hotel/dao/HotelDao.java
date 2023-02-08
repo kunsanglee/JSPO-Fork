@@ -15,5 +15,7 @@ public interface HotelDao {
 
     HotelDto selectHotelByHtId(int htId);
 
+       void updateHotel(HotelDto hotelDto) throws Exception;
 
+       void deleteHotel(int htId) throws Exception;
 }

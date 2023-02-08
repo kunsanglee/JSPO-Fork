@@ -51,6 +51,7 @@ public class ReservationController {
         hotelDto = hotelDao.selectHotelByHtId(hotelHtId);
         memberDto = memberDao.selectMemberByEmail((String) session.getAttribute("email"));
         roomDto = roomDao.selectRoomByRId(rId);
+
         System.out.println("roomDto.getrCheckin() = " + roomDto.getrCheckin());
         reservationDto.setResPrice(roomDto.getrPrice());
         reservationDto.setMemberMId(memberDto.getId());

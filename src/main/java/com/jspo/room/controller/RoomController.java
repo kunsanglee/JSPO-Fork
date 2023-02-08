@@ -30,6 +30,7 @@ public class RoomController {
 
     private RoomDto roomDto = RoomDto.getInstance();
 
+    private HotelDto hotelDto = HotelDto.getInstance();
 //    @GetMapping("/hotel/{rId}")
 //    public String room(@PathVariable String rId) {
 //
@@ -40,7 +41,8 @@ public class RoomController {
 
         List<RoomDto> list = roomDao.selectRoomByhtId(htId);
         model.addAttribute("list",list);
-
+        hotelDto = roomDao.selectRoomByinfo(htId);
+        model.addAttribute(hotelDto);
         return "roomlist"; // 객실 html
     }
     @PostMapping("/room/reg")
@@ -78,5 +80,35 @@ public class RoomController {
         return "roomList";
     }
 
+    @PostMapping("/room/updateView")
+    public String updateView(Model model,int rId) throws Exception {
+
+        model.addAttribute("roomupdate", roomDao.selectRoomByRId(rId));
+
+        return "adminupdateView";
+    }
+
+    @PostMapping("/room/update")
+    public String update(RoomDto roomDto, MultipartFile file) throws Exception {
+
+        System.out.println(roomDto);
+        String imgUploadPath = uploadPath + "imgUpload";
+        System.out.println("1. imgUploadPath"+imgUploadPath);
+
+        String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+
+        String fileName = null;
+        System.out.println(file);
+        System.out.println(file.getOriginalFilename());
+        if (file.getOriginalFilename() != null && (!file.getOriginalFilename().equals(""))) {
+            fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+            System.out.println("fileName = "+fileName);
+        } else {
+            fileName = "none.png";
+        }
+        roomDto.setrImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
+        roomDao.updateRoom(roomDto);
+        return "redirect:adminlist";
+    }
 
 }
