@@ -79,14 +79,32 @@ public class RoomController {
     @PostMapping("/room/updateView")
     public String updateView(Model model,int rId) throws Exception {
 
-        model.addAttribute("update", roomDao.selectRoomByRId(rId));
-        return "roomupdateView";
+        model.addAttribute("roomupdate", roomDao.selectRoomByRId(rId));
+
+        return "adminupdateView";
     }
 
     @PostMapping("/room/update")
-    public String update(HotelDto hotelDto) throws Exception {
+    public String update(RoomDto roomDto, MultipartFile file) throws Exception {
 
-        return "redirect:list";
+        System.out.println(roomDto);
+        String imgUploadPath = uploadPath + "imgUpload";
+        System.out.println("1. imgUploadPath"+imgUploadPath);
+
+        String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+
+        String fileName = null;
+        System.out.println(file);
+        System.out.println(file.getOriginalFilename());
+        if (file.getOriginalFilename() != null && (!file.getOriginalFilename().equals(""))) {
+            fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+            System.out.println("fileName = "+fileName);
+        } else {
+            fileName = "none.png";
+        }
+        roomDto.setrImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
+        roomDao.updateRoom(roomDto);
+        return "redirect:adminlist";
     }
 
 }

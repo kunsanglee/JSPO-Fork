@@ -86,8 +86,8 @@ public class HotelController {
     @PostMapping("/hotel/updateView")
     public String updateView(Model model,int htId) throws Exception {
 
-        model.addAttribute("update", hotelDao.selectHotelByHtId(htId));
-        return "hotelupdateView";
+        model.addAttribute("hotelupdate", hotelDao.selectHotelByHtId(htId));
+        return "adminupdateView";
     }
     @PostMapping("/hotel/update")
     public String update(HotelDto hotelDto,MultipartFile file) throws Exception {
@@ -108,7 +108,7 @@ public class HotelController {
         }
         hotelDto.setHtImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
         hotelDao.updateHotel(hotelDto);
-        return "redirect:list";
+        return "redirect:adminlist";
     }
 
     @PostMapping("/hotel/delete")

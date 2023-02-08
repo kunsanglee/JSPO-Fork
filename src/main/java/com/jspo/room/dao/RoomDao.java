@@ -18,4 +18,6 @@ public interface RoomDao {
     List<RoomDto> selectRoomByhtId(int htId);
 
     HotelDto selectRoomByinfo(int htId);
+
+    void updateRoom(RoomDto roomDto);
 }

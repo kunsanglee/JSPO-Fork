@@ -51,7 +51,6 @@ public class AdminController {
 
         List<RoomDto> rlist = roomDao.selectRoom();
         model.addAttribute("rlist",rlist);
-        System.out.println(rlist);
         return "Admin";
     }
 
