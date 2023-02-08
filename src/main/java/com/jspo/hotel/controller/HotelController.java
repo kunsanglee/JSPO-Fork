@@ -83,7 +83,7 @@ public class HotelController {
             pricelist.add(roomDao.selectPrice(i));
         }
         model.addAttribute("pricelist",pricelist);
-        return "HotelList";
+        return "hotelList";
     }
     @PostMapping("/hotel/updateView")
     public String updateView(Model model,int htId) throws Exception {
