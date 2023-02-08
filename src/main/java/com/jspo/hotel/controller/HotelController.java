@@ -35,6 +35,7 @@ public class HotelController {
     @Autowired
     private RoomDao roomDao;
 
+
     private RoomDto roomDto = RoomDto.getInstance();
 
     @GetMapping("/hotel/reg")
@@ -45,6 +46,7 @@ public class HotelController {
 //        }
         List<HotelDto> list = hotelDao.selectHotel();
         model.addAttribute("list",list); // 객실에 연결된 호텔이름때문
+
 
         return "HotelReg";
     }

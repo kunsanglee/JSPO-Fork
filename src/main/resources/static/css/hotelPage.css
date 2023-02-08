@@ -1,0 +1,31 @@
+.title{
+    display: inline-block;
+    flex-direction: column;
+    position: relative;
+}
+
+#reset{
+    color: gray;
+    position: absolute;
+    top: 48px;
+    right: 71px;
+
+}
+
+.slider .price_wrap{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.price_input_range{
+    width: 83%;
+}
+
+.price_input_group{
+    width: 14%;
+}
+.input-group input{
+    text-align: right;
+}
