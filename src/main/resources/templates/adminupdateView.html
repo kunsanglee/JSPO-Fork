@@ -1,0 +1,95 @@
+<html>
+<head>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <title>게시판</title>
+</head>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $(".Hcancel_btn").on("click", function(){
+      event.preventDefault();
+      location.href = "/hotel/adminlist";
+
+    })
+  });
+  $(document).ready(function(){
+
+    $(".Rcancel_btn").on("click", function(){
+      event.preventDefault();
+      location.href = "/room/adminlist";
+
+    })
+  });
+
+</script>
+<body>
+
+<div id="root">
+  <header>
+    <h1>수정 게시판</h1>
+  </header>
+
+
+  <th:block th:if="${hotelupdate != null}">
+    <form name="updateForm" role="form" method="post" action="/hotel/update" enctype="multipart/form-data">
+      <input type="hidden" name="htId" th:value="${hotelupdate.htId}"/>
+      <table>
+        <tbody>
+        <td>
+          <label>호텔명</label><input type="text" name="htName" th:value="${hotelupdate.htName}" /><br>
+          <label>호텔주소</label><input type="text" name="htAddress" th:value="${hotelupdate.htAddress}" /><br>
+          <label>호텔이미지</label><input type="file" id="htImg" name="file"/><br>
+          <div class="select_img"><img th:src="${hotelupdate.htImg}" /></div>
+          <label>호텔 전화번호</label><input type="text" name="htPhone" th:value="${hotelupdate.htPhone}" /><br>
+          <script>
+            $("#htImg").change(function(){
+              if(this.files && this.files[0]) {
+                var reader = new FileReader;
+                reader.onload = function(data) {
+                  $(".select_img img").attr("src", data.target.result).width(500);
+                }
+                reader.readAsDataURL(this.files[0]);
+              }
+            });
+          </script>
+        </td>
+        </tbody>
+      </table>
+      <div>
+        <button type="submit" >저장</button>
+        <button type="submit" class="Hcancel_btn">취소</button>
+      </div>
+    </form>
+
+  </th:block>
+  <th:block th:if="${roomupdate != null}">
+<!--  사진 객실이름 가격 체크인 시간 체크아웃 시간 -->
+    <form method="post" action="/room/update" enctype="multipart/form-data">
+      <input type="hidden" name="rId" th:value="${roomupdate.rId}"/>
+      <td>
+        <label>객실이름</label><input type="text" name="rName" th:value="${roomupdate.rName}" /><br>
+        <label>객실가격</label><input type="text" name="rPrice" th:value="${roomupdate.rPrice}" /><br>
+        <label>객실이미지</label><input type="file" id="rImg" name="file"/><br>
+        <div class="select_img"><img th:src="${roomupdate.rImg}" /></div>
+        <script>
+          $("#rImg").change(function(){
+            if(this.files && this.files[0]) {
+              var reader = new FileReader;
+              reader.onload = function(data) {
+                $(".select_img img").attr("src", data.target.result).width(500);
+              }
+              reader.readAsDataURL(this.files[0]);
+            }
+          });
+        </script>
+
+      </td>
+      <div>
+        <button type="submit" class="update_btn">저장</button>
+        <button type="submit" class="Rcancel_btn">취소</button>
+      </div>
+    </form>
+  </th:block>
+</div>
+</body>
+</html>
