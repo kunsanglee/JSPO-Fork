@@ -9,73 +9,171 @@
 </head>
 <body>
 
+<h5>예약</h5><br>
+<div>
+    <h5>숙소</h5>
+    <div th:object="${hotelDto}" hidden="hidden">
+        <span class="htId" th:text="*{htId}"></span>
+        <span class="htName" th:text="*{htName}"></span>
+        <span class="htAddress" th:text="*{htAddress}"></span>
+        <span class="fullName" th:text="|${hotelDto.htName} ${hotelDto.htAddress} ${roomDto.rName}|"></span>
+        <span class="resId" th:text="${reservationDto.resId}"></span>
+    </div>
+    <div th:object="${roomDto}" hidden="hidden">
+        <span class="rId" th:text="*{rId}"></span>
+        <span class="rName" th:text="*{rName}"></span>
+        <span class="rPrice" th:text="*{rPrice}"></span>
+        <span class="rCheckin" th:text="*{rCheckin}"></span>
+        <span class="rCheckout" th:text="*{rCheckout}"></span>
+    </div>
+    <div th:object="${memberDto}" hidden="hidden">
+        <span class="id" th:text="*{id}"></span>
+        <span class="email" th:text="*{email}"></span>
+        <span class="name" th:text="*{name}"></span>
+        <span class="phone" th:text="*{phone}"></span>
+    </div>
+    <span th:text="${hotelDto.htName}+' '+${hotelDto.htAddress}"></span><br>
+    <span th:text="${roomDto.rName}"></span><br>
+    <span th:text="|${#dates.format(roomDto.rCheckin, 'yyyy-MM-dd')} ${#dates.dayOfWeekNameShort(roomDto.rCheckin)} ~ ${#dates.format(roomDto.rCheckout, 'yyyy-MM-dd')} ${#dates.dayOfWeekNameShort(roomDto.rCheckout)} ${#dates.day(roomDto.rCheckout) - #dates.day(roomDto.rCheckin)}박|"></span><br>
 
 
-                <div class="reservation_page_wrap " layout:fragment="content" >
+    <div class="reservation_page_wrap " layout:fragment="content">
 
-                    <div class="container  pb-3 ">
+        <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+        <script src="js/reservation.js" defer></script>
+        <script>
+            var IMP = window.IMP;
+            IMP.init("imp52880818");
 
-                        <div class="rounded-3 shadow-lg mt-4 mb-5">
-                            <ul class="nav nav-tabs nav-justified my-1">
-                                <li class="nav-item  "><span class="display-3 nav-link fs-lg pt-3 fw-medium active fw-bold" href="#">예약 내역</span></li>
+            function requestPay() {
+                IMP.request_pay({
+                    pg: 'kakaopay.TC0ONETIME',
+                    // pg: 'kcp.T0000',
+                    pay_method: 'card',
+                    merchant_uid: /*"5700155333-33524"*/document.querySelector('.resId').textContent,
+                    name: /*'포시즌스 호텔 디럭스룸'*/document.querySelector('.fullName').textContent,
+                    amount: /*100*/document.querySelector('.rPrice').textContent,
+                    buyer_email: /*'Iamport@chai.finance'*/document.querySelector('.email').textContent,
+                    buyer_name: /*'아임포트 기술지원팀'*/document.querySelector('.name').textContent,
+                    buyer_tel: /*'010-1234-5678'*/document.querySelector('.phone').textContent,
+                    // buyer_addr: '서울특별시 강남구 삼성동',
+                    // buyer_postcode: '123-456',
+                    // notice_url : 'https://localhost:8080/reservation/complete',   //웹훅수신 URL 설정
+                }, function (rsp) { // callback
+                    if (rsp.success) {
+                        // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+                        // jQuery로 HTTP 요청
+                        jQuery.ajax({
+                            url: encodeURI("/reservation/complete"),
+                            method: "POST",
+                            headers: {"Content-Type": "application/json"},
+                            data: JSON.stringify({
+                                imp_uid: rsp.imp_uid,            // 결제 고유번호
+                                merchant_uid: rsp.merchant_uid,   // 주문번호
+                                amount: rsp.amount              // 결제금
+                            })
+                        }).done(function (data) {
+                            // 가맹점 서버 결제 API 성공시 로직
+                            alert("결제에 성공했습니다!");
+                            window.location.replace("/reserved");
+                        })
+                    } else {
+                        alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+                        window.location.replace("/hotel/list");
+                    }
+                })
+            }
+        </script>
 
-                            </ul>
-                            <div class="px-3 px-sm-4 px-xl-5 pt-1 pb-4 pb-sm-5">
-                                <div class="row">
-                                    <!-- Items in cart-->
-                                    <div class="col-lg-8 col-md-7 pt-sm-2 w-100">
-                                        <!-- Item-->
-                                        <div class="d-sm-flex justify-content-between align-items-center mt-3 mb-4 py-3  border-top border-bottom">
-                                            <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="#"><img src="/imgs/hotels/hotel1.png" id="hotel_picture" width="200px" height="140px" alt="hotel image"></a>                                                <div class="pt-2">
-                                                    <h3 class="product-title fs-base mb-2"><a href="#" style="text-decoration: none; color:  black" th:text="|${hotelDto.htName} ${hotelDto.htAddress} - ${roomDto.rName}|">나중에 클릭하면 해당 호텔 정보 페이지로 넘어가게 해야됨</a></h3>
-                                                    <div class="fs-sm"><span class="text-muted me-2" th:text="|${#dates.format(roomDto.rCheckin, 'yyyy-MM-dd')} / ${#dates.format(roomDto.rCheckout, 'yyyy-MM-dd')} - ${diff}박|"></span></div>
-                                                    <div class="fs-sm"><span class="text-muted me-2">체크인 :</span><span class="text-muted me-2">15:00 ▪ 체크아웃 12:00</span></div>
-                                                    <div class="hotel_price_remove">
-                                                    <div class="fs-lg text-accent pt-2" id="hotel_price_remove_id">
-                                                        <span th:text="|숙박 ${roomDto.rPrice}원|"></span>
-                                                        <button class="btn btn-link px-0 py-0 text-danger" type="button">삭제</button>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+        <div th:object="${hotelDto}" hidden="hidden">
+            <span class="htId" th:text="*{htId}"></span>
+            <span class="htName" th:text="*{htName}"></span>
+            <span class="htAddress" th:text="*{htAddress}"></span>
+            <span class="fullName" th:text="|${hotelDto.htName} ${hotelDto.htAddress} ${roomDto.rName}|"></span>
+            <span class="resId" th:text="${reservationDto.resId}"></span>
+        </div>
+        <div th:object="${roomDto}" hidden="hidden">
+            <span class="rId" th:text="*{rId}"></span>
+            <span class="rName" th:text="*{rName}"></span>
+            <span class="rPrice" th:text="*{rPrice}"></span>
+            <span class="rCheckin" th:text="*{rCheckin}"></span>
+            <span class="rCheckout" th:text="*{rCheckout}"></span>
+        </div>
+        <div th:object="${memberDto}" hidden="hidden">
+            <span class="id" th:text="*{id}"></span>
+            <span class="email" th:text="*{email}"></span>
+            <span class="name" th:text="*{name}"></span>
+            <span class="phone" th:text="*{phone}"></span>
+        </div>
 
+        <div class="container  pb-3 ">
+
+            <div class="rounded-3 shadow-lg mt-4 mb-5">
+                <ul class="nav nav-tabs nav-justified my-1">
+                    <li class="nav-item  "><span class="display-3 nav-link fs-lg pt-3 fw-medium active fw-bold"
+                                                 href="#">예약 내역</span></li>
+
+                </ul>
+                <div class="px-3 px-sm-4 px-xl-5 pt-1 pb-4 pb-sm-5">
+                    <div class="row">
+                        <!-- Items in cart-->
+                        <div class="col-lg-8 col-md-7 pt-sm-2 w-100">
+                            <!-- Item-->
+                            <div class="d-sm-flex justify-content-between align-items-center mt-3 mb-4 py-3  border-top border-bottom">
+                                <div class="d-block d-sm-flex align-items-center text-center text-sm-start"><a
+                                        class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="#"><img
+                                        src="/imgs/hotels/hotel1.png" id="hotel_picture" width="200px" height="140px"
+                                        alt="hotel image"></a>
+                                    <div class="pt-2">
+                                        <h3 class="product-title fs-base mb-2"><a href="#"
+                                                                                  style="text-decoration: none; color:  black"
+                                                                                  th:text="|${hotelDto.htName} ${hotelDto.htAddress} - ${roomDto.rName}|">나중에
+                                            클릭하면 해당 호텔 정보 페이지로 넘어가게 해야됨</a></h3>
+                                        <div class="fs-sm"><span class="text-muted me-2"
+                                                                 th:text="|${#dates.format(roomDto.rCheckin, 'yyyy-MM-dd')} ${#dates.dayOfWeekNameShort(roomDto.rCheckin)} ~ ${#dates.format(roomDto.rCheckout, 'yyyy-MM-dd')} ${#dates.dayOfWeekNameShort(roomDto.rCheckout)} ${#dates.day(roomDto.rCheckout) - #dates.day(roomDto.rCheckin)}박|"></span>
                                         </div>
-
-                                    <!-- 결제 -->
-                                    <div class="col-lg-4 col-md-5 pt-3 pt-sm-4 w-100">
-                                        <div class="rounded-3 bg-light px-3 px-sm-4 py-4 w-100">
-                                            <div class="text-center mb-4 pb-3 border-bottom">
-                                                <h3 class="h5 mb-3 pb-1 text-dark">총액</h3>
-                                                <h4 class="fw-normal text-dark" th:text="|${roomDto.rPrice}원|"></h4>
+                                        <div class="fs-sm"><span class="text-muted me-2">체크인 :</span><span
+                                                class="text-muted me-2">15:00 ▪ 체크아웃 12:00</span></div>
+                                        <div class="hotel_price_remove">
+                                            <div class="fs-lg text-accent pt-2" id="hotel_price_remove_id">
+                                                <span th:text="|숙박 ${roomDto.rPrice}원|"></span>
+                                                <!--                                                        <button class="btn btn-link px-0 py-0 text-danger" type="button">삭제</button>-->
                                             </div>
-
-
-                                            <div th:object="${memberDto}">
-                                                <h5>예약자 정보</h5>
-                                                <p class="m-1"><span>성명 :</span>
-                                                <span th:text="*{name}"></span></p>
-                                                <p class="m-1"><span>휴대폰 번호 :</span>
-                                                <span th:text="*{phone}"></span></p>
-                                            </div>
-
-                                            <form class="needs-validation" method="post" novalidate>
-
-                                            </form><a class="btn btn-success btn-shadow d-block w-100 mt-4 mb-3" href="#" onclick="requestPay()"><i class="ci-card fs-lg me-2"></i>결제하기</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- 결제 -->
+                            <div class="col-lg-4 col-md-5 pt-3 pt-sm-4 w-100">
+                                <div class="rounded-3 bg-light px-3 px-sm-4 py-4 w-100">
+                                    <div class="text-center mb-4 pb-3 border-bottom">
+                                        <h3 class="h5 mb-3 pb-1 text-dark">총액</h3>
+                                        <h4 class="fw-normal text-dark" th:text="|${roomDto.rPrice}원|"></h4>
+                                    </div>
+
+
+                                    <div th:object="${memberDto}">
+                                        <h5>예약자 정보</h5>
+                                        <p class="m-1"><span>성명 :</span>
+                                            <span th:text="*{name}"></span></p>
+                                        <p class="m-1"><span>휴대폰 번호 :</span>
+                                            <span th:text="*{phone}"></span></p>
+                                    </div>
+
+                                    <form class="needs-validation" method="post" novalidate>
+
+                                    </form>
+                                    <a class="btn btn-success btn-shadow d-block w-100 mt-4 mb-3" href="#"
+                                       onclick="requestPay()"><i class="ci-card fs-lg me-2"></i>결제하기</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-
-
                 </div>
-
-                </div>
-
-
-
+            </div>
+        </div>
+    </div>
+</div>
 </body>
-
+</html>
 

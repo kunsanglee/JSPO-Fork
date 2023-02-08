@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -62,6 +63,9 @@ public class RoomController {
 
         roomDto.setrImg(File.separator+"imgs"+File.separator+ "roomimgUpload" + ymdPath + File.separator+ fileName);
         roomDao.insertRoom(roomDto);
+
+        // DB에 저장하면 -1일 처리돼서 +1 처리
+        roomDto.setrCheckin(new Date(roomDto.getrCheckin().getTime()+(1000*60*60*24)));
 
         return "redirect:list";
     }

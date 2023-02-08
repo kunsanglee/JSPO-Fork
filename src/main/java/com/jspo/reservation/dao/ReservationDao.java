@@ -8,10 +8,15 @@ import java.util.List;
 @Mapper
 public interface ReservationDao {
     void insertReservation(ReservationDto reservationDto);
-    boolean deleteReservationByResId(int resId);
+    boolean deleteReservationByResId(String resId);
     boolean deleteReservationByMemberMId(int memberMId);
     ReservationDto selectReservationByResId(int resId);
     ReservationDto selectReservationByMemberMId(int memberMId);
     List<ReservationDto> selectAllReservationById(int memberMid);
-    ReservationDto selectLastReservation(int memberMid);
+    ReservationDto selectLastReservationById(int memberMid);
+    ReservationDto selectLastReservation();
+
+    void updateReservation();
+
+    Integer getAutoincrement(ReservationDto reservationDto);
 }
