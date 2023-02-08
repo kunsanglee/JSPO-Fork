@@ -1,6 +1,7 @@
 package com.jspo.room.controller;
 
 
+import com.jspo.hotel.dao.HotelDao;
 import com.jspo.hotel.dto.HotelDto;
 import com.jspo.room.dao.RoomDao;
 import com.jspo.room.dto.RoomDto;
@@ -25,17 +26,16 @@ public class RoomController {
     @Autowired
     private RoomDao roomDao;
 
+    @Autowired
+    private HotelDao hotelDao;
+
     @Value("${file.dir}")
     private String uploadPath;
 
     private RoomDto roomDto = RoomDto.getInstance();
 
     private HotelDto hotelDto = HotelDto.getInstance();
-//    @GetMapping("/hotel/{rId}")
-//    public String room(@PathVariable String rId) {
-//
-//        return "room"; // 객실 html
-//    }
+
     @GetMapping("/room/list/{htId}")
     public String room(@PathVariable int htId, Model model) {
 
@@ -44,6 +44,12 @@ public class RoomController {
         hotelDto = roomDao.selectRoomByinfo(htId);
         model.addAttribute(hotelDto);
         return "roomlist"; // 객실 html
+    }
+    @GetMapping("/room/reg")
+    public String insert(Model model,int htId) {
+        HotelDto hotelDto = hotelDao.selectHotelByHtId(htId);
+        model.addAttribute("hotelDto",hotelDto); // 호텔 정보를 보여주기위한
+        return "hotelReg";
     }
     @PostMapping("/room/reg")
     public String insert(RoomDto roomDto, MultipartFile file, @RequestParam String hotelHtId) throws Exception {
@@ -67,17 +73,16 @@ public class RoomController {
         roomDao.insertRoom(roomDto);
 
         // DB에 저장하면 -1일 처리돼서 +1 처리
-        roomDto.setrCheckin(new Date(roomDto.getrCheckin().getTime()+(1000*60*60*24)));
+//        roomDto.setrCheckin(new Date(roomDto.getrCheckin().getTime()+(1000*60*60*24)));
 
         return "redirect:list";
     }
     @GetMapping("/room/list")
     public String select(Model model) throws Exception {
 
-        List<RoomDto> list = roomDao.selectRoom();
-        model.addAttribute("list",list);
-        System.out.println(list);
-        return "roomList";
+        List<RoomDto> rlist = roomDao.selectRoom();
+        model.addAttribute("rlist",rlist);
+        return "admin";
     }
 
     @PostMapping("/room/updateView")
@@ -110,5 +115,6 @@ public class RoomController {
         roomDao.updateRoom(roomDto);
         return "redirect:adminlist";
     }
+
 
 }

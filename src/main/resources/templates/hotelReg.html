@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <title>등록페이지</title>
     <style>
-        .line {width: 100px; height: 100px;}
+        .img { width: 300px; height: 200px;}
     </style>
 </head>
 <body>
+<th:block th:if="${hotelDto == null}">
 <header>
-    <h1> 호텔 등록게시판</h1>
+    <h1> 호텔 등록</h1>
 </header>
 <form role="form" method="post" action="/hotel/reg" enctype="multipart/form-data">
     <table>
@@ -44,10 +45,46 @@
         </tbody>
     </table>
 </form>
+</th:block>
+<th:block th:if="${hotelDto != null}">
+    <header>
+        <h1> 호텔 </h1>
+    </header>
+    <form role="form" enctype="multipart/form-data">
+        <table>
+            <tbody>
+            <tr>
+                <td>
 
-<div class="line"></div>
+                    <label>호텔명</label><input type="text" th:value="${hotelDto.htName}" readonly /><br>
+                    <label>호텔주소</label><input type="text" th:value="${hotelDto.htAddress}" readonly /><br>
+                    <label>호텔이미지</label><input type="hidden" id="htImg" name="file"/><br>
+                    <div class="select_img"><img th:src="${hotelDto.htImg}" class="img" /></div>
+                    <label>호텔 전화번호</label><input type="text" th:value="${hotelDto.htPhone}" readonly /><br>
+
+                    <script>
+                        $("#htImg").change(function(){
+                            if(this.files && this.files[0]) {
+                                var reader = new FileReader;
+                                reader.onload = function(data) {
+                                    $(".select_img img").attr("src", data.target.result).width(500);
+                                }
+                                reader.readAsDataURL(this.files[0]);
+                            }
+                        });
+                    </script>
+                </td>
+            </tbody>
+        </table>
+    </form>
+
+
+
+
+
+
 <header>
-    <h1> 객실 등록게시판</h1>
+    <h1> 객실 등록</h1>
 </header>
 <form role="form" method="post" action="/room/reg" enctype="multipart/form-data">
     <table>
@@ -56,15 +93,10 @@
             <td>
                 <label>호텔명</label>
                 <select name="hotelHtId">
-                    <th:block th:each ="list : ${list}">
-                    <option th:text="${list.htId} + '-' + ${list.htName}" th:value="${list.htId}"></option>
-                    </th:block>
+                    <option th:text="${hotelDto.htName}" th:value="${hotelDto.htId}"></option>
                 </select><br>
                 <label>객실명</label><input type="text" name="rName"  /><br>
                 <label>객실가격</label><input type="text" name="rPrice" /><br>
-                <label>객실이용인원</label><input type="text" name="rCnt" /><br>
-                <label>체크인</label><input type="text" name="rCheckin" /><br>
-                <label>체크아웃</label><input type="text" name="rCheckout" /><br>
                 <label>객실이미지</label><input type="file" id="rImg" name="file" /><br>
                 <div class="select_img2"><img src="" /></div>
 
@@ -88,7 +120,7 @@
         </tbody>
     </table>
 </form>
-
+</th:block>
 
 
 </body>
