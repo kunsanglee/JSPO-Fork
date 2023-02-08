@@ -50,7 +50,7 @@
             <div class="mb-3 row">
                 <label for="staticBirth" class="col-sm-3 col-form-label" readonly>생년월일</label>
                 <div class="col-sm-5">
-                    <input type="text" readonly class="form-control-plaintext" id="staticBirth" th:value="*{birth}" >
+                    <input type="text" readonly class="form-control-plaintext" id="staticBirth" th:value="${#dates.format(memberDto.birth, 'yyyy년 MM월 dd일')}" >
                 </div>
             </div>
 
