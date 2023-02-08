@@ -4,6 +4,8 @@ package com.jspo.member.controller;
 import com.jspo.member.dao.MemberDao;
 import com.jspo.member.dto.MemberDto;
 import com.jspo.member.service.MemberService;
+import com.jspo.reservation.dao.ReservationDao;
+import com.jspo.reservation.dto.ReservationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -20,11 +23,15 @@ public class MemberController {
 
     @Autowired
     private MemberDao memberDao;
-
     @Autowired
     private MemberService memberService;
 
+    @Autowired
+    private ReservationDao reservationDao;
+
     private MemberDto memberDto = MemberDto.getInstance();
+
+    private ReservationDto reservationDto = ReservationDto.getInstance();
 
     @GetMapping("/my")
     public String myPage(HttpSession session, Model m) throws Exception {

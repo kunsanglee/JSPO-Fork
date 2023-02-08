@@ -64,6 +64,8 @@ public class JoinController {
             return "regForm";
         }
 
+        System.out.println("joinMember = " + joinMember.getBirth());
+
 //        DB에 등록한 회원 저장.
         memberDao.insertMember(joinMember);
         m.addAttribute("memberDto", joinMember);

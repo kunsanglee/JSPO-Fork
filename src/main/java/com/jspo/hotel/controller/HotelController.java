@@ -33,6 +33,7 @@ public class HotelController {
     @Autowired
     private RoomDao roomDao;
 
+
     private RoomDto roomDto = RoomDto.getInstance();
 
     @GetMapping("/hotel/reg")
@@ -44,7 +45,9 @@ public class HotelController {
         List<HotelDto> list = hotelDao.selectHotel();
         model.addAttribute("list",list); // 객실에 연결된 호텔이름때문
 
+
         return "hotelReg";
+
     }
     @PostMapping("/hotel/reg")
     public String insert(HotelDto hotelDto, MultipartFile file) throws Exception {
@@ -71,7 +74,6 @@ public class HotelController {
     @GetMapping("/hotel/list")
     public String select(Model model) throws Exception {
 
-
        List<HotelDto> list = hotelDao.selectHotel();
        model.addAttribute("list",list);
 
@@ -81,7 +83,7 @@ public class HotelController {
             pricelist.add(roomDao.selectPrice(i));
         }
         model.addAttribute("pricelist",pricelist);
-        return "hotelList";
+        return "HotelList";
     }
     @PostMapping("/hotel/updateView")
     public String updateView(Model model,int htId) throws Exception {

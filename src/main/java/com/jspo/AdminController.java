@@ -27,7 +27,7 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String admin() {
-        return "Admin";
+        return "admin";
     }
 
     @GetMapping("/hotel/adminlist")
@@ -43,7 +43,7 @@ public class AdminController {
         }
         model.addAttribute("pricelist",pricelist);
 
-        return "Admin";
+        return "admin";
     }
 
     @GetMapping("/room/adminlist")
@@ -51,7 +51,7 @@ public class AdminController {
 
         List<RoomDto> rlist = roomDao.selectRoom();
         model.addAttribute("rlist",rlist);
-        return "Admin";
+        return "admin";
     }
 
 

@@ -64,7 +64,6 @@
   </th:block>
   <th:block th:if="${roomupdate != null}">
 <!--  사진 객실이름 가격 체크인 시간 체크아웃 시간 -->
-<!--    수정해야함-->
     <form method="post" action="/room/update" enctype="multipart/form-data">
       <input type="hidden" name="rId" th:value="${roomupdate.rId}"/>
       <td>

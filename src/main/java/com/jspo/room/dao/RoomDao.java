@@ -11,6 +11,7 @@ public interface RoomDao {
     void insertRoom(RoomDto roomDto);
 
     RoomDto selectRoomByRId(int rId);
+
     List<RoomDto> selectRoom() throws Exception;
 
     Integer selectPrice(int hotelHtId);
@@ -20,4 +21,5 @@ public interface RoomDao {
     HotelDto selectRoomByinfo(int htId);
 
     void updateRoom(RoomDto roomDto);
+
 }

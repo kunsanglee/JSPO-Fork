@@ -1,0 +1,63 @@
+
+.reservation_page_wrap{
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+
+.reservation_page_wrap .container {
+    width: 1000px;
+    height: fit-content;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 5px 5px 10px  1px  rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 250px;
+        /*후에 수정*/
+
+}
+
+.reservation form{
+    font-size: 20px;
+}
+
+.reservation form .form-group{
+    margin-bottom: 12px;
+}
+
+.reservation form input[type="submit"]{
+    font-size: 20px;
+    margin-top: 15px;
+
+}
+.reservation form .form-group ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.reservation form .form-group li{
+    font-size: 11px;
+    list-style: none;
+    float: left;
+    border-right: 1px solid #ebebeb;
+    padding: 0 10px;
+}
+
+.reservation form .form-group li:nth-child(3){
+    border : none;
+}
+
+.reservation form .form-group li a{
+    text-decoration: none;
+    color: black;
+}
+
+
