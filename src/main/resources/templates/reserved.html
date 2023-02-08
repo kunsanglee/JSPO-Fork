@@ -46,7 +46,7 @@
         객실명 : <span th:text="${roomDto.getrName()}"></span><br>
         업체연락처 : <span th:text="${hotelDto.getHtPhone()}"></span><br>
         회원명 : <span class="memberName" th:text="${memberDto.getName()}"></span><br>
-        예약날짜 : <span th:text="${#dates.format(r.getResDate(), 'yyyy-MM-dd')} +' '+ ${#dates.dayOfWeekNameShort(r.getResDate())}"></span><br>
+        예약날짜 : <span th:text="${#dates.format(r.getResDate(), 'yyyy-MM-dd HH:mm:ss')} +' '+ ${#dates.dayOfWeekNameShort(r.getResDate())}"></span><br>
         숙박날짜 : <span th:text="|${#dates.format(r.roomRCheckin, 'yyyy-MM-dd')} ${#dates.dayOfWeekNameShort(r.roomRCheckin)} ~ ${#dates.format(r.roomRCheckout, 'yyyy-MM-dd')} ${#dates.dayOfWeekNameShort(r.roomRCheckout)} ${#dates.day(r.roomRCheckout) - #dates.day(r.roomRCheckin)}박|"></span><br>
         예약상태 : <span th:if="${r.getResState()} == 1" th:text="예약완료"></span>
         <span th:unless="${r.getResState()} == 1" th:text="예약마감"></span><br>
