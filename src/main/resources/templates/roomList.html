@@ -1,6 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">
+
+
 <head>
     <meta charset="UTF-8">
     <title>객실 등록</title>
@@ -22,7 +26,7 @@
     <h3 th:text="${hotelDto.htAddress}" />
 
 </header>
-
+<div class="container h-100 " layout:fragment="content">
 <table>
 
         <tr>
@@ -33,6 +37,7 @@
             <th>이용인원</th>
             <th>체크인 날짜</th>
             <th>체크아웃 날짜</th>
+
         </tr>
 
         <tr th:each="list : ${list}">
@@ -58,6 +63,6 @@
         </tr>
 
 </table>
-
+</div>
 </body>
 </html>

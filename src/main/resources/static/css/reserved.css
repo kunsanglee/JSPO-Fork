@@ -1,7 +1,3 @@
-
-
-
-
 .container {
     width: 1000px;
     padding: 20px;
@@ -13,10 +9,15 @@
 
 .reserved_hotel_img{
     margin-right: 30px;
-    background-color: lemonchiffon;
+    /*background-color: lemonchiffon;*/
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url("../imgs/hotels/hotel1.png");
+    background-size: cover;
+    width: 200px;
+    height: 180px;
+    border-radius: 15px;
 
 }
 #reserved_content{
@@ -26,4 +27,7 @@
 .reserved_hotel_info{
     display: flex;
     flex-direction: column;
+}
+.reserved_hotel_info p{
+    margin: 0 0  2px 0;
 }
