@@ -36,7 +36,6 @@ public class ReservationController {
     private RoomDto roomDto = RoomDto.getInstance();
     private MemberDto memberDto = MemberDto.getInstance();
     private ReservationDto reservationDto = ReservationDto.getInstance();
-    private static ReservationDto newReservation;
 
     @PostMapping("/reservation")
     public String reserve(HttpSession session, Model m, int hotelHtId, int rId) throws Exception {
@@ -68,13 +67,13 @@ public class ReservationController {
         reservationDto.setRoomRId(rId);
 
         Date now = new Date();
+        System.out.println("now = " + now);
         reservationDto.setResDate(now);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String res = simpleDateFormat.format(now)+hotelHtId+rId+memberDto.getId();
         System.out.println("res = " + res);
 
         reservationDto.setResId(res);
-        newReservation = reservationDto;
 
         System.out.println("reservationDto = " + reservationDto);
 
@@ -100,12 +99,8 @@ public class ReservationController {
         System.out.println("complete~~");
         System.out.println(data);
         System.out.println("reservationDto = " + reservationDto);
-        System.out.println("newReservation = " + newReservation);
 
-//        int resId = Integer.parseInt(data.get("merchant_uid"));
-//        reservationDto = reservationDao.selectReservationByResId(resId);
-//        System.out.println("reservationDto = " + reservationDto);
-        reservationDao.insertReservation(newReservation);
+        reservationDao.insertReservation(reservationDto);
     }
 
     @PostMapping("/reservation/cancel")
@@ -117,7 +112,6 @@ public class ReservationController {
         System.out.println("cancel~~");
         System.out.println("data = " + data);
         System.out.println("reservationDto = " + reservationDto);
-        System.out.println("newReservation = " + newReservation);
         if (data.isEmpty()) {
             return;
         } else {
