@@ -80,9 +80,9 @@ public class RoomController {
     @GetMapping("/room/list")
     public String select(Model model) throws Exception {
 
-        List<RoomDto> rlist = roomDao.selectRoom();
-        model.addAttribute("rlist",rlist);
-        return "admin";
+        List<RoomDto> list = roomDao.selectRoom();
+        model.addAttribute("list",list);
+        return "roomList";
     }
 
     @PostMapping("/room/updateView")
