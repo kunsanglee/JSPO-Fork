@@ -102,7 +102,7 @@
                                                                               th:text="|${hotelDto.htName} ${hotelDto.htAddress} - ${roomDto.rName}|">나중에
                                         클릭하면 해당 호텔 정보 페이지로 넘어가게 해야됨</a></h3>
                                     <div class="fs-sm"><span class="text-muted me-2"
-                                                             th:text="|${#dates.format(roomDto.rCheckin, 'yyyy-MM-dd')} ${#dates.dayOfWeekNameShort(roomDto.rCheckin)} ~ ${#dates.format(roomDto.rCheckout, 'yyyy-MM-dd')} ${#dates.dayOfWeekNameShort(roomDto.rCheckout)} ${#dates.day(roomDto.rCheckout) - #dates.day(roomDto.rCheckin)}박|"></span>
+                                                             th:text="|${#dates.format(roomDto.rCheckin, 'yyyy년 MM월 dd일')} (${#dates.dayOfWeekNameShort(roomDto.rCheckin)}) ~ ${#dates.format(roomDto.rCheckout, 'yyyy년 MM월 dd일')} (${#dates.dayOfWeekNameShort(roomDto.rCheckout)}) ${#dates.day(roomDto.rCheckout) - #dates.day(roomDto.rCheckin)}박|"></span>
                                     </div>
                                     <div class="fs-sm"><span class="text-muted me-2">체크인 :</span><span
                                             class="text-muted me-2">15:00 ▪ 체크아웃 12:00</span></div>

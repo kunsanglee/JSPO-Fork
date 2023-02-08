@@ -14,7 +14,6 @@
 
 
 
-
         <div class="container  pb-3 mt-5 mb-5 " layout:fragment="content">
             <div class="rounded-3 shadow-lg mt-4 mb-5">
                 <div class="px-3 px-sm-4 px-xl-5 pt-1 pb-4 pb-sm-5">
@@ -32,18 +31,22 @@
                                     <div class="reserved_hotel_info">
                                         <p> 예약번호 : <span class="resId" th:text="${r.getResId()}"></span> </p>
 
-                                    <p> 호텔명 : <span th:text="${hotelDto.getHtName()}"></span></p>
-                                    <p> 객실명 : <span th:text="${roomDto.getrName()}"></span></p>
-                                    <p> 업체연락처 : <span th:text="${hotelDto.getHtPhone()}"></span></p>
-                                    <p> 회원명 : <span class="memberName" th:text="${memberDto.getName()}"></span></p>
-                                   <p> 예약날짜 : <span th:text="${#dates.format(r.getResDate(), 'yyyy-MM-dd HH:mm:ss')} +' '+ ${#dates.dayOfWeekNameShort(r.getResDate())}"></span></p>
-<!--                                    숙박날짜 : <span th:text="|${#dates.format(r.roomRCheckin, 'yyyy-MM-dd')} ${#dates.dayOfWeekNameShort(r.roomRCheckin)} ~ ${#dates.format(r.roomRCheckout, 'yyyy-MM-dd')} ${#dates.dayOfWeekNameShort(r.roomRCheckout)} ${#dates.day(r.roomRCheckout) - #dates.day(r.roomRCheckin)}박|"></span><br>-->
-                                    <p> 예약상태 : <span th:if="${r.getResState()} == 1" th:text="예약완료"></span></p>
-                                    <p> <span th:unless="${r.getResState()} == 1" th:text="예약마감"></span></p>
-                                   <p>  결제금액 : <span class="resPrice" th:text="${r.getResPrice()}"></span></p>
-                                    <button th:if="${r.getResState() == 1}" th:text="예약취소" onclick="cancelPay()"></button>
+                                        <h1>예약내역페이지</h1>
+                                        <div th:each="r : ${reservation}">
+                                            예약번호 : <span class="resId" th:text="${r.getResId()}"></span><br>
+                                            호텔명 : <span th:text="${hotelDto.getHtName()}"></span><br>
+                                            객실명 : <span th:text="${roomDto.getrName()}"></span><br>
+                                            업체연락처 : <span th:text="${hotelDto.getHtPhone()}"></span><br>
+                                            회원명 : <span class="memberName" th:text="${memberDto.getName()}"></span><br>
+                                            예약날짜 : <span th:text="|${#dates.format(r.getResDate(), 'yyyy년 MM월 dd일 HH시 mm분')} (${#dates.dayOfWeekNameShort(r.getResDate())})|"></span><br>
+                                            숙박날짜 : <span th:text="|${#dates.format(r.roomRCheckin, 'yyyy년 MM월 dd일')} (${#dates.dayOfWeekNameShort(r.roomRCheckin)}) ~ ${#dates.format(r.roomRCheckout, 'yyyy년 MM월 dd일')} (${#dates.dayOfWeekNameShort(r.roomRCheckout)}) ${#dates.day(r.roomRCheckout) - #dates.day(r.roomRCheckin)}박|"></span><br>
+                                            예약상태 : <span th:if="${r.getResState()} == 1" th:text="예약완료"></span>
+                                            <span th:unless="${r.getResState()} == 1" th:text="예약마감"></span><br>
+                                            결제금액 : <span class="resPrice" th:text="${r.getResPrice()}"></span><br>
+                                            <button th:if="${r.getResState() == 1}" th:text="예약취소" onclick="cancelPay()"></button>
+                                            <br>
+                                        </div>
                                     </div>
-
                                 </div>
                             </div>
                         </tr>
