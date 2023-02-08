@@ -3,8 +3,15 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default_layout}">
+<head>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+</head>
 
 <body>
+
 
 
 
@@ -22,13 +29,20 @@
                                     <div class="reserved_hotel_img">
                                             예약된 호텔 이미지
                                     </div>
+                                    <div class="reserved_hotel_info">
+                                        <p> 예약번호 : <span class="resId" th:text="${r.getResId()}"></span> </p>
 
-                                        예약번호 : <td th:text="${r.getResId()}"></td><br>
-                                        호텔id : <td th:text="${r.getRoomHotelHtId()}"></td><br>
-                                        객실id : <td th:text="${r.getRoomRId()}"></td><br>
-                                        회원id : <td th:text="${r.getMemberMId()}"></td><br>
-                                        예약날짜 : <td th:text="${r.getResDate()}"></td><br>
-                                        <br>
+                                    <p> 호텔명 : <span th:text="${hotelDto.getHtName()}"></span></p>
+                                    <p> 객실명 : <span th:text="${roomDto.getrName()}"></span></p>
+                                    <p> 업체연락처 : <span th:text="${hotelDto.getHtPhone()}"></span></p>
+                                    <p> 회원명 : <span class="memberName" th:text="${memberDto.getName()}"></span></p>
+                                   <p> 예약날짜 : <span th:text="${#dates.format(r.getResDate(), 'yyyy-MM-dd HH:mm:ss')} +' '+ ${#dates.dayOfWeekNameShort(r.getResDate())}"></span></p>
+<!--                                    숙박날짜 : <span th:text="|${#dates.format(r.roomRCheckin, 'yyyy-MM-dd')} ${#dates.dayOfWeekNameShort(r.roomRCheckin)} ~ ${#dates.format(r.roomRCheckout, 'yyyy-MM-dd')} ${#dates.dayOfWeekNameShort(r.roomRCheckout)} ${#dates.day(r.roomRCheckout) - #dates.day(r.roomRCheckin)}박|"></span><br>-->
+                                    <p> 예약상태 : <span th:if="${r.getResState()} == 1" th:text="예약완료"></span></p>
+                                    <p> <span th:unless="${r.getResState()} == 1" th:text="예약마감"></span></p>
+                                   <p>  결제금액 : <span class="resPrice" th:text="${r.getResPrice()}"></span></p>
+                                    <button th:if="${r.getResState() == 1}" th:text="예약취소" onclick="cancelPay()"></button>
+                                    </div>
 
                                 </div>
                             </div>
@@ -37,9 +51,6 @@
                     </div>
                 </div>
             </div>
-
-
-
 
 </body>
 </html>

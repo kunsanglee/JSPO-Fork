@@ -117,18 +117,4 @@ public class MemberController {
 
         return false;
     }
-
-    @GetMapping("/reserved")
-    public String reserved(HttpSession session, Model m) throws Exception {
-        if (session.getAttribute("email") == null) {
-            return "login";
-        }
-
-        String email = (String) session.getAttribute("email");
-        memberDto = memberDao.selectMemberByEmail(email);
-        List<ReservationDto> reservation = reservationDao.selectAllReservationById(memberDto.getId());
-        m.addAttribute("reservation", reservation);
-
-        return "reserved";
-    }
 }

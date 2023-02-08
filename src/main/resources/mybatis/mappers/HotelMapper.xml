@@ -17,4 +17,17 @@
         select * from hotel where ht_id = #{htId};
     </select>
 
+    <update id="updateHotel" parameterType="HotelDto">
+        UPDATE hotel
+        set ht_name = #{htName},
+            ht_address = #{htAddress},
+            ht_img = #{htImg},
+            ht_phone = #{htPhone}
+        where ht_id = #{htId};
+    </update>
+
+    <delete id="deleteHotel" parameterType="int">
+        DELETE FROM hotel
+        where ht_id = #{htId}
+    </delete>
 </mapper>

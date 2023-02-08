@@ -8,16 +8,16 @@ trans_Logout();
 const deleteCookie = function(name) {
     document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
 }
-function trans_Logout(){
-    console.log('isLogin 작동중')
-    if (document.cookie!==''&&document.cookie!==null){
-        console.log('isLogin if 진입')
-        login_logout.innerText = '로그아웃';
-    }else if(document.cookie.length === 0){
-        login_logout.innerText = '로그인';
-    }
-
-}
+// function trans_Logout(){
+//     console.log('isLogin 작동중')
+//     if (document.cookie!==''&&document.cookie!==null){
+//         console.log('isLogin if 진입')
+//         login_logout.innerText = '로그아웃';
+//     }else if(document.cookie.length === 0){
+//         login_logout.innerText = '로그인';
+//     }
+//
+// }
 
 //로그아웃 클릭시 로그아웃
 login_logout.addEventListener('click',()=>{
