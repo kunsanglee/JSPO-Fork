@@ -39,10 +39,13 @@ public class RoomController {
     @GetMapping("/room/list/{htId}")
     public String room(@PathVariable int htId, Model model) {
 
+        roomDao.updateRoomState();
         List<RoomDto> list = roomDao.selectRoomByhtId(htId);
         model.addAttribute("list",list);
+
         hotelDto = hotelDao.selectHotelByHtId(htId);
         model.addAttribute("hotelDto",hotelDto);
+
         return "roomList"; // 객실 html
     }
     @GetMapping("/room/reg")
