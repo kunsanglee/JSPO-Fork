@@ -65,13 +65,12 @@ public class HotelController {
         hotelDto.setHtImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
        hotelDao.insertHotel(hotelDto);
 
-        return "/hotel/list";
+        return "redirect:list";
     }
     @GetMapping("/hotel/list")
     public String select(Model model,String fileName) throws Exception {
 
-        System.out.println(fileName);
-       List<HotelDto> list = hotelDao.selectHotel();
+        List<HotelDto> list = hotelDao.selectHotel();
        model.addAttribute("list",list);
 
         List pricelist = new ArrayList<>();
