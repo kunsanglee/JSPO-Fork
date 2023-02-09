@@ -11,6 +11,18 @@
         <result column="" property="htPhone" />
     </resultMap>
 
+    <resultMap id="reservationDto" type="com.jspo.reservation.dto.ReservationDto">
+        <result column="" property="resId" />
+        <result column="" property="resPrice" />
+        <result column="" property="resDate" />
+        <result column="" property="resState" />
+        <result column="" property="memberMId" />
+        <result column="" property="roomRCheckin" />
+        <result column="" property="roomRCheckout" />
+        <result column="" property="roomRId" />
+        <result column="" property="roomHotelId" />
+    </resultMap>
+
     <resultMap id="RoomDto" type="com.jspo.room.dto.RoomDto">
            <result column="" property="rId" />
            <result column="" property="rName" />
@@ -22,6 +34,7 @@
            <result column="" property="rCheckout" />
            <result column="" property="hotelHtId" />
         <collection property="hotelDto" resultMap="HDto" />
+        <collection property="reservationDto" resultMap="ReservationDto" />
     </resultMap>
 
     <!--    객실 입력-->
@@ -54,5 +67,11 @@
 
     <update id="updateRoom" parameterType="RoomDto">
         update room set r_name = #{rName},r_price = #{rPrice} ,r_img = #{rImg} where r_id = #{rId};
+    </update>
+
+<!--    수정해야함-->
+    <update id="updateRoomState">
+--         update room set r_state = 1 where now() > r_checkout or r_checkin > now();
+        update room set r_state = 1 where r_checkin > now() and now() > r_checkout;
     </update>
 </mapper>
