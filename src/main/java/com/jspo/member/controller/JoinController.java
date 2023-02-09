@@ -36,7 +36,7 @@ public class JoinController {
 
     @PostMapping("/join")
     public String join(@Valid MemberDto joinMember, Errors errors, Model m) throws Exception {
-        System.out.println(joinMember);
+
 //        post 요청시 넘어온 joinMember 입력값에서 validation에 걸리는 경우
         if (errors.hasErrors()) {
 //            회원가입 실패시 입력 데이터 유지

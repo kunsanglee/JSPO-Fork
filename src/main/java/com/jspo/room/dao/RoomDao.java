@@ -22,4 +22,6 @@ public interface RoomDao {
 
     void updateRoom(RoomDto roomDto);
 
+    void updateRoomState();
+
 }
