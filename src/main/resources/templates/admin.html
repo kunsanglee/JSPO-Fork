@@ -1,8 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/html">
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">
+
+
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <title>호텔 리스트</title>
     <style>
         .oriImg {
@@ -17,15 +21,17 @@
 </head>
 <body>
 
-
+<div class="container h-100 " layout:fragment="content">
 <header>
     <h1> ADMIN 게시판</h1>
 </header>
 
 <nav>
     <ul>
-        <li><a href="/hotel/adminlist">호텔 관리</a></li>
-        <li><a href="/room/adminlist">객실 관리</a></li>
+        <li><a href="/admin/hotellist">호텔 관리</a></li>
+        <li><a href="/admin/roomlist">객실 관리</a></li>
+        <li><a href="/hotel/reg">호텔 등록</a></li>
+
     </ul>
 </nav>
 
@@ -39,14 +45,19 @@
             <th>가격</th>
             <th>수정여부</th>
         </tr>
-        <tr th:each="hlist : ${hlist}">
+        <tr th:each="hlist, i: ${hlist}">
             <form role="form">
                 <input type="text" hidden="hidden" name="htId" th:value="${hlist.htId}">
-           <td><img th:src="${hlist.htImg}" class="oriImg"></td>
-            <td th:text="${hlist.htName}"></td>
-            <td th:text="${hlist.htAddress}"></td>
-            <td th:text="${pricelist[hlist.htId]}"></td>
-            <td><button type="submit" class="hotelupdate">수정</button></td>
+                <td><img th:src="${hlist.htImg}" class="oriImg"></td>
+                <td th:text="${hlist.htName}"></td>
+                <td th:text="${hlist.htAddress}"></td>
+                <td th:if="${pricelist[i.index]} != null"><span th:text="${pricelist[i.index]}+'원'"></span></td>
+                <td th:if="${pricelist[i.index]} == null"><span th:text='0원'></span></td>
+                <td>
+                    <button type="submit" class="roomcreate">객실등록</button>
+                    <br>
+                    <button type="submit" class="hotelupdate">수정</button>
+                </td>
             </form>
         </tr>
     </table>
@@ -61,8 +72,6 @@
             <th>객실이름</th>
             <th>객실가격</th>
             <th>이용인원</th>
-            <th>체크인 시간</th>
-            <th>체크아웃 시간</th>
             <th>수정여부</th>
         </tr>
         <tr th:each="rlist : ${rlist}">
@@ -73,13 +82,12 @@
                 <td th:name="rName" th:text="${rlist.rName}"></td>
                 <td th:name="rPrice" th:text="${rlist.rPrice}"></td>
                 <td th:name="rCnt" th:text="${rlist.rCnt}"></td>
-                <td th:name="rCheckin" th:text="${rlist.rCheckin}"></td>
-                <td th:name="rCheckout" th:text="${rlist.rCheckout}"></td>
                 <td><button type="submit" class="roomupdate">수정</button></td>
             </form>
         </tr>
     </table>
 </th:block>
+
 <script>
     var formObj = $("form[role='form']");
     $(".hotelupdate").click(function () {
@@ -92,7 +100,12 @@
         formObj.attr("method", "post")
         formObj.submit();
     });
+    $(".roomcreate").click(function () {
+        formObj.attr("action", "/room/reg");
+        formObj.submit();
+    });
 
 </script>
+</div>
 </body>
 </html>

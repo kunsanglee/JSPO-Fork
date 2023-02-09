@@ -30,14 +30,14 @@ public class AdminController {
         return "admin";
     }
 
-    @GetMapping("/hotel/adminlist")
+    @GetMapping("/admin/hotellist")
     public String adminHotel(Model model) throws Exception {
 
         List<HotelDto> hlist = hotelDao.selectHotel();
         model.addAttribute("hlist",hlist);
 
         List pricelist = new ArrayList<>(); // 가격 부분
-        pricelist.add(0);
+
         for(int i=1; i<=hlist.size() ; i++) {
             pricelist.add(roomDao.selectPrice(i));
         }
@@ -46,7 +46,7 @@ public class AdminController {
         return "admin";
     }
 
-    @GetMapping("/room/adminlist")
+    @GetMapping("/admin/roomlist")
     public String adminRoom(Model model) throws Exception {
 
         List<RoomDto> rlist = roomDao.selectRoom();

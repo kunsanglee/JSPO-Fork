@@ -36,8 +36,6 @@ public class JoinController {
 
     @PostMapping("/join")
     public String join(@Valid MemberDto joinMember, Errors errors, Model m) throws Exception {
-        System.out.println("joinMember = " + joinMember);
-        System.out.println("joinMember.getBirth() = " + joinMember.getBirth());
 
 //        post 요청시 넘어온 joinMember 입력값에서 validation에 걸리는 경우
         if (errors.hasErrors()) {

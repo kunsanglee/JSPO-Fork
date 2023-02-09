@@ -1,4 +1,10 @@
-<html>
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">
+
+
 <head>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <title>게시판</title>
@@ -24,7 +30,7 @@
 </script>
 <body>
 
-<div id="root">
+<div id="root "  layout:fragment="content">
   <header>
     <h1>수정 게시판</h1>
   </header>

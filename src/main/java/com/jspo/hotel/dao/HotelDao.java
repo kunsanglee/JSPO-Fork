@@ -18,4 +18,5 @@ public interface HotelDao {
        void updateHotel(HotelDto hotelDto) throws Exception;
 
        void deleteHotel(int htId) throws Exception;
+
 }
