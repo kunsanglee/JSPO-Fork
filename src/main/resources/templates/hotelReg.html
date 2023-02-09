@@ -24,7 +24,7 @@
         <tr>
             <td>
 
-                <label>호텔명</label><input type="text" name="htName"  /><br>
+                <label>호fff텔명</label><input type="text" name="htName"  /><br>
                 <label>호텔주소</label><input type="text" name="htAddress" /><br>
                 <label>호텔이미지</label><input type="file" id="htImg" name="file"/><br>
                 <div class="select_img"><img src="" /></div>
@@ -51,6 +51,7 @@
     </table>
 </form>
 </th:block>
+
 <th:block th:if="${hotelDto != null}">
     <header>
         <h1> 호텔 </h1>
@@ -86,11 +87,6 @@
 
 
 
-
-
-<header>
-    <h1> 객실 등록</h1>
-</header>
 <form role="form" method="post" action="/room/reg" enctype="multipart/form-data">
     <table>
         <tbody>
