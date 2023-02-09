@@ -68,17 +68,19 @@ public class HotelController {
         return "redirect:list";
     }
     @GetMapping("/hotel/list")
-    public String select(Model model) throws Exception {
+    public String select(Model model,String fileName) throws Exception {
 
-       List<HotelDto> list = hotelDao.selectHotel();
+        List<HotelDto> list = hotelDao.selectHotel();
        model.addAttribute("list",list);
 
         List pricelist = new ArrayList<>();
-        pricelist.add(0);
-        for(int i=1; i<=list.size() ; i++) {
+
+           for(int i=1; i<=list.size() ; i++) {
             pricelist.add(roomDao.selectPrice(i));
+
         }
         model.addAttribute("pricelist",pricelist);
+
         return "hotelList";
     }
     @PostMapping("/hotel/updateView")
