@@ -42,8 +42,10 @@ public class RoomController {
         roomDao.updateRoomState();
         List<RoomDto> list = roomDao.selectRoomByhtId(htId);
         model.addAttribute("list",list);
-        hotelDto = roomDao.selectRoomByinfo(htId);
-        model.addAttribute(hotelDto);
+
+        hotelDto = hotelDao.selectHotelByHtId(htId);
+        model.addAttribute("hotelDto",hotelDto);
+
         return "roomList"; // 객실 html
     }
     @GetMapping("/room/reg")
@@ -76,14 +78,7 @@ public class RoomController {
         // DB에 저장하면 -1일 처리돼서 +1 처리
 //        roomDto.setrCheckin(new Date(roomDto.getrCheckin().getTime()+(1000*60*60*24)));
 
-        return "redirect:list";
-    }
-    @GetMapping("/room/list")
-    public String select(Model model) throws Exception {
-
-        List<RoomDto> list = roomDao.selectRoom();
-        model.addAttribute("list",list);
-        return "roomList";
+        return "redirect:/admin/roomlist";
     }
 
     @PostMapping("/room/updateView")

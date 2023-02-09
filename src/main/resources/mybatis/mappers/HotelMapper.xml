@@ -17,6 +17,10 @@
         select * from hotel where ht_id = #{htId};
     </select>
 
+    <select id="selectHotelByName" parameterType="String" resultType="HotelDto">
+        select * from hotel where ht_name like CONCAT('%',#{htName},'%');
+    </select>
+
     <update id="updateHotel" parameterType="HotelDto">
         UPDATE hotel
         set ht_name = #{htName},
