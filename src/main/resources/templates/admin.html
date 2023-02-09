@@ -45,15 +45,19 @@
             <th>가격</th>
             <th>수정여부</th>
         </tr>
-        <tr th:each="hlist : ${hlist}">
+        <tr th:each="hlist, i: ${hlist}">
             <form role="form">
                 <input type="text" hidden="hidden" name="htId" th:value="${hlist.htId}">
-           <td><img th:src="${hlist.htImg}" class="oriImg"></td>
-            <td th:text="${hlist.htName}"></td>
-            <td th:text="${hlist.htAddress}"></td>
-            <td th:text="${pricelist[hlist.htId]}"></td>
-            <td><button type="submit" class="roomcreate">객실등록</button><br>
-            <button type="submit" class="hotelupdate">수정</button></td>
+                <td><img th:src="${hlist.htImg}" class="oriImg"></td>
+                <td th:text="${hlist.htName}"></td>
+                <td th:text="${hlist.htAddress}"></td>
+                <td th:if="${pricelist[i.index]} != null"><span th:text="${pricelist[i.index]}+'원'"></span></td>
+                <td th:if="${pricelist[i.index]} == null"><span th:text='0원'></span></td>
+                <td>
+                    <button type="submit" class="roomcreate">객실등록</button>
+                    <br>
+                    <button type="submit" class="hotelupdate">수정</button>
+                </td>
             </form>
         </tr>
     </table>
@@ -83,7 +87,7 @@
         </tr>
     </table>
 </th:block>
-</div>
+
 <script>
     var formObj = $("form[role='form']");
     $(".hotelupdate").click(function () {
@@ -102,5 +106,6 @@
     });
 
 </script>
+</div>
 </body>
 </html>

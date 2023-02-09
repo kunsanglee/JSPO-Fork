@@ -37,7 +37,7 @@ public class AdminController {
         model.addAttribute("hlist",hlist);
 
         List pricelist = new ArrayList<>(); // 가격 부분
-        pricelist.add(0);
+
         for(int i=1; i<=hlist.size() ; i++) {
             pricelist.add(roomDao.selectPrice(i));
         }
