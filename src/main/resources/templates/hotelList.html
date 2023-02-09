@@ -22,14 +22,15 @@
     <table>
         <tr><th>사진</th><th>호텔이름</th><th>주소</th> <th>가격</th></tr>
 
-        <tr th:each="list : ${list}">
-
+        <tr th:each="list, i : ${list}">
             <td>
             <a th:href="@{/room/list/} + ${list.htId}"><img th:src="${list.htImg}" class="oriImg" th:id="${list.htId}" ></a>
             </td>
             <td th:text="${list.htName}"></td>
             <td th:text="${list.htAddress}"></td>
-            <td th:if="${pricelist[1]} != null"><span th:text="${pricelist[list.htId]}+'원'"></span></td>
+
+            <td th:if="${pricelist[i.index]} != null"><span th:text="${pricelist[i.index]}+'원'"></span></td>
+            <td th:if="${pricelist[i.index]} == null"><span th:text='0원'></span></td>
 
         </tr>
 

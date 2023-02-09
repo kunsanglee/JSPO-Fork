@@ -21,10 +21,11 @@
 </head>
 <body>
 <header>
+    <th:block th:if="${hotelDto != null}">
     <h1 th:text="${hotelDto.htName}" />
     <h3 th:text="${hotelDto.htPhone}" />
     <h3 th:text="${hotelDto.htAddress}" />
-
+    </th:block>
 </header>
 <div class="container h-100 " layout:fragment="content">
 <table>
@@ -56,7 +57,9 @@
                 <input type="text" th:name="rId" th:value="${list.rId}"/>
             </div>
             <td>
+                <th:block th:if="${hotelDto != null}">
                 <button type="submit">객실 예약하기</button>
+                </th:block>
             </td>
             </form>
 
