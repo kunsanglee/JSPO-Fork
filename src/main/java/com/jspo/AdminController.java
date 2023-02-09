@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
@@ -25,17 +28,17 @@ public class AdminController {
 
     RoomDto roomDto = RoomDto.getInstance();
 
-    @GetMapping("/admin")
+    @GetMapping("")
     public String admin() {
         return "admin";
     }
 
-    @GetMapping("/admin/hotellist")
+    @GetMapping("/hotellist")
     public String adminHotel(Model model) throws Exception {
 
         List<HotelDto> hlist = hotelDao.selectHotel();
         model.addAttribute("hlist",hlist);
-
+        System.out.println(hlist);
         List pricelist = new ArrayList<>(); // 가격 부분
 
         for(int i=1; i<=hlist.size() ; i++) {
@@ -46,7 +49,7 @@ public class AdminController {
         return "admin";
     }
 
-    @GetMapping("/admin/roomlist")
+    @GetMapping("/roomlist")
     public String adminRoom(Model model) throws Exception {
 
         List<RoomDto> rlist = roomDao.selectRoom();

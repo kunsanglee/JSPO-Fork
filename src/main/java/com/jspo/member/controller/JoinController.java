@@ -78,8 +78,5 @@ public class JoinController {
     }
 
 
-    @GetMapping("/hotel")
-    public String hotel(){
-        return "hotelPage";
-    }
+
 }
