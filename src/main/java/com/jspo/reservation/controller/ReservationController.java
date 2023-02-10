@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,10 +39,11 @@ public class ReservationController {
     private ReservationDto reservationDto = ReservationDto.getInstance();
 
     @PostMapping("/reservation")
-    public String reserve(HttpSession session, Model m, int hotelHtId, int rId) throws Exception {
+    public String reserve(HttpSession session, Model m, int hotelHtId, int rId, HttpServletRequest request) throws Exception {
 
         // 로그인필터 있어야되는데..
         if (session.getAttribute("email") == null) {
+
             return "redirect:/login";
         }
 
@@ -147,6 +149,8 @@ public class ReservationController {
     @GetMapping("/reserved")
     public String reserved(HttpSession session, Model m) throws Exception {
         if (session.getAttribute("email") == null) {
+            String referer = "http://localhost:8080/reserved";
+            m.addAttribute("referer",referer);
             return "login";
         }
 

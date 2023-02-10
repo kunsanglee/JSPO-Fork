@@ -20,18 +20,19 @@
     </style>
 </head>
 <body>
-<header>
-    <th:block th:if="${hotelDto != null}">
-    <h1 th:text="${hotelDto.htName}" />
-    <h3 th:text="${hotelDto.htPhone}" />
-    <h3 th:text="${hotelDto.htAddress}" />
-    </th:block>
-</header>
+
 <div class="container h-100 " layout:fragment="content">
+    <header>
+        <th:block th:if="${hotelDto != null}">
+            <h1 th:text="${hotelDto.htName}" />
+            <h3 th:text="${hotelDto.htPhone}" />
+            <h3 th:text="${hotelDto.htAddress}" />
+        </th:block>
+    </header>
+
 <table>
 
         <tr>
-<!--            <th>호텔코드</th>-->
             <th>사진</th>
             <th>객실이름</th>
             <th>객실가격</th>
@@ -43,7 +44,6 @@
 
         <tr th:each="list : ${list}">
             <form role="form" method="post" action="/reservation">
-<!--            <td th:name="hotelHtId" th:text="${list.hotelHtId}"></td>-->
                 <input type="text" hidden=hidden th:name="hotelHtId" th:value="${list.hotelHtId}" />
             <td>
                 <img th:src="${list.rImg}" class="oriImg">
