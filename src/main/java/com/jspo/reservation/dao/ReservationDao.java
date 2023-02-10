@@ -10,13 +10,10 @@ public interface ReservationDao {
     void insertReservation(ReservationDto reservationDto);
     boolean deleteReservationByResId(String resId);
     boolean deleteReservationByMemberMId(int memberMId);
-    ReservationDto selectReservationByResId(int resId);
+    ReservationDto selectReservationByResId(long resId);
     ReservationDto selectReservationByMemberMId(int memberMId);
     List<ReservationDto> selectAllReservationById(int memberMid);
     ReservationDto selectLastReservationById(int memberMid);
     ReservationDto selectLastReservation();
 
-    void updateReservation();
-
-    Integer getAutoincrement(ReservationDto reservationDto);
 }

@@ -10,15 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class RoomController {
@@ -37,15 +33,31 @@ public class RoomController {
     private HotelDto hotelDto = HotelDto.getInstance();
 
     @GetMapping("/room/list/{htId}")
-    public String room(@PathVariable int htId, Model model) {
+    public String room(@PathVariable int htId, java.sql.Date checkin, java.sql.Date checkout, Model model) {
 
-        roomDao.updateRoomState();
-        List<RoomDto> list = roomDao.selectRoomByhtId(htId);
+        // room list를 회원이 선택한 체크인 체크아웃 기간을 reserved 테이블에서 조회하여
+        // 해당 기간에 겹치지 않는 r_id를 가진 객실들만 페이지에 보여줌.
+        System.out.println("htId = " + htId);
+        System.out.println("checkin = " + checkin);
+        System.out.println("checkout = " + checkout);
+        if (checkin == null || checkout == null) {
+            checkin = new java.sql.Date(System.currentTimeMillis());
+            checkout = new java.sql.Date(System.currentTimeMillis()+1000*60*60*24);
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("htId", htId);
+        map.put("checkin", checkin);
+        map.put("checkout", checkout);
+        List<RoomDto> list = roomDao.selectRoomByInOut(map);
         model.addAttribute("list",list);
         hotelDto = roomDao.selectRoomByinfo(htId);
+        System.out.println("hotelDto = " + hotelDto);
         model.addAttribute(hotelDto);
+        model.addAttribute("checkin", checkin);
+        model.addAttribute("checkout", checkout);
         return "roomList"; // 객실 html
     }
+
     @GetMapping("/room/reg")
     public String insert(Model model,int htId) {
         HotelDto hotelDto = hotelDao.selectHotelByHtId(htId);

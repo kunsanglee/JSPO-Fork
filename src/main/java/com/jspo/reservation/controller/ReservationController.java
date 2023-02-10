@@ -5,6 +5,7 @@ import com.jspo.hotel.dto.HotelDto;
 import com.jspo.member.dao.MemberDao;
 import com.jspo.member.dto.MemberDto;
 import com.jspo.reservation.dao.ReservationDao;
+import com.jspo.reservation.dao.ReservedDao;
 import com.jspo.reservation.dto.ReservationDto;
 import com.jspo.room.dao.RoomDao;
 import com.jspo.room.dto.RoomDto;
@@ -31,6 +32,8 @@ public class ReservationController {
     private RoomDao roomDao;
     @Autowired
     private ReservationDao reservationDao;
+    @Autowired
+    private ReservedDao reservedDao;
 
     private HotelDto hotelDto = HotelDto.getInstance();
     private RoomDto roomDto = RoomDto.getInstance();
@@ -38,7 +41,7 @@ public class ReservationController {
     private ReservationDto reservationDto = ReservationDto.getInstance();
 
     @PostMapping("/reservation")
-    public String reserve(HttpSession session, Model m, int hotelHtId, int rId) throws Exception {
+    public String reserve(HttpSession session, Model m, int hotelHtId, int rId, java.sql.Date rCheckin, java.sql.Date rCheckout) throws Exception {
 
         // 로그인필터 있어야되는데..
         if (session.getAttribute("email") == null) {
@@ -51,11 +54,16 @@ public class ReservationController {
         hotelDto = hotelDao.selectHotelByHtId(hotelHtId);
         memberDto = memberDao.selectMemberByEmail((String) session.getAttribute("email"));
         roomDto = roomDao.selectRoomByRId(rId);
+        roomDto.setrCheckin(rCheckin);
+        roomDto.setrCheckout(rCheckout);
+        System.out.println("rCheckin = " + rCheckin);
+        System.out.println("rCheckout = " + rCheckout);
 
         System.out.println("roomDto.getrCheckin() = " + roomDto.getrCheckin());
         reservationDto.setResPrice(roomDto.getrPrice());
         reservationDto.setMemberMId(memberDto.getId());
 
+        // 달력에서 체크인 체크아웃 얻어와야함.
         long inTime = roomDto.getrCheckin().getTime();
         long outTime = roomDto.getrCheckout().getTime();
         long diff = (outTime - inTime)/1000/60/60/24;
@@ -100,26 +108,18 @@ public class ReservationController {
         System.out.println(data);
         System.out.println("reservationDto = " + reservationDto);
 
-        reservationDao.insertReservation(reservationDto);
-    }
+        long inTime = reservationDto.getRoomRCheckin().getTime();
+        long outTime = reservationDto.getRoomRCheckout().getTime();
+        long diff = (outTime - inTime)/1000/60/60/24;
+        System.out.println("inTime = " + inTime);
+        System.out.println("outTime = " + outTime);
+        System.out.println("diff = " + diff);
 
-    @PostMapping("/reservation/cancel")
-    @CrossOrigin(origins = "*")
-    @ResponseBody
-    public void cancel(@RequestBody Map<String, String> data) {
-
-        // 결제 실패 reservation DB에 만들어두었던 정보 삭제.
-        System.out.println("cancel~~");
-        System.out.println("data = " + data);
-        System.out.println("reservationDto = " + reservationDto);
-        if (data.isEmpty()) {
-            return;
-        } else {
-            String resId = data.get("merchant_uid");
-            System.out.println("reservationDao.deleteReservationByResId(resId) = " + reservationDao.deleteReservationByResId(resId));
+        for (int i = 0; i < diff; i++) {
+            reservedDao.insertReserved(reservationDto);
         }
 
-
+        reservationDao.insertReservation(reservationDto);
     }
 
     @PostMapping("/reservation/cancel/{resId}")
@@ -139,7 +139,8 @@ public class ReservationController {
         System.out.println("취소사유 : " + reason);
         System.out.println("회원명  : " + memberName);
         System.out.println("주문번호 일치여부 : " + resId.equals(merchant_uid));
-        System.out.println("삭제처리 : " + reservationDao.deleteReservationByResId(resId));
+        reservedDao.deleteReserved(reservationDao.selectReservationByResId(Long.parseLong(merchant_uid)));
+        System.out.println("예약 삭제처리 : " + reservationDao.deleteReservationByResId(resId));
 
         return true;
     }
@@ -152,15 +153,23 @@ public class ReservationController {
 
         String email = (String) session.getAttribute("email");
         memberDto = memberDao.selectMemberByEmail(email);
-        reservationDto = reservationDao.selectLastReservationById(memberDto.getId());
-        hotelDto = hotelDao.selectHotelByHtId(reservationDto.getRoomHotelHtId());
-        roomDto = roomDao.selectRoomByRId(reservationDto.getRoomRId());
-        reservationDao.updateReservation();
-        List<ReservationDto> reservation = reservationDao.selectAllReservationById(memberDto.getId());
-        m.addAttribute("reservation", reservation);
-        m.addAttribute(memberDto);
-        m.addAttribute(hotelDto);
-        m.addAttribute(roomDto);
+        try {
+            reservationDto = reservationDao.selectLastReservationById(memberDto.getId());
+            hotelDto = hotelDao.selectHotelByHtId(reservationDto.getRoomHotelHtId());
+            roomDto = roomDao.selectRoomByRId(reservationDto.getRoomRId());
+            List<ReservationDto> reservation = reservationDao.selectAllReservationById(memberDto.getId());
+            m.addAttribute("reservation", reservation);
+            m.addAttribute(memberDto);
+            m.addAttribute(hotelDto);
+            m.addAttribute(roomDto);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute("reservation");
+            m.addAttribute(memberDto);
+            m.addAttribute(hotelDto);
+            m.addAttribute(roomDto);
+        }
 
 
         return "reserved";
