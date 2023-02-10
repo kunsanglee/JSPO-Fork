@@ -42,16 +42,31 @@ public class HotelController {
         return "hotelPage";
     }
 
+//    @PostMapping("/hotel")
+//    public String hotel(@RequestParam(required = false) String htName,HotelDto hotelDto , Model model){
+//
+//       hotelDto = hotelDao.selectHotelByName(htName);
+//       model.addAttribute("list",hotelDto);
+//
+//        List pricelist = new ArrayList<>(); // 가격 부분
+//        pricelist.add(roomDao.selectPrice(hotelDto.getHtId()));
+//        model.addAttribute("pricelist",pricelist);
+//        return "hotelList";
+//    }
     @PostMapping("/hotel")
     public String hotel(@RequestParam(required = false) String htName,HotelDto hotelDto , Model model){
 
-       hotelDto = hotelDao.selectHotelByName(htName);
-       model.addAttribute("list",hotelDto);
+        List<HotelDto> list = hotelDao.selectHotelByName(htName);
+        model.addAttribute("list",list);
 
         List pricelist = new ArrayList<>(); // 가격 부분
-        pricelist.add(roomDao.selectPrice(hotelDto.getHtId()));
+        for(int i=0; i<list.size() ; i++) {
+            pricelist.add(roomDao.selectPrice(list.get(i).getHtId()));
+
+        }
+        System.out.println(pricelist);
         model.addAttribute("pricelist",pricelist);
-        return "hotelList";
+        return "hotelPage";
     }
     @GetMapping("/hotel/reg")
     public String insert(HttpSession session, Model model)  throws Exception{

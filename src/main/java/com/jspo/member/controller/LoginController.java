@@ -42,9 +42,7 @@ public class LoginController {
     public String login(MemberDto loginMember , Model m, HttpServletRequest request,
                         HttpServletResponse response, boolean remember,@RequestParam String referer) throws Exception {
 
-        System.out.println(referer);
-        String result = referer.substring(22);
-        System.out.println(result);
+        String result = referer.substring(22); // referer가 헤더를 다가져오기때문에
 
         memberDto = memberDao.login(loginMember);
         HttpSession session = request.getSession();
@@ -60,27 +58,12 @@ public class LoginController {
             response.addCookie(cookie);
 
             session.setAttribute("email",memberDto.getEmail());
-//            String referer = request.getHeader("Referer");
-//            System.out.println(referer) +referer;
 
             m.addAttribute("memberDto", memberDto);
             m.addAttribute("encPwd", memberService.getEncPwd(memberDto));
 
             return "redirect:/" + result;
         }
-
-//        둘다 데이터가 없을시
-//        "아이디를 입력해주세요"
-//
-//        아이디만 있을시(틀려도)
-//                "비밀번호를 입력해주세요"
-//
-//        비밀번호 잘못적었을시
-//        "아이디 또는 비밀번호를 잘못 입력했습니다.
-//        입력하신 내용을 다시 확인해주세요"
-//
-//        비밀번호는 초기화 되고
-//        아이디쪽만 데이터가 남아있음
         return "login";
     }
 
