@@ -18,7 +18,7 @@
         </div>
 
         <form action="/login" method="post" name="loginForm" class="needs-validation">
-
+        <input type="hidden" name="referer" th:value="${referer}">
         <div class="form-group was-validated">
             <label class="form-label " for="email">이메일</label>
             <input class="form-control" type="email" id="email" name="email" required maxlength="30" minlength="6" autofocus th:value="${email}">
