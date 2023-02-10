@@ -13,42 +13,85 @@
     </style>
 </head>
 <body>
-<div class="container h-80 " layout:fragment="content">
+
 <th:block th:if="${hotelDto == null}">
+    <div class="container h-80 " layout:fragment="content">
+    <div class="hotel_reg_wrap justify-content-center"  >
+        <div class="hotel_reg" >
 
 
-<form role="form" method="post" action="/hotel/reg" enctype="multipart/form-data">
-    <table>
-        <tbody>
-        <tr>
-            <td>
+            <form role="form" method="post" action="/hotel/reg" enctype="multipart/form-data" name="hotel_reg_form">
 
-                <label>호텔명</label><input type="text" name="htName"  /><br>
-                <label>호텔주소</label><input type="text" name="htAddress" /><br>
-                <label>호텔이미지</label><input type="file" id="htImg" name="file"/><br>
                 <div class="select_img"><img src="" /></div>
-                <label>호텔 전화번호</label><input type="text" name="htPhone"  /><br>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">호텔명</span>
+                    <input type="text" class="form-control" id="htName" name="htName"  aria-describedby="inputGroup-sizing-default">
+                </div>
+
+
+                <!--                <label>호텔명</label><input type="text" name="htName"  /><br>-->
+                <!--                <label>호텔주소</label><input type="text" name="htAddress" /><br>-->
+                <!--                <label>호텔이미지</label><input type="file" id="htImg" name="file"/><br>-->
+
+<!--                                <label>호텔 전화번호</label><input type="text" name="htPhone"  /><br>-->
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" >호텔 주소</span>
+                    <input type="text" class="form-control" id="htAddress" name="htAddress"  aria-describedby="inputGroup-sizing-default">
+                </div>
+
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text" >호텔 연락처</span>
+                    <input type="text" class="form-control" id="htPhone" name="htPhone"  aria-describedby="inputGroup-sizing-default">
+                </div>
+
+                <div><button type="button" class="btn btn-primary">Primary</button></div>
 
                 <script>
                     $("#htImg").change(function(){
                         if(this.files && this.files[0]) {
-                            var reader = new FileReader;
+                            let reader = new FileReader;
                             reader.onload = function(data) {
                                 $(".select_img img").attr("src", data.target.result).width(500);
                             }
                             reader.readAsDataURL(this.files[0]);
                         }
                     });
+
                 </script>
-            </td>
-        <tr>
-            <td>
-                <button type="submit">작성</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</form>
+
+            </form>
+        </div>
+
+
+
+
+
+    </div>
+<!--<form role="form" method="post" action="/hotel/reg" enctype="multipart/form-data">-->
+<!--    <table>-->
+<!--        <tbody>-->
+<!--        <tr>-->
+<!--            <td>-->
+
+<!--                <label>호텔명</label><input type="text" name="htName"  /><br>-->
+<!--                <label>호텔주소</label><input type="text" name="htAddress" /><br>-->
+<!--                <label>호텔이미지</label><input type="file" id="htImg" name="file"/><br>-->
+<!--                <div class="select_img"><img src="" /></div>-->
+<!--                <label>호텔 전화번호</label><input type="text" name="htPhone"  /><br>-->
+
+
+<!--            </td>-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <button type="submit">작성</button>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</form>-->
+    </div>
 </th:block>
 
 <th:block th:if="${hotelDto != null}">
@@ -114,7 +157,7 @@
             </td>
                 <tr>
                     <td>
-                        <button type="submit">작성</button>
+                        <button type="submit">작성2</button>
                     </td>
                 </tr>
         </tbody>
