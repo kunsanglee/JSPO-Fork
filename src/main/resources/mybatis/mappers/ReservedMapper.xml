@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jspo.reservation.dao.ReservedDao">
+
+    <resultMap id="reservationDto" type="com.jspo.reservation.dto.ReservationDto">
+        <result column="" property="resId" />
+        <result column="" property="resPrice" />
+        <result column="" property="resDate" />
+        <result column="" property="resState" />
+        <result column="" property="memberMId" />
+        <result column="" property="roomRCheckin" />
+        <result column="" property="roomRCheckout" />
+        <result column="" property="roomRId" />
+        <result column="" property="roomHotelId" />
+    </resultMap>
+
+    <resultMap id="reserved" type="com.jspo.reservation.dto.Reserved">
+        <result column="" property="rId" />
+        <result column="" property="rName" />
+        <result column="" property="rPrice" />
+        <result column="" property="rState" />
+        <result column="" property="rCnt" />
+        <result column="" property="rImg" />
+        <result column="" property="rCheckin" />
+        <result column="" property="rCheckout" />
+        <result column="" property="hotelHtId" />
+        <collection property="reservationDto" resultMap="ReservationDto" />
+    </resultMap>
+
+    <insert id="insertReserved" parameterType="ReservationDto">
+        insert into reserved (ht_id, r_id, res_date) values (#{roomHotelHtId}, #{roomRId}, #{roomCheckin});
+    </insert>
+
+    <delete id="deleteReserved" parameterType="ReservationDto">
+        delete from reserved where ht_id = #{roomHotelHtId} and r_id = #{roomRId} and res_date between #{roomRCheckin} and #{roomRCheckout};
+    </delete>
+
+<!--    <select id="checkReservation" parameterType="ReservationDto" resultType="Integer">-->
+<!--        SELECT r_id FROM reserved WHERE DATE(#{}) BETWEEN #{roomRCheckin} AND #{roomRCheckout};-->
+<!--    </select>-->
+</mapper>
