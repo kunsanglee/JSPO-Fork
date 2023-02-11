@@ -15,7 +15,7 @@
         <result column="" property="roomHotelId" />
     </resultMap>
 
-    <resultMap id="reserved" type="com.jspo.reservation.dto.Reserved">
+    <resultMap id="reserved" type="com.jspo.reservation.dto.ReservedDto">
         <result column="" property="rId" />
         <result column="" property="rName" />
         <result column="" property="rPrice" />
@@ -29,14 +29,14 @@
     </resultMap>
 
     <insert id="insertReserved" parameterType="ReservationDto">
-        insert into reserved (ht_id, r_id, res_date) values (#{roomHotelHtId}, #{roomRId}, #{roomCheckin});
+        insert into reserved (ht_id, r_id, res_date) values (#{roomHotelHtId}, #{roomRId}, #{roomRCheckin});
     </insert>
 
     <delete id="deleteReserved" parameterType="ReservationDto">
         delete from reserved where ht_id = #{roomHotelHtId} and r_id = #{roomRId} and res_date between #{roomRCheckin} and #{roomRCheckout};
     </delete>
 
-<!--    <select id="checkReservation" parameterType="ReservationDto" resultType="Integer">-->
-<!--        SELECT r_id FROM reserved WHERE DATE(#{}) BETWEEN #{roomRCheckin} AND #{roomRCheckout};-->
-<!--    </select>-->
+    <select id="selectReservedAll" resultType="ReservedDto">
+        select * from reserved;
+    </select>
 </mapper>
