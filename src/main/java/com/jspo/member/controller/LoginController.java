@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
@@ -31,10 +28,13 @@ public class LoginController {
 
     private MemberDto memberDto = MemberDto.getInstance();
 
+    private static String referer = "";
+
     @GetMapping("/login")
-    public String login(@CookieValue (value = "email", required = false) String email, Model m) {
+    public String login(@CookieValue (value = "email", required = false) String email, Model m,HttpServletRequest request) {
 
         m.addAttribute("email", email);
+        referer = request.getHeader("referer");
 
         return "login";
     }
@@ -47,6 +47,7 @@ public class LoginController {
         HttpSession session = request.getSession();
         if(memberDto != null ) {
             Cookie cookie;
+
             if(remember) {
                 cookie = new Cookie("email", memberDto.getEmail());
                 cookie.setMaxAge(60*60*24);
@@ -54,16 +55,13 @@ public class LoginController {
                 cookie = new Cookie("email", null);
                 cookie.setMaxAge(0);
             }
+
             response.addCookie(cookie);
-
             session.setAttribute("email",memberDto.getEmail());
-//            String referer = request.getHeader("Referer");
-//            System.out.println(referer) +referer;
-
             m.addAttribute("memberDto", memberDto);
             m.addAttribute("encPwd", memberService.getEncPwd(memberDto));
 
-            return "redirect:/my";
+            return "redirect:" + referer;
         }
 
 //        둘다 데이터가 없을시

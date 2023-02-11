@@ -39,7 +39,3 @@ login_logout.addEventListener('click',()=>{
     console.log('클릭릭')
 })
 
-
-
-
-console.log('허미')

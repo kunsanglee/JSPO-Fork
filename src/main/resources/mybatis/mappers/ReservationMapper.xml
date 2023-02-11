@@ -16,7 +16,7 @@
         delete from reservation where member_m_id = #{memberMId};
     </delete>
 
-    <select id="selectReservationByResId" parameterType="Integer" resultType="ReservationDto">
+    <select id="selectReservationByResId" parameterType="Long" resultType="ReservationDto">
         select * from reservation where res_id = #{resId};
     </select>
 
@@ -40,12 +40,5 @@
         select * from reservation;
     </select>
 
-    <update id="updateReservation">
-        update reservation set res_state = 0 where now() > room_r_checkin;
-    </update>
 
-    <insert id="getAutoincrement" parameterType="ReservationDto" keyProperty="resId" useGeneratedKeys="true">
-        insert into reservation (res_price, member_m_id, room_r_checkin, room_r_checkout, room_r_id, room_hotel_ht_id)
-        values (#{resPrice},#{memberMId}, #{roomRCheckin}, #{roomRCheckout}, #{roomRId},#{roomHotelHtId});
-    </insert>
 </mapper>

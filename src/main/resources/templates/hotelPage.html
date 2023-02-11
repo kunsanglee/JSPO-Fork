@@ -58,23 +58,28 @@
 
 
     </div>
-
+    <form>
+        <tr th:each="list ,i : ${list}">
     <div class="card mb-3 hotel_list mt-4" >
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="/imgs/hotels/hotel1.PNG" class="img-fluid rounded-start" alt="..." width="100%" height="100%">
+                <a th:href="@{/room/list/} + ${list.htId}"> <img th:src="${list.htImg}" class="img-fluid rounded-start" alt="..." width="100%" height="100%"></a>
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h2 class="card-title fw-bolder">고잉 호텔</h2>
-                    <p class="card-text">서울 강남구 청담동 53-7</p>
+                    <h2 class="card-title fw-bolder" th:text ="${list.htName}"></h2>
+                    <p class="card-text" th:text="${list.htAddress}"></p>
                     <div class="hotel_list_price">
-                            <span class="display-4 fw-bolder">가격</span><span class="fw-bolder display-4">30,000</span><span class="fw-bolder display-4">원</span>
+                            <span class="display-4 fw-bolder">가격</span>
+                        <td th:if="${pricelist[i.index]} != null"><span class="fw-bolder display-4" th:text="${pricelist[i.index]}"></span><span class="fw-bolder display-4">원</span></td>
+                        <td th:if="${pricelist[i.index]} == null"><span class="fw-bolder display-4" th:text="0"></span><span class="fw-bolder display-4">원</span></td>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+        </tr>
+    </form>
     <ul>
         <li>최소가격이 최대가격보다 작게
             최대가격이 최소가격보다 크게</li>

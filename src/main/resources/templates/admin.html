@@ -71,7 +71,7 @@
             <th>객실이미지</th>
             <th>객실이름</th>
             <th>객실가격</th>
-            <th>이용인원</th>
+            <th>객실갯수</th>
             <th>수정여부</th>
         </tr>
         <tr th:each="rlist : ${rlist}">
@@ -82,7 +82,10 @@
                 <td th:name="rName" th:text="${rlist.rName}"></td>
                 <td th:name="rPrice" th:text="${rlist.rPrice}"></td>
                 <td th:name="rCnt" th:text="${rlist.rCnt}"></td>
-                <td><button type="submit" class="roomupdate">수정</button></td>
+                <td>
+                    <button type="submit" class="roomupdate">수정</button>
+                    <button type="submit" class="roomdelete">삭제</button>
+                </td>
             </form>
         </tr>
     </table>
@@ -104,7 +107,11 @@
         formObj.attr("action", "/room/reg");
         formObj.submit();
     });
-
+    $(".roomdelete").click(function () {
+        formObj.attr("action", "/room/delete");
+        formObj.attr("method", "post")
+        formObj.submit();
+    });
 </script>
 </div>
 </body>

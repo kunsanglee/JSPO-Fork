@@ -1,10 +1,12 @@
 package com.jspo.room.dao;
 
 import com.jspo.hotel.dto.HotelDto;
+import com.jspo.reservation.dto.ReservedDto;
 import com.jspo.room.dto.RoomDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface RoomDao {
@@ -22,6 +24,9 @@ public interface RoomDao {
 
     void updateRoom(RoomDto roomDto);
 
-    void updateRoomState();
+    List<RoomDto> selectRoomByInOut(Map map);
+//    void roomCntUp(ReservedDto reservedDto);
+//    void roomCntDown(ReservedDto reservedDto);
 
+    void deleteRoom(int rId);
 }

@@ -2,19 +2,23 @@ package com.jspo.reservation.dto;
 
 import java.util.Date;
 
-public class Reserved {
+public class ReservedDto {
     private Date resDate;
     private int htId;
     private int rId;
 
-    public Reserved() {
+    public ReservedDto() {
     }
 
-    public Reserved(Date resDate, int htId, int rId) {
+    public ReservedDto(Date resDate, int htId, int rId) {
         this.resDate = resDate;
         this.htId = htId;
         this.rId = rId;
     }
+
+    private static final ReservedDto instance = new ReservedDto();
+
+    public static ReservedDto getInstance() { return instance; }
 
     public Date getResDate() {
         return resDate;
