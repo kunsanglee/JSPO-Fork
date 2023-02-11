@@ -28,26 +28,26 @@ public class LoginController {
 
     private MemberDto memberDto = MemberDto.getInstance();
 
+    private static String referer = "";
+
     @GetMapping("/login")
     public String login(@CookieValue (value = "email", required = false) String email, Model m,HttpServletRequest request) {
 
         m.addAttribute("email", email);
-        String referer = request.getHeader("referer");
-        System.out.println(referer);
-        m.addAttribute("referer",referer);
+        referer = request.getHeader("referer");
+
         return "login";
     }
 
     @PostMapping("/login")
     public String login(MemberDto loginMember , Model m, HttpServletRequest request,
-                        HttpServletResponse response, boolean remember,@RequestParam String referer) throws Exception {
-
-        String result = referer.substring(22); // referer가 헤더를 다가져오기때문에
+                        HttpServletResponse response, boolean remember) throws Exception {
 
         memberDto = memberDao.login(loginMember);
         HttpSession session = request.getSession();
         if(memberDto != null ) {
             Cookie cookie;
+
             if(remember) {
                 cookie = new Cookie("email", memberDto.getEmail());
                 cookie.setMaxAge(60*60*24);
@@ -55,15 +55,27 @@ public class LoginController {
                 cookie = new Cookie("email", null);
                 cookie.setMaxAge(0);
             }
+
             response.addCookie(cookie);
-
             session.setAttribute("email",memberDto.getEmail());
-
             m.addAttribute("memberDto", memberDto);
             m.addAttribute("encPwd", memberService.getEncPwd(memberDto));
 
-            return "redirect:/" + result;
+            return "redirect:" + referer;
         }
+
+//        둘다 데이터가 없을시
+//        "아이디를 입력해주세요"
+//
+//        아이디만 있을시(틀려도)
+//                "비밀번호를 입력해주세요"
+//
+//        비밀번호 잘못적었을시
+//        "아이디 또는 비밀번호를 잘못 입력했습니다.
+//        입력하신 내용을 다시 확인해주세요"
+//
+//        비밀번호는 초기화 되고
+//        아이디쪽만 데이터가 남아있음
         return "login";
     }
 
