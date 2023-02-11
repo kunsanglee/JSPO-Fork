@@ -17,14 +17,13 @@
         </div>
 
         <form action="/login" method="post" name="loginForm" class="needs-validation">
+        <input type="hidden" name="referer" th:value="${referer}">
+        <div class="form-group was-validated">
+            <label class="form-label " for="email">이메일</label>
+            <input class="form-control" type="email" id="email" name="email" required maxlength="30" minlength="6" autofocus th:value="${email}">
+            <div class="invalid-feedback">
+                이메일 주소를 입력해주세요
 
-            <div class="form-group was-validated">
-                <label class="form-label " for="email">이메일</label>
-                <input class="form-control" type="email" id="email" name="email" required maxlength="30" minlength="6"
-                       autofocus th:value="${email}">
-                <div class="invalid-feedback">
-                    이메일 주소를 입력해주세요
-                </div>
             </div>
             <div class="form-group was-validated">
                 <label class="form-label" for="pwd">비밀번호</label>
