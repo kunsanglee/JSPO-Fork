@@ -28,28 +28,26 @@ public class LoginController {
 
     private MemberDto memberDto = MemberDto.getInstance();
 
+    private static String referer = "";
+
     @GetMapping("/login")
     public String login(@CookieValue (value = "email", required = false) String email, Model m,HttpServletRequest request) {
 
         m.addAttribute("email", email);
-        String referer = request.getHeader("referer");
-        System.out.println(referer);
-        m.addAttribute("referer",referer);
+        referer = request.getHeader("referer");
+
         return "login";
     }
 
     @PostMapping("/login")
     public String login(MemberDto loginMember , Model m, HttpServletRequest request,
-                        HttpServletResponse response, boolean remember,@RequestParam String referer) throws Exception {
-
-        System.out.println(referer);
-        String result = referer.substring(22);
-        System.out.println(result);
+                        HttpServletResponse response, boolean remember) throws Exception {
 
         memberDto = memberDao.login(loginMember);
         HttpSession session = request.getSession();
         if(memberDto != null ) {
             Cookie cookie;
+
             if(remember) {
                 cookie = new Cookie("email", memberDto.getEmail());
                 cookie.setMaxAge(60*60*24);
@@ -57,16 +55,13 @@ public class LoginController {
                 cookie = new Cookie("email", null);
                 cookie.setMaxAge(0);
             }
+
             response.addCookie(cookie);
-
             session.setAttribute("email",memberDto.getEmail());
-//            String referer = request.getHeader("Referer");
-//            System.out.println(referer) +referer;
-
             m.addAttribute("memberDto", memberDto);
             m.addAttribute("encPwd", memberService.getEncPwd(memberDto));
 
-            return "redirect:/" + result;
+            return "redirect:" + referer;
         }
 
 //        둘다 데이터가 없을시

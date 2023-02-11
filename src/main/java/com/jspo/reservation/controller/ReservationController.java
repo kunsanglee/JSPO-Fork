@@ -136,13 +136,13 @@ public class ReservationController {
     @GetMapping("/my/reserved")
     public String reserved(HttpSession session, Model m) throws Exception {
         if (session.getAttribute("email") == null) {
-            String referer = "http://localhost:8080/reserved";
-            m.addAttribute("referer",referer);
+
             return "login";
         }
 
         String email = (String) session.getAttribute("email");
         memberDto = memberDao.selectMemberByEmail(email);
+
         try {
             reservationDto = reservationDao.selectLastReservationById(memberDto.getId());
             hotelDto = hotelDao.selectHotelByHtId(reservationDto.getRoomHotelHtId());
@@ -160,7 +160,6 @@ public class ReservationController {
             m.addAttribute(hotelDto);
             m.addAttribute(roomDto);
         }
-
 
         return "reserved";
     }
