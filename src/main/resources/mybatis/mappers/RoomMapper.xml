@@ -74,4 +74,8 @@
 --         update room set r_state = 1 where now() > r_checkout or r_checkin > now();
         update room set r_state = 1 where r_checkin > now() and now() > r_checkout;
     </update>
+
+    <delete id="deleteRoom" parameterType="Integer">
+        delete from room where r_id = #{rId};
+    </delete>
 </mapper>

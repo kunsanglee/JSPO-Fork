@@ -64,7 +64,6 @@ public class HotelController {
             pricelist.add(roomDao.selectPrice(list.get(i).getHtId()));
 
         }
-        System.out.println(pricelist);
         model.addAttribute("pricelist",pricelist);
         return "hotelPage";
     }
@@ -122,7 +121,7 @@ public class HotelController {
     }
     @PostMapping("/hotel/update")
     public String update(HotelDto hotelDto,MultipartFile file) throws Exception {
-        System.out.println(hotelDto);
+
         String imgUploadPath = uploadPath + "imgUpload";
         System.out.println("1. imgUploadPath"+imgUploadPath);
 
@@ -139,7 +138,7 @@ public class HotelController {
         }
         hotelDto.setHtImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
         hotelDao.updateHotel(hotelDto);
-        return "redirect:adminlist";
+        return "redirect:/admin/hotellist";
     }
 
     @PostMapping("/hotel/delete")

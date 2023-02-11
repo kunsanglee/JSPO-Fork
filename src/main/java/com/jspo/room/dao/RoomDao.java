@@ -24,4 +24,5 @@ public interface RoomDao {
 
     void updateRoomState();
 
+    void deleteRoom(int rId);
 }
