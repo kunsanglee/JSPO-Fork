@@ -23,6 +23,12 @@
         <result column="" property="roomHotelId" />
     </resultMap>
 
+    <resultMap id="reservedDto" type="com.jspo.reservation.dto.ReservedDto">
+        <result column="" property="htId" />
+        <result column="" property="rId" />
+        <result column="" property="resDate" />
+    </resultMap>
+
     <resultMap id="RoomDto" type="com.jspo.room.dto.RoomDto">
            <result column="" property="rId" />
            <result column="" property="rName" />
@@ -35,6 +41,7 @@
            <result column="" property="hotelHtId" />
         <collection property="hotelDto" resultMap="HDto" />
         <collection property="reservationDto" resultMap="ReservationDto" />
+        <collection property="reservedDto" resultMap="reservedDto" />
     </resultMap>
 
     <!--    객실 입력-->
@@ -62,16 +69,19 @@
     </select>
 
     <select id="selectRoomByinfo" parameterType="Integer" resultType="hotelDto">
-        select ht_name,ht_phone,ht_address from hotel where ht_id = #{htId};
+        select * from hotel where ht_id = #{htId};
     </select>
 
     <update id="updateRoom" parameterType="RoomDto">
         update room set r_name = #{rName},r_price = #{rPrice} ,r_img = #{rImg} where r_id = #{rId};
     </update>
 
-<!--    수정해야함-->
-    <update id="updateRoomState">
---         update room set r_state = 1 where now() > r_checkout or r_checkin > now();
-        update room set r_state = 1 where r_checkin > now() and now() > r_checkout;
-    </update>
+<!--    회원이 선택한 체크인 체크아웃 기간에 겹치는 예약이 없는 방 select-->
+    <select id="selectRoomByInOut" parameterType="Map" resultType="RoomDto">
+        select * from room where r_id not in (select distinct reserved.r_id from room, reserved
+        where room.r_id = reserved.r_id
+        and room.hotel_ht_id = #{htId}
+        and reserved.res_date between #{checkin} and #{checkout});
+    </select>
+
 </mapper>
