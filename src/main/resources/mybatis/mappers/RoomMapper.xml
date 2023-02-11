@@ -76,6 +76,15 @@
         update room set r_name = #{rName},r_price = #{rPrice} ,r_img = #{rImg} where r_id = #{rId};
     </update>
 
+    <update id="updateRoomState">
+--         update room set r_state = 1 where now() > r_checkout or r_checkin > now();
+        update room set r_state = 1 where r_checkin > now() and now() > r_checkout;
+    </update>
+
+    <delete id="deleteRoom" parameterType="Integer">
+        delete from room where r_id = #{rId};
+    </delete>
+
 <!--    회원이 선택한 체크인 체크아웃 기간에 겹치는 예약이 없는 방 select-->
     <select id="selectRoomByInOut" parameterType="Map" resultType="RoomDto">
         select * from room where r_id not in (select distinct reserved.r_id from room, reserved

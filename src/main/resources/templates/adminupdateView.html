@@ -6,35 +6,37 @@
 
 
 <head>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <title>게시판</title>
 </head>
-<script type="text/javascript">
-  $(document).ready(function(){
 
-    $(".Hcancel_btn").on("click", function(){
-      event.preventDefault();
-      location.href = "/hotel/adminlist";
-
-    })
-  });
-  $(document).ready(function(){
-
-    $(".Rcancel_btn").on("click", function(){
-      event.preventDefault();
-      location.href = "/room/adminlist";
-
-    })
-  });
-
-</script>
 <body>
 
+
 <div id="root "  layout:fragment="content">
+
   <header>
     <h1>수정 게시판</h1>
   </header>
 
+  <script type="text/javascript">
+    $(document).ready(function(){
+
+      $(".Hcancel_btn").on("click", function(){
+        event.preventDefault();
+        location.href = "/admin/hotellist";
+
+      })
+    });
+    $(document).ready(function(){
+
+      $(".Rcancel_btn").on("click", function(){
+        event.preventDefault();
+        location.href = "/admin/roomlist";
+
+      })
+    });
+
+  </script>
 
   <th:block th:if="${hotelupdate != null}">
     <form name="updateForm" role="form" method="post" action="/hotel/update" enctype="multipart/form-data">
@@ -63,7 +65,7 @@
       </table>
       <div>
         <button type="submit" >저장</button>
-        <button type="submit" class="Hcancel_btn">취소</button>
+        <button type="button" class="Hcancel_btn">취소</button>
       </div>
     </form>
 
@@ -92,10 +94,11 @@
       </td>
       <div>
         <button type="submit" class="update_btn">저장</button>
-        <button type="submit" class="Rcancel_btn">취소</button>
+        <button type="button" class="Rcancel_btn">취소</button>
       </div>
     </form>
   </th:block>
 </div>
 </body>
+
 </html>
