@@ -28,4 +28,5 @@ public interface RoomDao {
 //    void roomCntUp(ReservedDto reservedDto);
 //    void roomCntDown(ReservedDto reservedDto);
 
+    void deleteRoom(int rId);
 }

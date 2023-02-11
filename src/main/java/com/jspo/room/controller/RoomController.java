@@ -121,8 +121,12 @@ public class RoomController {
         }
         roomDto.setrImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
         roomDao.updateRoom(roomDto);
-        return "redirect:adminlist";
+        return "redirect:/admin/roomlist";
     }
 
-
+    @PostMapping("/room/delete")
+    public String delete(int rId) {
+        roomDao.deleteRoom(rId);
+        return "admin";
+    }
 }
