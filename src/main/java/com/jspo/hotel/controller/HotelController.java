@@ -93,7 +93,8 @@ public class HotelController {
         } else {
             fileName = "none.png";
         }
-        hotelDto.setHtImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
+//        hotelDto.setHtImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
+        hotelDto.setHtImg("http://localhost:8080/static/"+fileName);
        hotelDao.insertHotel(hotelDto);
         return "redirect:/admin/hotellist";
     }
@@ -136,7 +137,8 @@ public class HotelController {
         } else {
             fileName = "none.png";
         }
-        hotelDto.setHtImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
+//        hotelDto.setHtImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
+        hotelDto.setHtImg("http://localhost:8080/static/"+fileName);
         hotelDao.updateHotel(hotelDto);
         return "redirect:/admin/hotellist";
     }
@@ -146,7 +148,6 @@ public class HotelController {
         hotelDao.deleteHotel(hotelDto.getHtId());
         return "redirect:list";
     }
-
 
 
 }
