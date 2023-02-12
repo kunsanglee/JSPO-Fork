@@ -6,7 +6,9 @@
 
 
 // //비밀번호 길이만큼 '*'를 표시해줌
-trans_password()
+
+document.addEventListener('load',trans_password);
+// trans_password()
 function trans_password() {
     const pwd_length = document.querySelector('#staticPassword');
     console.log(pwd_length.value)
