@@ -70,7 +70,7 @@ public class RoomController {
     public String insert(RoomDto roomDto, MultipartFile file, @RequestParam String hotelHtId) throws Exception {
 
         System.out.println("들어온 호텔코드 : " + hotelHtId);
-        String imgUploadPath = uploadPath + "roomimgUpload";
+        String imgUploadPath = uploadPath + "imgUpload";
         System.out.println("위치 : Room Post insert = imgUploadPath :"+imgUploadPath);
 
         String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
@@ -84,7 +84,8 @@ public class RoomController {
             fileName = "none.png";
         }
 
-        roomDto.setrImg(File.separator+"imgs"+File.separator+ "roomimgUpload" + ymdPath + File.separator+ fileName);
+//        roomDto.setrImg(File.separator+"imgs"+File.separator+ "roomimgUpload" + ymdPath + File.separator+ fileName);
+        roomDto.setrImg("http://localhost:8080/static/"+fileName);
         roomDao.insertRoom(roomDto);
 
         // DB에 저장하면 -1일 처리돼서 +1 처리
@@ -119,7 +120,8 @@ public class RoomController {
         } else {
             fileName = "none.png";
         }
-        roomDto.setrImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
+//        roomDto.setrImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
+        roomDto.setrImg("http://localhost:8080/static/"+fileName);
         roomDao.updateRoom(roomDto);
         return "redirect:/admin/roomlist";
     }
