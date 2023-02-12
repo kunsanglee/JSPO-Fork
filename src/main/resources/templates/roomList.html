@@ -4,7 +4,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default_layout}">
 
-
 <head>
     <meta charset="UTF-8">
     <title>객실 등록</title>
@@ -22,25 +21,53 @@
 <body>
 
 <div class="container h-100 " layout:fragment="content">
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+        $(function () {
+            $('input[name="daterange"]').daterangepicker({
+                "locale": {
+                    "format": "YYYY-MM-DD",
+                    "separator": " ~ ",
+                    "applyLabel": "확인",
+                    "cancelLabel": "취소",
+                    "fromLabel": "체크인",
+                    "toLabel": "체크아웃",
+                    "customRangeLabel": "Custom",
+                    "weekLabel": "주",
+                    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+                    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월",
+                        "7월", "8월", "9월", "10월", "11월", "12월"],
+                    "firstDay": 1
+                },
+                "startDate": new Date(),
+                "endDate": new Date(new Date().setDate(new Date().getDate() + 1)),
+                "minDate": new Date(),
+                "maxDate": new Date(new Date().setDate(new Date().getDate() + 90)),
+                "opens": "center",
+            }, function (start, end, label) {
+                console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+                window.document.querySelector('.start').value = start.format('YYYY-MM-DD');
+                window.document.querySelector('.end').value = end.format('YYYY-MM-DD');
+            })
+        });
+    </script>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+
     <header>
         <th:block th:if="${hotelDto != null}">
             <h1 th:text="${hotelDto.htName}"/>
-            <h3 th:text="${hotelDto.htPhone}"/>
             <h3 th:text="${hotelDto.htAddress}"/>
+            <h3 th:text="${hotelDto.htPhone}"/>
             <img th:src="${hotelDto.getHtImg()}" class="oriImg">
         </th:block>
     </header>
 
     <table>
-
-
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-        <script type="text/javascript"
-                src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-        <link rel="stylesheet" type="text/css"
-              href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
-
         <form th:action="@{/room/list/}+${hotelDto.htId}">
             <input type="text" name="daterange" th:value="${#temporals.createToday()}"/>
             <input type="text" class="start" name="checkin" th:value="${checkin}" hidden="hidden"/>
@@ -48,44 +75,11 @@
             <button type="submit">검색</button>
         </form>
 
-        <script>
-            $(function () {
-                $('input[name="daterange"]').daterangepicker({
-                    "locale": {
-                        "format": "YYYY-MM-DD",
-                        "separator": " ~ ",
-                        "applyLabel": "확인",
-                        "cancelLabel": "취소",
-                        "fromLabel": "체크인",
-                        "toLabel": "체크아웃",
-                        "customRangeLabel": "Custom",
-                        "weekLabel": "주",
-                        "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
-                        "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월",
-                            "7월", "8월", "9월", "10월", "11월", "12월"],
-                        "firstDay": 1
-                    },
-                    "startDate": new Date(),
-                    "endDate": new Date(new Date().setDate(new Date().getDate() + 1)),
-                    "minDate": new Date(),
-                    "maxDate": new Date(new Date().setDate(new Date().getDate() + 90)),
-                    "opens": "center",
-                }, function (start, end, label) {
-                    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-                    window.document.querySelector('.start').value = start.format('YYYY-MM-DD');
-                    window.document.querySelector('.end').value = end.format('YYYY-MM-DD');
-                })
-            });
-        </script>
-
-
-
         <tr>
             <th>사진</th>
             <th>객실이름</th>
             <th>객실가격</th>
         </tr>
-
 
         <tr th:each="list : ${list}">
             <form role="form" method="post" action="/reservation">
@@ -105,9 +99,7 @@
                     <button type="submit">객실 예약하기</button>
                 </td>
             </form>
-
         </tr>
-
     </table>
 </div>
 </body>
