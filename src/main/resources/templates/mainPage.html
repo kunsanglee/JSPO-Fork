@@ -24,9 +24,7 @@
 
         <div class=" mb-3 my-3">
             <form class="d-flex" action="/hotel" method="post">
-
                 <input class="form-control sm-5 me-2" type="search" placeholder="숙소명 검색" aria-label="Search" name="htName">
-
                 <button class="btn btn-outline-success" type="submit">검색</button>
             </form>
         </div>
@@ -57,14 +55,14 @@
             </div>
         </div>
 
-        <form>
+          <table>
             <tr th:each="list ,i : ${list}">
                 <div class="card mb-3 hotel_list mt-4">
                     <div class="row g-0">
                         <div class="col-md-4">
                             <a th:href="@{/room/list/} + ${list.htId}"> <img th:src="${list.htImg}"
-                                                                             class="img-fluid rounded-start" alt="..."
-                                                                             width="100%" height="100%"></a>
+                            class="img-fluid rounded-start" alt="..."
+                            width="100%" height="100%"></a>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -84,7 +82,7 @@
                     </div>
                 </div>
             </tr>
-        </form>
+          </table>
 
 
 
