@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -42,8 +43,10 @@ public class ReservationController {
 
     @PostMapping("/reservation")
     public String reserve(HttpSession session, Model m, int hotelHtId, int rId,
-                          java.sql.Date rCheckin, java.sql.Date rCheckout) throws Exception {
+                          java.sql.Date rCheckin, java.sql.Date rCheckout, HttpServletRequest request) throws Exception {
 
+        System.out.println("post reservation = " + request.getHeader("referer"));
+        
         if (session.getAttribute("email") == null) {
             return "redirect:/login";
         }

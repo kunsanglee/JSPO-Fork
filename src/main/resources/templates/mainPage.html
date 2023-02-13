@@ -15,6 +15,13 @@
     <h2><a href="/hotel/reg">호텔등록 페이지</a></h2>
     <h2><a href="/my/reserved">예약내역 페이지</a></h2>
     <h2><a href="/hotel/list">호텔 리스트</a></h2>
+
+    <th:block th:each="list : ${list}">
+        호텔이름<span th:text="${list.htName}"></span>
+        호텔주소<span th:text="${list.htAddress}"></span>
+        호텔사진<img th:src="${list.htImg}"/>
+        호텔전화<span th:text="${list.htPhone}"></span>
+    </th:block>
 </div>
 </body>
 </html>
