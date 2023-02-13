@@ -21,9 +21,9 @@
 </head>
 <body>
 
-<div class="container h-100 " layout:fragment="content">
+<div class="container" layout:fragment="content">
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary " >
+    <nav class="navbar navbar-expand-lg bg-body-tertiary my-2 " >
         <div class="container-fluid">
             <a class="navbar-brand" href="/admin/hotellist">관리자 홈</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,7 +91,7 @@
 <!--                    d-flex justify-content-center  item-align-center text-align-center-->
                     <input type="text" class="" hidden="hidden" name="rId" th:value="${rlist.rId}">
                     <td th:name="hotelHtId" th:text="${rlist.htName} + ' 호텔'"></td>
-                    <td><img   th:src="${rlist.rImg}" width="500px" height="200px" class="oriImg"></td>
+                    <td><img th:src="${rlist.rImg}" width="500px" height="220px" class="oriImg mx-auto d-block" ></td>
                     <td  th:name="rName" th:text="${rlist.rName}"></td>
                     <td  th:name="rPrice" th:text="${rlist.rPrice}"></td>
                     <td  th:name="rCnt" th:text="${rlist.rCnt}"></td>

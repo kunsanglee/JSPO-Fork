@@ -6,22 +6,88 @@
 <head>
 </head>
 <body>
-<div class="ready" layout:fragment="content">
+<div class="container" layout:fragment="content">
 
-    <h1>메인 페이지</h1>
+   <p><span>메인 페이지</span>
+    <span><a href="/hotel">호텔페이지// </a></span>
+    <span><a href="/admin/hotellist">관리자 페이지// </a></span>
+    <span><a href="/hotel/reg">호텔등록 페이지//</a></span>
+    <span><a href="/my/reserved">예약내역 페이지//</a></span>
+    <span   ><a href="/hotel/list">호텔 리스트</a></span>
+    </p>
 
-    <h2><a href="/hotel">호텔페이지 </a></h2>
-    <h2><a href="/admin/hotellist">관리자 페이지 </a></h2>
-    <h2><a href="/hotel/reg">호텔등록 페이지</a></h2>
-    <h2><a href="/my/reserved">예약내역 페이지</a></h2>
-    <h2><a href="/hotel/list">호텔 리스트</a></h2>
+        <div class="title my-3 w-100 justify-content-between">
 
-    <th:block th:each="list : ${list}">
-        호텔이름<span th:text="${list.htName}"></span>
-        호텔주소<span th:text="${list.htAddress}"></span>
-        호텔사진<img th:src="${list.htImg}"/>
-        호텔전화<span th:text="${list.htPhone}"></span>
-    </th:block>
-</div>
-</body>
-</html>
+            <span class="fw-bold display-6 ">맞춤 숙소 검색</span>
+            <span id="reset">초기화</span>
+        </div>
+
+        <div class=" mb-3 my-3">
+            <form class="d-flex" action="/hotel" method="post">
+                <input class="form-control sm-5 me-2" type="search" placeholder="숙소명 검색" aria-label="Search" name="htName">
+                <button class="btn btn-outline-success" type="submit">검색</button>
+            </form>
+        </div>
+
+        <div class="slider">
+
+            <label for="min_price" class="form-label fw-bold">최저가격</label>
+            <div class="price_wrap">
+                <input type="range" class="form-range price_input_range" id="min_price" min="1" max="9999" value="1"
+                       step="1">
+                <div class="input-group price_input_group">
+                    <span class="input-group-text ">₩</span>
+                    <input type="text" class="form-control " id="min_box" aria-label="원" value="10,000">
+                    <span class="input-group-text ">원</span>
+                </div>
+            </div>
+            <div class="max_price_wrap">
+                <label for="max_price" class="form-label fw-bold">최대가격</label>
+                <div class="price_wrap">
+                    <input type="range" class="form-range price_input_range" id="max_price" min="2" max="10000"
+                           value="10000" step="1">
+                    <div class="input-group price_input_group">
+                        <span class="input-group-text ">₩</span>
+                        <input type="text" class="form-control" id="max_box" aria-label="원" value="10,000,000">
+                        <span class="input-group-text">원</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!--          <table>-->
+<!--            <tr th:each="list ,i : ${list}">-->
+<!--                <div class="card mb-3 hotel_list mt-4">-->
+<!--                    <div class="row g-0">-->
+<!--                        <div class="col-md-4">-->
+<!--                            <a th:href="@{/room/list/} + ${list.htId}"> <img th:src="${list.htImg}"-->
+<!--                            class="img-fluid rounded-start" alt="..."-->
+<!--                            width="100%" height="100%"></a>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-8">-->
+<!--                            <div class="card-body">-->
+<!--                                <h2 class="card-title fw-bolder" th:text="${list.htName}"></h2>-->
+<!--                                <p class="card-text" th:text="${list.htAddress}"></p>-->
+<!--                                <div class="hotel_list_price">-->
+<!--                                    <span class="display-4 fw-bolder">가격</span>-->
+<!--                                    <td th:if="${pricelist[i.index]} != null"><span class="fw-bolder display-4"-->
+<!--                                                                                    th:text="${pricelist[i.index]}"></span><span-->
+<!--                                            class="fw-bolder display-4">원</span></td>-->
+<!--                                    <td th:if="${pricelist[i.index]} == null"><span class="fw-bolder display-4"-->
+<!--                                                                                    th:text="0"></span><span-->
+<!--                                            class="fw-bolder display-4">원</span></td>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </tr>-->
+<!--          </table>-->
+
+    </div>
+
+    </body>
+
+    </html>
+
+

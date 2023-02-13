@@ -5,15 +5,8 @@
       layout:decorate="~{layout/default_layout}">
 
 
-<head>
-    <meta charset="UTF-8">
-    <title>등록페이지</title>
-    <style>
-        .img { width: 300px; height: 200px;}
-    </style>
-</head>
 <body>
-<div class="container h-80 " layout:fragment="content">
+<div class="container" layout:fragment="content">
 <th:block th:if="${hotelDto == null}">
 
     <span class="fw-bold display-6 ">호텔 등록</span>
@@ -151,8 +144,6 @@
     </div>
 
 </th:block>
-
-
 </div>
 </body>
 </html>

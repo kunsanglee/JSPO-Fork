@@ -1,20 +1,8 @@
-/**{box-sizing: border-box}*/
-footer{
-    display: block;
 
-}
-
-.footer_wrapper{
-
-
-    /*position: relative;*/
-
-
-}
 .footer__container{
     height: 240px;
     width: 100vw;
-    background-color: black;
+    background-color: #6f2cf4;
     color: white;
     display: flex;
     flex-direction: column;
