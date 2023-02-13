@@ -1,32 +1,14 @@
 
 
-.hotel_list_hotel_img img{
-    margin-right: 30px;
-    /*background-color: lemonchiffon;*/
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-size: cover;
-    /*width: 200px;*/
-    /*height: 180px;*/
-    /*border-radius: 15px;*/
+/*#hotel_list_content{*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*}*/
+/*.hotel_list_hotel_info{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+/*.hotel_list_hotel_info p{*/
+/*    margin: 0 0  2px 0;*/
+/*}*/
 
-}
-#hotel_list_content{
-    display: flex;
-    flex-direction: row;
-}
-.hotel_list_hotel_info{
-    display: flex;
-    flex-direction: column;
-}
-.hotel_list_hotel_info p{
-    margin: 0 0  2px 0;
-}
-
-
-.oriImg{
-    border: 2px solid red;
-    width: 400px;
-    00.
-}
