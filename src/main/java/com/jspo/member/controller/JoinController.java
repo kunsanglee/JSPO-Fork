@@ -4,6 +4,7 @@ import com.jspo.member.dao.MemberDao;
 import com.jspo.member.dto.MemberDto;
 import com.jspo.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,9 +30,16 @@ public class JoinController {
 
     private MemberDto memberDto = MemberDto.getInstance();
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @GetMapping("/join")
-    public String join(MemberDto memberDto) {
+    public String join(MemberDto memberDto, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("email") != null) {
+            return "redirect:/";
+        }
 
         return "regForm";
     }
@@ -65,6 +75,11 @@ public class JoinController {
         }
 
         System.out.println("joinMember = " + joinMember.getBirth());
+
+        String encPwd = passwordEncoder.encode(joinMember.getPwd());
+        System.out.println("encPwd = " + encPwd);
+
+        joinMember.setPwd(encPwd);
 
 //        DB에 등록한 회원 저장.
         memberDao.insertMember(joinMember);

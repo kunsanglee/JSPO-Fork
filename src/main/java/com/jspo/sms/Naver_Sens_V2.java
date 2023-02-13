@@ -15,16 +15,26 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 
+@PropertySource("classpath:application.properties")
 public class Naver_Sens_V2 {
+
+    @Value("${naver-cloud-sms.accessKey}")
+    String accessKey;
+    @Value("${naver-cloud-sms.secretKey}")
+    String secretKey;
+    @Value("${naver-cloud-sms.serviceId}")
+    String serviceId;
+    @Value("${naver-cloud-sms.senderPhone}")
+    String senderPhone;
     @SuppressWarnings("unchecked")
     public void send_msg(String tel, String rand) {
         String hostNameUrl = "https://sens.apigw.ntruss.com";     		// 호스트 URL
         String requestUrl= "/sms/v2/services/";                   		// 요청 URL
         String requestUrlType = "/messages";                      		// 요청 URL
-        String accessKey = "clPna7hxL4V6MAnRnw62";                      // 개인 인증키
-        String secretKey = "OFaTzEzFaJ67pgCObgR4dlOXget1J6f013tH22RJ";	// 2차 인증을 위해 서비스마다 할당되는 service secret
-        String serviceId = "ncp:sms:kr:300653925895:jspo_sms";			// 프로젝트에 할당된 SMS 서비스 ID
+
         String method = "POST";											// 요청 method
         String timestamp = Long.toString(System.currentTimeMillis()); 	// current timestamp (epoch)
         requestUrl += serviceId + requestUrlType;
@@ -43,7 +53,7 @@ public class Naver_Sens_V2 {
         bodyJson.put("type","sms");	// 메시지 Type (sms | lms)
         bodyJson.put("contentType","COMM");
         bodyJson.put("countryCode","82");
-        bodyJson.put("from","01034464487");	// 발신번호 * 사전에 인증/등록된 번호만 사용할 수 있습니다.
+        bodyJson.put("from", senderPhone);	// 발신번호 * 사전에 인증/등록된 번호만 사용할 수 있습니다.
         bodyJson.put("content", "JSPO Auth Num");
         bodyJson.put("messages", toArr);
 
