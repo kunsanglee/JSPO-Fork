@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.util.*;
 
 @Controller
@@ -49,6 +48,7 @@ public class RoomController {
         map.put("checkin", checkin);
         map.put("checkout", checkout);
         List<RoomDto> list = roomDao.selectRoomByInOut(map);
+        System.out.println("list = " + list);
         model.addAttribute("list",list);
 
         model.addAttribute("checkin", checkin);
@@ -56,6 +56,7 @@ public class RoomController {
 
         hotelDto = hotelDao.selectHotelByHtId(htId);
         model.addAttribute("hotelDto",hotelDto);
+        System.out.println("hotelDto = " + hotelDto);
 
         return "roomList"; // 객실 html
     }
