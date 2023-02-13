@@ -36,8 +36,6 @@ public class MemberController {
     @GetMapping("/my")
     public String myPage(HttpSession session, Model m) throws Exception {
         if (session.getAttribute("email") == null) {
-            String referer = "http://localhost:8080/my";
-            m.addAttribute("referer",referer);
             return "login";
         }
 

@@ -14,8 +14,10 @@
 
             <div class="col col-md-2 border rounded-3  p-0 mx-3 mb-5"  th:each="list, i : ${list}">
                 <div class="hotel_list_img position-relative">
+
                 <a th:href="|@{/room/list/} + ${list.htId}|"><img th:src="${list.htImg}" class="oriImg rounded-3"
                     id="list_img" th:id="${list.htId}" width="202px" height="210px" style="background-size: cover; background-position: center"></a>
+
                 </div>
                 <div class="hotel_list_info mt-2 p-1">
                 <p class="m-0 "><span class="resId fs-6 text-secondary" th:text="${list.htAddress}"></span></p>

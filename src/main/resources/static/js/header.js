@@ -20,22 +20,22 @@ const deleteCookie = function(name) {
 // }
 
 //로그아웃 클릭시 로그아웃
-login_logout.addEventListener('click',()=>{
-    const LOGIN = "로그인";
-    const LOGOUT = '로그아웃';
-    const LOGIN_STATE = login_logout.innerText;
-    console.log(LOGIN_STATE);
-    if (LOGIN_STATE===LOGIN){
-        //비 로그인 상태
-        console.log('지금',LOGIN);
-        document.location.href = '/login'
-
-    }else if(LOGIN_STATE===LOGOUT){
-        deleteCookie('email');
-        document.location.href = '/logout';
-
-        console.log(LOGOUT);
-    }
-    console.log('클릭릭')
-})
+// login_logout.addEventListener('click',()=>{
+//     const LOGIN = "로그인";
+//     const LOGOUT = '로그아웃';
+//     const LOGIN_STATE = login_logout.innerText;
+//     console.log(LOGIN_STATE);
+//     if (LOGIN_STATE===LOGIN){
+//         //비 로그인 상태
+//         console.log('지금',LOGIN);
+//         document.location.href = '/login'
+//
+//     }else if(LOGIN_STATE===LOGOUT){
+//         deleteCookie('email');
+//         document.location.href = '/logout';
+//
+//         console.log(LOGOUT);
+//     }
+//     console.log('클릭릭')
+// })
 
