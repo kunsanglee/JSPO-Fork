@@ -6,7 +6,7 @@
 
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>호텔 리스트</title>
     <style>
         .oriImg {
@@ -22,97 +22,111 @@
 <body>
 
 <div class="container h-100 " layout:fragment="content">
-<header>
-    <h1> ADMIN 게시판</h1>
-</header>
 
-<nav>
-    <ul>
-        <li><a href="/admin/hotellist">호텔 관리</a></li>
-        <li><a href="/admin/roomlist">객실 관리</a></li>
-        <li><a href="/hotel/reg">호텔 등록</a></li>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary " >
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/admin/hotellist">관리자 홈</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/admin/hotellist">호텔 관리</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/roomlist">객실 관리</a>
+                    </li>
 
-    </ul>
-</nav>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/hotel/reg">호텔 등록</a>
+                    </li>
 
-<th:block th:if="${hlist != null}">
-    <table>
+                </ul>
 
-        <tr>
-            <th>호텔이미지</th>
-            <th>호텔이름</th>
-            <th>주소</th>
-            <th>가격</th>
-            <th>수정여부</th>
-        </tr>
-        <tr th:each="hlist, i: ${hlist}">
-            <form role="form">
-                <input type="text" hidden="hidden" name="htId" th:value="${hlist.htId}">
-                <td><img th:src="${hlist.htImg}" class="oriImg"></td>
-                <td th:text="${hlist.htName}"></td>
-                <td th:text="${hlist.htAddress}"></td>
-                <td th:if="${pricelist[i.index]} != null"><span th:text="${pricelist[i.index]}+'원'"></span></td>
-                <td th:if="${pricelist[i.index]} == null"><span th:text='0원'></span></td>
-                <td>
-                    <button type="submit" class="roomcreate">객실등록</button>
-                    <br>
-                    <button type="submit" class="hotelupdate">수정</button>
-                </td>
-            </form>
-        </tr>
-    </table>
-</th:block>
+            </div>
+        </div>
+    </nav>
 
-<th:block th:if="${rlist != null}">
-    <table>
 
-        <tr>
-            <th>호텔이름</th>
-            <th>객실이미지</th>
-            <th>객실이름</th>
-            <th>객실가격</th>
-            <th>객실갯수</th>
-            <th>수정여부</th>
-        </tr>
-        <tr th:each="rlist : ${rlist}">
-            <form role="form">
-                <input type="text" hidden="hidden" name="rId" th:value="${rlist.rId}">
-                <td th:name="hotelHtId" th:text="${rlist.htName} + '호텔'"></td>
-                <td><img th:src="${rlist.rImg}" class="oriImg"></td>
-                <td th:name="rName" th:text="${rlist.rName}"></td>
-                <td th:name="rPrice" th:text="${rlist.rPrice}"></td>
-                <td th:name="rCnt" th:text="${rlist.rCnt}"></td>
-                <td>
-                    <button type="submit" class="roomupdate">수정</button>
-                    <button type="submit" class="roomdelete">삭제</button>
-                </td>
-            </form>
-        </tr>
-    </table>
-</th:block>
+    <th:block th:if="${hlist != null}">
+        <table class="table">
 
-<script>
-    var formObj = $("form[role='form']");
-    $(".hotelupdate").click(function () {
-        formObj.attr("action", "/hotel/updateView");
-        formObj.attr("method", "post")
-        formObj.submit();
-    });
-    $(".roomupdate").click(function () {
-        formObj.attr("action", "/room/updateView");
-        formObj.attr("method", "post")
-        formObj.submit();
-    });
-    $(".roomcreate").click(function () {
-        formObj.attr("action", "/room/reg");
-        formObj.submit();
-    });
-    $(".roomdelete").click(function () {
-        formObj.attr("action", "/room/delete");
-        formObj.attr("method", "post")
-        formObj.submit();
-    });
-</script>
+            <tr class="text-center" >
+<!--                <th>호텔이미지</th>-->
+                <th>호텔이름</th>
+                <th>주소</th>
+                <th>가격</th>
+                <th>수정여부</th>
+            </tr>
+            <tr th:each="hlist, i: ${hlist}" class="text-center">
+                <form role="form">
+                    <input type="text" hidden="hidden" name="htId" th:value="${hlist.htId}">
+                    <td th:text="${hlist.htName}"></td>
+                    <td th:text="${hlist.htAddress}"></td>
+                    <td th:if="${pricelist[i.index]} != null"><span th:text="${pricelist[i.index]}+'원'"></span></td>
+                    <td th:if="${pricelist[i.index]} == null"><span th:text='0원'></span></td>
+                    <td>
+                        <button type="submit" class="btn btn-secondary roomcreate">객실등록</button>
+                        <button type="submit" class="btn btn-secondary hotelupdate">수정</button>
+                    </td>
+                </form>
+            </tr>
+        </table>
+    </th:block>
+
+    <th:block th:if="${rlist != null}">
+        <table class="table mt-3">
+
+            <tr  class="text-center " >
+                <th>호텔이름</th>
+                <th>객실이미지</th>
+                <th>객실이름</th>
+                <th>객실가격</th>
+                <th>객실갯수</th>
+                <th>수정여부</th>
+            </tr>
+            <tr th:each="rlist : ${rlist}" class="text-center">
+                <form role="form">
+<!--                    d-flex justify-content-center  item-align-center text-align-center-->
+                    <input type="text" class="" hidden="hidden" name="rId" th:value="${rlist.rId}">
+                    <td th:name="hotelHtId" th:text="${rlist.htName} + ' 호텔'"></td>
+                    <td><img   th:src="${rlist.rImg}" width="500px" height="200px" class="oriImg"></td>
+                    <td  th:name="rName" th:text="${rlist.rName}"></td>
+                    <td  th:name="rPrice" th:text="${rlist.rPrice}"></td>
+                    <td  th:name="rCnt" th:text="${rlist.rCnt}"></td>
+                    <td >
+
+                        <button type="submit" class="btn btn-secondary roomupdate">객실등록</button>
+                        <button type="submit" class="btn btn-secondary roomdelete">수정</button>
+                    </td>
+                </form>
+            </tr>
+        </table>
+    </th:block>
+
+    <script>
+        var formObj = $("form[role='form']");
+        $(".hotelupdate").click(function () {
+            formObj.attr("action", "/hotel/updateView");
+            formObj.attr("method", "post")
+            formObj.submit();
+        });
+        $(".roomupdate").click(function () {
+            formObj.attr("action", "/room/updateView");
+            formObj.attr("method", "post")
+            formObj.submit();
+        });
+        $(".roomcreate").click(function () {
+            formObj.attr("action", "/room/reg");
+            formObj.submit();
+        });
+        $(".roomdelete").click(function () {
+            formObj.attr("action", "/room/delete");
+            formObj.attr("method", "post")
+            formObj.submit();
+        });
+    </script>
 </div>
 </body>
 </html>
