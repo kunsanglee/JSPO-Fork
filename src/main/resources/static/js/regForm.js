@@ -21,7 +21,7 @@ let authNumCheck;
 function validate_check(email) {
 
     let regex = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    return (email !== '' && email !== 'undefined' && regex.test(email));
+    return (email !== '' && email !== 'undefined' && regex.test(email) );
 
 }
 
@@ -51,13 +51,14 @@ function checkEmail() {
                     emailCheck = false;
 
                 } else if (cnt === 0) {
-                    check_email_feedback_after.innerText = `사용 가능한 이메일입니다.`;
+                    check_email_feedback.innerText = `사용 가능한 이메일입니다.`;
+                    check_email_feedback.style.color = 'green';
                     check_email_feedback_after.style.display = "block";
                     emailCheck = true;
 
                 } else {
-                    check_email_feedback_after.innerText = `이미 존재하는 이메일입니다.`;
-                    check_email_feedback_after.style.display = "block";
+                    check_email_feedback.innerText = `이미 존재하는 이메일 입니다.`;
+                    check_email_feedback.style.display = "block";
                     emailCheck = false;
                 }
             },

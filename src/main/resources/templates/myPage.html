@@ -10,10 +10,14 @@
 
 
 
+    <title>마이페이지</title>
+
+
 </head>
 <body>
+<div class="container" layout:fragment="content">
+<div class="myPage_wrap justify-content-center"  >
 
-<div class="myPage_wrap justify-content-center" layout:fragment="content" >
     <div class="myPage" >
         <div class="myPage_title" >
             <p class="fs-3 fw-bold">회원정보</p>
@@ -43,12 +47,13 @@
                     <input type="password" class="form-control-plaintext" id="staticPassword" th:value="*{pwd.length}" readonly>
                 </div>
                 <div class="col-sm-4">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">비밀번호 변경</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >비밀번호 변경</button>
                 </div>
             </div>
 
+
             <div class="mb-3 row">
-                <label for="staticBirth" class="col-sm-3 col-form-label" readonly>생년월일</label>
+                <label for="staticBirth" class="col-sm-3 col-form-label">생년월일</label>
                 <div class="col-sm-5">
                     <input type="text" readonly class="form-control-plaintext" id="staticBirth" th:value="${#dates.format(memberDto.birth, 'yyyy년 MM월 dd일')}" >
                 </div>
@@ -69,6 +74,8 @@
 
 
         </form>
+
+
     </div>
 
 
@@ -114,8 +121,6 @@
     </div>
     <!--비밀번호 변경 모달 끝-->
 
-
-
     <div class="modal fade" id="staticBackdrop-phone" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -154,14 +159,7 @@
     </div>
 
 </div>
-
-
-<!-- Modal -->
-
-
-
-
-
+</div>
 </body>
 
 </html>

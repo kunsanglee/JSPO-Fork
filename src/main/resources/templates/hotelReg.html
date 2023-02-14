@@ -1,0 +1,149 @@
+<!--<!doctype html>-->
+<!--<html lang="en"-->
+<!--      xmlns:th="http://www.thymeleaf.org"-->
+<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+<!--      layout:decorate="~{layout/default_layout}">-->
+
+
+<!--<body>-->
+<!--<div class="container" layout:fragment="content">-->
+<!--<th:block th:if="${hotelDto == null}">-->
+
+<!--    <span class="fw-bold display-6 ">호텔 등록</span>-->
+<!--    <div class="hotel_reg_wrap justify-content-center"  >-->
+<!--        <div class="hotel_reg" >-->
+
+
+<!--            <form role="form" method="post" action="/hotel/reg" enctype="multipart/form-data" name="hotel_reg_form">-->
+
+<!--                <div class="select_img w-100 "><img src="" class="w-100 mb-2 p-1 rounded"  /></div>-->
+<!--                <div class="hotel_reg_input_group">-->
+<!--                <div class="input-group input-group-sm mb-3">-->
+<!--                    <span class="input-group-text">호텔명</span>-->
+<!--                    <input type="text" class="form-control" id="htName" name="htName"  aria-describedby="inputGroup-sizing-default">-->
+<!--                </div>-->
+
+
+<!--                <div class="input-group input-group-sm mb-3">-->
+<!--                    <span class="input-group-text" >호텔 주소</span>-->
+<!--                    <input type="text" class="form-control" id="htAddress" name="htAddress"  aria-describedby="inputGroup-sizing-default">-->
+<!--                </div>-->
+
+<!--                <div class="input-group input-group-sm mb-3">-->
+<!--                    <span class="input-group-text" >호텔 연락처</span>-->
+<!--                    <input type="tel" class="form-control" id="htPhone" name="htPhone"  aria-describedby="inputGroup-sizing-default">-->
+<!--                </div>-->
+<!--                <div class="input-group input-group-sm mb-3">-->
+<!--                    <span class="input-group-text" >호텔 이미지</span>-->
+<!--                    <input type="file" class="form-control" id="htImg" name="file"  aria-describedby="inputGroup-sizing-default">-->
+<!--                </div>-->
+<!--                </div>-->
+
+<!--                <script>-->
+<!--                    $("#htImg").change(function(){-->
+<!--                        if(this.files && this.files[0]) {-->
+<!--                            let reader = new FileReader;-->
+<!--                            reader.onload = function(data) {-->
+<!--                                $(".select_img img").attr("src", data.target.result).width(500);-->
+<!--                            }-->
+<!--                            reader.readAsDataURL(this.files[0]);-->
+<!--                        }-->
+<!--                    });-->
+
+<!--                </script>-->
+
+<!--                <div><button type="submit" class="btn btn-success w-100">등록하기</button></div>-->
+
+
+
+<!--            </form>-->
+<!--        </div>-->
+
+
+
+
+
+<!--    </div>-->
+
+<!--</th:block>-->
+
+<!--<th:block th:if="${hotelDto != null}">-->
+
+<!--    <span class="fw-bold display-6 ">호텔 정보</span>-->
+<!--    <div class="hotel_reg_wrap justify-content-center"  >-->
+<!--        <div class="hotel_reg" >-->
+
+
+
+<!--                <form role="form" method="post" action="/room/reg" enctype="multipart/form-data">-->
+
+<!--                <div class="select_img w-100 "><img th:src="${hotelDto.htImg}" class="w-100 mb-2 p-1 rounded img"  /></div>-->
+<!--                <div class="hotel_reg_input_group">-->
+<!--                    <div class="input-group input-group-sm mb-3">-->
+<!--                        <span class="input-group-text">호텔명</span>-->
+<!--                        <input type="text" class="form-control"  name="htName"  aria-describedby="inputGroup-sizing-default" th:value="${hotelDto.htName}" readonly>-->
+<!--                    </div>-->
+
+
+<!--                    <div class="input-group input-group-sm mb-3">-->
+<!--                        <span class="input-group-text" >호텔 주소</span>-->
+<!--                        <input type="text" class="form-control"  name="htAddress"  aria-describedby="inputGroup-sizing-default" th:value="${hotelDto.htAddress}" readonly>-->
+<!--                    </div>-->
+
+<!--                    <div class="input-group input-group-sm mb-3">-->
+<!--                        <span class="input-group-text" >호텔 연락처</span>-->
+<!--                        <input type="tel" class="form-control"  name="htPhone"  aria-describedby="inputGroup-sizing-default" th:value="${hotelDto.htPhone}" readonly>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+
+
+
+<!--&lt;!&ndash;                    <label>호텔명</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <select name="hotelHtId">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <option th:text="${hotelDto.htName}" th:value="${hotelDto.htId}"></option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </select><br>&ndash;&gt;-->
+
+<!--                    <span class="fw-bold">객실 등록</span>-->
+<!--                    <input type="hidden" name="hotelHtId" th:value="${hotelDto.htId}">-->
+<!--                    <div class="select_img2"><img src="" class="w-100 mb-2 p-1 rounded img"/></div>-->
+<!--                    <div class="input-group input-group-sm mb-3">-->
+<!--                        <span class="input-group-text">객실명</span>-->
+<!--                        <input type="text" class="form-control" name="rName"  aria-describedby="inputGroup-sizing-default">-->
+<!--                    </div>-->
+
+<!--                    <div class="input-group input-group-sm mb-3">-->
+<!--                        <span class="input-group-text">객실가격</span>-->
+<!--                        <input type="number" step="1000" class="form-control" name="rPrice"  aria-describedby="inputGroup-sizing-default">-->
+<!--                    </div>-->
+
+<!--                    <div class="input-group input-group-sm mb-3">-->
+<!--                        <span class="input-group-text" >객실 이미지</span>-->
+<!--                        <input type="file" class="form-control" id="rImg" name="file"  aria-describedby="inputGroup-sizing-default">-->
+<!--                        <script>-->
+<!--                            $("#rImg").change(function(){-->
+<!--                                if(this.files && this.files[0]) {-->
+<!--                                    let reader = new FileReader;-->
+<!--                                    reader.onload = function(data) {-->
+<!--                                        $(".select_img2 img").attr("src", data.target.result).width(500);-->
+<!--                                    }-->
+<!--                                    reader.readAsDataURL(this.files[0]);-->
+<!--                                }-->
+<!--                            });-->
+<!--                        </script>-->
+<!--                    </div>-->
+
+
+
+<!--                <div><button type="submit" class="btn btn-success w-100">등록하기</button></div>-->
+
+<!--                </form>-->
+<!--        </div>-->
+
+
+<!--    </div>-->
+
+<!--</th:block>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

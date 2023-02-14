@@ -35,14 +35,14 @@
 
             <div class="form-group was-validated">
                 <label class="form-label " for="email">이메일</label>
-                <input class="form-control" type="email" id="email" name="email" th:value="*{email}" required maxlength="30" minlength="6" oninput="checkEmail()">
+                <input class="form-control" type="email" id="email" name="email" th:value="*{email}" required maxlength="30" oninput="checkEmail()">
 
                 <div class="invalid-feedback" id="check_email_feedback">
                     이메일 주소를 입력해 주세요.
                 </div>
-                <div class="invalid-feedback" id="check_email_feedback_after" style="display:none; color: #4CAF50" >
+<!--                <div class="invalid-feedback" id="check_email_feedback_after" style="display:none; color: #4CAF50" >-->
 
-                </div>
+<!--                </div>-->
                 <div class="input-group mb-3">
                     <!--                    placeholder="인증번호 입력"-->
                     <input type="text" class="form-control" id="auth_email_num" oninput="checkAuthNum()"  aria-label="Auth email" aria-describedby="button-addon2" required minlength="6" maxlength="6">
