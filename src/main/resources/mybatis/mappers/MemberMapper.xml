@@ -48,4 +48,8 @@
     <delete id="deleteMember" parameterType="String">
         delete from member where email = #{email};
     </delete>
+
+    <select id="selectMemberByPhone" parameterType="String" resultType="MemberDto">
+        select * from member where phone = #{phone};
+    </select>
 </mapper>
