@@ -40,8 +40,6 @@
 //     })
 // });
 
-
-
 const inputLeft = document.getElementById("input-left");
 const inputRight = document.getElementById("input-right");
 
@@ -76,17 +74,19 @@ const setRightValue = () => {
 };
 
 
-
 inputLeft.addEventListener("input", setLeftValue);
 inputRight.addEventListener("input", setRightValue);
 
 const outputleft = document.getElementById("left");
 const outputright = document.getElementById("right");
 
-inputLeft.oninput = function() {
-    outputleft.innerHTML = (this.value*5000).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
+inputLeft.oninput = function () {
+    outputleft.innerHTML = (this.value * 5000).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
 
 }
-inputRight.oninput = function() {
-    outputright.innerHTML = (this.value*5000).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
+inputRight.oninput = function () {
+    outputright.innerHTML = (this.value * 5000).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원";
 }
+
+
+

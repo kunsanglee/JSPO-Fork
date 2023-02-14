@@ -15,13 +15,11 @@ let authNumCheck;
 // allCheck();
 
 
-
-
 // 이메일이 정규식에 맞는지 확인하여 true false 반환.
 function validate_check(email) {
 
     let regex = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    return (email !== '' && email !== 'undefined' && regex.test(email) );
+    return (email !== '' && email !== 'undefined' && regex.test(email));
 
 }
 
@@ -34,7 +32,7 @@ function checkEmail() {
 
     let email = $("#email").val();
 
-    if (email === "")  return check_email_feedback.innerText = `이메일 주소를 입력해 주세요.`;
+    if (email === "") return check_email_feedback.innerText = `이메일 주소를 입력해 주세요.`;
 
     if (!(validate_check(email))) {
         check_email_feedback.innerText = `이메일 형식에 맞게 입력해 주세요.`;
@@ -174,17 +172,16 @@ function allCheck() {
 }
 
 
-
-(function() {
+(function () {
     'use strict';
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
 
 
         const forms = document.getElementsByClassName('needs-validation');
 
-        let validation = Array.prototype.filter.call(forms, function(form) {
+        let validation = Array.prototype.filter.call(forms, function (form) {
 
-            form.password.addEventListener('keypress', function(event){
+            form.password.addEventListener('keypress', function (event) {
                 console.log("keypress");
                 console.log("event.which: " + event.which);
 
@@ -208,9 +205,9 @@ function allCheck() {
                     }
                 }
 
-                if(form.password.value.length >= 20)
+                if (form.password.value.length >= 20)
                     checkx = true;
-                if ( checkx ) {
+                if (checkx) {
                     event.preventDefault();
                     event.stopPropagation();
                     //
@@ -225,7 +222,7 @@ function allCheck() {
             matchedCase.push("[a-z]");     // Lowercase Alphabates
 
 
-            form.password.addEventListener('keyup', function(){
+            form.password.addEventListener('keyup', function () {
 
                 let messageCase = new Array();
                 messageCase.push(" 특수문자"); // Special Charector
@@ -237,10 +234,10 @@ function allCheck() {
                 let rti = "";
                 for (let i = 0; i < matchedCase.length; i++) {
                     if (new RegExp(matchedCase[i]).test(form.password.value)) {
-                        if(i === 0) messageCase.splice(messageCase.indexOf(" 특수문자"), 1);
-                        if(i === 1) messageCase.splice(messageCase.indexOf(" 알파벳 대문자"), 1);
-                        if(i === 2) messageCase.splice(messageCase.indexOf(" 숫자"), 1);
-                        if(i === 3) messageCase.splice(messageCase.indexOf(" 알파벳 소문자"), 1);
+                        if (i === 0) messageCase.splice(messageCase.indexOf(" 특수문자"), 1);
+                        if (i === 1) messageCase.splice(messageCase.indexOf(" 알파벳 대문자"), 1);
+                        if (i === 2) messageCase.splice(messageCase.indexOf(" 숫자"), 1);
+                        if (i === 3) messageCase.splice(messageCase.indexOf(" 알파벳 소문자"), 1);
                         ctr++;
                     }
                 }
@@ -273,7 +270,7 @@ function allCheck() {
                         break;
                 }
 
-                if (strength === "[보안 : 강함]" && form.password.value.length >= 8 ) {
+                if (strength === "[보안 : 강함]" && form.password.value.length >= 8) {
                     strength = "[보안 : 강함] 아주 좋습니다!";
                     bClass = "bg-success";
                     form.password.setCustomValidity("");
@@ -283,7 +280,7 @@ function allCheck() {
 
                 let sometext = "";
 
-                if(form.password.value.length < 8 ){
+                if (form.password.value.length < 8) {
                     let lengthI = 8 - form.password.value.length;
                     sometext += ` 최소  ${lengthI} 글자 이상, `;
                 }
@@ -291,22 +288,22 @@ function allCheck() {
                 sometext += messageCase;
 
 
-                if(sometext){
+                if (sometext) {
                     sometext = sometext + `가(이) 필요합니다.`;
                 }
 
 
                 $("#feedbackin, #feedbackirn").text(strength + sometext);
-                $("#progressbar").removeClass( "bg-danger bg-warning bg-success" ).addClass(bClass);
-                let plength = form.password.value.length ;
-                if(plength > 0) progressbar += ((plength - 0) * 1.75) ;
+                $("#progressbar").removeClass("bg-danger bg-warning bg-success").addClass(bClass);
+                let plength = form.password.value.length;
+                if (plength > 0) progressbar += ((plength - 0) * 1.75);
                 //console.log("plength: " + plength);
-                let  percentage = progressbar + "%";
+                let percentage = progressbar + "%";
                 form.password.parentNode.classList.add('was-validated');
                 //console.log("pacentage: " + percentage);
-                $("#progressbar").width( percentage );
+                $("#progressbar").width(percentage);
 
-                if(form.password.checkValidity() === true){
+                if (form.password.checkValidity() === true) {
                     console.log('성공')
                     allCheck();
                     //   form.verifyPassword.disabled = false;
@@ -317,7 +314,6 @@ function allCheck() {
 
 
             });
-
 
 
         });
