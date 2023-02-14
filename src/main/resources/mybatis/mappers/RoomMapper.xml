@@ -92,7 +92,11 @@
         and reserved.res_date between #{checkin} and #{checkout}) and hotel_ht_id = #{htId};
     </select>
 
-    <select id="selectHotelBetween" parameterType="Integer">
-        select * from hotel where r_price BETWEEN #{rPrice} and #{rPrice};
+    <select id="selectHotelBetween" parameterType="Map" resultType="HotelDto">
+        select  ht_id , ht_name, ht_address, ht_img , min(b.r_price) AS r_price
+        from hotel h LEFT JOIN room b on b.hotel_ht_id = h.ht_id
+        where b.r_price BETWEEN #{lvalue} and #{rvalue} group by b.hotel_ht_id;
+
     </select>
+
 </mapper>

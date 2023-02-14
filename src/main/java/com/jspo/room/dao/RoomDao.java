@@ -30,5 +30,6 @@ public interface RoomDao {
 
     void deleteRoom(int rId);
 
-    List<HotelDto> selectHotelBetween(int left, int right);
+    List<HotelDto> selectHotelBetween(Map map);
+
 }
