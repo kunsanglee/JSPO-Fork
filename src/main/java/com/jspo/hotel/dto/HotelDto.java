@@ -9,6 +9,11 @@ public class HotelDto {
     private String htAddress;
     private String htImg;
     private String htPhone;
+    private String left;
+
+    public String getLeft() {
+        return left;
+    }
 
     public HotelDto() {}
     public HotelDto(int htId, String htName, String htAddress, String htImg, String htPhone) {

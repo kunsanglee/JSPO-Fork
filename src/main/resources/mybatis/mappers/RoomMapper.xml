@@ -56,7 +56,7 @@
 
     <select id="selectRoom" resultType="RoomDto">
         select a.r_id,a.r_name, a.r_price, a.r_state, a.r_cnt, a.r_img, a.r_checkin, a.r_checkout, a.hotel_ht_id,b.ht_name
-        from room a LEFT JOIN hotel b on a.hotel_ht_id = b.ht_id;
+        from room a LEFT JOIN hotel b on a.hotel_ht_id = b.ht_id order by a.hotel_ht_id asc;
     </select>
 
     <select id="selectPrice" parameterType="Integer" resultType="Integer">
@@ -90,6 +90,13 @@
         where room.r_id = reserved.r_id
         and room.hotel_ht_id = #{htId}
         and reserved.res_date between #{checkin} and #{checkout}) and hotel_ht_id = #{htId};
+    </select>
+
+    <select id="selectHotelBetween" parameterType="Map" resultType="HotelDto">
+        select  ht_id , ht_name, ht_address, ht_img , min(b.r_price) AS r_price
+        from hotel h LEFT JOIN room b on b.hotel_ht_id = h.ht_id
+        where b.r_price BETWEEN #{lvalue} and #{rvalue} group by b.hotel_ht_id;
+
     </select>
 
 </mapper>

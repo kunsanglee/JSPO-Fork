@@ -13,10 +13,21 @@
 
 
 <div id="root "  layout:fragment="content">
-
+  <style>
+    .oriImg { width: 400px; height: 400px;  }
+  </style>
   <header>
-    <h1>수정 게시판</h1>
+    <h1> ADMIN 게시판</h1>
   </header>
+
+  <nav>
+    <ul>
+      <li><a href="/admin/hotellist">호텔 관리</a></li>
+      <li><a href="/admin/roomlist">객실 관리</a></li>
+      <li><a href="/hotel/reg">호텔 등록</a></li>
+
+    </ul>
+  </nav>
 
   <script type="text/javascript">
     $(document).ready(function(){
@@ -47,14 +58,14 @@
           <label>호텔명</label><input type="text" name="htName" th:value="${hotelupdate.htName}" /><br>
           <label>호텔주소</label><input type="text" name="htAddress" th:value="${hotelupdate.htAddress}" /><br>
           <label>호텔이미지</label><input type="file" id="htImg" name="file"/><br>
-          <div class="select_img"><img th:src="${hotelupdate.htImg}" /></div>
+          <div class="select_img"><img class="oriImg" th:src="${hotelupdate.htImg}" /></div>
           <label>호텔 전화번호</label><input type="text" name="htPhone" th:value="${hotelupdate.htPhone}" /><br>
           <script>
             $("#htImg").change(function(){
               if(this.files && this.files[0]) {
                 var reader = new FileReader;
                 reader.onload = function(data) {
-                  $(".select_img img").attr("src", data.target.result).width(500);
+                  $(".select_img img").attr("src", data.target.result).width(400);
                 }
                 reader.readAsDataURL(this.files[0]);
               }
@@ -78,13 +89,13 @@
         <label>객실이름</label><input type="text" name="rName" th:value="${roomupdate.rName}" /><br>
         <label>객실가격</label><input type="text" name="rPrice" th:value="${roomupdate.rPrice}" /><br>
         <label>객실이미지</label><input type="file" id="rImg" name="file"/><br>
-        <div class="select_img"><img th:src="${roomupdate.rImg}" /></div>
+        <div class="select_img"><img class="oriImg" th:src="${roomupdate.rImg}" /></div>
         <script>
           $("#rImg").change(function(){
             if(this.files && this.files[0]) {
               var reader = new FileReader;
               reader.onload = function(data) {
-                $(".select_img img").attr("src", data.target.result).width(500);
+                $(".select_img img").attr("src", data.target.result).width(400);
               }
               reader.readAsDataURL(this.files[0]);
             }

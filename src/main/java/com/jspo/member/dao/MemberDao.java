@@ -31,4 +31,5 @@ public interface MemberDao {
 
     void deleteMember(String email) throws Exception;
 
+    MemberDto selectMemberByPhone(String phone) throws Exception;
 }

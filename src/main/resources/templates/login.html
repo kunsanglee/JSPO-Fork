@@ -6,58 +6,245 @@
 
 
 <body>
-<div class="container"  layout:fragment="content">
-<div class="login_wrap justify-content-center">
-    <div class="login">
+<div class="container" layout:fragment="content">
+    <style>
+        #findEmail {
+            display: none;
+            width: 400px;
+            padding: 20px 60px;
+            background-color: #fefefe;
+            border: 1px solid #888;
+            border-radius: 3px;
+        }
 
-        <div class="logo">
+        #findPwd {
+            display: none;
+            width: 400px;
+            padding: 20px 60px;
+            background-color: #fefefe;
+            border: 1px solid #888;
+            border-radius: 3px;
+        }
+    </style>
 
-        <img class="text-center" src="/imgs/logos/jspo-logo-final.png" alt="" height="100px">
+    <div class="login_wrap justify-content-center">
+        <div class="login">
 
-        </div>
+            <div class="logo">
 
-        <form action="/login" method="post" name="loginForm" class="needs-validation">
-        <input type="hidden" name="referer" th:value="${referer}">
-        <div class="form-group was-validated">
-            <label class="form-label " for="email">이메일</label>
-            <input class="form-control" type="email" id="email" name="email" required maxlength="30" minlength="6" autofocus th:value="${email}">
-            <div class="invalid-feedback">
-                이메일 주소를 입력해주세요
+                <img class="text-center" src="/imgs/logos/jspo-logo-final.png" alt="" height="100px">
 
             </div>
-            <div class="form-group was-validated">
-                <label class="form-label" for="pwd">비밀번호</label>
-                <input class="form-control" type="password" id="pwd" name="pwd" minlength="8" maxlength="16" required>
-                <div class="invalid-feedback">
-                    비밀번호를 입력해주세요
+
+            <form action="/login" method="post" name="loginForm" class="needs-validation">
+                <input type="hidden" name="referer" th:value="${referer}">
+                <div class="form-group was-validated">
+                    <label class="form-label " for="email">이메일</label>
+                    <input class="form-control" type="email" id="email" name="email" required maxlength="30"
+                           minlength="6" autofocus th:value="${email}">
+                    <div class="invalid-feedback">
+                        이메일 주소를 입력해주세요
+
+                    </div>
+                    <div class="form-group was-validated">
+                        <label class="form-label" for="pwd">비밀번호</label>
+                        <input class="form-control" type="password" id="pwd" name="pwd" minlength="8" maxlength="16"
+                               required>
+                        <div class="invalid-feedback">
+                            비밀번호를 입력해주세요
+                        </div>
+                    </div>
+
+
+                    <div class="form-group form-check">
+
+                        <input class="form-check-input" type="checkbox" id="remember" name="remember"
+                               th:if="${email == null}">
+                        <input class="form-check-input" type="checkbox" id="remember-checked" name="remember"
+                               th:if="${email != null}" checked="checked">
+                        <label class="form-check-label" for="remember">이메일 기억하기</label>
+
+                    </div>
+
+
+                    <input class="btn btn-success w-100" type="submit" value="로그인">
+
+                    <div class="form-group">
+                        <ul>
+                            <li><a href="/join"><span>이메일 가입하기</span></a></li>
+                            <li><a><span id="findEmailByPhone">이메일 찾기</span></a></li>
+                            <li><a><span id="findPwdByEmail">비밀번호 찾기</span></a></li>
+                        </ul>
+                    </div>
                 </div>
+            </form>
+
+            <div id="findEmail">
+                <h3>이메일찾기</h3>
+                핸드폰<br><input type="text" placeholder="회원가입시 등록한 핸드폰 번호를 입력해주세요" id="inputPhone"><br>
+                인증번호<br><input type="text" placeholder="예)123456" id="authPhone">
+                <button th:text="전송" id="sendPhone"></button><br>
+                <button class="modal_close_btn" th:text="취소"></button>
+                <button th:text="확인" id="applyPhoneAuth"></button>
             </div>
 
-
-            <div class="form-group form-check">
-
-                <input class="form-check-input" type="checkbox" id="remember" name="remember" th:if="${email == null}">
-                <input class="form-check-input" type="checkbox" id="remember-checked" name="remember"
-                       th:if="${email != null}" checked="checked">
-                <label class="form-check-label" for="remember">이메일 기억하기</label>
-
-            </div>
-
-
-            <input class="btn btn-success w-100" type="submit" value="로그인">
-
-            <div class="form-group">
-                <ul>
-                    <li><a href="/join"><span>이메일 가입하기</span></a></li>
-                    <li><a href="/#"><span>이메일 찾기</span></a></li>
-                    <li><a href="/#"><span>비밀번호 찾기</span></a></li>
-                </ul>
+            <div id="findPwd">
+                <h3>비밀번호찾기</h3>
+                이메일<br><input type="text" placeholder="회원가입시 등록한 이메일을 입력해주세요" id="inputEmail"><br>
+                인증번호<br><input type="text" placeholder="예)123456" id="authEmail">
+                <button th:text="전송" id="sendEmail"></button><br>
+                <button class="modal_close_btn" th:text="취소"></button>
+                <button th:text="확인" id="applyEmailAuth"></button>
             </div>
         </div>
-        </form>
-    </div>
 
-</div>
+    </div>
+    <script>
+        function modal(id) {
+            var zIndex = 9999;
+            var modal = $('#' + id);
+            let inputPhone = $('#inputPwd');
+            let inputAuthPhone = $('#authPhone');
+            let inputEmail = $('#inputEmail');
+            let inputAuthEmail = $('#authEmail');
+
+            // 모달 div 뒤에 희끄무레한 레이어
+            var bg = $('<div>')
+                .css({
+                    position: 'fixed',
+                    zIndex: zIndex,
+                    left: '0px',
+                    top: '0px',
+                    width: '100%',
+                    height: '100%',
+                    overflow: 'auto',
+                    // 레이어 색갈은 여기서 바꾸면 됨
+                    backgroundColor: 'rgba(0,0,0,0.4)'
+                })
+                .appendTo('body');
+
+            modal
+                .css({
+                    position: 'fixed',
+                    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
+                    // 시꺼먼 레이어 보다 한칸 위에 보이기
+                    zIndex: zIndex + 1,
+
+                    // div center 정렬
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    msTransform: 'translate(-50%, -50%)',
+                    webkitTransform: 'translate(-50%, -50%)'
+                })
+                .show()
+                // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+                .find('.modal_close_btn')
+                .on('click', function () {
+                    bg.remove();
+                    modal.hide();
+                    inputPhone.val('');
+                    inputAuthPhone.val('');
+                    inputEmail.val('');
+                    inputAuthEmail.val('');
+                });
+        }
+
+        // 이메일 찾기
+        $('#findEmailByPhone').on('click', function () {
+            // 모달창 띄우기
+            modal('findEmail');
+        });
+
+        $('#sendPhone').on('click', function () {
+            let phone = $('#inputPhone').val();
+            $.ajax({
+                url: "/my/emailAuth",
+                type: "post",
+                data: {
+                    phone: phone
+                },
+                success: function (res) {
+                    if (res) {
+                        alert("등록하신 번호로 인증번호가 전송됐습니다.")
+                    } else {
+                        alert("입력하신 번호는 존재하지 않습니다.");
+                    }
+                }
+            })
+        });
+
+        $('#applyPhoneAuth').on('click', function() {
+            let phone = $('#inputPhone').val();
+            let input = $('#authPhone').val();
+            $.ajax({
+                url: "/my/checkEmailInput",
+                type: "post",
+                data: {
+                    phone: phone,
+                    input: input
+                },
+                success: function(res) {
+                    if (res !== null) {
+                        alert(res);
+                        alert("고객님의 이메일은 " + res + " 입니다.");
+                        window.location.reload();
+                    }
+                },
+                error: function() {
+                    alert("인증번호가 일치하지 않습니다.");
+                }
+            })
+        })
+
+        // 비밀번호 찾기
+        $('#findPwdByEmail').on('click', function () {
+            // 모달창 띄우기
+            modal('findPwd');
+        });
+
+        $('#sendEmail').on('click', function () {
+            let email = $('#inputEmail').val();
+            $.ajax({
+                url: "/my/PwdAuth",
+                type: "post",
+                data: {
+                    email: email
+                },
+                success: function (res) {
+                    if (res) {
+                        alert("등록하신 메일로 인증번호가 전송됐습니다.")
+                    } else {
+                        alert("입력하신 메일은 존재하지 않습니다.");
+                    }
+                }
+            })
+        });
+
+        $('#applyEmailAuth').on('click', function() {
+            let email = $('#inputEmail').val();
+            let input = $('#authEmail').val();
+            $.ajax({
+                url: "/my/checkPwdInput",
+                type: "post",
+                data: {
+                    email: email,
+                    input: input
+                },
+                success: function (res) {
+                    if (res) {
+                        alert("회원님의 이메일로 비밀번호가 전송됐습니다.");
+                        window.location.reload();
+                    } else {
+                        alert("입력하신 인증번호가 일치하지 않습니다.");
+                    }
+                }
+            })
+        })
+
+
+    </script>
 </div>
 </body>
 

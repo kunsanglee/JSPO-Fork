@@ -7,16 +7,15 @@ import com.jspo.room.dto.RoomDto;
 import com.jspo.upload.UploadFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -42,21 +41,30 @@ public class HotelController {
         return "hotelPage";
     }
 
-//    @PostMapping("/hotel")
-//    public String hotel(@RequestParam(required = false) String htName,HotelDto hotelDto , Model model){
-//
-//       hotelDto = hotelDao.selectHotelByName(htName);
-//       model.addAttribute("list",hotelDto);
-//
-//        List pricelist = new ArrayList<>(); // 가격 부분
-//        pricelist.add(roomDao.selectPrice(hotelDto.getHtId()));
-//        model.addAttribute("pricelist",pricelist);
-//        return "hotelList";
-//    }
     @PostMapping("/hotel")
-    public String hotel(@RequestParam(required = false) String htName,HotelDto hotelDto , Model model){
+    public String hotel(@RequestParam(required = false) String htName,HotelDto hotelDto , Model model,@RequestParam(required = false) String leftvalue,@RequestParam(required = false) String rightvalue){
 
-        List<HotelDto> list = hotelDao.selectHotelByName(htName);
+        leftvalue = leftvalue.replace("원","");
+        leftvalue = leftvalue.replace(",","");
+        int lvalue = Integer.parseInt(leftvalue);
+        rightvalue = rightvalue.replace("원","");
+        rightvalue = rightvalue.replace(",","");
+        int rvalue = Integer.parseInt(rightvalue);
+
+         //숙소명만 검색했을땐 숙소명만
+        //가격 조정했을땐 가격 조정한 숙소명만
+        //가격 조정, 숙소명 검색했을때 조건에 만족하는 숙소명만
+        List<HotelDto> list = null;
+        Map<String, Integer> map = new HashMap<>();
+        if(!("".equals(htName))) {
+            list = hotelDao.selectHotelByName(htName);
+        } else if("".equals(htName) && lvalue == 0 && rvalue == 500000) {
+            list = hotelDao.selectHotelByName(htName);
+        }  else if("".equals(htName) && lvalue != 0 || rvalue != 500000) {
+            map.put("lvalue", lvalue);
+            map.put("rvalue", rvalue);
+            list = roomDao.selectHotelBetween(map);
+        }
         model.addAttribute("list",list);
 
         List pricelist = new ArrayList<>(); // 가격 부분
@@ -68,14 +76,13 @@ public class HotelController {
         return "hotelPage";
     }
     @GetMapping("/hotel/reg")
-    public String insert(HttpSession session, Model model)  throws Exception{
-
+    public String insertHotel() {
 //        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
 //            return "redirect:/";
 //        }
-        return "hotelReg";
-
+        return "adminReg";
     }
+
     @PostMapping("/hotel/reg")
     public String insert(HotelDto hotelDto, MultipartFile file) throws Exception {
 

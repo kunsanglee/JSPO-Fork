@@ -57,7 +57,6 @@ public class ReservationController {
         roomDto = roomDao.selectRoomByRId(rId);
         roomDto.setrCheckin(rCheckin);
         roomDto.setrCheckout(rCheckout);
-
         // reservationDto 객체에 예약정보 입력
         reservationDto.setResPrice(roomDto.getrPrice());
         reservationDto.setMemberMId(memberDto.getId());

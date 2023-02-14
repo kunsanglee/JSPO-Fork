@@ -92,6 +92,7 @@
             };
         }
 
+
     </script>
 
     <div class="title my-3 w-100 justify-content-between">
@@ -101,41 +102,71 @@
     </div>
 
     <div class=" mb-3 my-3">
-        <form class="d-flex" action="/hotel" method="post">
+        <form class="d-flex" role="form" action="/hotel" method="post">
 
-            <input class="form-control sm-5 me-2" type="search" placeholder="숙소명 검색" aria-label="Search" name="htName">
+            <input class="form-control sm-5 me-2" type="search" placeholder="숙소명 검색" aria-label="Search" name="htName"><br>
 
-            <button class="btn btn-outline-success" type="submit">검색</button>
+            <div class="middle">
+                <div class="multi-range-slider">
+                    <!-- 진짜 슬라이더 -->
+                    <input type="range" id="input-left" min="0" max="100" value="1" />
+                    <input type="range" id="input-right"  min="0" max="100" value="99" />
+
+                    <!-- 커스텀 슬라이더 -->
+                    <div class="slider">
+                        <div class="track"></div>
+                        <div class="range"></div>
+                        <div class="thumb left"></div>
+                        <div class="thumb right"></div>
+                    </div>
+                </div>
+                <div>
+                    <input type="hidden" id="leftvalue" name="leftvalue">
+                    <input type="hidden" id="rightvalue" name="rightvalue">
+                    <p class="left" id="left">0원</p>
+                    <p class="right" id="right">500,000원</p>
+                </div>
+            </div>
+            <button class="btn btn-outline-success" type="submit" id="hotelSearch" onclick="price()">검색</button>
+            <script>
+
+                function price() {
+                    document.getElementById("leftvalue").value = document.getElementById("left").innerText;
+                    document.getElementById("rightvalue").value = document.getElementById("right").innerText;
+                }
+            </script>
         </form>
     </div>
 
-    <div class="slider">
+<!--    <div class="slider">-->
 
-        <label for="min_price" class="form-label fw-bold">최저가격</label>
-        <div class="price_wrap">
-            <input type="range" class="form-range price_input_range" id="min_price" min="1" max="9999" value="1"
-                   step="1">
-            <div class="input-group price_input_group">
-                <span class="input-group-text ">₩</span>
-                <input type="text" class="form-control " id="min_box" aria-label="원" value="10,000">
-                <span class="input-group-text ">원</span>
-            </div>
-        </div>
-        <div class="max_price_wrap">
-            <label for="max_price" class="form-label fw-bold">최대가격</label>
-            <div class="price_wrap">
-                <input type="range" class="form-range price_input_range" id="max_price" min="2" max="10000"
-                       value="10000" step="1">
-                <div class="input-group price_input_group">
-                    <span class="input-group-text ">₩</span>
-                    <input type="text" class="form-control" id="max_box" aria-label="원" value="10,000,000">
-                    <span class="input-group-text">원</span>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--        <label for="min_price" class="form-label fw-bold">최저가격</label>-->
+<!--        <div class="price_wrap">-->
+<!--            <input type="range" class="form-range price_input_range" id="min_price" min="1" max="9999" value="1"-->
+<!--                   step="1">-->
+<!--            <div class="input-group price_input_group">-->
+<!--                <span class="input-group-text ">₩</span>-->
+<!--                <input type="text" class="form-control " id="min_box" aria-label="원" value="10,000">-->
+<!--                <span class="input-group-text ">원</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="max_price_wrap">-->
+<!--            <label for="max_price" class="form-label fw-bold">최대가격</label>-->
+<!--            <div class="price_wrap">-->
+<!--                <input type="range" class="form-range price_input_range" id="max_price" min="2" max="10000"-->
+<!--                       value="10000" step="1">-->
+<!--                <div class="input-group price_input_group">-->
+<!--                    <span class="input-group-text ">₩</span>-->
+<!--                    <input type="text" class="form-control" id="max_box" aria-label="원" value="10,000,000">-->
+<!--                    <span class="input-group-text">원</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
 
     <form>
+
         <tr th:each="list ,i : ${list}">
             <div class="card mb-3 hotel_list mt-4">
                 <div class="row g-0">
@@ -167,6 +198,7 @@
 
 
 </div>
+
 
 </body>
 
