@@ -36,7 +36,11 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(@CookieValue(value = "email", required = false) String email, Model m, HttpServletRequest request) {
-        referer = request.getHeader("referer");
+        if (request.getHeader("referer").equals("http://localhost:8080/login?logout")) {
+            referer = "";
+        } else {
+            referer = request.getHeader("referer");
+        }
 
         System.out.println("get login = " + request.getHeader("referer"));
 
@@ -58,7 +62,7 @@ public class LoginController {
     public String login(MemberDto loginMember, Model m, HttpServletRequest request, HttpServletResponse response, boolean remember) throws Exception {
         System.out.println("post login = " + request.getHeader("referer"));
 
-        if (loginMember != null && loginMember.getPwd() != null && loginMember.getEmail() != null) {
+        if (loginMember.getEmail() != null && loginMember.getPwd() != null) {
             memberDto = memberDao.selectMemberByEmail(loginMember.getEmail());
             boolean matches = passwordEncoder.matches(loginMember.getPwd(), memberDto.getPwd());
 
@@ -78,10 +82,10 @@ public class LoginController {
                 session.setAttribute("email", memberDto.getEmail());
                 m.addAttribute("memberDto", memberDto);
                 m.addAttribute("encPwd", memberService.getEncPwd(memberDto));
+                return "redirect:" +referer;
             }
-            return "redirect:" +referer;
         }
-        return "login";
+        return "redirect:/login";
     }
 
     @GetMapping("/logout")
@@ -90,6 +94,6 @@ public class LoginController {
         HttpSession session = request.getSession();
         session.invalidate();
 
-        return "redirect:"+referer;
+        return "redirect:/";
     }
 }
