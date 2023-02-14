@@ -12,19 +12,76 @@
 <body>
 
 <div class="container h-100 " layout:fragment="content">
+
+    <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript"
-            src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript"  src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="/js/roomList.js" defer></script>
+
     <style>
         td {
             text-align: center;
         }
 
         .oriImg {
-            width: 200px;
-            height: 200px;
+            width: 300px;
+            height: 500px;
         }
+        .roomImg {
+            width: 500px;
+            height: 500px;
+        }
+
+
+        .visual {
+            position: relative;
+        }
+
+        .visual button {
+            position: absolute;
+            z-index: 10;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 71px;
+            height: 71px;
+            border-radius: 100%;
+            background: rgba(0, 0, 0, .5);
+            border: none;
+        }
+
+        .visual button:before {
+            font-family: 'xeicon';
+            color: #fff;
+            font-size: 45px;
+        }
+
+        .visual button.slick-prev {
+            left: 50px;
+            font-size: 0;
+            color: transparent;
+        }
+
+        .visual button.slick-prev:before {
+            content: "\e93d";
+            font-family: 'xeicon';
+
+        }
+
+
+        .visual button.slick-next {
+            right: 50px;
+            font-size: 0;
+            color: transparent;
+        }
+
+        .visual button.slick-next:before {
+            content: "\e940";
+            font-family: 'xeicon';
+        }
+
+
     </style>
 
 <!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>-->
@@ -37,7 +94,17 @@
             <h1 th:text="${hotelDto.htName}"/>
             <h3 th:text="${hotelDto.htAddress}"/>
             <h3 th:text="${hotelDto.htPhone}"/>
+            <!--    리스트로 그림 받아오기        -->
+            <section class="visual">
             <img th:src="${hotelDto.getHtImg()}" class="oriImg">
+                <img th:src="${hotelDto.getHtImg()}" class="oriImg">
+            </section>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $.noConflict();
+                    $('.visual').slick();
+                });
+            </script>
         </th:block>
     </header>
 
@@ -59,7 +126,7 @@
             <form role="form" method="post" action="/reservation">
                 <input type="text" hidden=hidden th:name="hotelHtId" th:value="${list.hotelHtId}"/>
                 <td>
-                    <img th:src="${list.rImg}" class="oriImg">
+                    <img th:src="${list.rImg}" class="roomImg">
                 </td>
                 <td th:name="rName" th:text="${list.rName}"></td>
                 <td th:name="rPrice" th:text="${list.rPrice}+'원'"></td>
