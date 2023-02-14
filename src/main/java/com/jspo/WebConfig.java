@@ -29,7 +29,7 @@ public class WebConfig  implements WebMvcConfigurer {
         System.out.println("파일 위치 = " + "file:///" + uploadImagesPath + "imgUpload" + datePath + "/");
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("file:///" + uploadImagesPath + "imgUpload" + datePath + "/")
-                .setCachePeriod(3600)
+                .setCachePeriod(40000)
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
     }

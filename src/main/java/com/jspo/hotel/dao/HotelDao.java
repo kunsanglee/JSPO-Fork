@@ -20,4 +20,5 @@ public interface HotelDao {
        void deleteHotel(int htId) throws Exception;
 
        List<HotelDto> selectHotelByName(String htName);
+
 }
