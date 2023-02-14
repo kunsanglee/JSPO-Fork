@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +28,8 @@ public class AdminController {
     RoomDto roomDto = RoomDto.getInstance();
 
     @GetMapping("")
-    public String admin() {
-        return "admin";
+    public String admin(){
+        return "redirect:/admin/hotellist";
     }
 
     @GetMapping("/hotellist")
@@ -56,7 +55,4 @@ public class AdminController {
         model.addAttribute("rlist",rlist);
         return "admin";
     }
-
-
-
 }

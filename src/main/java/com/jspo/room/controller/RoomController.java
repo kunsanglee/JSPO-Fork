@@ -65,7 +65,7 @@ public class RoomController {
     public String insert(Model model,int htId) {
         HotelDto hotelDto = hotelDao.selectHotelByHtId(htId);
         model.addAttribute("hotelDto",hotelDto); // 호텔 정보를 보여주기위한
-        return "hotelReg";
+        return "adminReg";
     }
     @PostMapping("/room/reg")
     public String insert(RoomDto roomDto, MultipartFile file, @RequestParam String hotelHtId) throws Exception {

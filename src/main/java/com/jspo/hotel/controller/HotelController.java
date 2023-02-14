@@ -7,14 +7,11 @@ import com.jspo.room.dto.RoomDto;
 import com.jspo.upload.UploadFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +51,14 @@ public class HotelController {
 //        return "hotelList";
 //    }
     @PostMapping("/hotel")
-    public String hotel(@RequestParam(required = false) String htName,HotelDto hotelDto , Model model){
+    public String hotel(@RequestParam(required = false) String htName,HotelDto hotelDto , Model model,@RequestParam(required = false) String leftvalue,@RequestParam(required = false) String rightvalue){
+
+        leftvalue = leftvalue.replace("원","");
+        leftvalue = leftvalue.replace(",","");
+        int lvalue = Integer.parseInt(leftvalue);
+        rightvalue = rightvalue.replace("원","");
+        rightvalue = rightvalue.replace(",","");
+        int rvalue = Integer.parseInt(rightvalue);
 
         List<HotelDto> list = hotelDao.selectHotelByName(htName);
         model.addAttribute("list",list);
@@ -68,14 +72,13 @@ public class HotelController {
         return "hotelPage";
     }
     @GetMapping("/hotel/reg")
-    public String insert(HttpSession session, Model model)  throws Exception{
-
+    public String insertHotel() {
 //        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
 //            return "redirect:/";
 //        }
-        return "hotelReg";
-
+        return "adminReg";
     }
+
     @PostMapping("/hotel/reg")
     public String insert(HotelDto hotelDto, MultipartFile file) throws Exception {
 
