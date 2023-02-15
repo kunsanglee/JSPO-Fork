@@ -196,7 +196,7 @@ public class MemberController {
             System.out.println("변경전 : "+memberDao.selectMemberByEmail(email).getPwd());
             memberDao.updatePwd(map);
             System.out.println("변경후 : "+memberDao.selectMemberByEmail(email).getPwd());
-            System.out.println("memberDto.getPwd() = " + memberDto.getPwd());
+            System.out.println("memberDto.getPwd() = " + memberDao.selectMemberByEmail(email).getPwd());
             emailService.sendPwd(email, result);
             return true;
         }

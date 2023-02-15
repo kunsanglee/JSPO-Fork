@@ -71,7 +71,6 @@ public class ReservationController {
         reservationDto.setRoomRId(rId);
 
         Date now = new Date();
-        System.out.println("now = " + now);
         reservationDto.setResDate(now);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String res = simpleDateFormat.format(now)+hotelHtId+rId+memberDto.getId();
