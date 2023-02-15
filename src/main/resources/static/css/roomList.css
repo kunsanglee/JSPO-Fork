@@ -65,3 +65,20 @@ tbody tr td {
 .drp-buttons {
     display: none !important;
 }
+
+.fow{
+
+}
+
+.fow .col-6{
+    /*display: inline-block;*/
+    /*flex-direction: row;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    /*text-align: center;*/
+}
+
+.fow .col-6 .room_list_wrap{
+    background-color: gold;
+    margin-left: 100px;
+}

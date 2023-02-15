@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">
+<head>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+
+    <style>
+        .container {
+            position: relative;
+            height: 100%;
+        }
+
+        .contentBox__item {
+            position: absolute;
+            top: 37%;
+            left: 37%;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+
+    <div class="contentBox__item">
+        <img src="https://cdn-icons-png.flaticon.com/128/2661/2661067.png"><br>
+        <h3>서버 오류입니다</h3><br>
+        <h6>알 수 없는 오류로 인해 페이지를 보여드릴 수 없습니다</h6><br>
+        <a href="/">홈으로가기</a>
+    </div>
+
+</div>
+
+</body>
+
+</html>
+
+

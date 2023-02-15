@@ -28,7 +28,13 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link" href="/admin/image">사진 관리</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/hotel/reg">호텔 등록</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/image/reg">사진 등록</a>
                     </li>
 
                 </ul>
@@ -151,7 +157,7 @@
 
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text">객실 이미지</span>
-                        <input type="file" class="form-control" id="rImg" name="file"
+                        <input multiple="multiple" type="file" class="form-control" id="rImg" name="file"
                                aria-describedby="inputGroup-sizing-default" required>
                         <script>
                             $("#rImg").change(function () {

@@ -2,12 +2,15 @@ package com.jspo;
 
 import com.jspo.hotel.dao.HotelDao;
 import com.jspo.hotel.dto.HotelDto;
+import com.jspo.image.dao.ImageDao;
+import com.jspo.image.dto.ImageDto;
 import com.jspo.room.dao.RoomDao;
 import com.jspo.room.dto.RoomDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -26,6 +29,9 @@ public class AdminController {
     RoomDao roomDao;
 
     RoomDto roomDto = RoomDto.getInstance();
+
+    @Autowired
+    ImageDao imageDao;
 
     @GetMapping("")
     public String admin(){
@@ -55,4 +61,16 @@ public class AdminController {
         model.addAttribute("rlist",rlist);
         return "admin";
     }
+
+    @GetMapping("/image") // 사진 관리 클릭시 들어옴
+    public String adminImage(Model model) {
+
+        List<ImageDto> ilist = imageDao.selectImage();
+        System.out.println("ilist = "+ilist);
+        model.addAttribute("ilist",ilist);
+
+        return "admin"; // admin 으로 몰아버릴까
+    }
+
+
 }

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">>
+
+<head>
+
+
+</head>
+
+<body>
+<div class="container " layout:fragment="content" >
+    <nav class="navbar navbar-expand-lg bg-body-tertiary my-2 " >
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/admin/hotellist">관리자 홈</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/admin/hotellist">호텔 관리</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/roomlist">객실 관리</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/image">사진 관리</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/hotel/reg">호텔 등록</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/image/reg">사진 등록</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <form action="/image/reg" method="post" enctype="multipart/form-data">
+
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">호텔명</label>
+            <select class="form-select" id="inputGroupSelect01">
+                <div th:each="list : ${list}">
+                    <option th:text="${list.htName}" th:value="${list.htId}" selected></option>
+                </div>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">선택목록</label>
+            <select class="form-select" id="inputGroupSelect02">
+                <option value="메인사진" selected>메인사진</option>
+                <option value="메인사진2">메인2사진</option>
+                <option value="비품사진">비품사진</option>
+                <option value="화장실사진">화장실사진</option>
+            </select>
+        </div>
+        <div class="input-group ">
+            <input type="file" id="img" name="file" class="form-control" required>
+        </div>
+        <div class="select_img my-3 text-center rounded"><img src="" /></div>
+
+
+        <button type="submit" class="btn btn-success w-100">등록</button>
+    </form>
+    <script>
+        $("#img").change(function () {
+            if (this.files && this.files[0]) {
+                let reader = new FileReader;
+                reader.onload = function (data) {
+                    $(".select_img img").attr("src", data.target.result).width(800);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    </script>
+
+
+</div>
+</body>
+</html>

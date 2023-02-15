@@ -3,6 +3,8 @@ package com.jspo.room.controller;
 
 import com.jspo.hotel.dao.HotelDao;
 import com.jspo.hotel.dto.HotelDto;
+import com.jspo.image.dao.ImageDao;
+import com.jspo.image.dto.ImageDto;
 import com.jspo.room.dao.RoomDao;
 import com.jspo.room.dto.RoomDto;
 import com.jspo.upload.UploadFileUtils;
@@ -24,12 +26,17 @@ public class RoomController {
     @Autowired
     private HotelDao hotelDao;
 
+    @Autowired
+    private ImageDao imageDao;
+
     @Value("${file.dir}")
     private String uploadPath;
 
     private RoomDto roomDto = RoomDto.getInstance();
 
     private HotelDto hotelDto = HotelDto.getInstance();
+
+    private ImageDto imageDto = ImageDto.getInstance();
 
     @GetMapping("/room/list/{htId}")
     public String room(@PathVariable int htId, java.sql.Date checkin, java.sql.Date checkout, Model model) {
@@ -56,6 +63,8 @@ public class RoomController {
 
         hotelDto = hotelDao.selectHotelByHtId(htId);
         model.addAttribute("hotelDto",hotelDto);
+        List<ImageDto> ilist = imageDao.selectImageByHtId(htId);
+        model.addAttribute("ilist",ilist);
         System.out.println("hotelDto = " + hotelDto);
 
         return "roomList"; // 객실 html

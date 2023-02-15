@@ -21,7 +21,7 @@ public class HomeController {
     @GetMapping("/")
     public String home(MemberDto memberDto, Model m) throws Exception {
 
-        List<HotelDto> list =  hotelDao.selectHotel();
+        List<HotelDto> list =  hotelDao.selectHotelTop();
         m.addAttribute("list", list);
 
         return "mainPage";

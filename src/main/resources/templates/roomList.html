@@ -41,11 +41,11 @@
         <div class="divider border-bottom w-90"></div>
         <span class="fs-5 fw-bold" >인기시설 및 서비스</span>
         <img class="" src="/imgs/hotels/option.png" alt="" style="width: 500px">
-        <div class="divider border-bottom w-90"></div>
+        <div class="divider mt-2 border-bottom w-90"></div>
         <span class="fs-5 fw-bold" >객실선택</span>
     </div>
 
-    <div class="daterange_box px-2 px-sm-2 ">
+    <div class="daterange_box">
         <form th:action="@{/room/list/}+${hotelDto.htId}" autocomplete="off">
 
 
@@ -53,7 +53,7 @@
                     <div class="input-group" >
 <!--                        <div class="daterange_box flex-row ">-->
                             <div class="daterage_input_btn ">
-                      <input type="text" id="daterange" name="daterange" th:value="${#temporals.createToday()}" readonly />
+                      <input type="text" id="daterange" name="daterange" th:value="${#temporals.createToday()}" readonly style="width: 300px; border-radius: 10px" />
                       <input type="text" class="start" name="checkin" th:value="${checkin}" hidden="hidden"/>
                       <input type="text" class="end" name="checkout" th:value="${checkout}" hidden="hidden"/>
                              </div>
@@ -64,6 +64,27 @@
                     </div>
 
         </form>
+    </div>
+    <div      class="fow my-3">
+        <div class="row">
+<!--            row-cols-2-->
+            <div class="col-3 m-1" th:each="list : ${list}">
+                <div class="room_list_wrap " style="width: 343px; margin: 0 ">
+                <input type="text" class="col-3 " hidden=hidden th:name="hotelHtId" th:value="${list.hotelHtId}"/>
+                <div class="room_list_img text-center col-3 ">
+                    <img th:src="${list.rImg}" class="roomImg rounded" style="width: 310px; height: 218px " >
+                </div>
+                <div class="room_list_info d-flex flex-column col-11">
+                <span class="fw-bold fs-5" th:name="rName" th:text="${list.rName}"></span>
+                    <span class="p-2 m-1 rounded" style="background-color: #f8f8f8">기준 2인 / 최대 2인 - 금연객실 </span>
+                    <p><span class="fw-bold">숙박</span><span>(15:00~)</span></p>
+                <span class="fw-bold fs-5 text-end" th:name="rPrice" th:text="${list.rPrice}+'원'"></span>
+                    <button type="submit" class="btn btn-danger my-2">객실 선택하기</button>
+                </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
 
@@ -143,62 +164,64 @@
 
 <!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>-->
 
-    <link rel="stylesheet" type="text/css"
-          href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+<!--    <link rel="stylesheet" type="text/css"-->
+<!--          href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>-->
 
     <header>
-        <th:block th:if="${hotelDto != null}">
-            <h1 th:text="${hotelDto.htName}"/>
-            <h3 th:text="${hotelDto.htAddress}"/>
-            <h3 th:text="${hotelDto.htPhone}"/>
-            <!--    리스트로 그림 받아오기        -->
-            <section class="visual">
-            <img th:src="${hotelDto.getHtImg()}" class="oriImg">
-                <img th:src="${hotelDto.getHtImg()}" class="oriImg">
-            </section>
+<!--        <th:block th:if="${hotelDto != null}">-->
+<!--            <h1 th:text="${hotelDto.htName}"/>-->
+<!--            <h3 th:text="${hotelDto.htAddress}"/>-->
+<!--            <h3 th:text="${hotelDto.htPhone}"/>-->
+<!--            &lt;!&ndash;    리스트로 그림 받아오기        &ndash;&gt;-->
+<!--            <section class="visual">-->
+<!--                <th:block th:if="${ilist != null}">-->
+<!--                    <tr th:each="ilist : ${ilist}">-->
+<!--            <img th:src="${ilist.getImg()}" class="oriImg">-->
+<!--                    </tr>-->
+<!--                </th:block>-->
+<!--            </section>-->
             <script type="text/javascript">
                 $(document).ready(function() {
                     $.noConflict();
                     $('.visual').slick();
                 });
             </script>
-        </th:block>
+<!--        </th:block>-->
     </header>
 
-    <table>
-        <form th:action="@{/room/list/}+${hotelDto.htId}">
-            <input type="text" name="daterange" th:value="${#temporals.createToday()}"/>
-            <input type="text" class="start" name="checkin" th:value="${checkin}" hidden="hidden"/>
-            <input type="text" class="end" name="checkout" th:value="${checkout}" hidden="hidden"/>
-            <button type="submit">검색</button>
-        </form>
+<!--    <table>-->
+<!--        <form th:action="@{/room/list/}+${hotelDto.htId}">-->
+<!--            <input type="text" name="daterange" th:value="${#temporals.createToday()}"/>-->
+<!--            <input type="text" class="start" name="checkin" th:value="${checkin}" hidden="hidden"/>-->
+<!--            <input type="text" class="end" name="checkout" th:value="${checkout}" hidden="hidden"/>-->
+<!--            <button class="submitDate" type="submit" hidden="hidden"></button>-->
+<!--        </form>-->
 
-        <tr>
-            <th>사진</th>
-            <th>객실이름</th>
-            <th>객실가격</th>
-        </tr>
+<!--        <tr>-->
+<!--            <th>사진</th>-->
+<!--            <th>객실이름</th>-->
+<!--            <th>객실가격</th>-->
+<!--        </tr>-->
 
-        <tr th:each="list : ${list}">
-            <form role="form" method="post" action="/reservation">
-                <input type="text" hidden=hidden th:name="hotelHtId" th:value="${list.hotelHtId}"/>
-                <td>
-                    <img th:src="${list.rImg}" class="roomImg" >
-                </td>
-                <td th:name="rName" th:text="${list.rName}"></td>
-                <td th:name="rPrice" th:text="${list.rPrice}+'원'"></td>
-                <td th:name="rCnt" th:text="${list.rCnt}+'명'"></td>
-                <div hidden="hidden">
-                    <input type="text" th:name="rId" th:value="${list.rId}"/>
-                    <input type="text" class="start" th:name="rCheckin" th:value="${checkin}"/>
-                    <input type="text" class="end" th:name="rCheckout" th:value="${checkout}"/>
-                </div>
-                <td>
-                    <button type="submit">객실 예약하기</button>
-                </td>
-            </form>
-        </tr>
-    </table>
+<!--        <tr th:each="list : ${list}">-->
+<!--            <form role="form" method="post" action="/reservation">-->
+<!--                <input type="text" hidden=hidden th:name="hotelHtId" th:value="${list.hotelHtId}"/>-->
+<!--                <td>-->
+<!--                    <img th:src="${list.rImg}" class="roomImg" >-->
+<!--                </td>-->
+<!--                <td th:name="rName" th:text="${list.rName}"></td>-->
+<!--                <td th:name="rPrice" th:text="${list.rPrice}+'원'"></td>-->
+<!--                <div hidden="hidden">-->
+<!--                    <input type="text" th:name="rId" th:value="${list.rId}"/>-->
+<!--                    <input type="text" class="start" th:name="rCheckin" th:value="${checkin}"/>-->
+<!--                    <input type="text" class="end" th:name="rCheckout" th:value="${checkout}"/>-->
+<!--                </div>-->
+<!--                <td>-->
+<!--                    <button type="submit">객실 예약하기</button>-->
+<!--                </td>-->
+<!--            </form>-->
+<!--        </tr>-->
+<!--    </table>-->
 </div>
 </body>
 </html>

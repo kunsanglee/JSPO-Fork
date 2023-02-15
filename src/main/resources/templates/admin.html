@@ -11,19 +11,7 @@
 
 </head>
 <body>
-    <style>
-        .oriImg {
-            width: 300px;
-            height: 300px;
-        }
 
-        td {
-            text-align: center;
-        }
-        th {
-            text-align: center;
-        }
-    </style>
 <header>
     <h1> ADMIN 게시판</h1>
 </header>
@@ -32,6 +20,21 @@
 
 
 <div class="container" layout:fragment="content">
+    <style>
+        .oriImg {
+            width: 300px;
+            height: 300px;
+        }
+
+        td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        th {
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
 
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary my-2 " >
@@ -50,9 +53,14 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link" href="/admin/image">사진 관리</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/hotel/reg">호텔 등록</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="/image/reg">사진 등록</a>
+                    </li>
                 </ul>
 
             </div>
@@ -107,7 +115,7 @@
                     <td  th:name="rName" th:text="${rlist.rName}"></td>
                     <td  th:name="rPrice" th:text="${rlist.rPrice}"></td>
                     <td  th:name="rCnt" th:text="${rlist.rCnt}"></td>
-                    <td >
+                    <td>
 
                         <button type="submit" class="btn btn-secondary roomupdate">수정</button>
                         <button type="submit" class="btn btn-danger roomdelete">삭제</button>
@@ -117,6 +125,30 @@
         </table>
     </th:block>
 
+    <th:block th:if="${ilist != null}">
+        <table class="table mt-3">
+
+            <tr  class="text-center " >
+                <th>호텔이름</th>
+                <th>객실이미지</th>
+                <th>이미지설명</th>
+                <th>수정여부</th>
+            </tr>
+            <tr th:each="ilist : ${ilist}" class="text-center">
+                <form role="form">
+
+                    <input type="text" class="" hidden="hidden" name="imgId" th:value="${ilist.imgId}">
+                    <td th:text="${ilist.htName}"></td>
+                    <td><img th:src="${ilist.img}" width="500px" height="220px" class="oriImg mx-auto d-block" style="border-radius: 10px" ></td>
+                    <td  th:name="imgExplain" th:text="${ilist.imgExplain}"></td>
+                    <td >
+                    <button type="submit" class="btn btn-secondary imageupdate">수정</button>
+                    <button type="submit" class="btn btn-danger imagedelete">삭제</button>
+                    </td>
+                </form>
+            </tr>
+        </table>
+    </th:block>
     <script>
         let formObj = $("form[role='form']");
         $(".hotelupdate").click(function () {
@@ -135,6 +167,16 @@
         });
         $(".roomdelete").click(function () {
             formObj.attr("action", "/room/delete");
+            formObj.attr("method", "post")
+            formObj.submit();
+        });
+        $(".imageupdate").click(function () {
+            formObj.attr("action", "/image/updateView");
+            formObj.attr("method", "post")
+            formObj.submit();
+        });
+        $(".imagedelete").click(function () {
+            formObj.attr("action", "/image/delete");
             formObj.attr("method", "post")
             formObj.submit();
         });
