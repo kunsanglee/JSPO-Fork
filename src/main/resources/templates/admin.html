@@ -11,19 +11,7 @@
 
 </head>
 <body>
-    <style>
-        .oriImg {
-            width: 300px;
-            height: 300px;
-        }
 
-        td {
-            text-align: center;
-        }
-        th {
-            text-align: center;
-        }
-    </style>
 <header>
     <h1> ADMIN 게시판</h1>
 </header>
@@ -32,6 +20,21 @@
 
 
 <div class="container" layout:fragment="content">
+    <style>
+        .oriImg {
+            width: 300px;
+            height: 300px;
+        }
+
+        td {
+            text-align: center;
+            vertical-align: middle;
+        }
+        th {
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
 
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary my-2 " >
@@ -112,7 +115,7 @@
                     <td  th:name="rName" th:text="${rlist.rName}"></td>
                     <td  th:name="rPrice" th:text="${rlist.rPrice}"></td>
                     <td  th:name="rCnt" th:text="${rlist.rCnt}"></td>
-                    <td >
+                    <td>
 
                         <button type="submit" class="btn btn-secondary roomupdate">수정</button>
                         <button type="submit" class="btn btn-danger roomdelete">삭제</button>
