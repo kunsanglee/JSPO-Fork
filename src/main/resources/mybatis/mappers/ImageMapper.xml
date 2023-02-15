@@ -33,4 +33,22 @@
         select * from images where room_hotel_ht_id = #{room_hotel_ht_id};
     </select>
 
+    <select id="selectImageByimgId" parameterType="Integer" resultType="ImageDto">
+        select * from images where img_id = #{imgId};
+    </select>
+
+    <update id="updateImage" parameterType="ImageDto">
+        UPDATE images
+        set img = #{img},
+            img_explain = #{imgExplain}
+        where img_id = #{imgId};
+    </update>
+
+    <delete id="deleteImage" parameterType="int">
+        DELETE FROM images
+        where img_id = #{imgId};
+    </delete>
+
+
+
 </mapper>

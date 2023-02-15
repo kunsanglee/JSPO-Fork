@@ -67,4 +67,40 @@ public class ImageController {
 
         return "redirect:/admin/image";
     }
+    @PostMapping("/image/updateView")
+    public String updateView(Model model,int imgId) throws Exception {
+
+        model.addAttribute("imageupdate", imageDao.selectImageByimgId(imgId));
+
+        return "adminupdateView";
+    }
+
+    @PostMapping("/image/update")
+    public String update(ImageDto imageDto,MultipartFile file) throws Exception {
+
+        String imgUploadPath = uploadPath + "imgUpload";
+        System.out.println("1. imgUploadPath"+imgUploadPath);
+
+        String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+
+        String fileName = null;
+        System.out.println(file);
+        System.out.println(file.getOriginalFilename());
+        if (file.getOriginalFilename() != null && (!file.getOriginalFilename().equals(""))) {
+            fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+            System.out.println("fileName = "+fileName);
+        } else {
+            fileName = "none.png";
+        }
+
+        imageDto.setImg("http://localhost:8080/static/"+fileName);
+        imageDao.updateImage(imageDto);
+
+        return "redirect:/admin/image";
+    }
+    @PostMapping("/image/delete")
+    public String delete(ImageDto imageDto) throws Exception {
+        imageDao.deleteImage(imageDto.getImgId());
+        return "redirect:/admin/image";
+    }
 }

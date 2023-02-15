@@ -13,4 +13,10 @@ public interface ImageDao {
     List<ImageDto> selectImage();
 
     List<ImageDto> selectImageByHtId(int htId);
+
+   void updateImage(ImageDto imageDto);
+
+    void deleteImage(int imgId);
+
+    ImageDto selectImageByimgId(int imgId);
 }
