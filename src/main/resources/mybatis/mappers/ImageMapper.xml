@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jspo.image.dao.ImageDao">
+
+    <insert id="insertImage" parameterType="ImageDto">
+        insert into images (img_id, room_r_id, room_hotel_ht_id, img, img_explain)
+        values (#{imgId}, #{roomRId}, #{roomHotelHtId}, #{img} , #{imgExplain});
+    </insert>
+
+    <select id="selectImage" parameterType="ImageDto" resultType="ImageDto">
+        select * from images;
+    </select>
+
+</mapper>

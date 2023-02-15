@@ -41,7 +41,7 @@ public class HotelController {
         return "hotelPage";
     }
 
-    @PostMapping("/hotel")
+    @GetMapping("/hotelsearch")
     public String hotel(@RequestParam(required = false) String htName,HotelDto hotelDto , Model model,@RequestParam(required = false) String leftvalue,@RequestParam(required = false) String rightvalue){
 
         leftvalue = leftvalue.replace("원","");

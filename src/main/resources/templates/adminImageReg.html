@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">>
+
+<head>
+
+
+</head>
+
+<body>
+<div class="container " layout:fragment="content" >
+
+        <input type="text" value="셀렉트박스 호텔">
+        <input type="text" value="셀렉트박스 객실">
+                            <label>호텔명</label>
+
+                            <select name="hotelHtId">
+                                <tr th:each="list : ${list}">
+                                <option th:text="${list.htName}" th:value="${list.htId}"></option>
+                                </tr>
+                            </select>
+
+        <label for="roomImg">이미지</label>
+        <input type="file" id="roomImg" name="file" />
+        <div class="select_img"><img src="" /></div>
+        <script>
+            $("#roomImg").change(function () {
+                if (this.files && this.files[0]) {
+                    let reader = new FileReader;
+                    reader.onload = function (data) {
+                        $(".select_img img").attr("src", data.target.result).width(500);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        </script>
+        <button type="submit">등록</button>
+</div>
+</body>
+</html>
