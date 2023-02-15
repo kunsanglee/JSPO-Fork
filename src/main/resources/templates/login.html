@@ -79,22 +79,50 @@
                 </div>
             </form>
 
-            <div id="findEmail">
-                <h3>이메일찾기</h3>
-                핸드폰<br><input type="text" placeholder="회원가입시 등록한 핸드폰 번호를 입력해주세요" id="inputPhone"><br>
-                인증번호<br><input type="text" placeholder="예)123456" id="authPhone">
-                <button th:text="전송" id="sendPhone"></button><br>
-                <button class="modal_close_btn" th:text="취소"></button>
-                <button th:text="확인" id="applyPhoneAuth"></button>
+            <div id="findEmail" style="width: 500px;border-radius: 15px">
+<!--                <div class="container">-->
+                <div class="title w-100 border-bottom mb-2 py-2 fw-bold">
+                <span class="fs-5">이메일찾기</span>
+                </div>
+                <label class="form-label " for="inputPhone">핸드폰 번호</label>
+                <input class="form-control mb-2" type="tel" id="inputPhone" name="email" required
+                       autofocus placeholder="회원가입시 등록한 핸드폰 번호를 입력해주세요">
+
+                <label class="form-label " for="authPhone">인증번호</label>
+                <div class="input-group mb-3">
+                <input class="form-control" type="text" id="authPhone" required
+                       placeholder="예)123456" >
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2-sendPhone" th:text="전송"></button>
+                </div>
+
+                <div class="button_box text-center">
+                    <input class="btn btn-secondary modal_close_btn" type="submit" value="취소" style="width: 6rem">
+                    <input class="btn btn-success" type="submit" value="확인" id="applyPhoneAuth" style="width: 6rem">
+                </div>
+<!--                </div>-->
             </div>
 
-            <div id="findPwd">
-                <h3>비밀번호찾기</h3>
-                이메일<br><input type="text" placeholder="회원가입시 등록한 이메일을 입력해주세요" id="inputEmail"><br>
-                인증번호<br><input type="text" placeholder="예)123456" id="authEmail">
-                <button th:text="전송" id="sendEmail"></button><br>
-                <button class="modal_close_btn" th:text="취소"></button>
-                <button th:text="확인" id="applyEmailAuth"></button>
+            <div id="findPwd" style="width: 500px;border-radius: 15px">
+                <div class="title w-100 border-bottom mb-2 py-2 fw-bold">
+                    <span class="fs-5">비밀번호 찾기</span>
+                </div>
+                <label class="form-label " for="inputEmail">이메일</label>
+                <input class="form-control mb-2" type="tel" id="inputEmail" required
+                       autofocus placeholder="회원가입시 등록한 이메일을 입력해주세요">
+
+                <label class="form-label " for="authEmail">인증번호</label>
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" id="authEmail" required
+                           placeholder="예)123456" >
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2-sendEmail" th:text="전송"></button>
+                </div>
+
+                <div class="button_box text-center">
+                    <input class="btn btn-secondary modal_close_btn" type="submit" value="취소" style="width: 6rem">
+                    <input class="btn btn-success" type="submit" value="확인" id="applyEmailAuth" style="width: 6rem">
+                </div>
+
+
             </div>
         </div>
 
@@ -157,7 +185,7 @@
             modal('findEmail');
         });
 
-        $('#sendPhone').on('click', function () {
+        $('#button-addon2-sendPhone').on('click', function () {
             let phone = $('#inputPhone').val();
             $.ajax({
                 url: "/my/emailAuth",
@@ -204,7 +232,7 @@
             modal('findPwd');
         });
 
-        $('#sendEmail').on('click', function () {
+        $('#button-addon2-sendEmail').on('click', function () {
             let email = $('#inputEmail').val();
             $.ajax({
                 url: "/my/PwdAuth",
