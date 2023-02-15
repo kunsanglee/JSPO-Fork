@@ -66,6 +66,7 @@ public class AdminController {
     public String adminImage(Model model) {
 
         List<ImageDto> ilist = imageDao.selectImage();
+        System.out.println("ilist = "+ilist);
         model.addAttribute("ilist",ilist);
 
         return "admin"; // admin 으로 몰아버릴까

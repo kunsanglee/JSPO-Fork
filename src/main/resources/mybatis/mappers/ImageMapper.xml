@@ -3,13 +3,34 @@
 
 <mapper namespace="com.jspo.image.dao.ImageDao">
 
+    <resultMap id="HDto" type="com.jspo.hotel.dto.HotelDto">
+        <result column="" property="htId" />
+        <result column="" property="htName" />
+        <result column="" property="htAddress" />
+        <result column="" property="htImg" />
+        <result column="" property="htPhone" />
+    </resultMap>
+
+    <resultMap id="imageDto" type="com.jspo.image.dto.ImageDto">
+        <result column="" property="imgId" />
+        <result column="" property="roomHotelHtId" />
+        <result column="" property="img" />
+        <result column="" property="imgExplain" />
+        <collection property="hotelDto" resultMap="HDto" />
+    </resultMap>
+
     <insert id="insertImage" parameterType="ImageDto">
-        insert into images (img_id, room_r_id, room_hotel_ht_id, img, img_explain)
-        values (#{imgId}, #{roomRId}, #{roomHotelHtId}, #{img} , #{imgExplain});
+        insert into images (room_hotel_ht_id, img, img_explain)
+        values (#{roomHotelHtId}, #{img} , #{imgExplain});
     </insert>
 
     <select id="selectImage" parameterType="ImageDto" resultType="ImageDto">
-        select * from images;
+        select i.img_id , i.room_hotel_ht_id , i.img , i.img_explain , h.ht_name
+        from images i LEFT JOIN hotel h on i.room_hotel_ht_id = h.ht_id;
+    </select>
+
+    <select id="selectImageByHtId" parameterType="Integer" resultType="ImageDto">
+        select * from images where room_hotel_ht_id = #{room_hotel_ht_id};
     </select>
 
 </mapper>

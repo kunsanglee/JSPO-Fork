@@ -11,4 +11,6 @@ public interface ImageDao {
     void insertImage(ImageDto imageDto);
 
     List<ImageDto> selectImage();
+
+    List<ImageDto> selectImageByHtId(int htId);
 }
