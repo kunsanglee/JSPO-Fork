@@ -1,19 +1,29 @@
 package com.jspo.image.dto;
 
+import com.jspo.hotel.dto.HotelDto;
+
 import java.util.Objects;
 
 public class ImageDto {
 
     private int imgId;
-    private int roomRId;
     private int roomHotelHtId;
     private String img;
     private String imgExplain;
+    private String htName;
+
+    public String getHtName() {
+        return htName;
+    }
+
+    public void setHtName(String htName) {
+        this.htName = htName;
+    }
 
     public ImageDto() {}
-    public ImageDto(int imgId, int roomRId, int roomHotelHtId, String img, String imgExplain) {
+
+    public ImageDto(int imgId, int roomHotelHtId, String img, String imgExplain) {
         this.imgId = imgId;
-        this.roomRId = roomRId;
         this.roomHotelHtId = roomHotelHtId;
         this.img = img;
         this.imgExplain = imgExplain;
@@ -25,14 +35,6 @@ public class ImageDto {
 
     public void setImgId(int imgId) {
         this.imgId = imgId;
-    }
-
-    public int getRoomRId() {
-        return roomRId;
-    }
-
-    public void setRoomRId(int roomRId) {
-        this.roomRId = roomRId;
     }
 
     public int getRoomHotelHtId() {
@@ -64,22 +66,28 @@ public class ImageDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ImageDto imageDto = (ImageDto) o;
-        return imgId == imageDto.imgId && roomRId == imageDto.roomRId && roomHotelHtId == imageDto.roomHotelHtId && Objects.equals(img, imageDto.img) && Objects.equals(imgExplain, imageDto.imgExplain);
+        return imgId == imageDto.imgId && roomHotelHtId == imageDto.roomHotelHtId && Objects.equals(img, imageDto.img) && Objects.equals(imgExplain, imageDto.imgExplain);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(imgId, roomRId, roomHotelHtId, img, imgExplain);
+        return Objects.hash(imgId, roomHotelHtId, img, imgExplain);
     }
 
     @Override
     public String toString() {
         return "ImageDto{" +
                 "imgId=" + imgId +
-                ", roomRId=" + roomRId +
                 ", roomHotelHtId=" + roomHotelHtId +
                 ", img='" + img + '\'' +
                 ", imgExplain='" + imgExplain + '\'' +
                 '}';
+    }
+
+    // DB조회용 user객체 싱글톤패턴으로 재사용
+    private static final ImageDto instance = new ImageDto();
+
+    public static ImageDto getInstance() {
+        return instance;
     }
 }

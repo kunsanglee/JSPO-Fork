@@ -96,8 +96,11 @@
             <h3 th:text="${hotelDto.htPhone}"/>
             <!--    리스트로 그림 받아오기        -->
             <section class="visual">
-            <img th:src="${hotelDto.getHtImg()}" class="oriImg">
-                <img th:src="${hotelDto.getHtImg()}" class="oriImg">
+                <th:block th:if="${ilist != null}">
+                    <tr th:each="ilist : ${ilist}">
+            <img th:src="${ilist.getImg()}" class="oriImg">
+                    </tr>
+                </th:block>
             </section>
             <script type="text/javascript">
                 $(document).ready(function() {
