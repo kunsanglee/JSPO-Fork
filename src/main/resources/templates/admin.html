@@ -129,16 +129,19 @@
                 <th>호텔이름</th>
                 <th>객실이미지</th>
                 <th>이미지설명</th>
+                <th>수정여부</th>
             </tr>
             <tr th:each="ilist : ${ilist}" class="text-center">
                 <form role="form">
 
-<!--                    <input type="text" class="" hidden="hidden" name="rId" th:value="${rlist.rId}">-->
+                    <input type="text" class="" hidden="hidden" name="imgId" th:value="${ilist.imgId}">
                     <td th:text="${ilist.htName}"></td>
                     <td><img th:src="${ilist.img}" width="500px" height="220px" class="oriImg mx-auto d-block" style="border-radius: 10px" ></td>
                     <td  th:name="imgExplain" th:text="${ilist.imgExplain}"></td>
-
-
+                    <td >
+                    <button type="submit" class="btn btn-secondary imageupdate">수정</button>
+                    <button type="submit" class="btn btn-danger imagedelete">삭제</button>
+                    </td>
                 </form>
             </tr>
         </table>
@@ -161,6 +164,16 @@
         });
         $(".roomdelete").click(function () {
             formObj.attr("action", "/room/delete");
+            formObj.attr("method", "post")
+            formObj.submit();
+        });
+        $(".imageupdate").click(function () {
+            formObj.attr("action", "/image/updateView");
+            formObj.attr("method", "post")
+            formObj.submit();
+        });
+        $(".imagedelete").click(function () {
+            formObj.attr("action", "/image/delete");
             formObj.attr("method", "post")
             formObj.submit();
         });

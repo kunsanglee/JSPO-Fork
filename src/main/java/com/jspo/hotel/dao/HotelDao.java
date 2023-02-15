@@ -21,4 +21,6 @@ public interface HotelDao {
 
        List<HotelDto> selectHotelByName(String htName);
 
+    List<HotelDto> selectHotelTop() throws Exception;
+
 }

@@ -21,6 +21,10 @@
         select * from hotel where ht_name like CONCAT('%',#{htName},'%');
     </select>
 
+    <select id="selectHotelTop" resultType="HotelDto">
+        select * from hotel LIMIT 5;
+    </select>
+
     <update id="updateHotel" parameterType="HotelDto">
         UPDATE hotel
         set ht_name = #{htName},
@@ -34,5 +38,6 @@
         DELETE FROM hotel
         where ht_id = #{htId}
     </delete>
+
 
 </mapper>

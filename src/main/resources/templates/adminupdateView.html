@@ -107,6 +107,15 @@
 
       })
     });
+    $(document).ready(function(){
+
+      $(".Icancel_btn").on("click", function(){
+        event.preventDefault();
+        location.href = "/admin/image";
+
+      })
+    });
+
 
   </script>
 
@@ -169,6 +178,47 @@
     </div>
   </th:block>
 
+  <th:block th:if="${imageupdate != null}">
+    <div class="hotel_reg_wrap justify-content-center">
+      <div class="hotel_reg">
+
+        <form method="post" action="/image/update" enctype="multipart/form-data">
+          <input type="hidden" name="imgId" th:value="${imageupdate.imgId}"/>
+          <div class="select_img w-100 "><img th:src="${imageupdate.img}" class="w-100 mb-2 p-1 rounded"/></div>
+          <div class="hotel_reg_input_group">
+            <div class="input-group input-group-sm mb-3">
+              <span class="input-group-text">이미지설명</span>
+              <input type="text" class="form-control" name="imgExplain" th:value="${imageupdate.imgExplain}"
+                     aria-describedby="inputGroup-sizing-default" required>
+            </div>
+
+            <div class="input-group input-group-sm mb-3">
+              <span class="input-group-text">객실 이미지</span>
+              <input type="file" class="form-control" id="img" name="file"
+                     aria-describedby="inputGroup-sizing-default" required>
+            </div>
+          </div>
+
+          <script>
+            $("#img").change(function(){
+              if(this.files && this.files[0]) {
+                var reader = new FileReader;
+                reader.onload = function(data) {
+                  $(".select_img img").attr("src", data.target.result).width(400);
+                }
+                reader.readAsDataURL(this.files[0]);
+              }
+            });
+          </script>
+
+          <div class="button_group w-100 h-10 text-end">
+            <button type="button" class="btn btn-secondary Icancel_btn ">취소</button>
+            <button type="submit" class="btn btn-success update_btn ">등록</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </th:block>
 </div>
 </body>
 <!--            <table>-->

@@ -53,9 +53,9 @@
         <div class="col col-md-2 " th:each="list : ${list}">
             <!--        border rounded-3 p-0 mx-3 mb-5-->
             <div class="card mb-3" style="width: 13rem;height: 18rem">
-                <!--                    <a th:href="|@{/room/list/} + ${list.htId}|">-->
-                <img th:src="${list.htImg}" src="" class="card-img-top" alt="" style="width: 12.9rem; height: 9rem">
-                <!--                    </a>-->
+                <a th:href="|@{/room/list/} + ${list.htId}|">
+                    <img th:src="${list.htImg}" src="" class="card-img-top" alt="" style="width: 12.9rem; height: 9rem">
+                </a>
                 <div class="card-body">
                     <p class="m-0 "><span class="resId fs-6 text-secondary" th:text="${list.htAddress}"></span></p>
                     <p class="m-0"><span class="resId fs-5" th:text="${list.htName}"></span></p>
