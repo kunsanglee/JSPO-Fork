@@ -116,7 +116,7 @@
             <input type="text" name="daterange" th:value="${#temporals.createToday()}"/>
             <input type="text" class="start" name="checkin" th:value="${checkin}" hidden="hidden"/>
             <input type="text" class="end" name="checkout" th:value="${checkout}" hidden="hidden"/>
-            <button type="submit">검색</button>
+            <button class="submitDate" type="submit" hidden="hidden"></button>
         </form>
 
         <tr>
@@ -133,7 +133,6 @@
                 </td>
                 <td th:name="rName" th:text="${list.rName}"></td>
                 <td th:name="rPrice" th:text="${list.rPrice}+'원'"></td>
-                <td th:name="rCnt" th:text="${list.rCnt}+'명'"></td>
                 <div hidden="hidden">
                     <input type="text" th:name="rId" th:value="${list.rId}"/>
                     <input type="text" class="start" th:name="rCheckin" th:value="${checkin}"/>
