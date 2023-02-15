@@ -50,9 +50,14 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link" href="/admin/image">사진 관리</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/hotel/reg">호텔 등록</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="/image/reg">사진 등록</a>
+                    </li>
                 </ul>
 
             </div>
@@ -117,6 +122,27 @@
         </table>
     </th:block>
 
+    <th:block th:if="${ilist != null}">
+        <table class="table mt-3">
+
+            <tr  class="text-center " >
+                <th>호텔이름</th>
+                <th>객실이미지</th>
+                <th>이미지설명</th>
+            </tr>
+            <tr th:each="ilist : ${ilist}" class="text-center">
+                <form role="form">
+
+<!--                    <input type="text" class="" hidden="hidden" name="rId" th:value="${rlist.rId}">-->
+                    <td th:text="${ilist.htName}"></td>
+                    <td><img th:src="${ilist.img}" width="500px" height="220px" class="oriImg mx-auto d-block" style="border-radius: 10px" ></td>
+                    <td  th:name="imgExplain" th:text="${ilist.imgExplain}"></td>
+
+
+                </form>
+            </tr>
+        </table>
+    </th:block>
     <script>
         let formObj = $("form[role='form']");
         $(".hotelupdate").click(function () {
