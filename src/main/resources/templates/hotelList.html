@@ -21,7 +21,7 @@
                 <div class="card-body">
                    <p class="m-0 "><span class="resId fs-6 text-secondary" th:text="${list.htAddress}"></span></p>
                    <p class="m-0"><span class="resId fs-5" th:text="${list.htName}"></span></p>
-                   <p class="text-end"><span th:if="${pricelist[i.index]} != null"><span class="fw-bold" th:text="${pricelist[i.index]}+'원'"></span></span></p>
+                   <p class="text-end"><span th:if="${pricelist[i.index]} != null"><span class="fw-bold" th:text="${#numbers.formatInteger(pricelist[i.index],3,'COMMA')}+'원'"></span></span></p>
                    <p class="text-end"><span th:if="${pricelist[i.index]} == null"><span class="fw-bold" th:text='0원'></span></span></p>
 
                 </div>

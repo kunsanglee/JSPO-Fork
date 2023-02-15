@@ -55,6 +55,7 @@ public class ReservationController {
         hotelDto = hotelDao.selectHotelByHtId(hotelHtId);
         memberDto = memberDao.selectMemberByEmail((String) session.getAttribute("email"));
         roomDto = roomDao.selectRoomByRId(rId);
+//        System.out.println("roomDto = " + roomDto);
         roomDto.setrCheckin(rCheckin);
         roomDto.setrCheckout(rCheckout);
         // reservationDto 객체에 예약정보 입력
@@ -154,11 +155,11 @@ public class ReservationController {
             m.addAttribute(roomDto);
 
         } catch (Exception e) {
-            e.printStackTrace();
-            m.addAttribute("reservation");
-            m.addAttribute(memberDto);
-            m.addAttribute(hotelDto);
-            m.addAttribute(roomDto);
+//            e.printStackTrace();
+//            m.addAttribute("reservation", "예약하신 내역이 없습니다");
+//            m.addAttribute(memberDto);
+//            m.addAttribute(hotelDto);
+//            m.addAttribute(roomDto);
         }
 
         return "reserved";
