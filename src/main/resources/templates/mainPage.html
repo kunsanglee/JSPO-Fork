@@ -18,9 +18,12 @@
 
         <div class="title my-3 w-100 justify-content-between">
 
-            <span class="fw-bold display-6 ">맞춤 숙소 검색</span>
+            <span class="fw-bold fs-3 ">맞춤 숙소 검색</span>
+            <div class="divider border-bottom my-2"></div>
             <span id="reset">초기화</span>
+
         </div>
+
 
         <div class=" mb-3 my-3">
             <form class="d-flex" action="/hotel" method="post">
@@ -53,36 +56,33 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-<!--          <table>-->
-<!--            <tr th:each="list ,i : ${list}">-->
-<!--                <div class="card mb-3 hotel_list mt-4">-->
-<!--                    <div class="row g-0">-->
-<!--                        <div class="col-md-4">-->
-<!--                            <a th:href="@{/room/list/} + ${list.htId}"> <img th:src="${list.htImg}"-->
-<!--                            class="img-fluid rounded-start" alt="..."-->
-<!--                            width="100%" height="100%"></a>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-8">-->
-<!--                            <div class="card-body">-->
-<!--                                <h2 class="card-title fw-bolder" th:text="${list.htName}"></h2>-->
-<!--                                <p class="card-text" th:text="${list.htAddress}"></p>-->
-<!--                                <div class="hotel_list_price">-->
-<!--                                    <span class="display-4 fw-bolder">가격</span>-->
-<!--                                    <td th:if="${pricelist[i.index]} != null"><span class="fw-bolder display-4"-->
-<!--                                                                                    th:text="${pricelist[i.index]}"></span><span-->
-<!--                                            class="fw-bolder display-4">원</span></td>-->
-<!--                                    <td th:if="${pricelist[i.index]} == null"><span class="fw-bolder display-4"-->
-<!--                                                                                    th:text="0"></span><span-->
-<!--                                            class="fw-bolder display-4">원</span></td>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </tr>-->
-<!--          </table>-->
+
+
+
+        </div>
+    <div class="title my-3 w-100 justify-content-between">
+        <span class="fw-bold fs-3 ">JSPO BEST 인기 호텔</span>
+        <div class="divider border-bottom my-2"></div>
+    </div>
+
+    <div class="row d-flex justify-content-start align-items-center p-2 "  >
+    <div class="col col-md-2 " th:each="list : ${list}" >
+<!--        border rounded-3 p-0 mx-3 mb-5-->
+                <div class="card mb-3" style="width: 13rem;height: 18rem">
+<!--                    <a th:href="|@{/room/list/} + ${list.htId}|">-->
+                        <img th:src="${list.htImg}" src="" class="card-img-top" alt=""  style="width: 12.9rem; height: 9rem">
+<!--                    </a>-->
+                    <div class="card-body">
+                        <p class="m-0 "><span class="resId fs-6 text-secondary" th:text="${list.htAddress}"></span></p>
+                        <p class="m-0"><span class="resId fs-5" th:text="${list.htName}"></span></p>
+<!--                        <p class="text-end"><span th:if="${pricelist[i.index]} != null"><span class="fw-bold" th:text="${pricelist[i.index]}+'원'"></span></span></p>-->
+<!--                        <p class="text-end"><span th:if="${pricelist[i.index]} == null"><span class="fw-bold" th:text='0원'></span></span></p>-->
+                    </div>
+                </div>
+            </div>
+    </div>
+
 
     </div>
 

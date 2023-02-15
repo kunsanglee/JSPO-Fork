@@ -126,7 +126,7 @@
             <form role="form" method="post" action="/reservation">
                 <input type="text" hidden=hidden th:name="hotelHtId" th:value="${list.hotelHtId}"/>
                 <td>
-                    <img th:src="${list.rImg}" class="roomImg">
+                    <img th:src="${list.rImg}" class="roomImg" >
                 </td>
                 <td th:name="rName" th:text="${list.rName}"></td>
                 <td th:name="rPrice" th:text="${list.rPrice}+'원'"></td>
