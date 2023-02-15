@@ -13,6 +13,63 @@
 
 <div class="container h-100 " layout:fragment="content">
 
+    <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/imgs/hotels/hotel1.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="/imgs/imgUpload/2023/02/03/092c70af-8896-4a71-bed1-9469067b49d8_신사스테이.PNG" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="/imgs/imgUpload/2023/02/03/1480b46c-b960-46f2-8cc6-d27389390ebe_그랜드.PNG" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
+    </div>
+    <div class="roomList_hotel_info d-flex flex-column   p-2">
+        <span class="fs-5 fw-bold" th:text="${hotelDto.htName}"/>
+        <p ><i class="fa-solid fa-location-dot text-secondary"></i><span class="card-text text-secondary mx-1 my-0" th:text="${hotelDto.htAddress}"></span></p>
+        <div class="divider border-bottom w-90"></div>
+        <span class="fs-5 fw-bold" >인기시설 및 서비스</span>
+        <img class="" src="/imgs/hotels/option.png" alt="" style="width: 500px">
+        <div class="divider border-bottom w-90"></div>
+        <span class="fs-5 fw-bold" >객실선택</span>
+    </div>
+
+    <div class="daterange_box px-2 px-sm-2 ">
+        <form th:action="@{/room/list/}+${hotelDto.htId}" autocomplete="off">
+
+
+                    <label for="daterange">날짜 선택</label>
+                    <div class="input-group" >
+<!--                        <div class="daterange_box flex-row ">-->
+                            <div class="daterage_input_btn ">
+                      <input type="text" id="daterange" name="daterange" th:value="${#temporals.createToday()}" readonly />
+                      <input type="text" class="start" name="checkin" th:value="${checkin}" hidden="hidden"/>
+                      <input type="text" class="end" name="checkout" th:value="${checkout}" hidden="hidden"/>
+                             </div>
+                            <div class="daterange_button_box text-center align-items-center justify-center">
+                                <button type="submit" class="btn btn-secondary mx-1" style="width: 100px; height: 46px;">검색</button>
+                            </div>
+<!--                        </div>-->
+                    </div>
+
+        </form>
+    </div>
+
+
+
+
+
     <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

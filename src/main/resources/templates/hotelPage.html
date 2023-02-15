@@ -102,8 +102,8 @@
     </div>
 
     <div class=" mb-3 my-3">
-        <form class="d-flex" role="form" action="/hotel" method="post">
-
+        <form class="" role="form" action="/hotel" method="post">
+            <div class="search_box d-flex flex-row align-items-center justify-center">
             <input class="form-control sm-5 me-2" type="search" placeholder="숙소명 검색" aria-label="Search" name="htName"><br>
 
             <div class="middle">
@@ -120,13 +120,17 @@
                         <div class="thumb right"></div>
                     </div>
                 </div>
-                <div>
+                <div class="price_input_box_container">
                     <input type="hidden" id="leftvalue" name="leftvalue">
                     <input type="hidden" id="rightvalue" name="rightvalue">
-                    <p class="left" id="left">0원</p>
-                    <p class="right" id="right">500,000원</p>
+                    <div class="price_input_box">
+                        <p class="left mb-0" id="left">0원</p>
+                        <p class="right mb-0" id="right">500,000원</p>
+                    </div>
                 </div>
+
             </div>
+
             <button class="btn btn-outline-success" type="submit" id="hotelSearch" onclick="price()">검색</button>
             <script>
 
@@ -135,6 +139,7 @@
                     document.getElementById("rightvalue").value = document.getElementById("right").innerText;
                 }
             </script>
+            </div>
         </form>
     </div>
 
@@ -168,27 +173,40 @@
     <form>
 
         <tr th:each="list ,i : ${list}">
-            <div class="card mb-3 hotel_list mt-4">
+            <div class="card  mb-3 hotel_list mt-4" style="height: 200px">
                 <div class="row g-0">
-                    <div class="col-md-4">
-                        <a th:href="@{/room/list/} + ${list.htId}"> <img th:src="${list.htImg}"
-                                                                         class="img-fluid rounded-start" alt="..."
-                                                                         width="100%" height="100%"></a>
+
+                    <div class="col-md-4" >
+                        <a th:href="@{/room/list/} + ${list.htId}">
+                         <img th:src="${list.htImg}"class="img-fluid rounded-start" alt="..."
+                                                                          style="background-size: cover;width: 431px; height: 200px;background-position: center"></a>
                     </div>
+
                     <div class="col-md-8">
-                        <div class="card-body">
+
+                        <div class="card-body ">
+
                             <h2 class="card-title fw-bolder" th:text="${list.htName}"></h2>
-                            <p class="card-text" th:text="${list.htAddress}"></p>
+                                <p><i class="fa-solid fa-location-dot text-secondary"></i><span class="card-text text-secondary mx-1" th:text="${list.htAddress}"></span></p>
                             <div class="hotel_list_price">
-                                <span class="display-4 fw-bolder">가격</span>
-                                <td th:if="${pricelist[i.index]} != null"><span class="fw-bolder display-4"
+                                <span class="fs-2 fw-bolder">가격</span>
+                                <td th:if="${pricelist[i.index]} != null"><span class="fw-bolder fs-2"
                                                                                 th:text="${pricelist[i.index]}"></span><span
-                                        class="fw-bolder display-4">원</span></td>
-                                <td th:if="${pricelist[i.index]} == null"><span class="fw-bolder display-4"
+                                        class="fw-bolder fs-2">원</span></td>
+                                <td th:if="${pricelist[i.index]} == null"><span class="fw-bolder fs-2"
                                                                                 th:text="0"></span><span
-                                        class="fw-bolder display-4">원</span></td>
+                                        class="fw-bolder fs-2">원</span></td>
+
+
                             </div>
+                                <div class="reserve_button text-end">
+                                    <a th:href="@{/room/list/} + ${list.htId}">
+                                <span class="btn btn-dark" style="width: 160px">객실선택</span>
+                                    </a>
+                                </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>
