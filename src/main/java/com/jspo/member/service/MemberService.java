@@ -1,8 +1,6 @@
 package com.jspo.member.service;
 
-import com.jspo.member.dao.MemberDao;
 import com.jspo.member.dto.MemberDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -23,15 +23,6 @@ public class Naver_Sens_V2_Controller {
 
         System.out.println("phone = " + phone);
 
-//        try { // 이미 가입된 전화번호가 있으면
-//            if(memberDao.memberPhoneCount(phone) > 0)
-//                System.out.println("memberDao.memberPhoneCount(phone) = " + memberDao.memberPhoneCount(phone));
-//                return false;
-//        } catch (Exception e) {
-//            System.out.println("catch error");
-//            e.printStackTrace();
-//        }
-
         if (memberDao.memberPhoneCount(phone) != 0) {
             System.out.println("이미 등록된 핸드폰 번호입니다.");
             return false;

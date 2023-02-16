@@ -38,8 +38,6 @@ public class LoginController {
             referer = request.getHeader("referer");
         }
 
-        System.out.println("get login = " + request.getHeader("referer"));
-
         HttpSession session = request.getSession();
         if (session.getAttribute("email") != null) {
             if (("http://localhost:8080/login").equals(referer)) {
@@ -56,7 +54,6 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(MemberDto loginMember, Model m, HttpServletRequest request, HttpServletResponse response, boolean remember) throws Exception {
-        System.out.println("post login = " + request.getHeader("referer"));
 
         if (loginMember.getEmail() != null && loginMember.getPwd() != null) {
             memberDto = memberDao.selectMemberByEmail(loginMember.getEmail());

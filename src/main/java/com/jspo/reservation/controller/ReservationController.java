@@ -90,20 +90,11 @@ public class ReservationController {
     public void complete(@RequestBody Map<String, String> data) {
         // imp_uid, merchant_uid, amount
         // 결제 성공 reservation DB에 정보 입력.
-        System.out.println("complete~~");
-        System.out.println(data);
-        System.out.println("reservationDto = " + reservationDto);
 
         long inTime = reservationDto.getRoomRCheckin().getTime();
         long outTime = reservationDto.getRoomRCheckout().getTime();
         long diff = (outTime - inTime)/1000/60/60/24;
-        System.out.println("inTime = " + inTime);
-        System.out.println("outTime = " + outTime);
-        System.out.println("diff = " + diff);
 
-        for (long i = inTime; i <= outTime; i += 86400000) {
-            System.out.println("i = " + i);
-        }
         Date date = new Date();
 
         Map<String, Object> map = new HashMap<>();
@@ -136,8 +127,8 @@ public class ReservationController {
         System.out.println("취소사유 : " + reason);
         System.out.println("회원명  : " + memberName);
         System.out.println("주문번호 일치여부 : " + resId.equals(merchant_uid));
-        reservedDao.deleteReserved(reservationDao.selectReservationByResId(Long.parseLong(merchant_uid)));
         System.out.println("예약 삭제처리 : " + reservationDao.deleteReservationByResId(resId));
+        reservedDao.deleteReserved(reservationDao.selectReservationByResId(Long.parseLong(merchant_uid)));
 
         return true;
     }
