@@ -43,37 +43,6 @@
         </form>
     </div>
 
-
-<!--        <div class="slider">-->
-
-<!--            <label for="min_price" class="form-label fw-bold">최저가격</label>-->
-<!--            <div class="price_wrap">-->
-<!--                <input type="range" class="form-range price_input_range" id="min_price" min="1" max="9999" value="1"-->
-<!--                       step="1">-->
-<!--                <div class="input-group price_input_group">-->
-<!--                    <span class="input-group-text ">₩</span>-->
-<!--                    <input type="text" class="form-control " id="min_box" aria-label="원" value="10,000">-->
-<!--                    <span class="input-group-text ">원</span>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="max_price_wrap">-->
-<!--                <label for="max_price" class="form-label fw-bold">최대가격</label>-->
-<!--                <div class="price_wrap">-->
-<!--                    <input type="range" class="form-range price_input_range" id="max_price" min="2" max="10000"-->
-<!--                           value="10000" step="1">-->
-<!--                    <div class="input-group price_input_group">-->
-<!--                        <span class="input-group-text ">₩</span>-->
-<!--                        <input type="text" class="form-control" id="max_box" aria-label="원" value="10,000,000">-->
-<!--                        <span class="input-group-text">원</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-
-
-
-<!--        </div>-->
-
     <div class="title my-3 w-100 justify-content-between">
         <span class="fw-bold fs-3 ">JSPO BEST 인기 호텔</span>
         <div class="divider border-bottom my-2"></div>
@@ -90,6 +59,29 @@
                 <div class="card-body">
                     <p class="m-0 "><span class="resId fs-6 text-secondary" th:text="${list.htAddress}"></span></p>
                     <p class="m-0"><span class="resId fs-5" th:text="${list.htName}"></span></p>
+                    <!--                        <p class="text-end"><span th:if="${pricelist[i.index]} != null"><span class="fw-bold" th:text="${pricelist[i.index]}+'원'"></span></span></p>-->
+                    <!--                        <p class="text-end"><span th:if="${pricelist[i.index]} == null"><span class="fw-bold" th:text='0원'></span></span></p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="title my-3 w-100 justify-content-between">
+        <span class="fw-bold fs-3 ">서울 인기 호텔</span>
+        <div class="divider border-bottom my-2"></div>
+    </div>
+
+
+    <div class="row d-flex justify-content-start align-items-center p-2 ">
+        <div class="col col-md-2 " th:each="listseoul : ${listseoul}">
+            <!--        border rounded-3 p-0 mx-3 mb-5-->
+            <div class="card mb-3" style="width: 13rem;height: 18rem">
+                <a th:href="|@{/room/list/} + ${listseoul.htId}|">
+                    <img th:src="${listseoul.htImg}" src="" class="card-img-top" alt="" style="width: 12.9rem; height: 9rem">
+                </a>
+                <div class="card-body">
+                    <p class="m-0 "><span class="resId fs-6 text-secondary" th:text="${listseoul.htAddress}"></span></p>
+                    <p class="m-0"><span class="resId fs-5" th:text="${listseoul.htName}"></span></p>
                     <!--                        <p class="text-end"><span th:if="${pricelist[i.index]} != null"><span class="fw-bold" th:text="${pricelist[i.index]}+'원'"></span></span></p>-->
                     <!--                        <p class="text-end"><span th:if="${pricelist[i.index]} == null"><span class="fw-bold" th:text='0원'></span></span></p>-->
                 </div>
