@@ -8,22 +8,22 @@
     <!--    justify-content-between-->
     <header>
     <nav class="navbar navbar-expand-lg shadow-lg sticky-top ">
-        <div class="header_container"><a href="/" class="navbar-brand align-middle">
-           <div class="header_img">
-            <img id="header_logo" src="/imgs/logos/jspo-logo-white3.png" alt="logo"  >
-           </div>
-
+        <a href="/" class="navbar-brand align-middle">
+            <div class="header_img">
+                <img id="header_logo" src="/imgs/logos/jspo-logo-white3.png" alt="logo"  >
+            </div>
         </a>
         <div class="header_nav_menu">
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-center ">
 
-                    <li class="nav-item">
+                    <li class="nav-item text-center">
                         <a href="/" class="nav-link">
                             홈
                         </a>
@@ -31,10 +31,9 @@
 
                     <li class="nav-item">
 
-            <span class="nav-item" id="login_logout">
+            <span class="nav-item text-center" id="login_logout">
               <a th:if="${session.email == null}" href="/login" class="nav-link">로그인</a>
               <a th:if="${session.email != null}" href="/logout" class="nav-link">로그아웃</a>
-
             </span>
                     </li>
 
@@ -70,7 +69,6 @@
 <!--                    삭제요망-->
                 </ul>
             </div>
-        </div>
         </div>
     </nav>
 
