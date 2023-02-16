@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -104,8 +105,21 @@ public class ReservationController {
         System.out.println("outTime = " + outTime);
         System.out.println("diff = " + diff);
 
-        for (int i = 0; i < diff; i++) {
-            reservedDao.insertReserved(reservationDto);
+        for (long i = inTime; i <= outTime; i += 86400000) {
+            System.out.println("i = " + i);
+        }
+        Date date = new Date();
+
+        Map<String, Object> map = new HashMap<>();
+
+        for (long i = inTime; i <= outTime; i += 86400000) {
+//            reservedDao.insertReserved(reservationDto);
+            date.setTime(i);
+            map.put("roomHotelHtId", reservationDto.getRoomHotelHtId());
+            map.put("roomRId", reservationDto.getRoomRId());
+//            map.put("roomRCheckin", new java.sql.Date(i));
+            map.put("roomRCheckin", date);
+            reservedDao.insertReserved(map);
         }
 
         reservationDao.insertReservation(reservationDto);
