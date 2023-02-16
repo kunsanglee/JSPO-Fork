@@ -42,7 +42,7 @@
 
             <div class="row">
                 <h1 class="fw-bold p-2 m-2 ">예약내역페이지</h1>
-                <h5 th:text="${reservation}?:'예약하신 내역이 없습니다'"></h5>
+                <h5 th:if="${reservation eq null}" th:text="'예약하신 내역이 없습니다'"></h5>
                 <div th:each="r : ${reservation}">
                     <div class="col-lg-4 col-md-5 pt-3 pt-sm-4 w-100">
 
