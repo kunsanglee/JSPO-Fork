@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ReservationController {
@@ -56,7 +53,6 @@ public class ReservationController {
         hotelDto = hotelDao.selectHotelByHtId(hotelHtId);
         memberDto = memberDao.selectMemberByEmail((String) session.getAttribute("email"));
         roomDto = roomDao.selectRoomByRId(rId);
-//        System.out.println("roomDto = " + roomDto);
         roomDto.setrCheckin(rCheckin);
         roomDto.setrCheckout(rCheckout);
         // reservationDto 객체에 예약정보 입력
@@ -113,11 +109,9 @@ public class ReservationController {
         Map<String, Object> map = new HashMap<>();
 
         for (long i = inTime; i <= outTime; i += 86400000) {
-//            reservedDao.insertReserved(reservationDto);
             date.setTime(i);
             map.put("roomHotelHtId", reservationDto.getRoomHotelHtId());
             map.put("roomRId", reservationDto.getRoomRId());
-//            map.put("roomRCheckin", new java.sql.Date(i));
             map.put("roomRCheckin", date);
             reservedDao.insertReserved(map);
         }
@@ -159,21 +153,22 @@ public class ReservationController {
         memberDto = memberDao.selectMemberByEmail(email);
 
         try {
-            reservationDto = reservationDao.selectLastReservationById(memberDto.getId());
-            hotelDto = hotelDao.selectHotelByHtId(reservationDto.getRoomHotelHtId());
-            roomDto = roomDao.selectRoomByRId(reservationDto.getRoomRId());
+
             List<ReservationDto> reservation = reservationDao.selectAllReservationById(memberDto.getId());
+            List<HotelDto> hotelDto = new ArrayList<>();
+            List<RoomDto> roomDto = new ArrayList<>();
+
+            for (ReservationDto reservationDto : reservation) {
+                hotelDto.add(hotelDao.selectHotelByHtId(reservationDto.getRoomHotelHtId()));
+                roomDto.add(roomDao.selectRoomByRId(reservationDto.getRoomRId()));
+            }
             m.addAttribute("reservation", reservation);
             m.addAttribute(memberDto);
-            m.addAttribute(hotelDto);
-            m.addAttribute(roomDto);
+            m.addAttribute("hotelDto", hotelDto);
+            m.addAttribute("roomDto", roomDto);
 
         } catch (Exception e) {
-//            e.printStackTrace();
-//            m.addAttribute("reservation", "예약하신 내역이 없습니다");
-//            m.addAttribute(memberDto);
-//            m.addAttribute(hotelDto);
-//            m.addAttribute(roomDto);
+
         }
 
         return "reserved";

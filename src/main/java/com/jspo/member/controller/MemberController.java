@@ -2,11 +2,17 @@ package com.jspo.member.controller;
 
 
 import com.jspo.email.EmailService;
+import com.jspo.hotel.dao.HotelDao;
+import com.jspo.hotel.dto.HotelDto;
 import com.jspo.member.dao.MemberDao;
 import com.jspo.member.dto.MemberDto;
 import com.jspo.member.service.MemberService;
 import com.jspo.reservation.dao.ReservationDao;
+import com.jspo.reservation.dao.ReservedDao;
 import com.jspo.reservation.dto.ReservationDto;
+import com.jspo.reservation.dto.ReservedDto;
+import com.jspo.room.dao.RoomDao;
+import com.jspo.room.dto.RoomDto;
 import com.jspo.sms.Naver_Sens_V2_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +24,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -39,8 +47,12 @@ public class MemberController {
 
     @Autowired
     private MemberDao memberDao;
+
     @Autowired
-    private MemberService memberService;
+    private HotelDao hotelDao;
+
+    @Autowired
+    private RoomDao roomDao;
 
     @Autowired
     private ReservationDao reservationDao;
@@ -61,8 +73,25 @@ public class MemberController {
 
         String email = (String) session.getAttribute("email");
         memberDto = memberDao.selectMemberByEmail(email);
-        m.addAttribute("memberDto", memberDto);
-        m.addAttribute("encPwd", memberService.getEncPwd(memberDto));
+
+        try {
+
+            List<ReservationDto> reservation = reservationDao.selectAllReservationById(memberDto.getId());
+            List<HotelDto> hotelDto = new ArrayList<>();
+            List<RoomDto> roomDto = new ArrayList<>();
+
+            for (ReservationDto reservationDto : reservation) {
+                hotelDto.add(hotelDao.selectHotelByHtId(reservationDto.getRoomHotelHtId()));
+                roomDto.add(roomDao.selectRoomByRId(reservationDto.getRoomRId()));
+            }
+            m.addAttribute("reservation", reservation);
+            m.addAttribute(memberDto);
+            m.addAttribute("hotelDto", hotelDto);
+            m.addAttribute("roomDto", roomDto);
+
+        } catch (Exception e) {
+
+        }
         return "myPage";
     }
 

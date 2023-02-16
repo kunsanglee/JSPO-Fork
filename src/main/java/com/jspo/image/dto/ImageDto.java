@@ -1,7 +1,5 @@
 package com.jspo.image.dto;
 
-import com.jspo.hotel.dto.HotelDto;
-
 import java.util.Objects;
 
 public class ImageDto {

@@ -4,8 +4,6 @@ import com.jspo.hotel.dao.HotelDao;
 import com.jspo.hotel.dto.HotelDto;
 import com.jspo.image.dao.ImageDao;
 import com.jspo.image.dto.ImageDto;
-import com.jspo.room.dao.RoomDao;
-import com.jspo.room.dto.RoomDto;
 import com.jspo.upload.UploadFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,12 +21,8 @@ public class ImageController {
     @Autowired
     HotelDao hotelDao;
 
-    HotelDto hotelDto = HotelDto.getInstance();
-
     @Autowired
     ImageDao imageDao;
-
-    ImageDto imageDto = ImageDto.getInstance();
 
     @Value("${file.dir}")
     private String uploadPath;

@@ -3,7 +3,6 @@ package com.jspo.hotel.controller;
 import com.jspo.hotel.dao.HotelDao;
 import com.jspo.hotel.dto.HotelDto;
 import com.jspo.room.dao.RoomDao;
-import com.jspo.room.dto.RoomDto;
 import com.jspo.upload.UploadFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class HotelController {
@@ -27,14 +25,8 @@ public class HotelController {
 
     @Value("${file.dir}")
     private String uploadPath;
-
-    private HotelDto hotelDto = HotelDto.getInstance();
-
     @Autowired
     private RoomDao roomDao;
-
-
-    private RoomDto roomDto = RoomDto.getInstance();
 
     @GetMapping("/hotel")
     public String hotel(){

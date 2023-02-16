@@ -11,7 +11,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,8 +26,6 @@ public class JoinController {
 
     @Autowired
     private MemberService memberService;
-
-    private MemberDto memberDto = MemberDto.getInstance();
 
     @Autowired
     private PasswordEncoder passwordEncoder;
