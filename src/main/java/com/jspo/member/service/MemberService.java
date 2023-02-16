@@ -1,17 +1,10 @@
 package com.jspo.member.service;
 
-import com.jspo.member.dao.MemberDao;
 import com.jspo.member.dto.MemberDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MemberService {
-
-    @Autowired
-    private MemberDao memberDao;
-
-    private MemberDto memberDto = MemberDto.getInstance();
 
     public static String getEncPwd(MemberDto memberDto) {
         // 회원정보페이지로 보내는 암호화 비밀번호

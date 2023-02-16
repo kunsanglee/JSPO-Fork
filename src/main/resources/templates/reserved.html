@@ -55,7 +55,7 @@
                             </div>
                             <div class="reserved_hotel_info">
                                 <p class="fw-bold">예약번호 : <span class="resId" th:text="${r.getResId()}"></span></p>
-                                <p>호텔명 : <span th:text="|${hotelDto.getHtName()} - ${roomDto.getrName()}|"></span></p>
+                                <p>호텔명 : <span th:text="|${hotelDto.get(rStat.index).getHtName()} - ${roomDto.get(rStat.index).getrName()}|"></span></p>
 
                                 <p> 예약자 : <span class="memberName" th:text="${memberDto.getName()}"></span></p>
                                 <p> 예약날짜 : <span
@@ -66,7 +66,7 @@
                                 </p>
                                 <p> 예약상태 : <span th:if="${r.getResState()} == 1" th:text="예약완료"></span></p>
                                 <p><span th:unless="${r.getResState()} == 1" th:text="예약마감"></span></p>
-                                <p> 업체연락처 : <span th:text="${hotelDto.getHtPhone()}"></span></p>
+                                <p> 업체연락처 : <span th:text="${hotelDto.get(rStat.index).getHtPhone()}"></span></p>
                                 <p> 결제금액 : <span class="resPrice" th:text="${#numbers.formatInteger(r.getResPrice(),3,'COMMA')}+원"></span></p>
                             </div>
                         </div>
