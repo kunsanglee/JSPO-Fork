@@ -18,13 +18,16 @@
     </select>
 
     <select id="selectHotelByName" parameterType="String" resultType="HotelDto">
-        select * from hotel where ht_name like CONCAT('%',#{htName},'%');
+        select * from hotel where ht_name like CONCAT('%',#{htName},'%') or ht_address like CONCAT('%',#{htAddress},'%');
     </select>
 
     <select id="selectHotelTop" resultType="HotelDto">
         select * from hotel LIMIT 5;
     </select>
 
+    <select id="selectHotelSeoul" resultType="HotelDto">
+        select * from hotel where ht_address like CONCAT('%','서울','%') LIMIT 5;
+    </select>
     <update id="updateHotel" parameterType="HotelDto">
         UPDATE hotel
         set ht_name = #{htName},
