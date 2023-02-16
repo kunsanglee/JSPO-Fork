@@ -10,10 +10,11 @@
 
 header .navbar{
     width: 100vw;
-    height: 10vh;
+    height: 8vh;
     background-color: #6f2cf4;
 
-    display: inline-block;
+    display: flex;
+    justify-content: space-between;
 }
 
 header .navbar a{

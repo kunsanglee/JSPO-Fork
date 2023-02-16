@@ -9,7 +9,9 @@ trans_password();
 
 function trans_password() {
     const pwd_length = document.querySelector('#staticPassword');
-    let length = parseInt(pwd_length.value);
+    // let length = parseInt(pwd_length.value);
+    let length = pwd_length.value;
+    console.log('렝쓰는',pwd_length.value)
     let star = '';
         for (let i = 1; i <= length; i++) {
             star += '●'
