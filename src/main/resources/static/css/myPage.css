@@ -74,3 +74,26 @@
 .margin-input{
     margin-bottom:20px;
 }
+
+#change_password_modal {
+   width: 380px;
+   padding: 1rem;
+   background-color: #ffffff;
+   box-shadow: 5px 5px 10px  1px  rgba(0, 0, 0, 0.2);
+   z-index: 9999;
+   border-radius: 15px;
+    position: absolute;
+    top: 40%;
+    visibility: hidden;
+}
+
+.price_input_box_container{
+    position: relative;
+}
+.price_input_box_container .price_input_box{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
