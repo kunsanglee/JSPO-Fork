@@ -46,8 +46,8 @@
     <form action="/image/reg" method="post" enctype="multipart/form-data">
 
         <div class="input-group mb-3">
-            <label class="input-group-text" for="inputGroupSelect01">호텔명</label>
-            <select class="form-select" id="inputGroupSelect01">
+            <label class="input-group-text" for="inputGroupSelect01" >호텔명</label>
+            <select class="form-select" id="inputGroupSelect01" name="roomHotelHtId">
                 <div th:each="list : ${list}">
                     <option th:text="${list.htName}" th:value="${list.htId}" selected></option>
                 </div>
@@ -55,7 +55,7 @@
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text" for="inputGroupSelect01">선택목록</label>
-            <select class="form-select" id="inputGroupSelect02">
+            <select class="form-select" id="inputGroupSelect02" name="imgExplain">
                 <option value="메인사진" selected>메인사진</option>
                 <option value="메인사진2">메인2사진</option>
                 <option value="비품사진">비품사진</option>

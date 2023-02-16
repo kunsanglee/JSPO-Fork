@@ -23,7 +23,8 @@ public class HomeController {
 
         List<HotelDto> list =  hotelDao.selectHotelTop();
         m.addAttribute("list", list);
-
+        List<HotelDto> listseoul = hotelDao.selectHotelSeoul();
+        m.addAttribute("listseoul",listseoul);
         return "mainPage";
     }
 }
