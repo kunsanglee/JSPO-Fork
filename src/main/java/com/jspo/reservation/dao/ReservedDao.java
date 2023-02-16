@@ -5,10 +5,11 @@ import com.jspo.reservation.dto.ReservedDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface ReservedDao {
-    void insertReserved(ReservationDto reservationDto);
+    void insertReserved(Map<String, Object> map);
 
     void deleteReserved(ReservationDto reservationDto);
 

@@ -28,7 +28,7 @@
         <collection property="reservationDto" resultMap="ReservationDto" />
     </resultMap>
 
-    <insert id="insertReserved" parameterType="ReservationDto">
+    <insert id="insertReserved" parameterType="Map">
         insert into reserved (ht_id, r_id, res_date) values (#{roomHotelHtId}, #{roomRId}, #{roomRCheckin});
     </insert>
 
