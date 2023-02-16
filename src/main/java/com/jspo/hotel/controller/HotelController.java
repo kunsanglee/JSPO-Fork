@@ -44,27 +44,34 @@ public class HotelController {
     @GetMapping("/hotelsearch")
     public String hotel(@RequestParam(required = false) String htName,HotelDto hotelDto , Model model,@RequestParam(required = false) String leftvalue,@RequestParam(required = false) String rightvalue){
 
-        leftvalue = leftvalue.replace("원","");
-        leftvalue = leftvalue.replace(",","");
-        int lvalue = Integer.parseInt(leftvalue);
-        rightvalue = rightvalue.replace("원","");
-        rightvalue = rightvalue.replace(",","");
-        int rvalue = Integer.parseInt(rightvalue);
+             List<HotelDto> list = null;
+        try {
+            leftvalue = leftvalue.replace("원","");
+            leftvalue = leftvalue.replace(",","");
+            int lvalue = Integer.parseInt(leftvalue);
+            rightvalue = rightvalue.replace("원","");
+            rightvalue = rightvalue.replace(",","");
+            int rvalue = Integer.parseInt(rightvalue);
 
+
+            Map<String, Integer> map = new HashMap<>();
+            if(!("".equals(htName))) {
+                list = hotelDao.selectHotelByName(htName);
+            } else if("".equals(htName) && lvalue == 0 && rvalue == 500000) {
+                list = hotelDao.selectHotelByName(htName);
+            }  else if("".equals(htName) && lvalue != 0 || rvalue != 500000) {
+                map.put("lvalue", lvalue);
+                map.put("rvalue", rvalue);
+                list = roomDao.selectHotelBetween(map);
+            }
+        } catch(Exception e) {
+            list = hotelDao.selectHotelByName(htName);
+
+        }
          //숙소명만 검색했을땐 숙소명만
         //가격 조정했을땐 가격 조정한 숙소명만
         //가격 조정, 숙소명 검색했을때 조건에 만족하는 숙소명만
-        List<HotelDto> list = null;
-        Map<String, Integer> map = new HashMap<>();
-        if(!("".equals(htName))) {
-            list = hotelDao.selectHotelByName(htName);
-        } else if("".equals(htName) && lvalue == 0 && rvalue == 500000) {
-            list = hotelDao.selectHotelByName(htName);
-        }  else if("".equals(htName) && lvalue != 0 || rvalue != 500000) {
-            map.put("lvalue", lvalue);
-            map.put("rvalue", rvalue);
-            list = roomDao.selectHotelBetween(map);
-        }
+
         model.addAttribute("list",list);
 
         List pricelist = new ArrayList<>(); // 가격 부분
