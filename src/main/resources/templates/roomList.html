@@ -140,8 +140,6 @@
 
     <div class="daterange_box">
         <form th:action="@{/room/list/}+${hotelDto.htId}" autocomplete="off">
-
-
             <label for="daterange">날짜 선택</label>
             <div class="input-group">
                 <!--                        <div class="daterange_box flex-row ">-->
@@ -150,6 +148,7 @@
                            style="width: 300px; border-radius: 10px"/>
                     <input type="text" class="start" name="checkin" th:value="${checkin}" hidden="hidden"/>
                     <input type="text" class="end" name="checkout" th:value="${checkout}" hidden="hidden"/>
+
                 </div>
                 <div class="daterange_button_box text-center align-items-center justify-center">
                     <button type="submit" class="btn btn-secondary mx-1" style="width: 100px; height: 46px;">검색</button>
@@ -179,7 +178,7 @@
                             <span class="fw-bold fs-5" th:name="rName" th:text="${list.rName}"></span>
                             <span class="p-2 m-1 rounded" style="background-color: #f8f8f8">기준 2인 / 최대 2인 - 금연객실 </span>
                             <p><span class="fw-bold">숙박</span><span>(15:00~)</span></p>
-                            <span class="fw-bold fs-5 text-end" th:name="rPrice" th:text="${list.rPrice}+'원'"></span>
+                            <span class="fw-bold fs-5 text-end" th:name="rPrice" th:text="${#numbers.formatInteger(list.rPrice,3,'COMMA')}+'원'"></span>
                             <button type="submit" class="btn btn-danger my-2">객실 선택하기</button>
                         </div>
                     </div>
