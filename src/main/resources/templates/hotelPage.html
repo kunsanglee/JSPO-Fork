@@ -19,7 +19,7 @@
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
                 center: new kakao.maps.LatLng(37.5707, 126.9754), // 지도의 중심좌표
-                level: 3 // 지도의 확대 레벨
+                level: 9 // 지도의 확대 레벨
             };
 
         var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -27,25 +27,49 @@
         // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다
         var positions = [
             {
-                content: '<div style="font-size: 15px; text-align: center; font-family: -apple-system">포시즌스호텔</div>',
+                content: '<div style="font-size: 13px; text-align: center;">포시즌스호텔</div>',
                 latlng: new kakao.maps.LatLng(37.5707, 126.9754)
             },
             {
-                content: '<div style="font-size: 15px; text-align: center; font-family: -apple-system">인터컨티넨탈 서울 코엑스</div>',
+                content: '<div style="font-size: 13px; text-align: center;">인터컨티넨탈 서울 코엑스</div>',
                 latlng: new kakao.maps.LatLng(37.508882, 127.060814)
             },
             {
-                content: '<div style="font-size: 15px; text-align: center; font-family: -apple-system">시그니엘 서울</div>',
+                content: '<div style="font-size: 13px; text-align: center;">시그니엘 서울</div>',
                 latlng: new kakao.maps.LatLng(37.5126039, 127.1025242)
             },
             {
-                content: '<div style="font-size: 15px; text-align: center; font-family: -apple-system">파크하얏트 서울</div>',
+                content: '<div style="font-size: 13px; text-align: center;">파크하얏트 서울</div>',
                 latlng: new kakao.maps.LatLng(37.5085791, 127.0641676)
             },
             {
-                content: '<div style="font-size: 15px; text-align: center; font-family: -apple-system">신라호텔 서울</div>',
+                content: '<div style="font-size: 13px; text-align: center;">신라호텔 서울</div>',
                 latlng: new kakao.maps.LatLng(37.55714006, 127.00825221)
-            }
+            },
+            {
+                content: '<div style="font-size: 13px; text-align: center;">반얀트리 클럽 앤 스파 서울</div>',
+                latlng: new kakao.maps.LatLng(37.5500108, 127.0004802)
+            },
+            {
+                content: '<div style="font-size: 13px; text-align: center;">안다즈</div>',
+                latlng: new kakao.maps.LatLng(37.5254876, 127.0289201)
+            },
+            {
+                content: '<div style="font-size: 13px; text-align: center;">그랜드 하얏트</div>',
+                latlng: new kakao.maps.LatLng(37.5395665, 126.9972844)
+            },
+            {
+                content: '<div style="font-size: 13px; text-align: center;">웨스틴 조선</div>',
+                latlng: new kakao.maps.LatLng(37.564378, 126.980058)
+            },
+            {
+                content: '<div style="font-size: 13px; text-align: center;">페어몬트</div>',
+                latlng: new kakao.maps.LatLng(37.5254876, 127.0289201)
+            },
+            {
+                content: '<div style="font-size: 13px; text-align: center;">신라스테이 광화문</div>',
+                latlng: new kakao.maps.LatLng(37.572565, 126.981137)
+            },
         ];
 
         var markerArray = [];

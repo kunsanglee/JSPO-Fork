@@ -111,8 +111,11 @@ public class MemberController {
         String email = (String) session.getAttribute("email");
         String DBPwd = memberDao.selectMemberByEmail(email).getPwd();
 
-        if (DBPwd.equals(pwd)) {
+        if (passwordEncoder.matches(pwd, DBPwd)) {
             Map<String, String> map = new HashMap<>();
+            System.out.println("chgPwd = " + chgPwd);
+            chgPwd = passwordEncoder.encode(chgPwd);
+            System.out.println("chgPwd = " + chgPwd);
             map.put("pwd", chgPwd);
             map.put("email", email);
             memberDao.updatePwd(map);
