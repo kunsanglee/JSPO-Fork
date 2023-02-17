@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ReservationController {
@@ -56,7 +53,6 @@ public class ReservationController {
         hotelDto = hotelDao.selectHotelByHtId(hotelHtId);
         memberDto = memberDao.selectMemberByEmail((String) session.getAttribute("email"));
         roomDto = roomDao.selectRoomByRId(rId);
-//        System.out.println("roomDto = " + roomDto);
         roomDto.setrCheckin(rCheckin);
         roomDto.setrCheckout(rCheckout);
         // reservationDto 객체에 예약정보 입력
@@ -94,30 +90,19 @@ public class ReservationController {
     public void complete(@RequestBody Map<String, String> data) {
         // imp_uid, merchant_uid, amount
         // 결제 성공 reservation DB에 정보 입력.
-        System.out.println("complete~~");
-        System.out.println(data);
-        System.out.println("reservationDto = " + reservationDto);
 
         long inTime = reservationDto.getRoomRCheckin().getTime();
         long outTime = reservationDto.getRoomRCheckout().getTime();
         long diff = (outTime - inTime)/1000/60/60/24;
-        System.out.println("inTime = " + inTime);
-        System.out.println("outTime = " + outTime);
-        System.out.println("diff = " + diff);
 
-        for (long i = inTime; i <= outTime; i += 86400000) {
-            System.out.println("i = " + i);
-        }
         Date date = new Date();
 
         Map<String, Object> map = new HashMap<>();
 
         for (long i = inTime; i <= outTime; i += 86400000) {
-//            reservedDao.insertReserved(reservationDto);
             date.setTime(i);
             map.put("roomHotelHtId", reservationDto.getRoomHotelHtId());
             map.put("roomRId", reservationDto.getRoomRId());
-//            map.put("roomRCheckin", new java.sql.Date(i));
             map.put("roomRCheckin", date);
             reservedDao.insertReserved(map);
         }
@@ -142,8 +127,8 @@ public class ReservationController {
         System.out.println("취소사유 : " + reason);
         System.out.println("회원명  : " + memberName);
         System.out.println("주문번호 일치여부 : " + resId.equals(merchant_uid));
-        reservedDao.deleteReserved(reservationDao.selectReservationByResId(Long.parseLong(merchant_uid)));
         System.out.println("예약 삭제처리 : " + reservationDao.deleteReservationByResId(resId));
+        reservedDao.deleteReserved(reservationDao.selectReservationByResId(Long.parseLong(merchant_uid)));
 
         return true;
     }
@@ -159,21 +144,22 @@ public class ReservationController {
         memberDto = memberDao.selectMemberByEmail(email);
 
         try {
-            reservationDto = reservationDao.selectLastReservationById(memberDto.getId());
-            hotelDto = hotelDao.selectHotelByHtId(reservationDto.getRoomHotelHtId());
-            roomDto = roomDao.selectRoomByRId(reservationDto.getRoomRId());
+
             List<ReservationDto> reservation = reservationDao.selectAllReservationById(memberDto.getId());
+            List<HotelDto> hotelDto = new ArrayList<>();
+            List<RoomDto> roomDto = new ArrayList<>();
+
+            for (ReservationDto reservationDto : reservation) {
+                hotelDto.add(hotelDao.selectHotelByHtId(reservationDto.getRoomHotelHtId()));
+                roomDto.add(roomDao.selectRoomByRId(reservationDto.getRoomRId()));
+            }
             m.addAttribute("reservation", reservation);
             m.addAttribute(memberDto);
-            m.addAttribute(hotelDto);
-            m.addAttribute(roomDto);
+            m.addAttribute("hotelDto", hotelDto);
+            m.addAttribute("roomDto", roomDto);
 
         } catch (Exception e) {
-//            e.printStackTrace();
-//            m.addAttribute("reservation", "예약하신 내역이 없습니다");
-//            m.addAttribute(memberDto);
-//            m.addAttribute(hotelDto);
-//            m.addAttribute(roomDto);
+
         }
 
         return "reserved";

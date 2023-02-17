@@ -94,12 +94,8 @@ public class RoomController {
             fileName = "none.png";
         }
 
-//        roomDto.setrImg(File.separator+"imgs"+File.separator+ "roomimgUpload" + ymdPath + File.separator+ fileName);
         roomDto.setrImg("http://localhost:8080/static/"+fileName);
         roomDao.insertRoom(roomDto);
-
-        // DB에 저장하면 -1일 처리돼서 +1 처리
-//        roomDto.setrCheckin(new Date(roomDto.getrCheckin().getTime()+(1000*60*60*24)));
 
         return "redirect:/admin/roomlist";
     }
@@ -130,7 +126,6 @@ public class RoomController {
         } else {
             fileName = "none.png";
         }
-//        roomDto.setrImg(File.separator+"imgs"+File.separator+ "imgUpload" + ymdPath + File.separator+ fileName);
         roomDto.setrImg("http://localhost:8080/static/"+fileName);
         roomDao.updateRoom(roomDto);
         return "redirect:/admin/roomlist";
