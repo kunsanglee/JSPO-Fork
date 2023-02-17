@@ -103,18 +103,15 @@
                 <th>객실이미지</th>
                 <th>객실이름</th>
                 <th>객실가격</th>
-                <th>객실갯수</th>
                 <th>수정여부</th>
             </tr>
             <tr th:each="rlist : ${rlist}" class="text-center">
                 <form role="form">
-<!--                    d-flex justify-content-center  item-align-center text-align-center-->
                     <input type="text" class="" hidden="hidden" name="rId" th:value="${rlist.rId}">
-                    <td th:name="hotelHtId" th:text="${rlist.htName} + ' 호텔'"></td>
+                    <td th:name="hotelHtId" th:text="${rlist.htName}"></td>
                     <td><img th:src="${rlist.rImg}" width="500px" height="220px" class="oriImg mx-auto d-block" style="border-radius: 10px" ></td>
                     <td  th:name="rName" th:text="${rlist.rName}"></td>
                     <td  th:name="rPrice" th:text="${#numbers.formatInteger(rlist.rPrice,3,'COMMA')}+원"></td>
-                    <td  th:name="rCnt" th:text="${rlist.rCnt}"></td>
                     <td>
 
                         <button type="submit" class="btn btn-secondary roomupdate">수정</button>
