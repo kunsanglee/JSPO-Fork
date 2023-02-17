@@ -47,7 +47,7 @@
         </form>
     </div>
 
-    <div class="title my-3 w-100 justify-content-between">
+    <div class="title my-3 w-100 ">
         <span class="fw-bold fs-3 ">JSPO BEST 인기 호텔</span>
         <div class="divider border-bottom my-2"></div>
     </div>
@@ -72,22 +72,24 @@
         </div>
     </div>
 
-    <div class="title my-3 w-100 justify-content-between">
+    <div class="title my-3 w-100 ">
         <span class="fw-bold fs-3 ">서울 인기 호텔</span>
         <div class="divider border-bottom my-2"></div>
     </div>
 
 
-    <div class="row d-flex justify-content-start align-items-center p-2 ">
+    <div class="row d-flex justify-content-evenly align-items-center p-2 ">
         <div class="col col-md-2 " th:each="listseoul : ${listseoul}">
             <!--        border rounded-3 p-0 mx-3 mb-5-->
-            <div class="card mb-3" style="width: 13rem;height: 18rem">
+            <div class="card mb-3" style="width: 13rem;height: 14rem">
                 <a th:href="|@{/room/list/} + ${listseoul.htId}|">
                     <img th:src="${listseoul.htImg}" src="" class="card-img-top" alt="" style="width: 12.9rem; height: 9rem">
                 </a>
                 <div class="card-body">
                     <p class="m-0 "><span class="resId fs-6 text-secondary" th:text="${listseoul.htAddress}"></span></p>
+                    <a th:href="|@{/room/list/} + ${listseoul.htId}|">
                     <p class="m-0"><span class="resId fs-5" th:text="${listseoul.htName}"></span></p>
+                    </a>
                     <!--                        <p class="text-end"><span th:if="${pricelist[i.index]} != null"><span class="fw-bold" th:text="${pricelist[i.index]}+'원'"></span></span></p>-->
                     <!--                        <p class="text-end"><span th:if="${pricelist[i.index]} == null"><span class="fw-bold" th:text='0원'></span></span></p>-->
                 </div>
