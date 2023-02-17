@@ -134,6 +134,6 @@ public class RoomController {
     @PostMapping("/room/delete")
     public String delete(int rId) {
         roomDao.deleteRoom(rId);
-        return "admin";
+        return "redirect:/admin/roomlist";
     }
 }
