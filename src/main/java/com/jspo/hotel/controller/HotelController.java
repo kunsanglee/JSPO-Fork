@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,15 +76,18 @@ public class HotelController {
         return "hotelPage";
     }
     @GetMapping("/hotel/reg")
-    public String insertHotel() {
-//        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
-//            return "redirect:/";
-//        }
+    public String insertHotel(HttpSession session) {
+        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
+            return "redirect:/";
+        }
         return "adminReg";
     }
 
     @PostMapping("/hotel/reg")
-    public String insert(HotelDto hotelDto, MultipartFile file) throws Exception {
+    public String insert(HotelDto hotelDto, MultipartFile file, HttpSession session) throws Exception {
+        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
+            return "redirect:/";
+        }
 
         String imgUploadPath = uploadPath + "imgUpload";
         System.out.println("1. imgUploadPath"+imgUploadPath);
@@ -121,13 +125,19 @@ public class HotelController {
         return "hotelList";
     }
     @PostMapping("/hotel/updateView")
-    public String updateView(Model model,int htId) throws Exception {
+    public String updateView(Model model,int htId, HttpSession session) throws Exception {
+        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
+            return "redirect:/";
+        }
 
         model.addAttribute("hotelupdate", hotelDao.selectHotelByHtId(htId));
         return "adminupdateView";
     }
     @PostMapping("/hotel/update")
-    public String update(HotelDto hotelDto,MultipartFile file) throws Exception {
+    public String update(HotelDto hotelDto,MultipartFile file, HttpSession session) throws Exception {
+        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
+            return "redirect:/";
+        }
 
         String imgUploadPath = uploadPath + "imgUpload";
         System.out.println("1. imgUploadPath"+imgUploadPath);
@@ -150,7 +160,10 @@ public class HotelController {
     }
 
     @PostMapping("/hotel/delete")
-    public String delete(HotelDto hotelDto) throws Exception {
+    public String delete(HotelDto hotelDto, HttpSession session) throws Exception {
+        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
+            return "redirect:/";
+        }
         hotelDao.deleteHotel(hotelDto.getHtId());
         return "redirect:list";
     }
