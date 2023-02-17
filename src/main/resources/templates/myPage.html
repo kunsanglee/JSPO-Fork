@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
-<div class="myPage_wrap justify-content-center"  >
+    <div class="myPage_wrap justify-content-center"  >
 
     <div class="myPage" >
         <div class="myPage_title" >
@@ -41,7 +41,7 @@
 
 
 
-            <div class="mb-3 row">
+            <div class="mb-3 row align-items-center">
                 <label for="staticPassword" class="col-sm-3 col-form-label" >비밀번호</label>
                 <div class="col-sm-5">
                     <input type="password" class="form-control-plaintext" id="staticPassword" th:value="*{pwd.length}" readonly>
@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="mb-3 row">
+            <div class="mb-3 row align-items-center">
                 <label for="staticPhone" class="col-sm-3 col-form-label" >연락처</label>
                 <div class="col-sm-5">
                     <input type="text" class="form-control-plaintext" id="staticPhone" th:value="*{phone}" readonly>
@@ -77,8 +77,121 @@
 
 
     </div>
-
     </div>
+
+<!--    -->
+
+    <style>
+        #cancelReserve {
+            display: none;
+            width: 400px;
+            padding: 20px 60px;
+            background-color: #fefefe;
+            border: 1px solid #888;
+            border-radius: 3px;
+        }
+    </style>
+
+    <div id="cancelReserve" style="width: 500px;border-radius: 15px">
+        <div class="title w-100 border-bottom mb-2 py-2 fw-bold">
+            <span class="fs-5">회원님의 예약을 취소하시겠습니까?</span>
+        </div>
+
+        <div class="button_box text-center">
+            <input class="btn btn-secondary modal_close_btn" type="submit" value="취소" style="width: 6rem">
+            <input class="btn btn-success" type="submit" value="확인" id="applyPhoneAuth" style="width: 6rem"
+                   onclick="cancelPay()">
+        </div>
+    </div>
+
+<!--예약내역-->
+    <div class="rounded-3 shadow-lg mt-2 mb-5">
+        <div class="px-3 px-sm-4 px-xl-5 pt-1 pb-4 pb-sm-5">
+
+            <div class="row">
+                <h1 class="fs-3 fw-bold p-2 m-2 ">예약내역페이지</h1>
+                <h5 th:if="${reservation eq null}" th:text="'예약하신 내역이 없습니다'"></h5>
+                <div th:each="r : ${reservation}">
+                    <div class="col-lg-4 col-md-5 pt-3 pt-sm-4 w-100">
+
+                        <div class="rounded-3 bg-light px-3 px-sm-4 py-4 w-100" id="reserved_content">
+                            <div class="reserved_hotel_img position-relative">
+                                <span class="btn btn-icon btn-danger position-absolute top-0 end-0 py-0 px-1 m-2"
+                                      th:if="${r.getResState() == 1 && #dates.createNow() < r.getRoomRCheckin()}"
+                                      onclick="modal()" data-bs-toggle="tooltip"
+                                      title="Remove from Favorites"><i class="fa-solid fa-trash-can"></i></span>
+                            </div>
+                            <div class="reserved_hotel_info">
+                                <p class="fw-bold">예약번호 : <span class="resId" th:text="${r.getResId()}"></span></p>
+                                <p>호텔명 : <span th:text="|${hotelDto.get(rStat.index).getHtName()} - ${roomDto.get(rStat.index).getrName()}|"></span></p>
+
+                                <p> 예약자 : <span class="memberName" th:text="${memberDto.getName()}"></span></p>
+                                <p> 예약날짜 : <span
+                                        th:text="|${#dates.format(r.getResDate(), 'yyyy년 MM월 dd일 HH시 mm분')} (${#dates.dayOfWeekNameShort(r.getResDate())})|"></span>
+                                </p>
+                                <p>숙박날짜 : <span
+                                        th:text="|${#dates.format(r.roomRCheckin, 'yyyy년 MM월 dd일')} (${#dates.dayOfWeekNameShort(r.roomRCheckin)}) ~ ${#dates.format(r.roomRCheckout, 'yyyy년 MM월 dd일')} (${#dates.dayOfWeekNameShort(r.roomRCheckout)})|"></span>
+                                </p>
+                                <p> 예약상태 : <span th:if="${r.getResState()} == 1" th:text="예약완료"></span></p>
+                                <p><span th:unless="${r.getResState()} == 1" th:text="예약마감"></span></p>
+                                <p> 업체연락처 : <span th:text="${hotelDto.get(rStat.index).getHtPhone()}"></span></p>
+                                <p> 결제금액 : <span class="resPrice" th:text="${#numbers.formatInteger(r.getResPrice(),3,'COMMA')}+원"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--예약내역 끝-->
+
+
+
+    <!--    <div class="rounded-3 shadow-lg mt-4 mb-5">-->
+<!--        <div class="px-3 px-sm-4 px-xl-5 pt-1 pb-4 pb-sm-5">-->
+
+<!--            <div class="row">-->
+<!--                <h1 class="fw-bold p-2 m-2 ">예약내역페이지</h1>-->
+<!--                <h5 th:if="${reservation eq null}" th:text="'예약하신 내역이 없습니다'"></h5>-->
+<!--                <div th:each="r : ${reservation}">-->
+<!--                    <div class="col-lg-4 col-md-5 pt-3 pt-sm-4 w-100">-->
+
+<!--                        <div class="rounded-3 bg-light px-3 px-sm-4 py-4 w-100" id="reserved_content">-->
+<!--                            <div class="reserved_hotel_img position-relative">-->
+<!--                                <span class="btn btn-icon btn-danger position-absolute top-0 end-0 py-0 px-1 m-2"-->
+<!--                                      th:if="${r.getResState() == 1 && #dates.createNow() < r.getRoomRCheckin()}"-->
+<!--                                      onclick="modal()" data-bs-toggle="tooltip"-->
+<!--                                      title="Remove from Favorites"><i class="fa-solid fa-trash-can"></i></span>-->
+<!--                            </div>-->
+<!--                            <div class="reserved_hotel_info">-->
+<!--                                <p class="fw-bold">예약번호 : <span class="resId" th:text="${r.getResId()}"></span></p>-->
+<!--                                <p>호텔명 : <span th:text="|${hotelDto.getHtName()} - ${roomDto.getrName()}|"></span></p>-->
+<!--                        <p>호텔명 : <span th:text="|${hotelDto.get(rStat.index).getHtName()} - ${roomDto.get(rStat.index).getrName()}|"></span></p>-->
+
+<!--                                <p> 예약자 : <span class="memberName" th:text="${memberDto.getName()}"></span></p>-->
+<!--                                <p> 예약날짜 : <span-->
+<!--                                        th:text="|${#dates.format(r.getResDate(), 'yyyy년 MM월 dd일 HH시 mm분')} (${#dates.dayOfWeekNameShort(r.getResDate())})|"></span>-->
+<!--                                </p>-->
+<!--                                <p>숙박날짜 : <span-->
+<!--                                        th:text="|${#dates.format(r.roomRCheckin, 'yyyy년 MM월 dd일')} (${#dates.dayOfWeekNameShort(r.roomRCheckin)}) ~ ${#dates.format(r.roomRCheckout, 'yyyy년 MM월 dd일')} (${#dates.dayOfWeekNameShort(r.roomRCheckout)})|"></span>-->
+<!--                                </p>-->
+<!--                                <p> 예약상태 : <span th:if="${r.getResState()} == 1" th:text="예약완료"></span></p>-->
+<!--                                <p><span th:unless="${r.getResState()} == 1" th:text="예약마감"></span></p>-->
+<!--                                <p> 업체연락처 : <span th:text="${hotelDto.getHtPhone()}"></span></p>-->
+<!--                                <p> 결제금액 : <span class="resPrice" th:text="${#numbers.formatInteger(r.getResPrice(),3,'COMMA')}+원"></span></p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    -->
+
+
+
+
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -154,50 +267,12 @@
                 </div>
             </div>
         </div>
+    </div>
+<!--    비밀번호 변경 모달-->
 
     </div>
 
-    <div class="rounded-3 shadow-lg mt-4 mb-5">
-        <div class="px-3 px-sm-4 px-xl-5 pt-1 pb-4 pb-sm-5">
 
-            <div class="row">
-                <h1 class="fw-bold p-2 m-2 ">예약내역페이지</h1>
-                <h5 th:if="${reservation eq null}" th:text="'예약하신 내역이 없습니다'"></h5>
-                <div th:each="r : ${reservation}">
-                    <div class="col-lg-4 col-md-5 pt-3 pt-sm-4 w-100">
-
-                        <div class="rounded-3 bg-light px-3 px-sm-4 py-4 w-100" id="reserved_content">
-                            <div class="reserved_hotel_img position-relative">
-                                <span class="btn btn-icon btn-danger position-absolute top-0 end-0 py-0 px-1 m-2"
-                                      th:if="${r.getResState() == 1 && #dates.createNow() < r.getRoomRCheckin()}"
-                                      onclick="modal()" data-bs-toggle="tooltip"
-                                      title="Remove from Favorites"><i class="fa-solid fa-trash-can"></i></span>
-                            </div>
-                            <div class="reserved_hotel_info">
-                                <p class="fw-bold">예약번호 : <span class="resId" th:text="${r.getResId()}"></span></p>
-                                <p>호텔명 : <span th:text="|${hotelDto.get(rStat.index).getHtName()} - ${roomDto.get(rStat.index).getrName()}|"></span></p>
-
-                                <p> 예약자 : <span class="memberName" th:text="${memberDto.getName()}"></span></p>
-                                <p> 예약날짜 : <span
-                                        th:text="|${#dates.format(r.getResDate(), 'yyyy년 MM월 dd일 HH시 mm분')} (${#dates.dayOfWeekNameShort(r.getResDate())})|"></span>
-                                </p>
-                                <p>숙박날짜 : <span
-                                        th:text="|${#dates.format(r.roomRCheckin, 'yyyy년 MM월 dd일')} (${#dates.dayOfWeekNameShort(r.roomRCheckin)}) ~ ${#dates.format(r.roomRCheckout, 'yyyy년 MM월 dd일')} (${#dates.dayOfWeekNameShort(r.roomRCheckout)})|"></span>
-                                </p>
-                                <p> 예약상태 : <span th:if="${r.getResState()} == 1" th:text="예약완료"></span></p>
-                                <p><span th:unless="${r.getResState()} == 1" th:text="예약마감"></span></p>
-                                <p> 업체연락처 : <span th:text="${hotelDto.get(rStat.index).getHtPhone()}"></span></p>
-                                <p> 결제금액 : <span class="resPrice" th:text="${#numbers.formatInteger(r.getResPrice(),3,'COMMA')}+원"></span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-</div>
 </body>
 
 </html>

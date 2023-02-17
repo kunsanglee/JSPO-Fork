@@ -1,6 +1,6 @@
 
 .myPage_wrap{
-    /*height: 100vh;*/
+    height: 35vh;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -10,13 +10,11 @@
 
 
 .myPage {
-    width: 530px;
-    padding: 20px;
+    width: 100%;
+    padding: 20px 60px;
     border-radius: 12px;
     background-color: #ffffff;
     box-shadow: 5px 5px 10px  1px  rgba(0, 0, 0, 0.2);
-    position: absolute;
-    top: 350px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
