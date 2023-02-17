@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +30,18 @@ public class AdminController {
     ImageDao imageDao;
 
     @GetMapping("")
-    public String admin(){
+    public String admin(HttpSession session){
+        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
+            return "redirect:/";
+        }
         return "redirect:/admin/hotellist";
     }
 
     @GetMapping("/hotellist")
-    public String adminHotel(Model model) throws Exception {
+    public String adminHotel(Model model, HttpSession session) throws Exception {
+        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
+            return "redirect:/";
+        }
 
         List<HotelDto> hlist = hotelDao.selectHotel();
         model.addAttribute("hlist",hlist);
@@ -50,7 +57,10 @@ public class AdminController {
     }
 
     @GetMapping("/roomlist")
-    public String adminRoom(Model model) throws Exception {
+    public String adminRoom(Model model, HttpSession session) throws Exception {
+        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
+            return "redirect:/";
+        }
 
         List<RoomDto> rlist = roomDao.selectRoom();
         model.addAttribute("rlist",rlist);
@@ -58,7 +68,10 @@ public class AdminController {
     }
 
     @GetMapping("/image") // 사진 관리 클릭시 들어옴
-    public String adminImage(Model model) {
+    public String adminImage(Model model, HttpSession session) {
+        if (!"admin@jspo.com".equals(session.getAttribute("email"))) {
+            return "redirect:/";
+        }
 
         List<ImageDto> ilist = imageDao.selectImage();
         System.out.println("ilist = "+ilist);
@@ -66,6 +79,4 @@ public class AdminController {
 
         return "admin"; // admin 으로 몰아버릴까
     }
-
-
 }
