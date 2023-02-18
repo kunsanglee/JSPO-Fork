@@ -32,13 +32,15 @@
      로그인시 쿠키 및 세션 생성
 <img src="https://user-images.githubusercontent.com/121557816/219847100-26f73fc8-22c8-4aeb-9d57-a20c33b582cc.gif" height="50%" width="50%">
 
-
+---
 
 * 비밀번호 변경, 예약 및 결제 (https://youtu.be/HUX_ukh4nqM) <br><br>
     마이페이지를 이용한 비밀번호 변경<br>
     검색시 가격범위 및 호텔이름으로 호텔검색<br>
     객실을 선택하여 카카오페이를 이용하여 결제<br>
 <img src="https://user-images.githubusercontent.com/121557816/219847106-28382b34-65bf-4a1d-9d1a-90ffe5e9acc3.gif" height="50%" width="50%">
+
+---
 
 * 관리자 기능 (https://youtu.be/5YDPaTALKmA)<br><br>
     ADMIN 계정을 이용한 호텔등록 및 객실등록<br>
