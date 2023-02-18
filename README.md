@@ -30,10 +30,10 @@
 * 로그인, 회원가입
 <img src="https://user-images.githubusercontent.com/121557816/219847100-26f73fc8-22c8-4aeb-9d57-a20c33b582cc.gif" height="400px" width="400px">
 
-* 예약 및 결제
+* 비밀번호 변경, 예약 및 결제
 <img src="https://user-images.githubusercontent.com/121557816/219847106-28382b34-65bf-4a1d-9d1a-90ffe5e9acc3.gif" height="400px" width="400px">
 
-* 관리자 기능
+* 관리자 기능(호텔관리, 객실관리)
 <img src="https://user-images.githubusercontent.com/121557816/219847110-a25ee817-ac85-412b-a4c0-d760dc8a77e9.gif" height="400px" width="400px">
 
 ## 기술 소개
