@@ -66,12 +66,27 @@ public class HotelController {
         //가격 조정, 숙소명 검색했을때 조건에 만족하는 숙소명만
 
         model.addAttribute("list",list);
-
         List pricelist = new ArrayList<>(); // 가격 부분
-        for(int i=0; i<list.size() ; i++) {
-            pricelist.add(roomDao.selectPrice(list.get(i).getHtId()));
+        try {
+            leftvalue = leftvalue.replace("원","");
+            leftvalue = leftvalue.replace(",","");
+            int lvalue = Integer.parseInt(leftvalue);
+            rightvalue = rightvalue.replace("원","");
+            rightvalue = rightvalue.replace(",","");
+            int rvalue = Integer.parseInt(rightvalue);
+            for(int i=0; i<list.size() ; i++) {
+                pricelist.add(roomDao.selectmainPrice(list.get(i).getHtId(),lvalue,rvalue));
+                System.out.println(list.get(i).getHtId());
+            }
 
+        } catch(Exception e) {
+            for(int i=0; i<list.size() ; i++) {
+                pricelist.add(roomDao.selectPrice(list.get(i).getHtId()));
+            }
         }
+
+
+        System.out.println(pricelist);
         model.addAttribute("pricelist",pricelist);
         return "hotelPage";
     }
