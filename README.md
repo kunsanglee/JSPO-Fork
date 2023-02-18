@@ -26,6 +26,16 @@
 * Column 39개
 <img src="https://user-images.githubusercontent.com/121557816/219566231-b173d362-80c7-49d9-9f43-e7ba437d2a64.png" height="600px" width="600px">
 
+### 시연 영상
+* 로그인, 회원가입
+<img src="https://user-images.githubusercontent.com/121557816/219847100-26f73fc8-22c8-4aeb-9d57-a20c33b582cc.gif" height="400px" width="400px">
+
+* 예약 및 결제
+<img src="https://user-images.githubusercontent.com/121557816/219847106-28382b34-65bf-4a1d-9d1a-90ffe5e9acc3.gif" height="400px" width="400px">
+
+* 관리자 기능
+<img src="https://user-images.githubusercontent.com/121557816/219847110-a25ee817-ac85-412b-a4c0-d760dc8a77e9.gif" height="400px" width="400px">
+
 ## 기술 소개
 ### 사용언어 & 라이브러리
 <img src="https://img.shields.io/badge/java | 11-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/javascript | ES6-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
