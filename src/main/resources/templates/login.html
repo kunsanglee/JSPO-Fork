@@ -37,16 +37,16 @@
                     </div>
 
 <!--                    form-check-input-->
-                    <div class="form-group form-check">
-                        <input class="form-check-input mt-0" type="checkbox" id="remember" name="remember"
-                               th:if="${email == null}">
-                        <input class="form-check-input mt-0" type="checkbox" id="remember-checked" name="remember"
-                               th:if="${email != null}" checked="checked">
-                        <label class="form-check-label" for="remember">이메일 기억하기</label>
+                    <div class="form-group  d-flex flex-row w-100">
+                        <input class="" type="checkbox" id="remember" name="remember"
+                               th:if="${email == null}" style="width: 30px; height: 30px; border: 1px solid #ebebeb" >
+                        <input class="" type="checkbox" id="remember-checked" name="remember"
+                               th:if="${email != null}" checked="checked" style="width: 30px; height: 30px; border: 1px solid #ebebeb"><span class="mx-2">아이디 기억하기</span>
+
 
                     </div>
 
-                    <input class="btn btn-success" type="submit" value="로그인">
+                    <input class="btn btn-success" type="submit" value="로그인" style="background-color: green">
 
                     <div class="form-group">
                         <ul>
