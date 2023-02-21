@@ -22,9 +22,10 @@
 * SpringBoot Starter Mail 2.7.0 api - 이메일 인증번호 발송
 
 ### ERD
-* Table 6개
-* Column 39개
-<img src="https://user-images.githubusercontent.com/121557816/219566231-b173d362-80c7-49d9-9f43-e7ba437d2a64.png" height="600px" width="600px"> 
+* Table 12개
+* Column 94개
+<img src="https://user-images.githubusercontent.com/121557816/220265947-69dc5c6a-e552-4262-8a7a-36038c8c8d35.png" height="600px" width="600px"> 
+
 
 ### 시연 영상
 * 로그인, 회원가입 (https://youtu.be/URM8aCB4_7s)<br><br>
