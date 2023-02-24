@@ -45,12 +45,12 @@ public class AdminController {
 
         List<HotelDto> hlist = hotelDao.selectHotel();
         model.addAttribute("hlist",hlist);
-        System.out.println(hlist);
+        System.out.println("hlist =" +hlist);
         List pricelist = new ArrayList<>(); // 가격 부분
-
         for(int i=1; i<=hlist.size() ; i++) {
             pricelist.add(roomDao.selectPrice(i));
         }
+        System.out.println(pricelist);
         model.addAttribute("pricelist",pricelist);
 
         return "admin";
