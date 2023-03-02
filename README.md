@@ -28,7 +28,7 @@
 
 
 ### 시연 영상
-* 로그인, 회원가입 (https://youtu.be/URM8aCB4_7s)<br><br>
+* 로그인, 회원가입 (https://youtu.be/fc9vkz9-1-g)<br><br>
      이메일인증,  비밀번호 유효성 검사, 핸드폰인증을 이용한 회원가입<br>
      로그인시 쿠키 및 세션 생성
 <img src="https://user-images.githubusercontent.com/121557816/219847100-26f73fc8-22c8-4aeb-9d57-a20c33b582cc.gif" height="50%" width="50%">
