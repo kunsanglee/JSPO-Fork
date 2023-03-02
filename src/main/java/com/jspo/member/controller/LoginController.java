@@ -69,8 +69,9 @@ public class LoginController {
         try {
             if (loginMember.getEmail() != null && loginMember.getPwd() != null) {  // 이메일과 패스워드를 적고 로그인 클릭하면
                 memberDto = memberDao.selectMemberByEmail(loginMember.getEmail()); // 이메일로 DB에 조회 해본다
+                System.out.println(memberDto);
                 boolean matches = passwordEncoder.matches(loginMember.getPwd(), memberDto.getPwd()); // DB에서 조회된 아이디의 암호화된 패스워드와 로그인창에 적힌 패스워드가 같은 지 비교
-
+                System.out.println("match = " + matches);
                 if (matches) { // 같다면 세션추가 및 쿠키추가
                     HttpSession session = request.getSession();
                     Cookie cookie;
@@ -107,7 +108,7 @@ public class LoginController {
             } else if("".equals(loginMember.getEmail()) && !("".equals(loginMember.getPwd()))) {
                 // 이메일을 입력해주세요
                 redirectAttributes.addFlashAttribute("iderror","이메일을 입력해주세요");
-            } else if(!("".equals(loginMember.getEmail())) && "".equals(loginMember.getPwd())) {
+            } else if(!("".equals(loginMember.getEmail())) && "".equals(loginMember.getPwd()) && memberDto != null) {
                 // 비밀번호를 입력해주세요
                 redirectAttributes.addFlashAttribute("pwderror","비밀번호를 입력해주세요");
                 redirectAttributes.addFlashAttribute("preemail",loginMember.getEmail());
@@ -116,6 +117,7 @@ public class LoginController {
             }
             return "redirect:/login";
         }
+        redirectAttributes.addFlashAttribute("totalerror","이메일 또는 비밀번호를 다시 확인하세요");//
         return "redirect:/login";
     }
 
