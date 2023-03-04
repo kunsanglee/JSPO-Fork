@@ -61,6 +61,8 @@ public class Naver_Sens_V2 {
         String body = bodyJson.toJSONString();
 
         System.out.println(body);
+        System.out.println("secretKey = " + secretKey);
+
 
         try {
 
@@ -102,6 +104,7 @@ public class Naver_Sens_V2 {
 
         } catch (Exception e) {
             System.out.println(e);
+            e.printStackTrace();
         }
     }
 
