@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class MemberController {
@@ -183,7 +180,7 @@ public class MemberController {
     public String phoneAuth(String phone, String input) throws Exception {
         System.out.println("input = " + input);
 
-        if (code.equals(input)) {
+        if (!input.equals("") && code.equals(input)) {
             memberDto = memberDao.selectMemberByPhone(phone);
             String result = memberDto.getEmail();
             System.out.println("result = " + result);
