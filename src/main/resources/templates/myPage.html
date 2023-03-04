@@ -103,13 +103,15 @@
                    onclick="cancelPay()">
         </div>
     </div>
-
+    <div class="reserved_title" style="height: min-content; margin-top: 150px">
+    <span class="fs-3 fw-bold p-2 m-2 ">예약내역페이지</span>
+    </div>
 <!--예약내역-->
     <div class="rounded-3 shadow-lg mt-2 mb-5">
         <div class="px-3 px-sm-4 px-xl-5 pt-1 pb-4 pb-sm-5">
 
             <div class="row">
-                <h1 class="fs-3 fw-bold p-2 m-2 ">예약내역페이지</h1>
+
                 <h5 th:if="${reservation eq null}" th:text="'예약하신 내역이 없습니다'"></h5>
                 <div th:each="r : ${reservation}">
                     <div class="col-lg-4 col-md-5 pt-3 pt-sm-4 w-100">

@@ -4,13 +4,19 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default_layout}">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">-->
 </head>>
 
 <body>
 <div class="container" layout:fragment="content">
 
-    <div class="login_wrap justify-content-center">
+    <style>
+        #iderror, #pwderror, #totalerror {
+            color: red;
+            font-size: small;
+        }
+    </style>
+   <div class="login_wrap justify-content-center">
         <div class="login">
 
             <div class="logo">
@@ -19,34 +25,40 @@
 
             <form action="/login" method="post" name="loginForm" class="needs-validation">
                 <input type="hidden" name="referer" th:value="${referer}">
-                <div class="form-group was-validated">
-                    <label class="form-label " for="email">이메일</label>
-                    <input class="form-control" type="email" id="email" name="email" required maxlength="30"
+<!--                <div class="form-group was-validated">-->
+                <div class="">
+                    <label class="form-label" for="email">이메일</label>
+                    <input class="form-control" type="email" id="email" name="email" maxlength="30"
                            minlength="6" autofocus th:value="${email}">
+                    <span id="iderror" th:if="${iderror}" th:text="${iderror}"></span>
                     <div class="invalid-feedback">
                         이메일 주소를 입력해주세요
 
                     </div>
-                    <div class="form-group was-validated">
+                    <div class="">
                         <label class="form-label" for="pwd">비밀번호</label>
                         <input class="form-control" type="password" id="pwd" name="pwd" minlength="8" maxlength="16"
-                               required>
+                               >
+                        <span id="pwderror" th:if="${pwderror}" th:text="${pwderror}"></span>
+                        <span id="totalerror" th:if="${totalerror}" th:text="${totalerror}"></span>
+
                         <div class="invalid-feedback">
                             비밀번호를 입력해주세요
                         </div>
                     </div>
 
 <!--                    form-check-input-->
-                    <div class="form-group form-check">
-                        <input class="form-check-input mt-0" type="checkbox" id="remember" name="remember"
-                               th:if="${email == null}">
-                        <input class="form-check-input mt-0" type="checkbox" id="remember-checked" name="remember"
-                               th:if="${email != null}" checked="checked">
-                        <label class="form-check-label" for="remember">이메일 기억하기</label>
+                    <div style="width: 200px; display: table-cell; vertical-align: bottom; padding-top: 20px">
+                    <div class="form-group  d-flex flex-row w-100">
+                        <input class="remember" type="checkbox" id="remember" name="remember"
+                               th:if="${email == null}" style="width: 20px; height: 20px; border: 1px solid #ebebeb;" >
+                        <input class="remember-checked" type="checkbox" id="remember-checked" name="remember"
+                               th:if="${email != null}" checked="checked" style="width: 20px; height: 20px; border: 1px solid #ebebeb;"><span class="mx-2">아이디 기억하기</span>
 
                     </div>
+                    </div>
 
-                    <input class="btn btn-success" type="submit" value="로그인">
+                    <input class="btn btn-success" type="submit" value="로그인" style="background-color: green">
 
                     <div class="form-group">
                         <ul>

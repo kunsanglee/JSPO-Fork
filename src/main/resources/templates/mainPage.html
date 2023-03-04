@@ -56,7 +56,7 @@
     <div class="row d-flex justify-content-evenly align-items-center p-2 ">
         <div class="col col-md-2 mx-3 " th:each="list : ${list}">
             <!--        border rounded-3 p-0 mx-3 mb-5-->
-            <div class="card mb-3" style="width: 13rem;height: 14rem">
+            <div class="card mb-3" style="width: 13rem;height: 15rem">
                 <a th:href="|@{/room/list/} + ${list.htId}|">
                     <img th:src="${list.htImg}" src="" class="card-img-top" alt="" style="width: 12.9rem; height: 9rem">
                 </a>
@@ -81,7 +81,7 @@
     <div class="row d-flex justify-content-evenly align-items-center p-2 ">
         <div class="col col-md-2 " th:each="listseoul : ${listseoul}">
             <!--        border rounded-3 p-0 mx-3 mb-5-->
-            <div class="card mb-3" style="width: 13rem;height: 14rem">
+            <div class="card mb-3" style="width: 13rem;height: 15rem">
                 <a th:href="|@{/room/list/} + ${listseoul.htId}|">
                     <img th:src="${listseoul.htImg}" src="" class="card-img-top" alt="" style="width: 12.9rem; height: 9rem">
                 </a>

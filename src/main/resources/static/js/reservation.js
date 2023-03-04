@@ -31,7 +31,7 @@ function requestPay() {
             }).done(function (e) {
                 // 가맹점 서버 결제 API 성공시 로직
                 alert("결제에 성공했습니다!");
-                window.location.replace("/my/reserved");
+                window.location.replace("/my");
             })
         } else {
             alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);

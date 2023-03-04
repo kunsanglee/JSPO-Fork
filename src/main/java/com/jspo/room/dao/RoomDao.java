@@ -18,6 +18,7 @@ public interface RoomDao {
 
     Integer selectPrice(int hotelHtId);
 
+    Integer selectmainPrice(int hotelHtId, int lvalue , int rvalue);
     List<RoomDto> selectRoomByhtId(int htId);
 
     HotelDto selectRoomByinfo(int htId);
